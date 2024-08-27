@@ -17,11 +17,9 @@ def cadastro(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # loga o usuário após o cadastro
-            return JsonResponse({'redirect_url': '/usuario/home/'})
+            return JsonResponse({'redirect_url': '/accounts/home/'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors.as_json()})
     else:
         form = UsuarioForm()
     return render(request, 'cadastro.html', {'form': form})
-
-

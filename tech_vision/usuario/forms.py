@@ -19,7 +19,6 @@ class UsuarioForm(forms.ModelForm):
         }
 
 
-    
     def clean_email(self):
         """
         Aplicando regras de validacao personalizadas
@@ -31,7 +30,7 @@ class UsuarioForm(forms.ModelForm):
             raise forms.ValidationError('Este email ja esta em uso.')
         return email
 
-    
+
     def clean_password(self):
     
         password = self.cleaned_data.get('password')
@@ -39,6 +38,7 @@ class UsuarioForm(forms.ModelForm):
              raise forms.ValidationError('A senha deve ter pelo menos 8 caracteres.')
         return password
     
+
     def save(self, commit=True):
             user = User.objects.create_user(
                 email=self.cleaned_data['email'],
