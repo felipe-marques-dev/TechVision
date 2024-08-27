@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/08/2024 às 13:07
+-- Tempo de geração: 27/08/2024 às 14:20
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -152,6 +152,13 @@ CREATE TABLE `django_admin_log` (
   `change_message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id`, `object_id`, `object_repr`, `action_flag`, `change_message`) VALUES
+(1, '2024-08-27 12:15:35', 2, 6, '1', 'Product object (1)', 1, '[{\"added\": {}}]');
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +179,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'group'),
 (1, 'auth', 'permission'),
 (3, 'contenttypes', 'contenttype'),
+(6, 'produtos', 'product'),
 (4, 'sessions', 'session'),
 (5, 'usuario', 'user');
 
@@ -227,24 +235,37 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
+('c60ir59vz41lsp0klr4g4phdtunt63mx', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1siuxu:0pXmvK-6uRUSpalY29C71uln7g3rwxNcDG0xRUCep8U', '2024-09-10 12:06:26.231567'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
 ('xf16zbob48k949xemv7igodpfct1dhow', '.eJxVjMsOwiAQRf-FtSEwZYq4dN9vIDM8pGogKe3K-O_apAvd3nPOfQlP21r81tPi5yguYhCn340pPFLdQbxTvTUZWl2XmeWuyIN2ObWYntfD_Tso1Mu3HqNRHICtjZpRKQJwaIzmSKRDBnLIgJTPzqIhckPG4EbF2YABtCjeH-KXN5A:1sithF:_my2LD02pkkgdZ3SsUE_R8Yy6XiclyTS8P7h0mmIMJA', '2024-09-10 10:45:09.776666');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products`
+-- Estrutura para tabela `produtos_product`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE `produtos_product` (
   `product_id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `category` varchar(40) NOT NULL,
-  `sub_category` varchar(30) NOT NULL,
+  `sub_category` varchar(40) NOT NULL,
   `description` varchar(150) NOT NULL,
   `estoque` int(100) NOT NULL,
-  `price` double NOT NULL
+  `price` double NOT NULL,
+  `promotion` tinyint(1) NOT NULL,
+  `foto_1` varchar(100) DEFAULT NULL,
+  `foto_2` varchar(100) DEFAULT NULL,
+  `foto_3` varchar(100) DEFAULT NULL,
+  `foto_4` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `produtos_product`
+--
+
+INSERT INTO `produtos_product` (`product_id`, `name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
+(1, 'dsadassa', 'dsadsad', 'wwqwewq', 'weqeqeq', 222, 22.2, 1, 'produtos/buddog.jpg', 'produtos/buddog_Eqxho26.jpg', 'produtos/buddog_Dae8Djs.jpg', 'produtos/buddog_spVbOJA.jpg');
 
 -- --------------------------------------------------------
 
@@ -271,7 +292,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
 (1, 'Nome', 'Sobrenome', 'usuario@exemplo.com', 'pbkdf2_sha256$720000$ija2e5DwuT5069X13jW4q2$P0xZ+wYFmv9IMX9H1KmPGmZ1SgQKOfLj/MGdIS5xobM=', 0, 1, 0, NULL, 0),
-(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$600000$8fH89yGR3mdPpUsvtmsPLH$KDvFYXHmx4nfnK+DlA+ChR1Aj+OzKoa3FKZiJamjNxI=', 0, 1, 1, '2024-08-22 17:13:53', 1),
+(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$600000$8fH89yGR3mdPpUsvtmsPLH$KDvFYXHmx4nfnK+DlA+ChR1Aj+OzKoa3FKZiJamjNxI=', 0, 1, 1, '2024-08-27 12:06:26', 1),
 (3, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 10:45:09', 1);
 
 -- --------------------------------------------------------
@@ -382,9 +403,9 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
--- Índices de tabela `products`
+-- Índices de tabela `produtos_product`
 --
-ALTER TABLE `products`
+ALTER TABLE `produtos_product`
   ADD PRIMARY KEY (`product_id`);
 
 --
@@ -459,13 +480,13 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
@@ -474,10 +495,10 @@ ALTER TABLE `django_migrations`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT de tabela `products`
+-- AUTO_INCREMENT de tabela `produtos_product`
 --
-ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `produtos_product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -525,7 +546,7 @@ ALTER TABLE `auth_permission`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_user_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
-  ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+  ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `produtos_product` (`product_id`);
 
 --
 -- Restrições para tabelas `delivery`
