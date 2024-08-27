@@ -35,7 +35,7 @@ class UsuarioForm(forms.ModelForm):
     def clean_password(self):
     
         password = self.cleaned_data.get('password')
-        if len(password) <= 8 :
+        if len(password) <= 7 :
              raise forms.ValidationError('A senha deve ter pelo menos 8 caracteres.')
         return password
     

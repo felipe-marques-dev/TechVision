@@ -6,8 +6,7 @@ from django.contrib.auth import login
 
 
 def home(request):
-
-    return render(request, 'index.html')
+    return render(request, 'home.html')
 
 
 def cadastro(request):

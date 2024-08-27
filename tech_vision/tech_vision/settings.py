@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-%3v)_#=y_!@w%c8qdqg@5x83o2w_(@(c+j&dd4b^c%-*dl4i$4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['d5fb-201-31-70-194.ngrok-free.app']
+ALLOWED_HOSTS = ['d5fb-201-31-70-194.ngrok-free.app', '127.0.0.1']
 
 
 # Application definition
@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuario',
-    'produtos',
-    'autenticacao'
+    'produtos'
 ]
 
 AUTH_USER_MODEL = 'usuario.User'
