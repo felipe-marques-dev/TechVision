@@ -1,0 +1,12 @@
+body {
+    background-color: #d9e4e4;
+    color: rgb(0, 0, 0);
+}
+
+.bg-primary {
+    background-color: #d9e4e4 !important; /* Cor personalizada */
+}
+
+.bg-secondary {
+    background-color: #ffffff !important;
+}
