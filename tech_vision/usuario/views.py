@@ -6,6 +6,7 @@ from django.contrib.auth import login
 
 
 def home(request):
+
     return render(request, 'index.html')
 
 
@@ -21,4 +22,5 @@ def cadastro(request):
     else:
         form = UsuarioForm()
     return render(request, 'cadastro.html', {'form': form})
+
 
