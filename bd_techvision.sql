@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22/08/2024 às 20:15
+-- Tempo de geração: 27/08/2024 às 13:07
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -172,7 +172,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'group'),
 (1, 'auth', 'permission'),
 (3, 'contenttypes', 'contenttype'),
-(4, 'sessions', 'session');
+(4, 'sessions', 'session'),
+(5, 'usuario', 'user');
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,8 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
-('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676');
+('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
+('xf16zbob48k949xemv7igodpfct1dhow', '.eJxVjMsOwiAQRf-FtSEwZYq4dN9vIDM8pGogKe3K-O_apAvd3nPOfQlP21r81tPi5yguYhCn340pPFLdQbxTvTUZWl2XmeWuyIN2ObWYntfD_Tso1Mu3HqNRHICtjZpRKQJwaIzmSKRDBnLIgJTPzqIhckPG4EbF2YABtCjeH-KXN5A:1sithF:_my2LD02pkkgdZ3SsUE_R8Yy6XiclyTS8P7h0mmIMJA', '2024-09-10 10:45:09.776666');
 
 -- --------------------------------------------------------
 
@@ -269,7 +271,32 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
 (1, 'Nome', 'Sobrenome', 'usuario@exemplo.com', 'pbkdf2_sha256$720000$ija2e5DwuT5069X13jW4q2$P0xZ+wYFmv9IMX9H1KmPGmZ1SgQKOfLj/MGdIS5xobM=', 0, 1, 0, NULL, 0),
-(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$600000$8fH89yGR3mdPpUsvtmsPLH$KDvFYXHmx4nfnK+DlA+ChR1Aj+OzKoa3FKZiJamjNxI=', 0, 1, 1, '2024-08-22 17:13:53', 1);
+(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$600000$8fH89yGR3mdPpUsvtmsPLH$KDvFYXHmx4nfnK+DlA+ChR1Aj+OzKoa3FKZiJamjNxI=', 0, 1, 1, '2024-08-22 17:13:53', 1),
+(3, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 10:45:09', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario_groups`
+--
+
+CREATE TABLE `usuario_groups` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario_user_permissions`
+--
+
+CREATE TABLE `usuario_user_permissions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
@@ -367,6 +394,22 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `usuario_groups`
+--
+ALTER TABLE `usuario_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `group_id` (`group_id`);
+
+--
+-- Índices de tabela `usuario_user_permissions`
+--
+ALTER TABLE `usuario_user_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `permission_id` (`permission_id`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -422,7 +465,7 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
@@ -440,7 +483,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `usuario_groups`
+--
+ALTER TABLE `usuario_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario_user_permissions`
+--
+ALTER TABLE `usuario_user_permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
@@ -485,6 +540,20 @@ ALTER TABLE `delivery`
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `django_admin_log_ibfk_2` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
+
+--
+-- Restrições para tabelas `usuario_groups`
+--
+ALTER TABLE `usuario_groups`
+  ADD CONSTRAINT `usuario_groups_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `usuario_groups_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
+
+--
+-- Restrições para tabelas `usuario_user_permissions`
+--
+ALTER TABLE `usuario_user_permissions`
+  ADD CONSTRAINT `usuario_user_permissions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `usuario_user_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
