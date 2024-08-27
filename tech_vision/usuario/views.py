@@ -3,4 +3,6 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return HttpResponse("Home")
+    if request.method == "GET":
+        return render(request, "home.html")
+    
