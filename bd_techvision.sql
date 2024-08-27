@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/08/2024 às 14:20
+-- Tempo de geração: 27/08/2024 às 20:47
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -157,7 +157,14 @@ CREATE TABLE `django_admin_log` (
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id`, `object_id`, `object_repr`, `action_flag`, `change_message`) VALUES
-(1, '2024-08-27 12:15:35', 2, 6, '1', 'Product object (1)', 1, '[{\"added\": {}}]');
+(1, '2024-08-27 12:15:35', 2, 6, '1', 'Product object (1)', 1, '[{\"added\": {}}]'),
+(2, '2024-08-27 13:42:22', 2, 6, '2', 'Product object (2)', 1, '[{\"added\": {}}]'),
+(3, '2024-08-27 15:53:08', 2, 6, '2', 'Product object (2)', 3, ''),
+(4, '2024-08-27 15:53:17', 2, 6, '1', 'Product object (1)', 3, ''),
+(5, '2024-08-27 16:01:27', 2, 6, '3', 'Product object (3)', 1, '[{\"added\": {}}]'),
+(6, '2024-08-27 16:07:53', 2, 6, '4', 'Product object (4)', 1, '[{\"added\": {}}]'),
+(7, '2024-08-27 16:12:45', 2, 6, '5', 'Product object (5)', 1, '[{\"added\": {}}]'),
+(8, '2024-08-27 16:17:12', 2, 6, '6', 'Product object (6)', 1, '[{\"added\": {}}]');
 
 -- --------------------------------------------------------
 
@@ -234,10 +241,11 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('b80ehir8jysfrtyk8ghu9y5gva0ilyas', '.eJxVjEEOwiAQRe_C2hCgDAwu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWQZx-t0T5wW0H5U7tNss8t3WZktwVedAur3Ph5-Vw_w4q9fqtgZnBMAafMIN3puSEgRw6O9iB2EAoCrUDHUY_omeXkIlUyUEBWi3eH-XEN6M:1sj0wE:w3l-tstaDpgO3oUO7dTBdpLPpaj-Mth7miZK-rgjqFI', '2024-09-10 18:29:06.843108'),
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
 ('c60ir59vz41lsp0klr4g4phdtunt63mx', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1siuxu:0pXmvK-6uRUSpalY29C71uln7g3rwxNcDG0xRUCep8U', '2024-09-10 12:06:26.231567'),
-('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
-('xf16zbob48k949xemv7igodpfct1dhow', '.eJxVjMsOwiAQRf-FtSEwZYq4dN9vIDM8pGogKe3K-O_apAvd3nPOfQlP21r81tPi5yguYhCn340pPFLdQbxTvTUZWl2XmeWuyIN2ObWYntfD_Tso1Mu3HqNRHICtjZpRKQJwaIzmSKRDBnLIgJTPzqIhckPG4EbF2YABtCjeH-KXN5A:1sithF:_my2LD02pkkgdZ3SsUE_R8Yy6XiclyTS8P7h0mmIMJA', '2024-09-10 10:45:09.776666');
+('edeowszhehzl5dsv3scfkfcgcoo5xt8e', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1siwXr:nQdUi7POBfGyExmmBiKYphSQ7aQPdDQV-nS2qpqTmUQ', '2024-09-10 13:47:39.772701'),
+('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676');
 
 -- --------------------------------------------------------
 
@@ -265,7 +273,10 @@ CREATE TABLE `produtos_product` (
 --
 
 INSERT INTO `produtos_product` (`product_id`, `name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
-(1, 'dsadassa', 'dsadsad', 'wwqwewq', 'weqeqeq', 222, 22.2, 1, 'produtos/buddog.jpg', 'produtos/buddog_Eqxho26.jpg', 'produtos/buddog_Dae8Djs.jpg', 'produtos/buddog_spVbOJA.jpg');
+(3, 'Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
+(4, 'TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
+(5, 'Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
+(6, 'Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 50, 25, 0, 'produtos/rodo1.jpg', 'produtos/rodo2.webp', 'produtos/rodo3.webp', 'produtos/rodo4.jpg');
 
 -- --------------------------------------------------------
 
@@ -291,9 +302,13 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(1, 'Nome', 'Sobrenome', 'usuario@exemplo.com', 'pbkdf2_sha256$720000$ija2e5DwuT5069X13jW4q2$P0xZ+wYFmv9IMX9H1KmPGmZ1SgQKOfLj/MGdIS5xobM=', 0, 1, 0, NULL, 0),
-(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$600000$8fH89yGR3mdPpUsvtmsPLH$KDvFYXHmx4nfnK+DlA+ChR1Aj+OzKoa3FKZiJamjNxI=', 0, 1, 1, '2024-08-27 12:06:26', 1),
-(3, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 10:45:09', 1);
+(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-08-27 15:52:23', 1),
+(3, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 18:22:23', 1),
+(5, 'Lucas', 'Leite', 'lucas.leite4@aluno.senai.br', 'pbkdf2_sha256$720000$F4tinjN1FfBo5BOQ1oupHT$JRcr/TapZdrVHs3uMSCHpVRCldM33ZKWfIL8GxrXcXQ=', 0, 1, 0, '2024-08-27 17:03:52', 0),
+(6, 'adsf', 'asdf', 'teste@gmail.com', 'pbkdf2_sha256$720000$pUrz3odG7368gdKjDuoHm6$b+RS6G8/Xj5piYKfSVj9aWbCos2zOdiO6ehmZbNYpns=', 0, 1, 0, '2024-08-27 18:26:15', 0),
+(7, 'asdf', 'adffa', 'testse@gmail.com', 'pbkdf2_sha256$720000$FjpgtjKAslzXm0aDLP9xf0$ZMvJQZD8CNcrSFif2dh/2vV7zAbLShIFxU7YpA+zMzI=', 0, 1, 0, '2024-08-27 18:28:21', 0),
+(8, 'afdadsfad', 'asdfasdfasd', 'lucasleite.miaguel10@gmail.com', 'pbkdf2_sha256$720000$3DCewdksvU1nFyFp74pGfz$QpYJ0LQpkv0LNcCAb18D/CjHnNyT1a/vBRF2eKOymjw=', 0, 1, 0, '2024-08-27 18:28:40', 0),
+(9, 'adsfadsfa', 'adsfsdfas', 'tdseste@gmail.com', 'pbkdf2_sha256$720000$fSPeCgXfBJnUFTRuVtCnKF$tk4C12d7ttdo4a31tx0xQMUpurrTqCN6VK3Y7TvfmnM=', 0, 1, 0, '2024-08-27 18:29:06', 0);
 
 -- --------------------------------------------------------
 
@@ -480,7 +495,7 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
@@ -498,13 +513,13 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT de tabela `produtos_product`
 --
 ALTER TABLE `produtos_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_groups`
