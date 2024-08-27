@@ -59,6 +59,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://d5fb-201-31-70-194.ngrok-free.app'
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://d5fb-201-31-70-194.ngrok-free.app'
+]
+
 ROOT_URLCONF = 'tech_vision.urls'
 
 TEMPLATES = [
