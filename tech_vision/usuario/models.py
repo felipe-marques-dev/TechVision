@@ -76,13 +76,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Adress(models.Model):
     adress_id = models.AutoField(primary_key = True)
+    city = models.CharField(max_length=50)
     street = models.CharField(max_length=20)
     block = models.CharField(max_length=20)
     reference = models.CharField(max_length=30)
     cep = models.CharField(max_length=8)
     state = models.CharField(max_length=2)
     number = models.IntegerField()
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE, related_name='enderecos')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enderecos')
 
 
 @admin.register(User)
