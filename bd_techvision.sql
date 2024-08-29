@@ -273,7 +273,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 --
 
 CREATE TABLE `produtos_product` (
-  `product_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   `category` varchar(40) NOT NULL,
   `sub_category` varchar(40) NOT NULL,
@@ -291,11 +291,11 @@ CREATE TABLE `produtos_product` (
 -- Despejando dados para a tabela `produtos_product`
 --
 
-INSERT INTO `produtos_product` (`product_id`, `name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
-(3, 'Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
-(4, 'TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
-(5, 'Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
-(6, 'Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 50, 25, 0, 'produtos/rodo1.jpg', 'produtos/rodo2.webp', 'produtos/rodo3.webp', 'produtos/rodo4.jpg');
+INSERT INTO `produtos_product` (`name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
+('Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
+('TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
+('Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
+('Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 50, 25, 0, 'produtos/rodo1.jpg', 'produtos/rodo2.webp', 'produtos/rodo3.webp', 'produtos/rodo4.jpg');
 
 -- --------------------------------------------------------
 
@@ -304,7 +304,7 @@ INSERT INTO `produtos_product` (`product_id`, `name`, `category`, `sub_category`
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `email` varchar(30) NOT NULL,
@@ -320,15 +320,9 @@ CREATE TABLE `usuario` (
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(2, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-08-29 11:25:19', 1),
-(3, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 18:22:23', 1),
-(5, 'Lucas', 'Leite', 'lucas.leite4@aluno.senai.br', 'pbkdf2_sha256$720000$F4tinjN1FfBo5BOQ1oupHT$JRcr/TapZdrVHs3uMSCHpVRCldM33ZKWfIL8GxrXcXQ=', 0, 1, 1, '2024-08-27 17:03:52', 0),
-(6, 'adsf', 'asdf', 'teste@gmail.com', 'pbkdf2_sha256$720000$pUrz3odG7368gdKjDuoHm6$b+RS6G8/Xj5piYKfSVj9aWbCos2zOdiO6ehmZbNYpns=', 0, 1, 0, '2024-08-27 18:26:15', 0),
-(7, 'asdf', 'adffa', 'testse@gmail.com', 'pbkdf2_sha256$720000$FjpgtjKAslzXm0aDLP9xf0$ZMvJQZD8CNcrSFif2dh/2vV7zAbLShIFxU7YpA+zMzI=', 0, 1, 0, '2024-08-27 18:28:21', 0),
-(8, 'afdadsfad', 'asdfasdfasd', 'lucasleite.miaguel10@gmail.com', 'pbkdf2_sha256$720000$3DCewdksvU1nFyFp74pGfz$QpYJ0LQpkv0LNcCAb18D/CjHnNyT1a/vBRF2eKOymjw=', 0, 1, 0, '2024-08-27 18:28:40', 0),
-(9, 'adsfadsfa', 'adsfsdfas', 'tdseste@gmail.com', 'pbkdf2_sha256$720000$fSPeCgXfBJnUFTRuVtCnKF$tk4C12d7ttdo4a31tx0xQMUpurrTqCN6VK3Y7TvfmnM=', 0, 1, 0, '2024-08-27 18:29:06', 0),
-(10, 'Ana Clara', 'Guimarães', 'anaclara.itapeva@gmail.com', 'pbkdf2_sha256$720000$JG3KsSiNwUy9GtMpPCYXtk$oQmxsD7SqDPZLevHhDvV5cDlpNf3pmTOTI7pFgjwH4g=', 0, 1, 0, '2024-08-29 11:24:24', 0);
+INSERT INTO `usuario` (`first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
+('Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-08-29 11:25:19', 1),
+('Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 18:22:23', 1);
 
 -- --------------------------------------------------------
 
@@ -469,17 +463,6 @@ ALTER TABLE `django_session`
   ADD PRIMARY KEY (`session_key`),
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
---
--- Índices de tabela `produtos_product`
---
-ALTER TABLE `produtos_product`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Índices de tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `usuario_adress`
