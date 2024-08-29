@@ -19,8 +19,7 @@ url = "5b43-201-91-14-234.ngrok-free.app"
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/usuario/home'
-
+LOGIN_REDIRECT_URL = '/accounts/home'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -151,3 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Não mexer nisso!!! Até integrarmos o site com uma api de email 
+# Isso registra todos os emails enviados ao console (para que você possa copiar o link de redefinição de senha do console).
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

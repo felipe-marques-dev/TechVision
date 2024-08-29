@@ -6,11 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Botao para logout -->
+
+    <ul class="sidebar-nav">
+        ...
+    
+        {% if user.is_authenticated %}
+          <li>User: {{ user.get_username }}</li>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+            </form>
+        {% else %}
+          <li><a href="{% url 'login'%}">Login</a></li>
+        {% endif %}
+      </ul>
+    <!-- Botao para logout 
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">logout</button>
     </form>
+    -->
 </body>
 </html>
 
