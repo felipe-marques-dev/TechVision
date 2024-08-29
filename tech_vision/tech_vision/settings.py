@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
+url = "5b43-201-91-14-234.ngrok-free.app"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +31,7 @@ SECRET_KEY = 'django-insecure-%3v)_#=y_!@w%c8qdqg@5x83o2w_(@(c+j&dd4b^c%-*dl4i$4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['d5fb-201-31-70-194.ngrok-free.app', '127.0.0.1']
+ALLOWED_HOSTS = [url, '127.0.0.1']
 
 
 # Application definition
@@ -59,11 +61,11 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://d5fb-201-31-70-194.ngrok-free.app'
+    'https://' + url 
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://d5fb-201-31-70-194.ngrok-free.app'
+    'https://' + url 
 ]
 
 ROOT_URLCONF = 'tech_vision.urls'
