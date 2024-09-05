@@ -1,10 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.db import models
-from django.utils import timezone
-from django.contrib import admin
 from produtos.models import Produto
+
+from django.contrib import admin
 
 class CustomUserManager(BaseUserManager):
     """
@@ -37,17 +35,12 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
 
         return self.create_user(
-
             email=email,
             password=password,
             first_name=first_name,
             last_name=last_name,
             **extra_fields
         )
-
-
-   
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     
@@ -58,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-     # Chama o manager personalizado
+    # Chama o manager personalizado
     objects = CustomUserManager()
 
     # Campo usado para fazer login
@@ -73,9 +66,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
 class Endereco(models.Model):
-    adress_id = models.AutoField(primary_key = True)
+    adress_id = models.AutoField(primary_key=True)
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=20)
     block = models.CharField(max_length=20)
@@ -87,16 +79,7 @@ class Endereco(models.Model):
 
 class Carrinho(models.Model):
     cart_id = models.AutoField(primary_key=True)
-    quantity= models.IntegerField()
+    quantity = models.IntegerField()
     produto = models.ForeignKey(Produto, models.SET_NULL, null=True, related_name='carrinho')
     user = models.ForeignKey(User, models.CASCADE, related_name='carrinho')
-
-
-
-# adiciona o User na pagina de admin
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
-    search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('email',)
 

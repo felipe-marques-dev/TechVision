@@ -1,6 +1,5 @@
 from django.db import models
 from usuario.models import Endereco, User
-# Create your models here.
 
 class Transportadora(models.Model):
     carrier_id = models.AutoField(primary_key=True)
@@ -9,10 +8,9 @@ class Transportadora(models.Model):
     description = models.CharField(max_length=150)
 
 class Pedido(models.Model):
-
     STATUS_CHOICES = [
         ('pendente', 'Pagamento Pendente'),
-        ('pendente', 'Pagamento Aprovado'),
+        ('aprovado', 'Pagamento Aprovado'), 
         ('em_transito', 'Em Trânsito'),
         ('entregue', 'Entregue'),
         ('cancelado', 'Cancelado'),
@@ -22,8 +20,5 @@ class Pedido(models.Model):
     endereco = models.ForeignKey(Endereco, models.SET_NULL, null=True, related_name='pedidos')
     transportadora = models.ForeignKey(Transportadora, models.SET_NULL, null=True, related_name='pedidos')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pedidos")
-    status = models.CharField(max_length= 40, choices=STATUS_CHOICES, default="pendente")
+    status = models.CharField(max_length=40, choices=STATUS_CHOICES, default="pendente")
     frete = models.FloatField()
-
-
-
