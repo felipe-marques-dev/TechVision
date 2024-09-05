@@ -10,6 +10,7 @@ interface User {
 async function fetchUsers(): Promise<User[]> {
   const response = await fetch('http://localhost:8000/accounts/api');
   const data = await response.json();
+  console.log(data)
   return data;
 }
 
