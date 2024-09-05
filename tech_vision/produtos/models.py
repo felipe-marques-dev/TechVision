@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Product(models.Model):
+class Produto(models.Model):
     product_id = models.AutoField(primary_key = True)
     name = models.CharField(max_length=40)
     category = models.CharField(max_length=40)
