@@ -13,9 +13,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
+FRONTEND_URL = 'http://localhost:3000'
+url = "5b43-201-91-14-234.ngrok-free.app"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/accounts/home'
@@ -29,7 +31,7 @@ SECRET_KEY = 'django-insecure-%3v)_#=y_!@w%c8qdqg@5x83o2w_(@(c+j&dd4b^c%-*dl4i$4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [url, '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -41,18 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    'rest_framework',
     'usuario',
     'produtos',
-    'rest_framework',
+    'corsheaders'
 ]
 
 AUTH_USER_MODEL = 'usuario.User'
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # This must be place above all the other middleware
-
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,7 +60,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
+
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.AllowAny']}
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -135,21 +138,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(PROJECT_DIR, 'frontend/app/static'),)
-STATIC_ROOT = os.path.join('static')
+STATIC_ROOT = os.path.join('staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [
+    BASE_DIR.parent/ 'frontend',
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'frontend/app/media')
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:80',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    FRONTEND_URL
+]
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-       'http://localhost:3000',
-)
 
 # Não mexer nisso!!! Até integrarmos o site com uma api de email 
 # Isso registra todos os emails enviados ao console (para que você possa copiar o link de redefinição de senha do console).

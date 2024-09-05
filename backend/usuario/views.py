@@ -4,7 +4,23 @@ from .forms import UsuarioForm
 from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
+from . models import *
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+from . serializer import *
 
+class UserView(APIView):
+    def get(self, request):
+        output = [{'first_name':output.first_name, 'last_name':output.last_name, 'email':output.email, 'is_verified':output.is_verified, 'is_active':output.is_active, 'is_staff':output.is_staff}
+                  for output in User.objects.all()]
+        return Response(output)
+
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
 
 @login_required
 def home(request):
