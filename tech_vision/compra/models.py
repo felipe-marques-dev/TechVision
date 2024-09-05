@@ -19,10 +19,11 @@ class Delivery(models.Model):
     ]
 
     delivery_id = models.AutoField(primary_key=True)
-    adress_id = models.ForeignKey(Adress, on_delete=models.CASCADE, related_name='enderecos')
-    carrier_id = models.ForeignKey(Carrier, on_delete=models.CASCADE, related_name='transportadoras')
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="usuarios")
+    adress_id = models.ForeignKey(Adress, models.SET_NULL, null=True, related_name='pedidos')
+    carrier_id = models.ForeignKey(Carrier, models.SET_NULL, null=True, related_name='pedidos')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pedidos")
     status = models.CharField(max_length= 40, choices=STATUS_CHOICES, default="pendente")
     frete = models.FloatField()
+
 
 
