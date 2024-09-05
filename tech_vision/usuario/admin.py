@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Endereco, User, Carrinho
+from .models import Endereco, User, Carrinho, CarrinhoItem
+
 # Register your models here.
 
 
@@ -13,38 +14,29 @@ class AdressAdmin(admin.ModelAdmin):
         return obj.user.email
     user_email.short_description = 'Email do Usuário'
 
+class CarrinhoItemInline(admin.TabularInline):
+    model = CarrinhoItem
+    fields = ['quantity', 'price']
+    can_delete = False
+
 
 # Adiciona o Cart ao painel de Admin
 @admin.register(Carrinho)
-class CartAdmin(admin.ModelAdmin):
-    list_display = ('carrinho_id','quantidade','produto_id','produto_nome','usuario_id', 'user_email')
+class CarrinhoAdmin(admin.ModelAdmin):
+    list_display = ('user_email','carrinho_id')
     search_fields = ('cart_id','user_id__email')
+    inlines = [CarrinhoItemInline]
 
-
-    # nomes das colunas 
-    def produto_id(self, obj):
-        return obj.produto.product_id
-    produto_id.short_description = 'ID do Produto'  
-
-    def produto_nome(self, obj):
-        return obj.produto.name
-    produto_nome.short_description = 'Nome do Produto'
 
     def carrinho_id(self, obj):
         return obj.cart_id
     carrinho_id.short_description = 'ID do carrinho'
 
-    def quantidade(self, obj):
-        return obj.quantity
-    quantidade.short_description = 'Quantidade'
 
     def user_email(self, obj):
         return obj.user.email
     user_email.short_description = 'Email do Usuário'
 
-    def usuario_id(self, obj):
-        return obj.user.id
-    usuario_id.short_description = 'ID do Usuário'
 
 
 @admin.register(User)

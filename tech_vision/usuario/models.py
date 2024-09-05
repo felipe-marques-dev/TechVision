@@ -78,8 +78,15 @@ class Endereco(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enderecos')
 
 class Carrinho(models.Model):
-    cart_id = models.AutoField(primary_key=True)
-    quantity = models.IntegerField()
-    produto = models.ForeignKey(Produto, models.SET_NULL, null=True, related_name='carrinho')
+    cart_id = models.AutoField(primary_key=True) 
     user = models.ForeignKey(User, models.CASCADE, related_name='carrinho')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+
+class CarrinhoItem(models.Model):
+    id = models.AutoField(primary_key=True) 
+    cart_id = models.ForeignKey(Carrinho, related_name="itens", on_delete=models.CASCADE)
+    produto_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)

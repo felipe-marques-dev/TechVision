@@ -22,7 +22,7 @@ class TransportadoraInline(admin.TabularInline):
     can_delete = False
 
 @admin.register(Transportadora)
-class CarrierAdmin(admin.ModelAdmin):
+class TransportadoraAdmin(admin.ModelAdmin):
     list_display = ('name', 'carrier_id', 'cnpj', 'description') # Campos exibidos
     search_fields = ('name', 'carrier_id', 'cnpj')
     inlines = [TransportadoraInline] # Campos pesquisáveis no painel de admin
