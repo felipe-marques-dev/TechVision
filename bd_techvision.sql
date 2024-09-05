@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/08/2024 às 13:58
+-- Tempo de geração: 05/09/2024 às 15:28
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -111,20 +111,6 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `carrier`
---
-
-CREATE TABLE `carrier` (
-  `carrier_id` int(11) NOT NULL,
-  `name` varchar(40) NOT NULL,
-  `cnpj` varchar(14) NOT NULL,
-  `description` varchar(150) NOT NULL,
-  `frete` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `cart`
 --
 
@@ -138,14 +124,44 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `delivery`
+-- Estrutura para tabela `compra_carrier`
 --
 
-CREATE TABLE `delivery` (
-  `delivery_id` int(11) NOT NULL,
-  `adress_id` int(11) NOT NULL,
-  `carrier_id` int(11) NOT NULL
+CREATE TABLE `compra_carrier` (
+  `carrier_id` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `cnpj` varchar(14) NOT NULL,
+  `description` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `compra_carrier`
+--
+
+INSERT INTO `compra_carrier` (`carrier_id`, `name`, `cnpj`, `description`) VALUES
+(1, 'DRP', '3213123213', 'TESTE');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `compra_delivery`
+--
+
+CREATE TABLE `compra_delivery` (
+  `delivery_id` int(11) NOT NULL,
+  `adress_id_id` int(11) NOT NULL,
+  `carrier_id_id` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `frete` double NOT NULL,
+  `user_id_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `compra_delivery`
+--
+
+INSERT INTO `compra_delivery` (`delivery_id`, `adress_id_id`, `carrier_id_id`, `status`, `frete`, `user_id_id`) VALUES
+(1, 2, 1, 'pendente', 22, 2);
 
 -- --------------------------------------------------------
 
@@ -181,7 +197,9 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 (10, '2024-08-29 11:14:25', 2, 5, '2', 'usuariosuper@exemplo.com', 2, '[{\"changed\": {\"fields\": [\"Groups\", \"User permissions\"]}}]'),
 (11, '2024-08-29 11:23:25', 2, 5, '5', 'lucas.leite4@aluno.senai.br', 2, '[{\"changed\": {\"fields\": [\"Is staff\"]}}]'),
 (12, '2024-08-29 11:33:24', 2, 7, '1', 'Adress object (1)', 1, '[{\"added\": {}}]'),
-(13, '2024-08-29 11:39:42', 2, 7, '2', 'Adress object (2)', 1, '[{\"added\": {}}]');
+(13, '2024-08-29 11:39:42', 2, 7, '2', 'Adress object (2)', 1, '[{\"added\": {}}]'),
+(14, '2024-09-05 13:21:49', 1, 8, '1', 'Carrier object (1)', 1, '[{\"added\": {}}]'),
+(15, '2024-09-05 13:25:37', 1, 9, '1', 'Delivery object (1)', 1, '[{\"added\": {}}]');
 
 -- --------------------------------------------------------
 
@@ -202,6 +220,8 @@ CREATE TABLE `django_content_type` (
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'group'),
 (1, 'auth', 'permission'),
+(8, 'compra', 'carrier'),
+(9, 'compra', 'delivery'),
 (3, 'contenttypes', 'contenttype'),
 (6, 'produtos', 'product'),
 (4, 'sessions', 'session'),
@@ -264,7 +284,8 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('c60ir59vz41lsp0klr4g4phdtunt63mx', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1siuxu:0pXmvK-6uRUSpalY29C71uln7g3rwxNcDG0xRUCep8U', '2024-09-10 12:06:26.231567'),
 ('edeowszhehzl5dsv3scfkfcgcoo5xt8e', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1siwXr:nQdUi7POBfGyExmmBiKYphSQ7aQPdDQV-nS2qpqTmUQ', '2024-09-10 13:47:39.772701'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
-('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473');
+('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
+('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
 
 -- --------------------------------------------------------
 
@@ -273,7 +294,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 --
 
 CREATE TABLE `produtos_product` (
-  `product_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `category` varchar(40) NOT NULL,
   `sub_category` varchar(40) NOT NULL,
@@ -291,11 +312,11 @@ CREATE TABLE `produtos_product` (
 -- Despejando dados para a tabela `produtos_product`
 --
 
-INSERT INTO `produtos_product` (`name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
-('Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
-('TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
-('Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
-('Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 50, 25, 0, 'produtos/rodo1.jpg', 'produtos/rodo2.webp', 'produtos/rodo3.webp', 'produtos/rodo4.jpg');
+INSERT INTO `produtos_product` (`product_id`, `name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
+(1, 'Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
+(2, 'TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
+(3, 'Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
+(4, 'Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 50, 25, 0, 'produtos/rodo1.jpg', 'produtos/rodo2.webp', 'produtos/rodo3.webp', 'produtos/rodo4.jpg');
 
 -- --------------------------------------------------------
 
@@ -304,7 +325,7 @@ INSERT INTO `produtos_product` (`name`, `category`, `sub_category`, `description
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `email` varchar(30) NOT NULL,
@@ -320,9 +341,9 @@ CREATE TABLE `usuario` (
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-('Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-08-29 11:25:19', 1),
-('Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 18:22:23', 1);
+INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
+(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-09-05 13:20:07', 1),
+(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 18:22:23', 1);
 
 -- --------------------------------------------------------
 
@@ -414,12 +435,6 @@ ALTER TABLE `auth_permission`
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
 
 --
--- Índices de tabela `carrier`
---
-ALTER TABLE `carrier`
-  ADD PRIMARY KEY (`carrier_id`);
-
---
 -- Índices de tabela `cart`
 --
 ALTER TABLE `cart`
@@ -428,12 +443,19 @@ ALTER TABLE `cart`
   ADD KEY `cart_user_id` (`user_id`);
 
 --
--- Índices de tabela `delivery`
+-- Índices de tabela `compra_carrier`
 --
-ALTER TABLE `delivery`
+ALTER TABLE `compra_carrier`
+  ADD PRIMARY KEY (`carrier_id`);
+
+--
+-- Índices de tabela `compra_delivery`
+--
+ALTER TABLE `compra_delivery`
   ADD PRIMARY KEY (`delivery_id`),
-  ADD KEY `adress_id` (`adress_id`),
-  ADD KEY `carrier_id` (`carrier_id`);
+  ADD KEY `adress_id` (`adress_id_id`),
+  ADD KEY `carrier_id` (`carrier_id_id`),
+  ADD KEY `user_id_id` (`user_id_id`);
 
 --
 -- Índices de tabela `django_admin_log`
@@ -463,6 +485,17 @@ ALTER TABLE `django_session`
   ADD PRIMARY KEY (`session_key`),
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
+--
+-- Índices de tabela `produtos_product`
+--
+ALTER TABLE `produtos_product`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `usuario_adress`
@@ -510,34 +543,34 @@ ALTER TABLE `auth_permission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT de tabela `carrier`
---
-ALTER TABLE `carrier`
-  MODIFY `carrier_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `cart`
 --
 ALTER TABLE `cart`
   MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `delivery`
+-- AUTO_INCREMENT de tabela `compra_carrier`
 --
-ALTER TABLE `delivery`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `compra_carrier`
+  MODIFY `carrier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `compra_delivery`
+--
+ALTER TABLE `compra_delivery`
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
@@ -600,11 +633,12 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `produtos_product` (`product_id`);
 
 --
--- Restrições para tabelas `delivery`
+-- Restrições para tabelas `compra_delivery`
 --
-ALTER TABLE `delivery`
-  ADD CONSTRAINT `adress_id` FOREIGN KEY (`adress_id`) REFERENCES `usuario_adress` (`adress_id`),
-  ADD CONSTRAINT `carrier_id` FOREIGN KEY (`carrier_id`) REFERENCES `carrier` (`carrier_id`);
+ALTER TABLE `compra_delivery`
+  ADD CONSTRAINT `adress_id` FOREIGN KEY (`adress_id_id`) REFERENCES `usuario_adress` (`adress_id`),
+  ADD CONSTRAINT `carrier_id` FOREIGN KEY (`carrier_id_id`) REFERENCES `compra_carrier` (`carrier_id`),
+  ADD CONSTRAINT `user_id_id` FOREIGN KEY (`user_id_id`) REFERENCES `usuario` (`id`);
 
 --
 -- Restrições para tabelas `django_admin_log`
