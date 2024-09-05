@@ -12,7 +12,7 @@ from . serializer import *
 
 class UserView(APIView):
     def get(self, request):
-        output = [{'first_name':output.first_name, 'last_name':output.last_name, 'email':output.email, 'is_verified':output.is_verified, 'is_active':output.is_active, 'is_staff':output.is_staff}
+        output = [{'first_name':output.first_name, 'last_name':output.last_name, 'email':output.email, 'is_verified':output.is_verified, 'is_active':output.is_active, 'is_staff':output.is_staff, 'password':output.password}
                   for output in User.objects.all()]
         return Response(output)
 
@@ -24,8 +24,14 @@ class UserView(APIView):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    return HttpResponse("Home")
 
+
+def login(request):
+    if request.method == 'POST':
+        return HttpResponse("post")
+    else:
+        return HttpResponse("get")
 
 def cadastro(request):
     if request.method == 'POST':
