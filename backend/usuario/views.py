@@ -1,47 +1,48 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .forms import UsuarioForm
-from django.shortcuts import redirect
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from rest_framework.views import APIView
-from . models import *
+from django.shortcuts import get_list_or_404
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
-from . serializer import *
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from .models import User
+from .serializers import UserSerializer
 
-class UserView(APIView):
-    def get(self, request):
-        output = [{'first_name':output.first_name, 'last_name':output.last_name, 'email':output.email, 'is_verified':output.is_verified, 'is_active':output.is_active, 'is_staff':output.is_staff, 'password':output.password}
-                  for output in User.objects.all()]
-        return Response(output)
-
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
-
-@login_required
-def home(request):
-    return HttpResponse("Home")
-
-
+# Login
+@api_view(['POST'])
 def login(request):
-    if request.method == 'POST':
-        return HttpResponse("post")
-    else:
-        return HttpResponse("get")
+    # Retorna o usuario requisitado
+    user = get_list_or_404(User, email=request.data['email'])
+    # Verifica se o campo de senha esta correto
+    # Caso não esteja, é retornado HTTP_404_NOT_FOUND
+    for user in user:
+        if not user.check_password(request.data['password']):
+            return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
+    # Pega o token existente do usuario e o retorna
+    # Ou cria um token se o usuario não tiver
+    token, created = Token.objects.get_or_create(user=user)
+    serializer = UserSerializer(instance=user)
+    return Response({"token": token.key, "user": serializer.data})
 
+# Cadastro
+@api_view(['POST'])
 def cadastro(request):
-    if request.method == 'POST':
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # loga o usuário após o cadastro
-            return JsonResponse({'redirect_url': '/accounts/home/'})
-        else:
-            return JsonResponse({'success': False, 'errors': form.errors.as_json()})
-    else:
-        form = UsuarioForm()
-    return render(request, 'cadastro.html', {'form': form})
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        user = User.objects.get(first_name=request.data['first_name'], last_name=request.data['last_name'], email=request.data['email'], password=request.data['password'])
+        user.set_password(request.data['password'])
+        user.save()
+        token = Token.objects.create(user=user)
+        return Response({"token": token.key, "user": serializer.data})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Validar o token
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def validar_token(request):
+    return Response({"Usuario liberado {}".format(request.user.email)})

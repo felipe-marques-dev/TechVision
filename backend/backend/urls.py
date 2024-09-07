@@ -10,10 +10,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', generic.RedirectView.as_view(url='/accounts/api', permanent=False), name='anything'),
+    # path('', generic.RedirectView.as_view(url='/accounts/login', permanent=False), name='anything'),
     path('accounts/', include('usuario.urls')),
-    path('produtos/', include('produtos.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('produtos/', include('produtos.urls'))
 ]
 
 # Adiciona a configuração para servir arquivos de mídia durante o desenvolvimento

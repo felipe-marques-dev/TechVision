@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from .models import Product
 from .serializers import ProductSerializer
-from rest_framework import generics
-from rest_framework import routers, serializers, viewsets
+from rest_framework import generics, routers, serializers, viewsets
 # Create your views here.
 
 

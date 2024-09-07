@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
+from rest_framework.response import Response
 
 
 class CustomUserManager(BaseUserManager):
@@ -16,7 +17,7 @@ class CustomUserManager(BaseUserManager):
         Cria e salva um usuário com username, email e senha.
         """
         if not email:
-            raise ValueError('O campo de email é obrigatório!')
+            return Response({"Email obrigatório"})
 
         email = self.normalize_email(email)
         user = self.model(
