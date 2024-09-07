@@ -1,3 +1,5 @@
+venv_tech_vision/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

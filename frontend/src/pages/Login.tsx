@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 interface User {
     id: number;
-    name: string;
+    nome: string;
     email: string;
   }
   
@@ -35,7 +35,7 @@ interface User {
         <div>
           {users.map((user) => (
             <div key={user.id}>
-              <h2>{user.name}</h2>
+              <h2>{user.nome}</h2>
               <p>{user.email}</p>
             </div>
           ))}
@@ -45,5 +45,38 @@ interface User {
   
 
 export function Login(){
-    return <UserList></UserList>
+    return (
+      <div>
+      <h1>Login</h1>
+      <form
+        onSubmit={(e: React.SyntheticEvent) => {
+          e.preventDefault();
+          const target = e.target as typeof e.target & {
+            email: { value: string };
+            password: { value: string };
+          };
+          const email = target.email.value; // typechecks!
+          const password = target.password.value; // typechecks!
+          // etc...
+        }}
+      >
+        <div>
+          <label>
+            Email:
+            <input type="email" name="email" />
+          </label>
+        </div>
+        <div>
+          <label>
+            Password:
+            <input type="password" name="password" />
+          </label>
+        </div>
+        <div>
+          <input type="submit" value="Log in" />
+        </div>
+      </form>
+      <a href="/cadastro">Cadastre-se</a>
+      </div>
+    )
 }
