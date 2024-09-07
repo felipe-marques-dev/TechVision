@@ -12,8 +12,14 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:8000/accounts/validar_token
+GET http://127.0.0.1:8000/accounts/usuario
 Content-Type: application/json
-Authorization: Token 2246a8b80a88ec5476ac472f210c6a374a414bc3
 
 { }
+
+###
+
+POST http://127.0.0.1:8000/accounts/logout
+Content-Type: application/json
+
+{ "email": "lucas.leite5@aluno.senai.br", "password": "password" }
