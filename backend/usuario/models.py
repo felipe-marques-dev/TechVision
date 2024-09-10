@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
 from django.db import models
+from .hash import hash_password
 from django.utils import timezone
 from django.contrib import admin
 from rest_framework.response import Response
@@ -25,9 +25,11 @@ class CustomUserManager(BaseUserManager):
             email=email,
             first_name=first_name,
             last_name=last_name,
+            password=hash_password(password),
             **extra_fields
         )
-        user.set_password(password)  # Define a senha de forma segura
+        
+         # Define a senha de forma segura
         user.save(using=self._db)
         return user
 
