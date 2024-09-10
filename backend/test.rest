@@ -1,0 +1,25 @@
+POST http://127.0.0.1:8000/accounts/login
+Content-Type: application/json
+
+{ "email": "lucas.leite5@aluno.senai.br", "password": "password" }
+
+###
+
+POST http://127.0.0.1:8000/accounts/cadastro
+Content-Type: application/json
+
+{ "first_name": "lucas", "last_name": "leite", "email": "lucas.leite15@aluno.senai.br", "password": "password" }
+
+###
+
+GET http://127.0.0.1:8000/accounts/usuario
+Content-Type: application/json
+
+{ }
+
+###
+
+POST http://127.0.0.1:8000/accounts/logout
+Content-Type: application/json
+
+{ "email": "lucas.leite5@aluno.senai.br", "password": "password" }
