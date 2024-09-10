@@ -14,3 +14,6 @@ class Produto(models.Model):
     foto_2 = models.ImageField(upload_to='produtos/')
     foto_3 = models.ImageField(upload_to='produtos/')
     foto_4 = models.ImageField(upload_to='produtos/')
+
+    def __str__(self):
+        return self.name

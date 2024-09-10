@@ -77,16 +77,31 @@ class Endereco(models.Model):
     number = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enderecos')
 
+
+
+
 class Carrinho(models.Model):
     cart_id = models.AutoField(primary_key=True) 
     user = models.ForeignKey(User, models.CASCADE, related_name='carrinho')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
 class CarrinhoItem(models.Model):
-    id = models.AutoField(primary_key=True) 
-    cart_id = models.ForeignKey(Carrinho, related_name="itens", on_delete=models.CASCADE)
-    produto_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    cartitem_id = models.AutoField(primary_key=True) 
+    cart = models.ForeignKey(Carrinho, related_name="itens", on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    
+    def get_produto_nome(self):
+        return self.produto.name
+
+    @property
+    def price(self):
+        return self.produto.price * self.quantity
+
+
+
+    def __str__(self):
+         return f'{self.produto.name} - {self.quantity}'
