@@ -16,7 +16,7 @@ urlpatterns = [
     path('produtos/', include('produtos.urls'))
 ]
 
-urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
+# urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
 
 # Adiciona a configuração para servir arquivos de mídia durante o desenvolvimento
 if settings.DEBUG:

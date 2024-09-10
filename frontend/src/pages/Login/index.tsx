@@ -23,6 +23,7 @@ export function Login(){
   const [first_name, setFirst_name] = useState('');
   const [last_name, setLast_name] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   useEffect(() => {
     // Alterar a tag title da pagina
@@ -51,25 +52,31 @@ export function Login(){
 
   function submitRegistration(e: { preventDefault: () => void; }){
     e.preventDefault();
-    client.post(
-      "accounts/cadastro",
-      {
-        email: email,
-        first_name: first_name,
-        last_name: last_name,
-        password: password
-      }
-    ).then(function(res){
+    if(password === passwordConfirm){
       client.post(
-        "accounts/login",
+        "accounts/cadastro",
         {
           email: email,
+          first_name: first_name,
+          last_name: last_name,
           password: password
         }
       ).then(function(res){
-        setCurrentUser(true);
+        client.post(
+          "accounts/login",
+          {
+            email: email,
+            password: password
+          }
+        ).then(function(res){
+          setCurrentUser(true);
+        });
       });
-    });
+    }
+    else{
+      return alert("Os campos de senha são diferentes")
+    }
+    
   }
 
   function submitLogin(e: { preventDefault: () => void; }){
@@ -138,22 +145,57 @@ export function Login(){
       <form id="cadastro-form" method="post" onSubmit={e => submitRegistration(e)}>
           <div className="mb-3">
               <label htmlFor="inputEmail" className="form-label">Email</label><br/>
-              <input type="email" name="email" id="inputEmail" className="form-control" required/>
+              <input 
+              type="email" 
+              name="email" 
+              id="inputEmail" 
+              className="form-control" 
+              onChange={e => setEmail(e.target.value)}
+              required/>
               <div id="email-error" className="text-danger"></div>
           </div>
           <div className="mb-3">
               <label htmlFor="inputNome" className="form-label">Nome</label><br/>
-              <input type="text" name="first_name" id="inputNome" className="form-control" required/>
+              <input 
+              type="text" 
+              name="first_name" 
+              id="inputNome" 
+              className="form-control"
+              onChange={e => setFirst_name(e.target.value)} 
+              required/>
               <div id="nome-error" className="text-danger"></div>
           </div>
           <div className="mb-3">
               <label htmlFor="inputSobrenome" className="form-label">Sobrenome</label><br/>
-              <input type="text" name="last_name" id="inputSobrenome" className="form-control" required/>
+              <input 
+              type="text" 
+              name="last_name" 
+              id="inputSobrenome" 
+              className="form-control" 
+              onChange={e => setLast_name(e.target.value)}
+              required/>
               <div id="sobrenome-error" className="text-danger"></div>
           </div>
           <div className="mb-3">
               <label htmlFor="inputPassword" className="form-label">Senha</label><br/>
-              <input type="password" name="password" id="inputPassword" className="form-control" required/>
+              <input 
+              type="password" 
+              name="password" 
+              id="inputPassword" 
+              className="form-control"
+              onChange={e => setPassword(e.target.value)}
+              required/>
+              <div id="password-error" className="text-danger"></div>
+          </div>
+          <div className="mb-3">
+              <label htmlFor="inputPasswordConfirm" className="form-label">Confirme a Senha</label><br/>
+              <input 
+              type="password" 
+              name="passwordConfirm" 
+              id="inputPasswordConfirm" 
+              className="form-control"
+              onChange={e => setPasswordConfirm(e.target.value)}
+              required/>
               <div id="password-error" className="text-danger"></div>
           </div>
           <div className="col-12 d-flex justify-content-center">
@@ -197,9 +239,6 @@ export function Login(){
     </div>
       )
     }
-   
-    </div>
-    
-        
+    </div>  
   );
 }
