@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Endereco, User, Carrinho, CarrinhoItem
+from produtos.models import Produto
 
 # Register your models here.
 
@@ -16,9 +17,17 @@ class AdressAdmin(admin.ModelAdmin):
 
 class CarrinhoItemInline(admin.TabularInline):
     model = CarrinhoItem
-    fields = ['quantity', 'price']
+    fields = ['quantity_display', 'price_display', 'produto']
     can_delete = False
+    readonly_fields = ['price_display', 'quantity_display', 'produto']
 
+    def quantity_display(self,obj):
+        return obj.quantity
+    quantity_display.short_description = "Quantidade"
+
+    def price_display(self, obj):
+        return obj.price
+    price_display.short_description = 'Preço'
 
 # Adiciona o Cart ao painel de Admin
 @admin.register(Carrinho)
@@ -36,6 +45,7 @@ class CarrinhoAdmin(admin.ModelAdmin):
     def user_email(self, obj):
         return obj.user.email
     user_email.short_description = 'Email do Usuário'
+    
 
 
 
