@@ -1,11 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+<<<<<<< HEAD:backend/usuario/models.py
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
 from rest_framework.response import Response
+=======
+from produtos.models import Produto
+>>>>>>> 620016509821c16603e5e28e5103150a44f0e120:tech_vision/usuario/models.py
 
+from django.contrib import admin
 
 class CustomUserManager(BaseUserManager):
     """
@@ -38,17 +42,12 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
 
         return self.create_user(
-
             email=email,
             password=password,
             first_name=first_name,
             last_name=last_name,
             **extra_fields
         )
-
-
-   
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     
@@ -59,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-     # Chama o manager personalizado
+    # Chama o manager personalizado
     objects = CustomUserManager()
 
     # Campo usado para fazer login
@@ -74,9 +73,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
-class Adress(models.Model):
-    adress_id = models.AutoField(primary_key = True)
+class Endereco(models.Model):
+    adress_id = models.AutoField(primary_key=True)
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=20)
     block = models.CharField(max_length=20)
@@ -84,11 +82,33 @@ class Adress(models.Model):
     cep = models.CharField(max_length=8)
     state = models.CharField(max_length=2)
     number = models.IntegerField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enderecos')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enderecos')
 
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
-    search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('email',)
+
+
+class Carrinho(models.Model):
+    cart_id = models.AutoField(primary_key=True) 
+    user = models.ForeignKey(User, models.CASCADE, related_name='carrinho')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class CarrinhoItem(models.Model):
+    cartitem_id = models.AutoField(primary_key=True) 
+    cart = models.ForeignKey(Carrinho, related_name="itens", on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    
+    def get_produto_nome(self):
+        return self.produto.name
+
+    @property
+    def price(self):
+        return self.produto.price * self.quantity
+
+
+
+    def __str__(self):
+         return f'{self.produto.name} - {self.quantity}'

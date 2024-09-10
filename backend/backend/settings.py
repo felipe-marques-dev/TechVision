@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-%3v)_#=y_!@w%c8qdqg@5x83o2w_(@(c+j&dd4b^c%-*dl4i$4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD:backend/backend/settings.py
 ALLOWED_HOSTS = ['*']
+=======
+ALLOWED_HOSTS = [url, '127.0.0.1', 'localhost']
+>>>>>>> 620016509821c16603e5e28e5103150a44f0e120:tech_vision/tech_vision/settings.py
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1',
@@ -47,9 +51,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+<<<<<<< HEAD:backend/backend/settings.py
     'corsheaders',
     'usuario.apps.UsuarioConfig',
     'produtos',
+=======
+    'usuario',
+    'produtos',
+    'compra'
+>>>>>>> 620016509821c16603e5e28e5103150a44f0e120:tech_vision/tech_vision/settings.py
 ]
 
 
