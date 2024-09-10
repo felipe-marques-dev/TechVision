@@ -8,7 +8,7 @@ Content-Type: application/json
 POST http://127.0.0.1:8000/accounts/cadastro
 Content-Type: application/json
 
-{ "first_name": "lucas", "last_name": "leite", "email": "lucas.leite15@aluno.senai.br", "password": "password" }
+{ "first_name": "lucas", "last_name": "leite", "email": "lucas.leite35@aluno.senai.br", "password": "password" }
 
 ###
 

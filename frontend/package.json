@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.55.0",
     "axios": "^1.7.7",
+    "bcrypt-ts": "^5.0.2",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "frontend": "file:",
@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.5.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

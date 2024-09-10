@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { genSaltSync, hashSync } from "bcrypt-ts";
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -13,6 +14,21 @@ axios.defaults.withCredentials = true;
 const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
+
+const salt = genSaltSync(10);
+const hash = hashSync("", salt);
+
+  
+  const saltRounds = 10; // Número de rounds para o salt
+
+  // Função para hash de senha
+  function hashPassword(password: string) {
+    const salt = genSaltSync(10);
+    const hash = hashSync(password, salt);
+    console.log(hash);
+    return hash;
+  }
+  
 
 export function Login(){
 
@@ -59,14 +75,14 @@ export function Login(){
           email: email,
           first_name: first_name,
           last_name: last_name,
-          password: password
+          password: hashPassword(password),
         }
       ).then(function(res){
         client.post(
           "accounts/login",
           {
             email: email,
-            password: password
+            password: hashPassword(password),
           }
         ).then(function(res){
           setCurrentUser(true);
