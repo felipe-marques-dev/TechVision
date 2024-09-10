@@ -25,7 +25,7 @@ class CustomUserManager(BaseUserManager):
             email=email,
             first_name=first_name,
             last_name=last_name,
-            password=password,
+            password=hash_password(password),
             **extra_fields
         )
         

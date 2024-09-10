@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
-
+from .hash import hash_password, verify_password
+from .models import User
 UserModel = get_user_model()
 
 def custom_validation(data):
@@ -22,6 +23,17 @@ def validate_email(data):
 
 def validate_password(data):
     password = data['password'].strip()
+    email= data['email'].strip()
+    user = User.objects.get(email=email)
+    stored_hash = user.password
+    bytes_hash = stored_hash.encode('utf-8') 
     if not password:
         raise ValidationError('e necessario informar uma senha')
-    return True
+    
+    if verify_password(password, bytes_hash):
+        print("teste")
+        print("correto!")
+        return True
+    print("teste")
+    print("incorreto!")
+    return False

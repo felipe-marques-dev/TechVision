@@ -15,17 +15,12 @@ const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
 
-const salt = genSaltSync(10);
-const hash = hashSync("", salt);
-
   
-  const saltRounds = 10; // Número de rounds para o salt
-
   // Função para hash de senha
   function hashPassword(password: string) {
     const salt = genSaltSync(10);
     const hash = hashSync(password, salt);
-    console.log(hash);
+
     return hash;
   }
   
