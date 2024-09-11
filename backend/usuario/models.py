@@ -25,11 +25,11 @@ class CustomUserManager(BaseUserManager):
             email=email,
             first_name=first_name,
             last_name=last_name,
-            password=hash_password(password),
             **extra_fields
         )
         
-         # Define a senha de forma segura
+        # Define a senha de forma segura
+        user.set_password(password)
         user.save(using=self._db)
         return user
 

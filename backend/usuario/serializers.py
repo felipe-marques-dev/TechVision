@@ -2,6 +2,7 @@ from django.forms import ValidationError
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework.serializers import ModelSerializer
+from .hash import hash_password
 from .models import *
 
 UserModel = get_user_model()
@@ -20,9 +21,11 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
-    ##
+
     def check_user(self, clean_data):
-        user = authenticate(username=clean_data['email'], password=clean_data['password'])
+        password = clean_data['password']
+        user = authenticate(username=clean_data['email'], password=password)
+        
         if not user:
             raise ValidationError('usuario nao encontrado')
         return user
