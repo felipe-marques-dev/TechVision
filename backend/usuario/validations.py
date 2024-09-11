@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
-from .hash import hash_password, verify_password
 from .models import User
 UserModel = get_user_model()
 
