@@ -1,13 +1,8 @@
-from django.contrib.auth import get_user_model, login, logout
-from django.shortcuts import get_list_or_404
+from django.contrib.auth import login, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework import status
-from rest_framework.authtoken.models import Token
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from .models import User
+from rest_framework.authentication import SessionAuthentication
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from rest_framework import permissions, status
 from .validations import custom_validation, validate_email, validate_password
@@ -29,7 +24,6 @@ class UserLogin(APIView):
     ##
     def post(self, request):
         data = request.data
-        print(data)
         assert validate_email(data)
         assert validate_password(data)
         serializer = UserLoginSerializer(data=data)

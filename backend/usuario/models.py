@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.db import models
-from django.utils import timezone
-from django.contrib import admin
 from rest_framework.response import Response
 from produtos.models import Produto
-from django.contrib import admin
 
 class CustomUserManager(BaseUserManager):
     """
