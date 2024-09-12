@@ -1,0 +1,23 @@
+.CardGroup{
+    text-decoration: none;
+    margin-top: 7vw;
+    justify-content: center;
+}
+
+.ico-carrinho{
+    width: 20px;
+}
+
+.Link{
+    text-decoration: none;
+
+}
+
+.txt-carrinho{
+    margin-right: 1vh;
+}
+
+.Class{
+    padding: 1vh;
+    margin: 1vh;
+}
