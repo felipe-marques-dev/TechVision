@@ -1,12 +1,11 @@
 import React from "react"; 
-import ListaProdutos from "../../components/ListaProdutos";
+import Carrossel from "../../components/Carrossel";
 import { Navbar } from "../../components/Navbar";
 export function Home(){
     return(
         <div>
             <Navbar />
-            <h1>Home</h1>
-            <ListaProdutos />
+            <Carrossel />
         </div>
         
     )

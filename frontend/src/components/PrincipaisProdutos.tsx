@@ -6,9 +6,10 @@ interface Produto{
     name: string;
     product_id: number;
     price: number;
+    description: string;
 }
 
-function ListaProdutos(){
+function PrincipaisProdutos(){
     const [produtos, setProdutos] = useState<Produto[]>([]);
 
     useEffect(() => {
@@ -24,11 +25,11 @@ function ListaProdutos(){
     console.log(produtos)
     return(
         <div>
-            <h1>Lista de Produtos</h1>
+            <h1>Principais Produtos</h1>
             <ul>
                 {produtos.map(produto => (
                     <li key={produto.product_id}>   
-                         <Link to={`/produto/${produto.product_id}`}>{produto.name} - R${produto.price}</Link>
+                         <Link to={`/produto/${produto.product_id}`}>{produto.name} {produto.description} - R${produto.price}</Link>
                     </li>
                 ))}
             </ul>   
@@ -38,4 +39,4 @@ function ListaProdutos(){
 }
 
 
-export default ListaProdutos;
+export default PrincipaisProdutos;
