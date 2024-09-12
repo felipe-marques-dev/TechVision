@@ -1,0 +1,389 @@
+a{
+    text-decoration:none;
+}
+
+
+
+/* header*/
+#header{
+background-color: black;
+height: 5vw;
+color: white;
+}
+
+#btn-search{
+    border: solid white 1px;
+    color: white;
+}
+
+#btn-search:hover{
+    background-color: white;
+    transition: 0.6s;
+    color: black;
+}
+
+
+
+/*index*/
+
+.carousel-inner{
+    margin-top: 2vw;
+    height: fit-content;
+    justify-content: center;
+    justify-items: center;
+    margin-left: 75vh;
+    margin-bottom: 2vw;
+}
+
+#border-top-line {
+    border-top: 2px solid #000000; /* Ajuste a cor e a espessura da borda conforme necessário */
+    padding: 10px; /* Espaçamento interno opcional */
+    width: 90%;
+}
+
+#ico{
+    width: 5vh;
+    padding-right: 5px;
+}
+
+#text-titulo{
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+    font-size: 60px;
+    font-weight: 1000;
+    color: #841abb;
+    padding: 1vw;
+    border-bottom: 2px solid #000000;
+}
+  
+
+.decoracao{
+    text-decoration: none;
+    color: black;
+}
+
+.decoracao:hover{
+    text-decoration: none;
+    transition: 0.6s;
+    color: #841abb;
+}
+
+#principais-produtos{
+    margin-bottom: 5vw;
+}
+
+#promocoes{
+    margin-bottom: 5vw;
+}
+
+.card{
+    margin-left: 4vh;
+}
+
+#increase{
+    background-color: white;
+    color: black;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+#increase:hover{
+    transition: 0.6s;
+    background-color: #841abb;
+    color: white;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+
+#decrease{
+    background-color: white;
+    color: black;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+#decrease:hover{
+    transition: 0.6s;
+    background-color: #841abb;
+    color: white;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+#ico-carrinho{
+    width: 3vh;
+    padding-right: 5px;
+}
+
+#link-pdts{
+    text-decoration: none;
+    color: black;
+}
+
+#link-pdts:hover{
+    text-decoration: none;
+    color: #841abb;
+    transition:0.6s;
+}
+
+#img-pdts{
+    padding: 1vh;
+}
+
+
+/*produtoInd*/
+
+#produtoInd{
+    margin: 2vw;
+}
+
+#tituloInd{
+    font-size: 60px;
+    font-weight: 1000;
+    color: #000000;
+}
+
+.preco{
+    font-size: 30px;
+    font-weight: 500;
+    color: #000000;
+}
+
+
+#ico-carrinho-pdt{
+    width: 2.5vh;
+}
+
+
+#add-cart-pdt{
+    text-decoration: none;
+    background-color: #841abb;
+    transition:0.6s;
+    color: white;
+}
+
+.botao{
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
+    background-color: #841abb;
+    transition:0.6s;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5vw;
+}
+
+.preco-anterior{
+    text-decoration: line-through;
+    color: #888; 
+    font-size: 1.2em; 
+    margin-right: 10px;
+}
+
+
+
+/*carrinho*/
+
+#carrinho{
+    padding: 4vh;
+}
+
+.progress-step {
+    position: relative;
+    text-align: center;
+}
+.progress-step::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 100%;
+    height: 2px;
+    background-color: #dee2e6; /* Cor padrão da linha de progresso */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.progress-step:last-child::after {
+    display: none;
+}
+.progress-step.completed {
+    color: #841abb; /* Cor para etapas completas */
+}
+.progress-step.completed::after {
+    background-color: #841abb; /* Cor da linha para etapas completas */
+}
+.step-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dee2e6; /* Cor padrão dos ícones */
+    color: #fff;
+    font-weight: bold;
+}
+.progress-step.completed .step-icon {
+    background-color: #841abb; /* Cor dos ícones para etapas completas */
+}
+
+.tit-carrinho{
+    font-size: 30px;
+    font-weight: 600;
+    padding: 3vw;
+}
+
+
+.img-carrinho {
+    max-width: 150px; /* Ajuste a largura máxima conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+}
+.cart-item {
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0;
+}
+.cart-item-title {
+    font-weight: bold;
+}
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.quantity-controls input {
+    width: 60px;
+    text-align: center;
+}
+
+#coluna2{
+    padding: 5vh;
+}
+
+
+
+/*pagamento*/
+
+.titulo{
+    padding: 3vw;
+}
+
+#formas-pagamento{
+    padding: 8vh;
+}
+
+.img-pagamento{
+    width: 40vh;
+}
+
+#coluna3{
+    padding: 10vh;
+}
+
+
+
+/*conta*/
+
+.txt-user{
+    font-size: 35px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.botao-conta {
+    text-decoration: none;
+    text-decoration: none;
+    background-color: #ffffff;
+    transition:0.6s;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    padding: 0.8vw;
+    width: 40vh;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+#minha-conta{
+    padding-bottom: 5vw;
+    background-color:#841abb;
+    border-radius: 10px;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+}
+
+.img-user{
+    padding: 2vh;
+}
+
+
+
+/*concluido*/
+
+#agradecimento{
+    background-color: #841abb;
+    border-radius: 10px;
+    margin-top: 5vw;
+    margin-bottom: 2vw;
+    color: #fff;
+}
+
+#dentro{
+    background-color: #fff;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+#botao-agrad{
+    margin-bottom: 3vw;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*footer*/
+footer{
+    background-color: black;
+    height: fit-content;
+    color: white;
+    padding: 10px;
+}
+
+#img-footer{
+    height: 5vw;
+}   
+
+#contatos1{
+    text-decoration: none;
+    padding-top: 1vw;
+    font-size: 15px;
+}
+
+#ico-ctt{
+    height: 50px;
+    padding: 1vh;
+}
+
+#ico-ctt2{
+    height: 60px;
+    padding: 1vh;
+}
+
+    
