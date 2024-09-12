@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { client } from "../../services/client";
+import { Logo } from "../../components/Logo";
 
 export function Login() {
 
@@ -50,17 +49,8 @@ export function Login() {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>Authentication App</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <div className="d-flex justify-content-center align-bottom p-5">
+                <Logo />
       <div className="container-fluid mb-3 rounded-4 w-25 position-absolute top-50 start-50 translate-middle bg-secondary p-4" style={{ borderRadius: '20px' }}>
         <h1 className="d-flex justify-content-center" id="title">Login</h1>
         <form id="login-form" method="post" onSubmit={e => submitLogin(e)}>
@@ -99,6 +89,7 @@ export function Login() {
         </form>
         <br />
       </div>
+    </div>
     </div>
   );
 }

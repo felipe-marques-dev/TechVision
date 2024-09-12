@@ -1,13 +1,14 @@
 import React from "react"
 import  { Div, Button, A } from "../styles/NavBar/navbar"
+import { Logo } from "./Logo"
+
 export function Navbar(){
 
-    const logo_atena = 'logo_atena.png'
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary m-0 p-0">
             <Div className="container-fluid" id="header">
-            <Div className="navbar-brand" ><img className="logo" src={`/images/${logo_atena}`}/></Div>
+            <Div className="navbar-brand" ><Logo/></Div>
             <Button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </Button>

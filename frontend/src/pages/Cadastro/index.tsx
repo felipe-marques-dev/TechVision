@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../../services/client";
-import { Button, Container, Navbar } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { Logo } from "../../components/Logo";
 
 export function Cadastro() {
 
@@ -67,17 +68,9 @@ export function Cadastro() {
 
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand>Authentication App</Navbar.Brand>
-                    <Navbar.Toggle />
-                    <Navbar.Collapse className="justify-content-end">
-                        <Navbar.Text>
-                            
-                        </Navbar.Text>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <div className="d-flex justify-content-center align-bottom p-5">
+                <Logo />
+            
             <div className="container-fluid mb-3 rounded-4 w-25 position-absolute top-50 start-50 translate-middle bg-secondary p-4" style={{ borderRadius: '20px' }}>
                 <h1 className="d-flex justify-content-center" id="title">Cadastre-se</h1>
                 <form id="cadastro-form" method="post" onSubmit={e => submitRegistration(e)}>
@@ -140,13 +133,13 @@ export function Cadastro() {
                         <button type="submit" className="btn btn-dark mt-4 rounded-4" style={{ borderRadius: '10px' }}>Enviar</button>
                     </div>
                     <br />
-                    <p className="col-12 d-flex justify-content-center" style={{fontSize: "15px"}}>Já possui uma conta?</p>
+                    <p className="col-12 d-flex justify-content-center" style={{ fontSize: "15px" }}>Já possui uma conta?</p>
                     <div className="col-12 d-flex justify-content-center">
-                        <Button id="form_btn" className="bg-secondary" onClick={onClick_form_btn} variant="light" style={{ border: "1px solid black"}}>Fazer Login</Button>
+                        <Button id="form_btn" className="bg-secondary" onClick={onClick_form_btn} variant="light" style={{ border: "1px solid black" }}>Fazer Login</Button>
                     </div>
                 </form>
             </div>
         </div>
-
+        </div>
     )
 }
