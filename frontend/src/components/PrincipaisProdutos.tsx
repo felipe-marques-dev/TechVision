@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { client } from "../services/client";
 import { Link } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import '../styles/PrincipaisProdutos/principaisProdutos.css'; // Importa o arquivo CSS
 
 interface Produto{
     name: string;
@@ -22,20 +25,43 @@ function PrincipaisProdutos(){
         })
     }, []);
 
-    console.log(produtos)
-    return(
-        <div>
-            <h1>Principais Produtos</h1>
-            <ul>
-                {produtos.map(produto => (
-                    <li key={produto.product_id}>   
-                         <Link to={`/produto/${produto.product_id}`}>{produto.name} {produto.description} - R${produto.price}</Link>
-                    </li>
-                ))}
-            </ul>   
-        </div>
-    );
 
+
+    console.log(produtos)
+    const img = "ico-carrinho.png"
+    return(
+            <div>
+            <div className="text-center">
+                    <div id="texto-titulo" className="col d-flex justify-content-center fs-1" >
+                        <h3 id="text-titulo">Principais produtos</h3>
+                </div>
+            </div>
+            <CardGroup className="CardGroup">
+          
+                {produtos.map(produto => (
+
+                          
+                        <Link className="Link" to={`/produto/${produto.product_id}`}>
+                                <Card className="Class" key={produto.product_id}>
+                                    <Card.Img variant="top" style={{width: "310px", height: "160px"}} src={produto.foto_1} />
+                                    <Card.Body>
+                                    <Card.Title>{produto.name}</Card.Title>
+                                    <Card.Text>
+                                       {produto.price}
+                                    </Card.Text>
+                                    <Card.Text>
+                                       {produto.description}
+                                    </Card.Text>
+                                    </Card.Body>
+                                    <Card.Footer>
+                                    <Link className="Link" to="/" ><p className="txt-carrinho"> Adicionar ao carrinho </p><small className="text-muted">Comprar agora</small></Link>
+                                    </Card.Footer>
+                                </Card></Link>
+                ))}
+            </CardGroup>
+            </div> 
+    );
+    
 }
 
 
