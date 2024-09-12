@@ -56,7 +56,7 @@ export function Login() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              <Button id="form_btn" onClick={onClick_form_btn} variant="light">Criar conta</Button>
+
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -90,6 +90,11 @@ export function Login() {
             <button type="submit" className="btn btn-dark mt-4 rounded-4" style={{ borderRadius: '10px' }}>
               Enviar
             </button>
+          </div>
+          <br />
+          <p className="col-12 d-flex justify-content-center" style={{ fontSize: "15px" }}>Não possui uma conta?</p>
+          <div className="col-12 d-flex justify-content-center">
+            <Button id="form_btn" className="bg-secondary" onClick={onClick_form_btn} variant="light" style={{ border: "1px solid black" }}>Criar conta</Button>
           </div>
         </form>
         <br />
