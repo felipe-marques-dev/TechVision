@@ -61,6 +61,10 @@ export function Cadastro() {
 
     }
 
+    if (currentUser) {
+        return navigate('/profile');
+    }
+
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -69,7 +73,7 @@ export function Cadastro() {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            <Button id="form_btn" onClick={onClick_form_btn} variant="light">Login</Button>
+                            
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>
@@ -134,6 +138,11 @@ export function Cadastro() {
                     </div>
                     <div className="col-12 d-flex justify-content-center">
                         <button type="submit" className="btn btn-dark mt-4 rounded-4" style={{ borderRadius: '10px' }}>Enviar</button>
+                    </div>
+                    <br />
+                    <p className="col-12 d-flex justify-content-center" style={{fontSize: "15px"}}>Já possui uma conta?</p>
+                    <div className="col-12 d-flex justify-content-center">
+                        <Button id="form_btn" className="bg-secondary" onClick={onClick_form_btn} variant="light" style={{ border: "1px solid black"}}>Fazer Login</Button>
                     </div>
                 </form>
             </div>
