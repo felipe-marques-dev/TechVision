@@ -36,8 +36,8 @@ function Carrossel(){
 
                 <Carousel  className="carousel carousel-dark slide">
                     {produtos.map(produto => (
-                        <Carousel.Item key={produto.product_id}>
-                            <Link to={`/produto/${produto.product_id}`}><img src={produto.foto_1} className="w-25 p-4 m-3 mt-0" /></Link>
+                        <Carousel.Item key={produto.product_id} style={{ height: '400px' }}>
+                            <Link to={`/produto/${produto.product_id}`}><img src={produto.foto_1} className=" w-25" style={{  maxHeight: '100%', width:'auto', margin: '0 auto', display: 'block'}}/></Link>
                         </Carousel.Item>
                         ))}
                 </Carousel>
