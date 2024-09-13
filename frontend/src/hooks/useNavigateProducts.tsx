@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export const navigateProducts = () => {
+export const useNavigateProducts = () => {
     const navigate = useNavigate()
 
     const goToProduct = (id: number) => {

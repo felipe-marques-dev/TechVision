@@ -3,7 +3,7 @@ import { client } from "../services/client";
 import { Link, useNavigate } from "react-router-dom";
 import { Carousel, CarouselItem } from "react-bootstrap";
 import { H3 } from  "../styles/Carrossel/lista";
-import { navigateProducts } from "../hooks/navigateProducts"
+import { useNavigateProducts } from "../hooks/useNavigateProducts";
 interface Produto{
     name: string;
     product_id: number;
@@ -12,7 +12,7 @@ interface Produto{
 
 function Carrossel(){
     const [produtos, setProdutos] = useState<Produto[]>([]);
-    const { goToProduct } = navigateProducts();
+    const { goToProduct } = useNavigateProducts();
 
     
     useEffect(() => {
