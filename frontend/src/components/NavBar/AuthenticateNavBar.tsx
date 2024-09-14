@@ -13,7 +13,7 @@ type MinhaContaProps = {
 
 export const LoginNavBar = (props: LoginProps) => {
     return(
-    <A href="/" ><Div className="nav-link fw-bolder fs-5" >
+    <A href="/profile" ><Div className="nav-link fw-bolder fs-5" >
     {
         props.loggedIn ? `Olá, ${props.userName}!` : `Login`
 

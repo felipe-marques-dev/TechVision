@@ -1,11 +1,11 @@
 import React from "react"; 
 import Carrossel from "../../components/Carrossel";
-import { Navbar } from "../../components/NavBar/Navbar";
+import { Nav_bar } from "../../components/NavBar/Navbar";
 import PrincipaisProdutos from "../../components/PrincipaisProdutos";
 export function Home(){
     return(
         <div>
-            <Navbar />
+            <Nav_bar />
             <Carrossel />
             <PrincipaisProdutos />
         </div>
