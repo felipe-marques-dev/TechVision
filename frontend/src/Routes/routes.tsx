@@ -9,6 +9,7 @@ import { Cadastro } from "../pages/Cadastro/index.tsx";
 import { Home } from "../pages/Home/index.tsx";
 import { Profile } from "../pages/Profile/index.tsx";
 import { ProdutoIndividual } from "../components/ProdutoIndividual.tsx";
+import { Carrinho } from "../pages/Carrinho/index.tsx";
 export function AppRoutes(){
     return (
         <Router>
@@ -18,6 +19,7 @@ export function AppRoutes(){
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/produto/:id" element={<ProdutoIndividual />}/>
+                <Route path="/carrinho" element={<Carrinho />} />
             </Routes>
         </Router>
     )
