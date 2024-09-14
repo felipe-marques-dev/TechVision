@@ -26,24 +26,31 @@ export function Nav_bar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary m-0 p-0">
+      <nav className="navbar navbar-expand-lg bg-black">
         <Div className="container-fluid" id="header">
+          <Div className="collapse navbar-collapse d-flex" id="navbarSupportedContent" >
           <Div className="navbar-brand" ><Logo /></Div>
-          <Div className="collapse navbar-collapse d-flex " id="navbarSupportedContent" >
-                <DropDownNav></DropDownNav>
-                <ul className="dropdown-menu" id="dropdown-menu">
-                  <li><Div className="dropdown-item" >Eletrônicos</Div></li>
-                  <li><Div className="dropdown-item" >Planos - Tv box</Div></li>
-                </ul>
-            <form className="d-flex col-md-3 ms-md-auto" role="search">
-              <input className="form-control me-2" type="search" placeholder="Pesquisar..." aria-label="Search" />
-              <Button className="btn" id="btn-search" type="submit"><FaMagnifyingGlass /></Button>
+            <form className="d-flex col-5 ms-auto bg-white border border-white rounded-pill" role="search">
+              <input className="form-control border border-white rounded-pill" type="search" placeholder="Pesquisar produtos..." aria-label="Search" />
+              <Button className="btn bg-black border-3 border-white rounded-pill" id="btn-search" type="submit"><FaMagnifyingGlass color="white" /></Button>
             </form>
-            <div className="navbar-nav col-md-3 ms-md-auto">
+            <div className="navbar-nav ms-auto">
               <LoginNavBar loggedIn={loggedIn} userName={userInfo} />
-              <A href="/carrinho" ><Div className="nav-link" ><FaCartShopping style={{width: "40px", marginTop: '10px'}} /></Div></A>
-            </div>  
+            </div>
+            <div className="navbar-nav ms-1">
+            <A href="/carrinho" ><Div className="nav-link" ><FaCartShopping style={{ width: "40px"}} /></Div></A>
+            </div>
+            
           </Div>
+        </Div>
+      </nav>
+      <nav className="navbar navbar-expand-lg bg-black m-0 p-0">
+        <Div className="container-fluid d-flex justify-content-center" id="header">
+          <div>
+          <DropDownNav></DropDownNav>
+          </div>
+         
+          <div className="ms-3">Assinatura</div>
         </Div>
       </nav>
     </>
