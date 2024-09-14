@@ -2,6 +2,8 @@ import { Button, Container, Navbar } from "react-bootstrap";
 import { client } from "../../services/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Nav_bar } from "../../components/NavBar/Navbar";
+
 
 export function Profile() {
   const navigate = useNavigate();
@@ -9,7 +11,7 @@ export function Profile() {
 
   useEffect(() => {
     // Alterar a tag title da pagina
-    document.title = 'Login';
+    document.title = 'Perfil';
     // fazer a requisicao para 
     //ver o status de sessao 
     // do usuario
@@ -35,24 +37,17 @@ export function Profile() {
     });
   }
 
-  return (
-    <div>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>Authentication App</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              <form onSubmit={e => submitLogout(e)}>
-                <Button type="submit" variant="light">Log out</Button>
-              </form>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <div className="center">
-        <h2>You're logged in!</h2>
+    return (
+      <div>
+        <Nav_bar/>
+        <div className="center">
+          <h2>You're logged in!</h2>
+        </div>
+        <form onSubmit={e => submitLogout(e)}>
+                  <Button type="submit" variant="dark">Log out</Button>
+        </form>
       </div>
-    </div>
-  );
+    );
+
+ 
 }
