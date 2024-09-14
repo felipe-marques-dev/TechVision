@@ -32,12 +32,12 @@ function Carrossel(){
     return(
       <div className="text-center">
         <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0" >
-            <H3 id="text-titulo">Em destaque</H3>
+        <H3 id="text-titulo justify-content-center">Em destaque</H3>
           </div>
 
 
 
-                <Carousel  className="carousel carousel-dark slide">
+                <Carousel  className="carousel carousel-dark slide justify-content-center" >
                     {produtos.map(produto => (
                         <Carousel.Item 
                             key={produto.product_id} 
@@ -51,6 +51,7 @@ function Carrossel(){
                                 src={produto.foto_1}
                                 className="w-25" 
                                 style={{
+                                    cursor: 'pointer',
                                     maxHeight: '100%',
                                     width:'auto',
                                     margin: '0 auto',
