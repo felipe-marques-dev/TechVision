@@ -5,11 +5,7 @@ import { LoginNavBar, MinhaContaNavBar } from "./AuthenticateNavBar"
 import { client } from "../../services/client"
 import { FaCartShopping } from "react-icons/fa6";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import DropDownNav from "./DropDownNav"
 
 export function Nav_bar() {
 
@@ -34,9 +30,7 @@ export function Nav_bar() {
         <Div className="container-fluid" id="header">
           <Div className="navbar-brand" ><Logo /></Div>
           <Div className="collapse navbar-collapse d-flex " id="navbarSupportedContent" >
-                <Div className="nav-link dropdown-toggle " role="Button" data-bs-toggle="dropdown" aria-expanded="false"  >
-                  Categorias
-                </Div>
+                <DropDownNav></DropDownNav>
                 <ul className="dropdown-menu" id="dropdown-menu">
                   <li><Div className="dropdown-item" >Eletrônicos</Div></li>
                   <li><Div className="dropdown-item" >Planos - Tv box</Div></li>
@@ -47,9 +41,8 @@ export function Nav_bar() {
             </form>
             <div className="navbar-nav col-md-3 ms-md-auto">
               <LoginNavBar loggedIn={loggedIn} userName={userInfo} />
-              <A href="/carrinho" ><Div className="nav-link" ><FaCartShopping style={{width: "40px"}} /></Div></A>
-            </div>
-            
+              <A href="/carrinho" ><Div className="nav-link" ><FaCartShopping style={{width: "40px", marginTop: '10px'}} /></Div></A>
+            </div>  
           </Div>
         </Div>
       </nav>
