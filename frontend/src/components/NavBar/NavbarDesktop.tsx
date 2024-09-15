@@ -60,7 +60,7 @@ export function NavbarDesktop() {
           </div>
           
           {/* Outras opcoes */}
-          <div className="ms-5"><A className="m-0 p-0" href="/assinatura">Assinatura</A></div>
+          <div className="ms-5"><A className="m-0 p-0" href="/assinatura" style={{fontSize: "22px"}}>Assinatura</A></div>
         </Div>
       </nav>
     </div >

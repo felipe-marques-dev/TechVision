@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useState } from 'react';
-import {
-  HamburgerMenuIcon,
-  CaretDownIcon,
-  DotFilledIcon,
-  CheckIcon,
-  ChevronRightIcon,
-} from '@radix-ui/react-icons';
+import { CaretDownIcon } from '@radix-ui/react-icons';
 import '../../styles/NavBar/dropdown_styles.css'
 import { client } from '../../services/client';
 
@@ -28,7 +22,7 @@ const DropdownMenuDemo: React.FC = () => {
         onMouseEnter={() => setOpen(true)}  
         onMouseLeave={() => setOpen(false)}
         style={{
-            fontSize: '28px',
+            fontSize: '22px',
             border: '0px',
         }}
         >

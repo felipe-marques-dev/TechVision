@@ -1,12 +1,9 @@
-import { Box, Flex, IconButton } from "@chakra-ui/react";
+import { Box, Collapse, Flex, IconButton, SlideFade } from "@chakra-ui/react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react"
-import { Nav_bar } from "./Navbar";
-import { Navbar } from "react-bootstrap";
 import { A, Button, Div } from "../../styles/NavBar/navbar";
 import { Logo } from "../Logo";
-import { LoginNavBar } from "./AuthenticateNavBar";
 import { FaCartShopping, FaMagnifyingGlass, FaRegUser } from "react-icons/fa6";
 import DropDownNav from "./DropDownNav";
 
@@ -27,7 +24,10 @@ export const NavMenuMobile = () => {
               boxSize="3rem"
               size="2rem"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label={""} />
+              aria-label={""} 
+              />
+            {/* animação para a navbar */}
+            <Collapse in={isOpen} animateOpacity> 
             <Box
               p="2rem 8rem"
               m="0 !important"
@@ -47,13 +47,14 @@ export const NavMenuMobile = () => {
                       <DropDownNav></DropDownNav>
                     </div>
                     {/* Outras opcoes */}
-                    <div className="p-0 m-0" style={{fontSize: "25px"}}>
+                    <div className="p-0 m-0" style={{fontSize: "22px"}}>
                       <A className="p-0" href="/assinatura"> Assinatura</A>
                       </div>
                   </Div>
                 </nav>
               </Flex>
             </Box>
+            </Collapse>
             {/* Logo */}
             <Div className="navbar-brand ms-3" ><Logo /></Div>
             {/* Icone de usuario */}
