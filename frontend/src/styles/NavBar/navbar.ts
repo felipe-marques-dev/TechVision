@@ -16,7 +16,8 @@ const Button = styled.button`
 
 const A = styled.a`
     text-decoration: none;
-
+    margin: 0;
+    border: none;
 `
 
 export { Div, Button, A };

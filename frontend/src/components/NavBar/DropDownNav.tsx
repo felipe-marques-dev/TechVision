@@ -23,17 +23,18 @@ const DropdownMenuDemo: React.FC = () => {
   }, [])
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenu.Trigger asChild>
-        <button aria-label="Customise options"         
+      <DropdownMenu.Trigger asChild >
+        <button className="d-inline-flex align-items-center" aria-label="Customise options"         
         onMouseEnter={() => setOpen(true)}  
         onMouseLeave={() => setOpen(false)}
         style={{
             fontSize: '28px',
-            border: '0px'
+            border: '0px',
+            zIndex: "2"
         }}
         >
           Categorias
-          <CaretDownIcon />
+          <CaretDownIcon/>
         </button>
       </DropdownMenu.Trigger>
 

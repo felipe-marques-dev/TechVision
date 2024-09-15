@@ -37,7 +37,7 @@ function Carrossel(){
 
 
 
-                <Carousel  className="carousel carousel-dark slide justify-content-center" >
+                <Carousel  className="carousel carousel-dark slide justify-content-center" style={{zIndex: "-1"}}>
                     {produtos.map(produto => (
                         <Carousel.Item 
                             key={produto.product_id} 
@@ -55,7 +55,7 @@ function Carrossel(){
                                     maxHeight: '100%',
                                     width:'auto',
                                     margin: '0 auto',
-                                    display: 'block'
+                                    display: 'block',
                                 }}
                             />
 
