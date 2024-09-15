@@ -22,6 +22,12 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Produto.objects.all()
     serializer_class = ProductSerializer
 
+    # Pega as permissões do usuario atual
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAdminUser()]
+
 # API de categorias
 class CategoryList(generics.ListCreateAPIView):
     queryset = Produto.objects.values('category').distinct()
