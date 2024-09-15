@@ -45,6 +45,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
@@ -61,8 +62,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'usuario'
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
 
     def __str__(self):
         return self.email

@@ -17,8 +17,8 @@ class Pedido(models.Model):
     ]
 
     delivery_id = models.AutoField(primary_key=True)
-    endereco = models.ForeignKey(Endereco, models.SET_NULL, null=True, related_name='pedidos')
-    transportadora = models.ForeignKey(Transportadora, models.SET_NULL, null=True, related_name='pedidos')
+    endereco = models.ForeignKey(Endereco, on_delete=models.SET_DEFAULT, default='excluido/nao setado', null=True, related_name='pedidos')
+    transportadora = models.ForeignKey(Transportadora, on_delete=models.SET_DEFAULT, default='excluido/nao setado', null=True, related_name='pedidos')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pedidos")
     status = models.CharField(max_length=40, choices=STATUS_CHOICES, default="pendente")
     frete = models.FloatField()
