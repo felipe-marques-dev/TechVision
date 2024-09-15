@@ -2,33 +2,33 @@ from django.shortcuts import render
 from .models import Produto
 from .serializers import ProductSerializer,CategorySerializer
 from rest_framework import generics
-from rest_framework import permissions, status
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.response import Response
-from django.http import HttpResponse
+from rest_framework.permissions import IsAdminUser, AllowAny
 
+
+# API de produtos
 class ProductListCreate(generics.ListCreateAPIView):
     queryset = Produto.objects.all()
     serializer_class = ProductSerializer
-    def check_permission(self, request):
-        if request.method == 'POST' and  permission_classes == (permissions.IsAuthenticated, permissions.IsAdminUser):
-            authentication_classes = [SessionAuthentication]
-            permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    # Pega as permissões do usuario atual
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [IsAdminUser()]
+        return [AllowAny()]
 
 
+# API de produto individual 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Produto.objects.all()
     serializer_class = ProductSerializer
 
+# API de categorias
 class CategoryList(generics.ListCreateAPIView):
     queryset = Produto.objects.values('category').distinct()
     serializer_class = CategorySerializer
 
-    def check_permission(self, request):
-        if request.method == 'POST' and  permission_classes == (permissions.IsAuthenticated, permissions.IsAdminUser):
-            authentication_classes = [SessionAuthentication]
-            permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+    # Pega as permissões do usuario atual
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [IsAdminUser()]
+        return [AllowAny()]
