@@ -9,6 +9,8 @@ interface Produto{
     name: string;
     product_id: number;
     price: number;
+    url_name: string;
+    foto_1: string;
 }
 
 function Carrossel(){
@@ -40,14 +42,14 @@ function Carrossel(){
                 <Carousel  className="carousel carousel-dark slide justify-content-center">
                     {produtos.map(produto => (
                         <Carousel.Item 
-                            key={produto.product_id} 
+                            key={produto.url_name} 
                             style={{ 
                                 height: '400px' 
                                 }}
                         >
 
                             <img 
-                                onClick={() => goToProduct(produto.product_id)} 
+                                onClick={() => goToProduct(produto.url_name)} 
                                 src={produto.foto_1}
                                 className="w-25" 
                                 style={{

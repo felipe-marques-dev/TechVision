@@ -10,6 +10,8 @@ interface Produto{
     product_id: number;
     price: number;
     description: string;
+    url_name: string;
+    foto_1: string;
 }
 
 function PrincipaisProdutos(){
@@ -41,8 +43,8 @@ function PrincipaisProdutos(){
                 {produtos.map(produto => (
 
                           
-                        <Link className="Link" to={`/produto/${produto.product_id}`}>
-                                <Card className="Class" key={produto.product_id}>
+                        <Link className="Link" to={`/produto/${produto.url_name}`}>
+                                <Card className="Class" key={produto.url_name}>
                                     <Card.Img variant="top" style={{width: "310px", height: "160px"}} src={produto.foto_1} />
                                     <Card.Body>
                                     <Card.Title>{produto.name}</Card.Title>

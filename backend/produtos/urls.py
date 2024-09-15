@@ -4,6 +4,6 @@ from .views import ProductListCreate, ProductDetail, CategoryList
 
 urlpatterns = [
     path('itens/', ProductListCreate.as_view(), name='product-list-create'),
-    path('itens/<int:pk>/', ProductDetail.as_view(), name='product-detail'),
+    path('itens/<slug:url_name>/', ProductDetail.as_view(), name='product-detail'),
     path('categories/', CategoryList.as_view(), name='categories')
 ]

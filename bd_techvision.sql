@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/09/2024 às 20:56
+-- Tempo de geração: 15/09/2024 às 19:36
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -138,7 +138,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (45, 'Can add log entry', 17, 'add_logentry'),
 (46, 'Can change log entry', 17, 'change_logentry'),
 (47, 'Can delete log entry', 17, 'delete_logentry'),
-(48, 'Can view log entry', 17, 'view_logentry');
+(48, 'Can view log entry', 17, 'view_logentry'),
+(49, 'Can add cors model', 18, 'add_corsmodel'),
+(50, 'Can change cors model', 18, 'change_corsmodel'),
+(51, 'Can delete cors model', 18, 'delete_corsmodel'),
+(52, 'Can view cors model', 18, 'view_corsmodel');
 
 -- --------------------------------------------------------
 
@@ -166,6 +170,17 @@ CREATE TABLE `compra_transportadora` (
   `name` varchar(40) DEFAULT NULL,
   `cnpj` varchar(14) DEFAULT NULL,
   `description` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `corsheaders_corsmodel`
+--
+
+CREATE TABLE `corsheaders_corsmodel` (
+  `id` bigint(20) NOT NULL,
+  `cors` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -229,7 +244,9 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 (37, '2024-09-05 16:14:46', 1, 14, '3', 'Carrinho object (3)', 3, ''),
 (38, '2024-09-10 11:41:52', 1, 14, '6', 'Carrinho object (6)', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"carrinho item\", \"object\": \"Fone de Ouvido sem fio JBL Wave Buds - 1\"}}, {\"added\": {\"name\": \"carrinho item\", \"object\": \"TV Box XPlus - 1\"}}, {\"added\": {\"name\": \"carrinho item\", \"object\": \"TV Box XPlus - 1\"}}]'),
 (39, '2024-09-10 11:43:22', 1, 14, '6', 'Carrinho object (6)', 2, '[{\"changed\": {\"name\": \"carrinho item\", \"object\": \"Fone de Ouvido sem fio JBL Wave Buds - 2\", \"fields\": [\"Quantity\"]}}]'),
-(40, '2024-09-10 11:44:40', 1, 14, '6', 'Carrinho object (6)', 2, '[{\"changed\": {\"name\": \"carrinho item\", \"object\": \"Fone de Ouvido sem fio JBL Wave Buds - 3\", \"fields\": [\"Quantity\"]}}]');
+(40, '2024-09-10 11:44:40', 1, 14, '6', 'Carrinho object (6)', 2, '[{\"changed\": {\"name\": \"carrinho item\", \"object\": \"Fone de Ouvido sem fio JBL Wave Buds - 3\", \"fields\": [\"Quantity\"]}}]'),
+(41, '2024-09-15 17:24:59', 2, 11, '8', 'iphone bom e legal', 1, '[{\"added\": {}}]'),
+(42, '2024-09-15 17:25:42', 2, 11, '8', 'iphone bom e legal', 2, '[{\"changed\": {\"fields\": [\"Foto 1\"]}}]');
 
 -- --------------------------------------------------------
 
@@ -256,6 +273,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (12, 'compra', 'pedido'),
 (13, 'compra', 'transportadora'),
 (3, 'contenttypes', 'contenttype'),
+(18, 'corsheaders', 'corsmodel'),
 (6, 'produtos', 'product'),
 (11, 'produtos', 'produto'),
 (4, 'sessions', 'session'),
@@ -304,7 +322,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (18, 'usuario', '0001_initial', '2024-09-10 11:24:56.306404'),
 (19, 'admin', '0001_initial', '2024-09-10 11:26:01.466806'),
 (20, 'admin', '0002_logentry_remove_auto_add', '2024-09-10 11:26:01.466806'),
-(21, 'admin', '0003_logentry_add_action_flag_choices', '2024-09-10 11:26:01.482517');
+(21, 'admin', '0003_logentry_add_action_flag_choices', '2024-09-10 11:26:01.482517'),
+(22, 'corsheaders', '0001_initial', '2024-09-15 16:45:51.754169'),
+(23, 'corsheaders', '0002_alter_corsmodel_id', '2024-09-15 16:45:51.779730'),
+(24, 'produtos', '0002_alter_produto_url_name', '2024-09-15 17:24:11.771854'),
+(25, 'produtos', '0003_alter_produto_foto_1_alter_produto_foto_2_and_more', '2024-09-15 17:24:52.749943');
 
 -- --------------------------------------------------------
 
@@ -328,6 +350,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
 ('c60ir59vz41lsp0klr4g4phdtunt63mx', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1siuxu:0pXmvK-6uRUSpalY29C71uln7g3rwxNcDG0xRUCep8U', '2024-09-10 12:06:26.231567'),
 ('edeowszhehzl5dsv3scfkfcgcoo5xt8e', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1siwXr:nQdUi7POBfGyExmmBiKYphSQ7aQPdDQV-nS2qpqTmUQ', '2024-09-10 13:47:39.772701'),
+('f1zznuf0v3htkwasutmlsxn1f7a1j6c6', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1spsuw:kksh13WFv7OXnFCO8JRfVcFYtEIF7bIoD_Iy9mFK7t0', '2024-09-29 17:20:10.932756'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
 ('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
@@ -344,6 +367,7 @@ CREATE TABLE `produtos_produto` (
   `category` varchar(40) NOT NULL,
   `sub_category` varchar(40) NOT NULL,
   `description` varchar(150) NOT NULL,
+  `url_name` varchar(40) DEFAULT NULL,
   `estoque` int(100) NOT NULL,
   `price` double NOT NULL,
   `promotion` tinyint(1) NOT NULL,
@@ -357,11 +381,12 @@ CREATE TABLE `produtos_produto` (
 -- Despejando dados para a tabela `produtos_produto`
 --
 
-INSERT INTO `produtos_produto` (`product_id`, `name`, `category`, `sub_category`, `description`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
-(1, 'Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
-(2, 'TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
-(3, 'Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
-(4, 'Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 50, 25, 0, 'produtos/rodo1.jpg', 'produtos/rodo2.webp', 'produtos/rodo3.webp', 'produtos/rodo4.jpg');
+INSERT INTO `produtos_produto` (`product_id`, `name`, `category`, `sub_category`, `description`, `url_name`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
+(1, 'Fone de Ouvido sem fio JBL Wave Buds', 'Eletrônicos', 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 'fone-sem-fio', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
+(2, 'TV Box XPlus', 'Eletrônicos', 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 'tv-box', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
+(3, 'Ralo Inox para Banheiro 10x10cm', 'Domésticos', 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 'ralo-inox', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
+(4, 'Rodo de Cozinha Inox', 'Domésticos', 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 'rodo-de-cozinha-inox', 50, 25, 0, 'produtos/i932895_amZChfD.webp', 'produtos/i932895_eVb37py.webp', 'produtos/i932895_3WLNFHY.webp', 'produtos/i932895_Apwywhp.webp'),
+(8, 'iphone bom e legal', 'eletronicos', 'celular', 'e bom', 'iphone-bom-e-legal', 1, 12212, 0, 'produtos/i932895_lrzbvVY.webp', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -388,12 +413,13 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
 (1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-09-10 14:12:54', 1),
-(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-08-27 18:22:23', 1),
+(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-09-15 17:20:10', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (25, 'lucas', 'leite', 'lucas.leite15@aluno.senai.br', 'password', 0, 1, 0, NULL, 0),
 (26, 'dsadsadas', 'dadasdasd', 'bootdoff@gmail.com', 'b\'$2b$12$9atdulrn1.5bOfHkZO/15esE7Ej.sGIdCn5rhFeudNjUD1ybvDk7a\'', 0, 1, 0, NULL, 0),
 (27, 'lucas', 'leite', 'felipe1234@gmail.com', 'b\'$2b$12$6cnExHvl/w/80eyDMNI/9eoT5hhounrfhaslcTWP5z0inC5f3SUa6\'', 0, 1, 0, NULL, 0),
-(28, 'lucas', 'leite', 'felipe12347@gmail.com', '$2b$12$0OBjesb9JpXDvZE/PZkcKe0BgitJj7tke5aA498U.eGM.c8DF8Ie6', 0, 1, 0, NULL, 0);
+(28, 'lucas', 'leite', 'felipe12347@gmail.com', '$2b$12$0OBjesb9JpXDvZE/PZkcKe0BgitJj7tke5aA498U.eGM.c8DF8Ie6', 0, 1, 0, NULL, 0),
+(29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0);
 
 -- --------------------------------------------------------
 
@@ -549,6 +575,12 @@ ALTER TABLE `compra_transportadora`
   ADD PRIMARY KEY (`carrier_id`);
 
 --
+-- Índices de tabela `corsheaders_corsmodel`
+--
+ALTER TABLE `corsheaders_corsmodel`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
@@ -647,7 +679,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de tabela `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `compra_pedido`
@@ -662,34 +694,40 @@ ALTER TABLE `compra_transportadora`
   MODIFY `carrier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de tabela `corsheaders_corsmodel`
+--
+ALTER TABLE `corsheaders_corsmodel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_carrinho`

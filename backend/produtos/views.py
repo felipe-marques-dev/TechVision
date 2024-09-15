@@ -21,6 +21,7 @@ class ProductListCreate(generics.ListCreateAPIView):
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Produto.objects.all()
     serializer_class = ProductSerializer
+    lookup_field = 'url_name'
 
     # Pega as permissões do usuario atual
     def get_permissions(self):
