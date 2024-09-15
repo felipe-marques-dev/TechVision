@@ -41,13 +41,13 @@ export const NavMenuMobile = () => {
               <Flex flexDir="column" bg="black" className="position-relative">
 
                 <nav className="navbar m-0 p-0">
-                  <Div className="container-fluid d-flex justify-content-md-center position-relative text-center align-items-center col-md-auto" id="header">
+                  <Div className="container-fluid d-flex justify-content-md-center position-relative text-center align-items-center p-0" id="header">
                     {/* Categorias */}
-                    <div className="row ">
+                    <div className="row p-0">
                       <DropDownNav></DropDownNav>
                     </div>
                     {/* Outras opcoes */}
-                    <div className="ms-3 row " style={{fontSize: "25px"}}>
+                    <div className="p-0 m-0 row " style={{fontSize: "25px"}}>
                       <A className="m-0 p-0" href="/assinatura">Assinatura</A>
                       </div>
                   </Div>

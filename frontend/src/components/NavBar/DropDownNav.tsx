@@ -24,7 +24,7 @@ const DropdownMenuDemo: React.FC = () => {
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
       <DropdownMenu.Trigger asChild >
-        <button className="d-inline-flex align-items-center" aria-label="Customise options"         
+        <button className="d-inline-flex align-items-center p-0 m-0" aria-label="Customise options"         
         onMouseEnter={() => setOpen(true)}  
         onMouseLeave={() => setOpen(false)}
         style={{

@@ -68,10 +68,10 @@ export function Cadastro() {
 
     return (
         <div>
-            <div className="d-flex justify-content-center align-bottom p-5">
+            <div className="d-flex position-relative justify-content-center align-bottom p-5">
                 <Logo />
-            
-            <div className="container-fluid mb-3 rounded-4 w-25 position-absolute top-50 start-50 translate-middle bg-secondary p-4" style={{ borderRadius: '20px' }}>
+            </div>
+            <div className="container-fluid mb-3 rounded-4 w-25 position-relative bg-secondary p-4" style={{ borderRadius: '20px', minWidth: "300px"}}>
                 <h1 className="d-flex justify-content-center" id="title">Cadastre-se</h1>
                 <form id="cadastro-form" method="post" onSubmit={e => submitRegistration(e)}>
                     <div className="mb-3">
@@ -139,7 +139,6 @@ export function Cadastro() {
                     </div>
                 </form>
             </div>
-        </div>
         </div>
     )
 }
