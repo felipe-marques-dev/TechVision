@@ -1,8 +1,24 @@
-import React from "react"
-import  { Div, Button, A } from "../styles/NavBar/navbar"
-import { Logo } from "./Logo"
-
+import React, { useEffect, useState } from "react"
+import  { Div, Button, A } from "../../styles/NavBar/navbar"
+import { Logo } from "../Logo"
+import { LoginNavBar, MinhaContaNavBar } from "./AuthenticateNavBar"
+import { client } from "../../services/client"
 export function Navbar(){
+   
+    const [userInfo, setUserInfo] = useState<[]>([]);
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
+    console.log(userInfo)
+    useEffect(() => {
+      client.get('accounts/usuario')
+      .then(response => {
+        setUserInfo(response.data['user']['first_name'])
+        setLoggedIn(true)
+      })
+      .catch(response => {
+        console.log("Erro ao capturar usuario")
+        setLoggedIn(false)
+      })
+    }, []) 
 
     return(
         <>
@@ -18,11 +34,12 @@ export function Navbar(){
                 <A href="/"> <Div className="nav-link" aria-current="page" >Home</Div></A>
               </li>
               <li className="nav-item">
-                <A href="/"><Div className="nav-link"  >Minha conta</Div> </A>
-              </li>
-              <li className="nav-item">
                 <A href="/" ><Div className="nav-link" >Carrinho</Div></A>
               </li>
+              <li className="nav-item">
+                <MinhaContaNavBar loggedIn={loggedIn}/>
+              </li>
+   
               <li className="nav-item dropdown">
                 <Div className="nav-link dropdown-toggle"  role="Button" data-bs-toggle="dropdown" aria-expanded="false"  >
                   Categorias
@@ -37,6 +54,9 @@ export function Navbar(){
               <input className="form-control me-2" type="search" placeholder="pesquisar..." aria-label="Search" />
               <Button className="btn" id="btn-search" type="submit">Pesquisar</Button>
             </form>
+            <ul className="navbar-nav d-flex justify-content-end">
+              <LoginNavBar loggedIn={loggedIn} userName={userInfo}/>
+            </ul>
           </Div>
             </Div>
             </nav>
