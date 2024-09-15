@@ -17,7 +17,7 @@ export const NavMenuMobile = () => {
 
   return (
     <>
-      <nav className="navbar bg-black">
+      <nav className="navbar bg-black" style={{zIndex: "1"}}>
         <Div className="container-fluid" id="header">
           <Div className="collapse navbar-collapse d-flex" id="navbarSupportedContent" >
             {/* Menu mobile */}
@@ -43,12 +43,12 @@ export const NavMenuMobile = () => {
                 <nav className="navbar m-0 p-0">
                   <Div className="container-fluid d-flex justify-content-md-center position-relative text-center align-items-center p-0" id="header">
                     {/* Categorias */}
-                    <div className="row p-0">
+                    <div className="row p-0 me-2">
                       <DropDownNav></DropDownNav>
                     </div>
                     {/* Outras opcoes */}
-                    <div className="p-0 m-0 row " style={{fontSize: "25px"}}>
-                      <A className="m-0 p-0" href="/assinatura">Assinatura</A>
+                    <div className="p-0 m-0" style={{fontSize: "25px"}}>
+                      <A className="p-0" href="/assinatura"> Assinatura</A>
                       </div>
                   </Div>
                 </nav>

@@ -30,7 +30,6 @@ const DropdownMenuDemo: React.FC = () => {
         style={{
             fontSize: '28px',
             border: '0px',
-            zIndex: "2"
         }}
         >
           Categorias
@@ -43,6 +42,7 @@ const DropdownMenuDemo: React.FC = () => {
          onMouseEnter={() => setOpen(true)}
          onMouseLeave={() => setOpen(false)}
          sideOffset={5}
+         style={{zIndex: "1"}}
          >
           {categorias.map(categoria =>(
             <DropdownMenu.Item 
@@ -50,7 +50,7 @@ const DropdownMenuDemo: React.FC = () => {
             className="DropdownMenuItem"
             style={{
               fontSize: '22px',
-              padding: '20px'
+              padding: '0px',
             }}
             >
             {categoria.category}

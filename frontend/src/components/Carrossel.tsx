@@ -30,14 +30,14 @@ function Carrossel(){
 
     // Retorna o carrossel com os produtos ( iteração pelo .map())
     return(
-      <div className="text-center">
-        <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0" >
-        <H3 id="text-titulo justify-content-center">Em destaque</H3>
+      <div className="mt-auto" style={{zIndex: -1}}>
+        <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0">
+        <H3 id="text-titulo" className="justify-content-center">Em destaque</H3>
           </div>
 
 
 
-                <Carousel  className="carousel carousel-dark slide justify-content-center" style={{zIndex: "-1"}}>
+                <Carousel  className="carousel carousel-dark slide justify-content-center">
                     {produtos.map(produto => (
                         <Carousel.Item 
                             key={produto.product_id} 
@@ -52,10 +52,12 @@ function Carrossel(){
                                 className="w-25" 
                                 style={{
                                     cursor: 'pointer',
-                                    maxHeight: '100%',
-                                    width:'auto',
+                                    minHeight: "auto",
+                                    minWidth: '400px',
+                                    width:'100%',
                                     margin: '0 auto',
                                     display: 'block',
+                                    zIndex: ""
                                 }}
                             />
 
