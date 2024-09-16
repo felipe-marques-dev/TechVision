@@ -1,46 +1,34 @@
 import {useEffect, useState} from "react";
-import { client } from "../services/client";
+
 import { Carousel } from "react-bootstrap";
 import { H3 } from  "../styles/Carrossel/lista";
-import { useNavigateProducts } from "../hooks/useNavigateProducts";
+
 import { ImageLoader } from './ImageLoader';
+import { pegarProdutos } from './Produtos/pegarProdutos'
 // Tipos requeridos pelo useState
 interface Produto{
     name: string;
     product_id: number;
     price: number;
     url_name: string;
-    foto_1: string;
+    foto_1?: string;
+    foto_2?: string;
+    foto_3?: string;
+    foto_4?: string;
 }
 
 function Carrossel(){
-    const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [produtos_list, setProdutos] = useState<Produto[]>([]);
     const [errors, setErrors] = useState<Map<string, boolean>>(new Map());  // Custom hook que leva até a página do produto
     
     // faz a busca dos produtos
     useEffect(() => {
-        const pegarProdutos = async () => {
-            try {
-              const response = await client.get('/produtos/itens');
-              const produtosData = response.data;
-              const newErrors = new Map<string, boolean>(); // inicializa o mapa de erros
-
-              // verifica se a imagem existe para cada produto
-              for (const produto of produtosData) {
-                try {
-                 await client.get(produto.foto_1);
-                } catch {
-                  newErrors.set(produto.url_name, true) // marca o erro para esta imagem
-                }
-              }
-              setErrors(newErrors);
-              setProdutos(produtosData);
-            } catch (error) {
-              console.error('Erro ao buscar produtos:', error);
-            }
-          };
-      
-          pegarProdutos();
+        const loadProdutos = async () => {
+          const {produtos, errors } = await pegarProdutos('/produtos/itens/');
+          setProdutos(produtos);
+          setErrors(errors);
+        }
+        loadProdutos();
         }, []);
 
 
@@ -60,7 +48,7 @@ function Carrossel(){
                         alignItems: 'end',
                     }}
                 >
-                    {produtos.map(produto => (
+                    {produtos_list.map(produto => (
                         <Carousel.Item 
                             key={produto.url_name} 
                             style={{ 
