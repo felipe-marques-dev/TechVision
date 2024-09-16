@@ -8,7 +8,7 @@ import { Login } from "../pages/Login/index.tsx";
 import { Cadastro } from "../pages/Cadastro/index.tsx";
 import { Home } from "../pages/Home/index.tsx";
 import { Profile } from "../pages/Profile/index.tsx";
-import { ProdutoIndividual } from "../components/ProdutoIndividual.tsx";
+import { ProdutoIndividual } from "../components/Produtos/ProdutoIndividual.tsx";
 import { Carrinho } from "../pages/Carrinho/index.tsx";
 export function AppRoutes(){
     return (

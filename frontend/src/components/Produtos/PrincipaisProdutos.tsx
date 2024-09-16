@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import { client } from "../services/client";
+import { client } from "../../services/client";
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import '../styles/PrincipaisProdutos/principaisProdutos.css'; // Importa o arquivo CSS
+import '../../styles/PrincipaisProdutos/principaisProdutos.css'; // Importa o arquivo CSS
 
 interface Produto{
     name: string;
