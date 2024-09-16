@@ -3,7 +3,7 @@ import { client } from "../services/client";
 import { Carousel } from "react-bootstrap";
 import { H3 } from  "../styles/Carrossel/lista";
 import { useNavigateProducts } from "../hooks/useNavigateProducts";
-
+import { ImageLoader } from './ImageLoader';
 // Tipos requeridos pelo useState
 interface Produto{
     name: string;
@@ -15,51 +15,70 @@ interface Produto{
 
 function Carrossel(){
     const [produtos, setProdutos] = useState<Produto[]>([]);
-    const { goToProduct } = useNavigateProducts();  // Custom hook que leva até a página do produto
-
+    const [errors, setErrors] = useState<Map<string, boolean>>(new Map());  // Custom hook que leva até a página do produto
+    
     // faz a busca dos produtos
     useEffect(() => {
-        client.get('/produtos/itens')
-                .then(response =>{
-                    setProdutos(response.data)   // Salva os produtos na variável produtos
-        })
-        .catch(error => {
-            const erro: string = ("Ops! Ocorreu um erro ao buscar os produtos.") 
-            console.log("Ops! Ocorreu um erro ao buscar os produtos.")
+        const pegarProdutos = async () => {
+            try {
+              const response = await client.get('/produtos/itens');
+              const produtosData = response.data;
+              const newErrors = new Map<string, boolean>(); // inicializa o mapa de erros
 
-        })
-    }, []);
+              // verifica se a imagem existe para cada produto
+              for (const produto of produtosData) {
+                try {
+                 await client.get(produto.foto_1);
+                } catch {
+                  newErrors.set(produto.url_name, true) // marca o erro para esta imagem
+                }
+              }
+              setErrors(newErrors);
+              setProdutos(produtosData);
+            } catch (error) {
+              console.error('Erro ao buscar produtos:', error);
+            }
+          };
+      
+          pegarProdutos();
+        }, []);
+
 
     // Retorna o carrossel com os produtos ( iteração pelo .map())
     return(
       <div className="mt-auto" style={{zIndex: -1}}>
-        <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0">
-        <H3 id="text-titulo" className="justify-content-center">Em destaque</H3>
+        <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0 h-25">
+        <H3 id="text-titulo" className="d-flex justify-content-center">Em destaque</H3>
           </div>
 
 
 
-                <Carousel  className="carousel carousel-dark slide justify-content-center">
+                <Carousel  
+                    className="carousel carousel-dark slide justify-content-center" 
+                    style={{
+                        marginTop: "3vh",
+                        alignItems: 'end',
+                    }}
+                >
                     {produtos.map(produto => (
                         <Carousel.Item 
                             key={produto.url_name} 
                             style={{ 
-                                height: '400px' 
+                                height: '400px',
+                                marginBottom: '2vh' 
                                 }}
                         >
-
-                            <img 
-                                onClick={() => goToProduct(produto.url_name)} 
+                            <ImageLoader 
+                                onClick={produto.url_name} 
                                 src={produto.foto_1}
-                                className="w-25" 
+                                className="w-25 d-flex justify-content-center"
+                                erro={errors.get(produto.url_name) || false}
                                 style={{
                                     cursor: 'pointer',
-                                    minHeight: "auto",
-                                    minWidth: '400px',
+                                    maxHeight: '400px',
                                     width:'100%',
+                                    minWidth: '350px',
                                     margin: '0 auto',
-                                    display: 'block',
-                                    zIndex: ""
                                 }}
                             />
 
