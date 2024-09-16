@@ -1,11 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useNavigateProducts } from "../hooks/useNavigateProducts";
 import React from "react";
-import { color } from "framer-motion";
+
 
 type ImageProps = {
-    src: string;
+    src: string | undefined;
     erro: boolean;
     onClick: string;
     className ?: string;
