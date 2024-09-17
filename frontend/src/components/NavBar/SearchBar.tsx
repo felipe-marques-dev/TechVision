@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { client } from "../services/client";
-import { ImageLoader } from "./ImageLoader";
+import { client } from "../../services/client";
+import { ImageLoader } from "../ImageLoader";
 
 interface Produto {
   product_id: number;
@@ -48,7 +48,7 @@ export const SearchBar = () => {
               <li
                 key={produto.product_id}
                 className="d-flex align-items-center p-2 border-bottom"
-                style={{ width: '100%' }}
+                style={{ width: '100%', cursor: 'pointer' }}
               >
                 <ImageLoader
                   onClick={produto.url_name}
