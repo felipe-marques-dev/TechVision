@@ -82,7 +82,7 @@ function PrincipaisProdutos(props: ProdutosProps){
                 <div className="swiper-wrapper">
                 {produtos.map(produto =>  (
                                 <Card className="swiper-slide" onClick={() => goToProduct(produto.url_name)} key={produto.url_name} style={{maxWidth: '300px', maxHeight: '420px', minHeight: '420px'}}>
-                                    <Card.Img variant="top" style={{width: "auto", maxHeight: "200px", padding: '10px'}} src={produto.foto_1} />
+                                    <Card.Img variant="top" style={{width: "auto", maxHeight: "240px ", padding: '10px'}} src={produto.foto_1} />
                                     <Card.Body>
                                     <Card.Text
                                     className="fs-4"
