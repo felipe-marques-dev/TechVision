@@ -1,0 +1,23 @@
+
+.ico-carrinho{
+    width: 20px;
+}
+
+.Link{
+    text-decoration: none;
+
+}
+
+.txt-carrinho{
+    margin-right: 1vh;
+}
+
+.Class{
+    padding: 1vh;
+    margin: 1vh;
+}
+
+.nome-carrinho{
+    font-weight: 800;
+    font-size: 20px;
+}
