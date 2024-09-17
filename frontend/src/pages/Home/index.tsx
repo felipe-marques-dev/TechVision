@@ -7,7 +7,8 @@ export function Home(){
         <div>
             <Nav_bar />
             <Carrossel />
-            <PrincipaisProdutos />
+            <PrincipaisProdutos titulo="Principais Produtos" promotion={false}/>
+            <PrincipaisProdutos titulo="Em Promoção" promotion={true}/>
         </div>
         
     )

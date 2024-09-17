@@ -21,3 +21,33 @@
     padding: 1vh;
     margin: 1vh;
 }
+
+.swiper-container {
+    width: 99vw; /* 100% da largura da viewport */
+    height: 100%;  /* Ajuste conforme necessário para a altura */
+    box-sizing: border-box; /* Inclui o padding e a borda no cálculo da largura e altura */
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000; /* Cor das setas de navegação */
+}
+
+.swiper-pagination {
+    bottom: 10px; /* Posiciona a paginação */
+}
+
+.swiper-slide {
+    background: #ddd; /* Cor de fundo dos slides */
+    border-radius: 10px; /* Arredondar os cantos */
+    overflow: hidden;
+    display: flex;
+    width: calc(100% / 3 - 20px);
+    cursor: pointer; /* 100% dividido pelo número de slides visíveis, ajustado pelo espaçamento */
+
+}
+
