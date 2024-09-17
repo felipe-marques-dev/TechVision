@@ -8,6 +8,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import DropDownNav from "./DropDownNav"
 import { useMediaQuery } from "@chakra-ui/react"
 import { NavMenuMobile } from "./NavbarMobile"
+import { SearchBar } from "../SearchBar"
 
 export function NavbarDesktop() {
 
@@ -36,10 +37,7 @@ export function NavbarDesktop() {
             {/* Logo */}
             <Div className="navbar-brand" ><Logo /></Div>
             {/* Barra de pesquisa */}
-            <form className="d-flex col-5 ms-auto bg-white border border-white rounded-pill" role="search">
-              <input className="form-control border border-white rounded-pill" type="search" placeholder="Pesquisar produtos..." aria-label="Search" />
-              <Button className="btn bg-black border-3 border-white rounded-pill" id="btn-search" type="submit"><FaMagnifyingGlass color="white" /></Button>
-            </form>
+            <SearchBar />
             {/* Mostra o nome do usuario */}
             <div className="navbar-nav ms-auto">
               <LoginNavBar loggedIn={loggedIn} userName={userInfo} />
