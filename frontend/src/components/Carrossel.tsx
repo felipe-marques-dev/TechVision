@@ -36,7 +36,7 @@ function Carrossel(){
     return(
       <div className="mt-auto" style={{zIndex: -1}}>
         <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0 h-25">
-        <H3 id="text-titulo" className="d-flex justify-content-center">Em destaque</H3>
+        <H3 id="text-titulo" className="d-flex justify-content-center mt-5">Em destaque</H3>
           </div>
 
 
