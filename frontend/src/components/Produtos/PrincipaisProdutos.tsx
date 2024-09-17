@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import '../../styles/PrincipaisProdutos/principaisProdutos.css'; // Importa o arquivo CSS
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
+import { useNavigateProducts } from "../../hooks/useNavigateProducts";
+import { H3 } from "../../styles/Carrossel/lista";
 
 interface Produto{
     name: string;
@@ -14,9 +18,13 @@ interface Produto{
     foto_1: string;
 }
 
-function PrincipaisProdutos(){
+type ProdutosProps = {
+    promotion: boolean;
+    titulo: string;
+}
+function PrincipaisProdutos(props: ProdutosProps){
     const [produtos, setProdutos] = useState<Produto[]>([]);
-
+    const {goToProduct} = useNavigateProducts();
     useEffect(() => {
         client.get('/produtos/itens')
                 .then(response =>{
@@ -28,40 +36,81 @@ function PrincipaisProdutos(){
     }, []);
 
 
+    let produtoPrice: number = 0
+    
+    React.useEffect(() => {
+        new Swiper('.swiper-container', {
+            slidesPerView: 3, // Exibe 3 slides visíveis de cada vez
+            spaceBetween: 10, // Espaço entre os slides
+            loop: true, // Faz o carrossel rodar em loop infinito
+            navigation: {
+                nextEl: '.swiper-button-next', // Seletores para setas de navegação
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination', // Paginação para indicar mais slides
+                clickable: true,
+            },
+            breakpoints: {
+                // Responsividade
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    }, []);
 
-    console.log(produtos)
+
     const img = "ico-carrinho.png"
     return(
             <div>
             <div className="text-center">
-                    <div id="texto-titulo" className="col d-flex justify-content-center fs-1" >
-                        <h3 id="text-titulo">Principais produtos</h3>
+                    <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0 h-25" >
+                        <H3 id="text-titulo"  className="d-flex justify-content-center ">{props.titulo}</H3>
                 </div>
             </div>
-            <CardGroup className="CardGroup">
-          
-                {produtos.map(produto => (
-
-                          
-                        <Link className="Link" to={`/produto/${produto.url_name}`}>
-                                <Card className="Class" key={produto.url_name}>
-                                    <Card.Img variant="top" style={{width: "310px", height: "160px"}} src={produto.foto_1} />
+            <div className="swiper-container mt-4">
+                <div className="swiper-wrapper">
+                {produtos.map(produto =>  (
+                                <Card className="swiper-slide" onClick={() => goToProduct(produto.url_name)} key={produto.url_name} style={{maxWidth: '300px', maxHeight: '420px', minHeight: '420px'}}>
+                                    <Card.Img variant="top" style={{width: "auto", maxHeight: "200px", padding: '10px'}} src={produto.foto_1} />
                                     <Card.Body>
-                                    <Card.Title>{produto.name}</Card.Title>
-                                    <Card.Text>
-                                       {produto.price}
+                                    <Card.Text
+                                    className="fs-4"
+                                    style={{
+                                        color: 'gray',
+                                        textDecoration: 'line-through',
+                                        marginBottom: '0px',
+                                        marginTop: '1vh'
+                                    }}
+                                    >
+                                       {`R$${((1.3 * produto.price).toFixed(0))}`}
                                     </Card.Text>
+                                    <Card.Title 
+                                    className="fs-2"
+                                    >
+                                        {`R$${((produto.price.toFixed(2)).toString()).replace('.', ',')}`}
+                                    </Card.Title>
+                                    
                                     <Card.Text>
-                                       {produto.description}
+                                       {produto.description.length > 50 ? `${produto.description.slice(0, 50)}...`: `${produto.description}`}
                                     </Card.Text>
                                     </Card.Body>
-                                    <Card.Footer>
-                                    <Link className="Link" to="/" ><p className="txt-carrinho"> Adicionar ao carrinho </p><small className="text-muted">Comprar agora</small></Link>
-                                    </Card.Footer>
-                                </Card></Link>
-                ))}
-            </CardGroup>
+                                </Card>
+                ))} 
+                <div className="swiper-pagination"></div>
+            </div>
             </div> 
+            </div>
     );
     
 }

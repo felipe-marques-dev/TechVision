@@ -10,7 +10,7 @@ class Produto(models.Model):
     description = models.CharField(max_length=150)
     url_name = models.SlugField(unique=True, null=True, blank=True)
     estoque = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.FloatField()
     promotion = models.BooleanField(default=False)
     foto_1 = models.ImageField(upload_to='produtos/', null=True, blank=True)
     foto_2 = models.ImageField(upload_to='produtos/', null=True, blank=True)
