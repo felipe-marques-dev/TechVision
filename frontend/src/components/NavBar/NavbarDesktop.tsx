@@ -37,7 +37,7 @@ export function NavbarDesktop() {
             {/* Logo */}
             <Div className="navbar-brand" ><Logo /></Div>
             {/* Barra de pesquisa */}
-            <SearchBar />
+            <SearchBar width="50"/>
             {/* Mostra o nome do usuario */}
             <div className="navbar-nav ms-auto">
               <LoginNavBar loggedIn={loggedIn} userName={userInfo} />

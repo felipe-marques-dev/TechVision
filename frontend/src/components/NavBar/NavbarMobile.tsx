@@ -6,6 +6,7 @@ import { A, Button, Div } from "../../styles/NavBar/navbar";
 import { Logo } from "../Logo";
 import { FaCartShopping, FaMagnifyingGlass, FaRegUser } from "react-icons/fa6";
 import DropDownNav from "./DropDownNav";
+import { SearchBar } from "../SearchBar";
 
 export const NavMenuMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,12 +69,7 @@ export const NavMenuMobile = () => {
 
           </Div>
           {/* Barra de pesquisa */}
-          <div className="collapse navbar-collapse d-flex justify-content-center position-relative align-items-center">
-          <form className="d-flex col-12 bg-white border border-white rounded-pill" role="search">
-              <input className="form-control border border-white rounded-pill" type="search" placeholder="Pesquisar produtos..." aria-label="Search" />
-              <Button className="btn bg-black border-3 border-white rounded-pill" id="btn-search" type="submit"><FaMagnifyingGlass color="white" /></Button>
-            </form>
-          </div>
+          <SearchBar width="75"/>
           
         </Div>
       </nav>

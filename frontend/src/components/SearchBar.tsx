@@ -9,7 +9,11 @@ interface Produto {
   url_name: string; // Certifique-se de que esse campo existe em seu API
 }
 
-export const SearchBar = () => {
+interface SearchBarProps{
+  width: string;
+}
+
+export const SearchBar = (props: SearchBarProps) => {
   const [termoBusca, setTermoBusca] = useState<string>('');
   const [sugestoes, setSugestoes] = useState<Produto[]>([]);
 
@@ -26,7 +30,7 @@ export const SearchBar = () => {
   return (
     <div className="container position-relative d-flex flex-column align-items-center">
       {/* Barra de pesquisa */}
-      <div className="d-flex col-5 bg-white border border-white rounded-pill" role="search">
+      <div className={`d-flex col-5 bg-white w-${props.width} border border-white rounded-pill`} role="search">
         <input
           className="form-control border border-white rounded-pill"
           type="search"
@@ -40,8 +44,8 @@ export const SearchBar = () => {
       {/* Resultados da pesquisa */}
       {sugestoes.length > 0 && (
         <div
-          className="search-results position-fixed w-50 p-2 bg-dark rounded border border-secondary"
-          style={{ zIndex: 1000, marginTop: '5vh' }}
+          className={`search-results position-fixed w-${props.width} p-2 rounded border border-secondary`}
+          style={{ zIndex: 1000, marginTop: '5vh', backgroundColor: 'black' }}
         >
           <ul className="list-unstyled mb-0" style={{ padding: 0, margin: 0 }}>
             {sugestoes.map((produto) => (
