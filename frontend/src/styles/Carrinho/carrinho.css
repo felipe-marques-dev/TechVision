@@ -21,3 +21,23 @@
     font-weight: 800;
     font-size: 20px;
 }
+
+.botao-carrinho{
+    margin: 1vh;
+    background-color: #841abb;
+    padding: 1vh;
+    color: white;
+    border-radius: 10px;
+}
+
+.botao{
+    padding: 1vh;
+    border-radius: 10px;
+}
+
+.botao:hover{
+    background-color:rgb(187, 187, 187);
+    padding: 1vh;
+    border-radius: 10px;
+    transition: 0.6s;
+}

@@ -4,6 +4,8 @@ import { client } from "../../services/client";
 import { useNavigate } from "react-router-dom";
 import '../../styles/Carrinho/carrinho.css'
 import { H3 } from  "../../styles/Carrossel/lista";
+import { Input } from "@chakra-ui/react";
+import Calculo from "./Calculo";
 
 interface Produto {
   name: string;
@@ -83,16 +85,17 @@ export function Carrinho() {
                   <p><strong>Valor dos Produtos:</strong> R$ 4.899,80</p>
                   <p><strong>Frete:</strong> R$ 0,00</p>
                   <h5>ENTREGA</h5>
-                  <p><strong>CEP *</strong> 12345-678</p>
-                  <p><a href="#">Não lembro meu CEP</a></p>
+                  <Calculo />
+
                   <a href="pagamento.html">
                     <button className="botao">Ir para o pagamento</button>
                   </a>
-                  <button className="btn btn-secondary btn-custom">Continuar comprando</button>
+                  <button className="botao-carrinho">Continuar comprando</button>
                 </div>
               </div>
             </div>
           </div>
+
       )}
     </div>
   );
