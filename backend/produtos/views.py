@@ -50,6 +50,6 @@ def sugestoes_produtos(request):
         produtos = Produto.objects.filter(
             Q(name__icontains=termo_busca) | 
             Q(description__icontains=termo_busca)
-        ).values('product_id', 'name')[:5]  # Retorna os primeiros 5 resultados
+        ).values('product_id', 'name', 'description', 'foto_1', 'price', 'url_name')[:5]  # Retorna os primeiros 5 resultados
         return JsonResponse(list(produtos), safe=False)
     return JsonResponse([], safe=False)
