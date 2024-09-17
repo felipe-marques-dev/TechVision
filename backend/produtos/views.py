@@ -3,7 +3,9 @@ from .models import Produto
 from .serializers import ProductSerializer,CategorySerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, AllowAny
-
+from django.http import JsonResponse
+from .models import Produto
+from django.db.models import Q
 
 # API de produtos
 class ProductListCreate(generics.ListCreateAPIView):
@@ -39,3 +41,15 @@ class CategoryList(generics.ListCreateAPIView):
         if self.request.method == 'POST':
             return [IsAdminUser()]
         return [AllowAny()]
+
+
+
+def sugestoes_produtos(request):
+    termo_busca = request.GET.get('q', '')
+    if termo_busca:
+        produtos = Produto.objects.filter(
+            Q(name__icontains=termo_busca) | 
+            Q(description__icontains=termo_busca)
+        ).values('product_id', 'name')[:5]  # Retorna os primeiros 5 resultados
+        return JsonResponse(list(produtos), safe=False)
+    return JsonResponse([], safe=False)
