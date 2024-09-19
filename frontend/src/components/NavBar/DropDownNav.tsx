@@ -13,6 +13,7 @@ const DropdownMenuDemo: React.FC = () => {
     client.get('produtos/categories/')
     .then(response => {
       setCategorias(response.data)
+      
     })
   }, [])
   return (
@@ -40,14 +41,14 @@ const DropdownMenuDemo: React.FC = () => {
          >
           {categorias.map(categoria =>(
             <DropdownMenu.Item 
-            key={categoria.category} 
+            key={categoria.name} 
             className="DropdownMenuItem"
             style={{
               fontSize: '22px',
               padding: '0px',
             }}
             >
-            {categoria.category}
+            {categoria.name}
           </DropdownMenu.Item>
           ))}
         </DropdownMenu.Content>
