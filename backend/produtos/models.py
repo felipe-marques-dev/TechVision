@@ -2,10 +2,16 @@ from django.db import models
 from django.utils.text import slugify
 
 
+class Categoria(models.Model):
+    category_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+
+
+
 class Produto(models.Model):
     product_id = models.AutoField(primary_key = True)
     name = models.CharField(max_length=40)
-    category = models.CharField(max_length=40)
+    categoria = models.ForeignKey(Categoria, related_name="categories", on_delete=models.CASCADE)
     sub_category = models.CharField(max_length=40)
     description = models.CharField(max_length=150)
     url_name = models.SlugField(unique=True, null=True, blank=True)
@@ -26,3 +32,4 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.name
+

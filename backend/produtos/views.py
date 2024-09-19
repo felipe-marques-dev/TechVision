@@ -4,7 +4,7 @@ from .serializers import ProductSerializer,CategorySerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, AllowAny
 from django.http import JsonResponse
-from .models import Produto
+from .models import Produto, Categoria
 from django.db.models import Q
 
 # API de produtos
@@ -33,8 +33,19 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
 
 # API de categorias
 class CategoryList(generics.ListCreateAPIView):
-    queryset = Produto.objects.values('category').distinct()
+    queryset = Categoria.objects.all()
     serializer_class = CategorySerializer
+
+    # Pega as permissões do usuario atual
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [IsAdminUser()]
+        return [AllowAny()]
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategorySerializer
+    lookup_field = 'id'
 
     # Pega as permissões do usuario atual
     def get_permissions(self):
