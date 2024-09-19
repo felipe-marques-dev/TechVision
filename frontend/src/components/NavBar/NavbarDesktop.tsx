@@ -14,7 +14,6 @@ export function NavbarDesktop() {
 
   const [userInfo, setUserInfo] = useState<[]>([]);
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
-  console.log(userInfo)
 
   useEffect(() => {
     client.get('accounts/usuario')

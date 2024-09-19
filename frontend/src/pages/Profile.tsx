@@ -1,8 +1,8 @@
 import { Button, Container, Navbar } from "react-bootstrap";
-import { client } from "../../services/client";
+import { client } from "../services/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Nav_bar } from "../../components/NavBar/Navbar";
+import { Nav_bar } from "../components/NavBar/Navbar";
 
 
 export function Profile() {

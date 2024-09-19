@@ -4,10 +4,10 @@ import {
     Route
 } from "react-router-dom";
 
-import { Login } from "../pages/Login/index.tsx";
-import { Cadastro } from "../pages/Cadastro/index.tsx";
-import { Home } from "../pages/Home/index.tsx";
-import { Profile } from "../pages/Profile/index.tsx";
+import { Login } from "../pages/Login.tsx";
+import { Cadastro } from "../pages/Cadastro.tsx";
+import { Home } from "../pages/Home.tsx";
+import { Profile } from "../pages/Profile.tsx";
 import { ProdutoIndividual } from "../components/Produtos/ProdutoIndividual.tsx";
 import { Carrinho } from "../pages/Carrinho/index.tsx";
 export function AppRoutes(){
