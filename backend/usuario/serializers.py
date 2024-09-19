@@ -33,3 +33,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('email', 'first_name')
+
+class CarrinhoItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarrinhoItem
+        fields = ('cartitem_id', 'cart', 'produto', 'quantity', 'price' )
