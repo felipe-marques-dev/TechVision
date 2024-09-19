@@ -49,3 +49,5 @@ class UserView(APIView):
 
 class CarrinhoItemView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CarrinhoItem.objects.all()
+    serializer_class = CarrinhoItemSerializer
+    
