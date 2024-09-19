@@ -18,9 +18,17 @@ export function AppRoutes(){
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/produto/:id" element={<ProdutoIndividual />}/>
+                <Route path={"/produto/:url_name"} element={<ProdutoIndividual />}/>
                 <Route path="/carrinho" element={<Carrinho />} />
             </Routes>
         </Router>
     )
 }
+
+
+
+
+
+
+
+
