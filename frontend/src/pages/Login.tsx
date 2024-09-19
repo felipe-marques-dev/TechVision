@@ -73,7 +73,7 @@ export function Login() {
 
   return (
     <div>
-      <div className="d-flex position-relative justify-content-center align-bottom p-5">
+      <div className="d-flex position-relative justify-content-center align-bottom p-4">
         <Logo />
       </div>
       <div className="container-fluid mb-auto rounded-4 w-25 position-relative bg-white p-4 border-5 border-black" style={{ borderRadius: '20px', minWidth: "300px" }}>
@@ -88,11 +88,12 @@ export function Login() {
               className="border-3"
               onChange={e => setEmail(e.target.value)}
               required
-              isInvalid={email === "" || /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) === false}
+              isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))|| !valid}
             />
-            <Form.Control.Feedback type="invalid" >
-              <b>Email inválido.</b>
-            </Form.Control.Feedback>
+            {!valid ? (<Form.Control.Feedback type="invalid"><b>Senha ou Email inválidos</b></Form.Control.Feedback>) :
+              (<Form.Control.Feedback type="invalid">
+                <b>Email Inválido.</b>
+              </Form.Control.Feedback>)}
           </Form.Group>
           <Form.Group className="mb-3" id="password" >
             <Form.Label htmlFor="inputPassword">Senha</Form.Label><br />
@@ -103,9 +104,9 @@ export function Login() {
               className="border-3"
               onChange={e => setPassword(e.target.value)}
               required
-              isInvalid={password.length < 8}
+              isInvalid={password.length < 8 || !valid}
             />
-            {valid === false ? (<span style={{ color: "red" }}><b>Senha ou Email inválidos</b></span>) :
+            {!valid ? (<Form.Control.Feedback type="invalid"><b>Senha ou Email inválidos</b></Form.Control.Feedback>) :
               (<Form.Control.Feedback type="invalid">
                 <b>Senha Inválida.</b>
               </Form.Control.Feedback>)}
@@ -116,7 +117,7 @@ export function Login() {
               type="submit"
               className="btn btn-dark mt-4 rounded-4"
               style={{ borderRadius: '10px' }}
-              disabled={isLoading || password.length < 8 || email === "" || /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) === false}>
+              disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))}>
               Enviar
             </button>
           </div>

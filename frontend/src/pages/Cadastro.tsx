@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { client } from "../services/client";
 import { Button, Form } from "react-bootstrap";
 import { Logo } from "../components/Logo";
-import { last } from "lodash";
 
 export function Cadastro() {
 
@@ -43,32 +42,31 @@ export function Cadastro() {
         e.preventDefault();
         setIsLoading(true);
 
-        if (password === passwordConfirm) {
-            client.post(
-                "accounts/cadastro",
-                {
-                    email: email,
-                    first_name: first_name,
-                    last_name: last_name,
-                    password: password,
-                }
-            ).then(function (res) {
+            setTimeout(() => {
                 client.post(
-                    "accounts/login",
+                    "accounts/cadastro",
                     {
                         email: email,
+                        first_name: first_name,
+                        last_name: last_name,
                         password: password,
                     }
                 ).catch(function (error) {
                     setCurrentUser(false);
-                })
-                    .then(function (res) {
+                    return setValid(false);
+                }).then(function (res) {
+                    client.post(
+                        "accounts/login",
+                        {
+                            email: email,
+                            password: password,
+                        }
+                    ).then(function (res) {
                         setCurrentUser(true);
+                        setValid(true);
                     });
-            });
-        }
-        setIsLoading(false);
-
+                }); return setIsLoading(false);
+            }, 1500);
     }
 
     if (currentUser) {
@@ -77,7 +75,7 @@ export function Cadastro() {
 
     return (
         <div>
-            <div className="d-flex position-relative justify-content-center align-bottom p-5">
+            <div className="d-flex position-relative justify-content-center align-bottom p-4">
                 <Logo />
             </div>
             <div className="container-fluid mb-3 rounded-4 w-25 position-relative bg-white border-5 border-black p-4" style={{ borderRadius: '20px', minWidth: "300px" }}>
@@ -92,12 +90,15 @@ export function Cadastro() {
                             className="border-3"
                             onChange={e => setEmail(e.target.value)}
                             required
-                            isValid={/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)}
-                            isInvalid={email === "" || /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) === false}
+                            isValid={/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) || valid}
+                            isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || !valid}
                         />
-                        <Form.Control.Feedback type="invalid" >
+                        {!valid ? (<Form.Control.Feedback type="invalid">
+                            <b>Email já utilizado por outro usuário.</b>
+                        </Form.Control.Feedback>):
+                        (<Form.Control.Feedback type="invalid">
                             <b>Email inválido.</b>
-                        </Form.Control.Feedback>
+                        </Form.Control.Feedback>)} 
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="inputNome" className="form-label">Nome</Form.Label><br />
@@ -109,7 +110,7 @@ export function Cadastro() {
                             onChange={e => setFirst_name(e.target.value)}
                             required
                             isValid={first_name !== ""}
-                            isInvalid={first_name === "" || /^[a-z0-9.]/i.test(first_name) === false}
+                            isInvalid={first_name === "" || !(/^[a-z0-9.]/i.test(first_name))}
                         />
                         <Form.Control.Feedback type="invalid" >
                             <b>Campo não preenchido.</b>
@@ -123,10 +124,10 @@ export function Cadastro() {
                             id="inputSobrenome"
                             className="border-3"
                             onChange={e => setLast_name(e.target.value)}
-                            required 
+                            required
                             isValid={last_name !== ""}
-                            isInvalid={last_name == "" || /^[a-z0-9.]/i.test(last_name) === false}/>
-                            <Form.Control.Feedback type="invalid" >
+                            isInvalid={last_name == "" || !(/^[a-z0-9.]/i.test(last_name))} />
+                        <Form.Control.Feedback type="invalid" >
                             <b>Campo não preenchido.</b>
                         </Form.Control.Feedback>
                     </Form.Group>
@@ -139,8 +140,8 @@ export function Cadastro() {
                             className="border-3"
                             onChange={e => setPassword(e.target.value)}
                             required
-                            isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password) === true}
-                            isInvalid={password.length < 8 || password !== passwordConfirm || /^[a-z0-9.]/.test(password) === false}
+                            isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password)}
+                            isInvalid={password.length < 8 || password !== passwordConfirm || !(/^[a-z0-9.]/.test(password))}
                         />
                         {password.length < 8 || /^[a-z0-9.]/.test(password) === false ? (<Form.Control.Feedback type="invalid"><b>Senha Inválida. Senha deve possuir no mínimo 8 caracteres </b></Form.Control.Feedback>) :
                             (<Form.Control.Feedback type="invalid">
@@ -155,20 +156,21 @@ export function Cadastro() {
                             id="inputPasswordConfirm"
                             className="border-3"
                             onChange={e => setPasswordConfirm(e.target.value)}
-                            required 
-                            isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password) === true}
-                            isInvalid={password.length < 8 || password !== passwordConfirm || /^[a-z0-9.]/.test(password) === false}/>
-                            <Form.Control.Feedback type="invalid">
-                                <b>As senhas não combinam</b>
-                            </Form.Control.Feedback>
+                            required
+                            isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password)}
+                            isInvalid={password.length < 8 || password !== passwordConfirm || !(/^[a-z0-9.]/.test(password))} />
+                        <Form.Control.Feedback type="invalid">
+                            <b>As senhas não combinam</b>
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <div className="col-12 d-flex justify-content-center">
-                        <button 
-                        type="submit" 
-                        className="btn btn-dark mt-4 rounded-4" 
-                        style={{ borderRadius: '10px' }}
-                        disabled={isLoading}
-                        >Enviar</button>
+                        <button
+                            type="submit"
+                            className="btn btn-dark mt-4 rounded-4"
+                            style={{ borderRadius: '10px' }}
+                            disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || password !== passwordConfirm}>
+                            Enviar
+                        </button>
                     </div>
                     <br />
                     <p className="col-12 d-flex justify-content-center" style={{ fontSize: "15px" }}>Já possui uma conta?</p>
