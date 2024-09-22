@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../services/client";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import { Logo } from "../components/Logo";
 
 export function Cadastro() {
@@ -42,19 +42,21 @@ export function Cadastro() {
         e.preventDefault();
         setIsLoading(true);
 
-            setTimeout(() => {
-                client.post(
-                    "accounts/cadastro",
-                    {
-                        email: email,
-                        first_name: first_name,
-                        last_name: last_name,
-                        password: password,
-                    }
-                ).catch(function (error) {
-                    setCurrentUser(false);
-                    return setValid(false);
-                }).then(function (res) {
+        setTimeout(() => {
+            client.post(
+                "accounts/cadastro",
+                {
+                    email: email,
+                    first_name: first_name,
+                    last_name: last_name,
+                    password: password,
+                }
+            )
+            // faz o login automaticamente 
+            // se o cadastro não retornar nenhum erro
+                .then((res) => {
+                    setValid(true);
+                    console.log(valid);
                     client.post(
                         "accounts/login",
                         {
@@ -63,10 +65,16 @@ export function Cadastro() {
                         }
                     ).then(function (res) {
                         setCurrentUser(true);
-                        setValid(true);
                     });
-                }); return setIsLoading(false);
-            }, 1500);
+                }, 
+                // se o email já está sendo utilizado retorna um erro
+                // no campo de email
+                (error) => {
+                    setCurrentUser(false);
+                    setValid(false);
+                });
+            return setIsLoading(false);
+        }, 1500);
     }
 
     if (currentUser) {
@@ -95,10 +103,10 @@ export function Cadastro() {
                         />
                         {!valid ? (<Form.Control.Feedback type="invalid">
                             <b>Email já utilizado por outro usuário.</b>
-                        </Form.Control.Feedback>):
-                        (<Form.Control.Feedback type="invalid">
-                            <b>Email inválido.</b>
-                        </Form.Control.Feedback>)} 
+                        </Form.Control.Feedback>) :
+                            (<Form.Control.Feedback type="invalid">
+                                <b>Email inválido.</b>
+                            </Form.Control.Feedback>)}
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="inputNome" className="form-label">Nome</Form.Label><br />
@@ -166,10 +174,10 @@ export function Cadastro() {
                     <div className="col-12 d-flex justify-content-center">
                         <button
                             type="submit"
-                            className="btn btn-dark mt-4 rounded-4"
+                            className="btn btn-dark mt-4 rounded-4 d-flex justify-content-center align-items-center"
                             style={{ borderRadius: '10px' }}
                             disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || password !== passwordConfirm}>
-                            Enviar
+                            {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}
                         </button>
                     </div>
                     <br />

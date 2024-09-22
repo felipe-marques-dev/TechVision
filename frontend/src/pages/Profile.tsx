@@ -33,15 +33,18 @@ export function Profile() {
       { withCredentials: true }
     ).then(function (res) {
       setCurrentUser(false);
-      navigate('/login');
     });
+  }
+
+  if (!currentUser){
+    return navigate('/login');
   }
 
     return (
       <div>
         <Nav_bar/>
         <div className="center">
-          <h2>You're logged in!</h2>
+          <h2>Você está logado!</h2>
         </div>
         <form onSubmit={e => submitLogout(e)}>
                   <Button type="submit" variant="dark">Log out</Button>

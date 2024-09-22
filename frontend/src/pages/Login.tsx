@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { client } from "../services/client";
 import { Logo } from "../components/Logo";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 
 export function Login() {
 
@@ -118,7 +118,7 @@ export function Login() {
               className="btn btn-dark mt-4 rounded-4"
               style={{ borderRadius: '10px' }}
               disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))}>
-              Enviar
+              {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}
             </button>
           </div>
           <br />
