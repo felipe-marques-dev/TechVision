@@ -86,8 +86,8 @@ export function Cadastro() {
             <div className="d-flex position-relative justify-content-center align-bottom p-4">
                 <Logo />
             </div>
-            <div className="container-fluid mb-3 rounded-4 w-25 position-relative bg-white border-5 border-black p-4" style={{ borderRadius: '20px', minWidth: "300px" }}>
-                <h1 className="d-flex justify-content-center" id="title">Cadastre-se</h1>
+            <div className="container-fluid mb-3 rounded-4 bg-white border-5 border-black p-4" style={{ borderRadius: '20px', minWidth: "325px", width:"325px"}}>
+                <h1 className="d-flex justify-content-center" id="title" style={{fontSize: "40px"}}>Cadastre-se</h1>
                 <Form id="cadastro-form" method="post" onSubmit={e => submitRegistration(e)}>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="inputEmail" className="form-label">Email</Form.Label><br />
@@ -95,7 +95,7 @@ export function Cadastro() {
                             type="email"
                             name="email"
                             id="inputEmail"
-                            className="border-3"
+                            className="border-3 w-75"
                             onChange={e => setEmail(e.target.value)}
                             required
                             isValid={/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) || valid}
@@ -114,7 +114,7 @@ export function Cadastro() {
                             type="text"
                             name="first_name"
                             id="inputNome"
-                            className="border-3"
+                            className="border-3 w-75"
                             onChange={e => setFirst_name(e.target.value)}
                             required
                             isValid={first_name !== ""}
@@ -130,7 +130,7 @@ export function Cadastro() {
                             type="text"
                             name="last_name"
                             id="inputSobrenome"
-                            className="border-3"
+                            className="border-3 w-75"
                             onChange={e => setLast_name(e.target.value)}
                             required
                             isValid={last_name !== ""}
@@ -145,7 +145,7 @@ export function Cadastro() {
                             type="password"
                             name="password"
                             id="inputPassword"
-                            className="border-3"
+                            className="border-3 w-75"
                             onChange={e => setPassword(e.target.value)}
                             required
                             isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password)}
@@ -162,7 +162,7 @@ export function Cadastro() {
                             type="password"
                             name="passwordConfirm"
                             id="inputPasswordConfirm"
-                            className="border-3"
+                            className="border-3 w-75"
                             onChange={e => setPasswordConfirm(e.target.value)}
                             required
                             isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password)}

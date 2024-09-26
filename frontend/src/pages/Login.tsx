@@ -76,8 +76,8 @@ export function Login() {
       <div className="d-flex position-relative justify-content-center align-bottom p-4">
         <Logo />
       </div>
-      <div className="container-fluid mb-auto rounded-4 w-25 position-relative bg-white p-4 border-5 border-black" style={{ borderRadius: '20px', minWidth: "300px" }}>
-        <h1 className="d-flex justify-content-center" id="title">Login</h1>
+      <div className="container-fluid mb-auto rounded-4 position-relative bg-white p-4 border-5 border-black" style={{ borderRadius: '20px', minWidth: "325px", width:"325px"}}>
+        <h1 className="d-flex justify-content-center" id="title" style={{fontSize: "40px"}}>Login</h1>
         <Form id="login-form" method="post" onSubmit={e => submitLogin(e)} noValidate>
           <Form.Group className="mb-3" id="email">
             <Form.Label htmlFor="inputEmail">Email</Form.Label><br />
@@ -85,7 +85,7 @@ export function Login() {
               type="email"
               name="email"
               id="inputEmail"
-              className="border-3"
+              className="border-3 w-75"
               onChange={e => setEmail(e.target.value)}
               required
               isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))|| !valid}
@@ -101,7 +101,7 @@ export function Login() {
               type="password"
               name="password"
               id="inputPassword"
-              className="border-3"
+              className="border-3 w-75"
               onChange={e => setPassword(e.target.value)}
               required
               isInvalid={password.length < 8 || !valid}
