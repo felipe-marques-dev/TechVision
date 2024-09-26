@@ -67,10 +67,13 @@ def sugestoes_produtos(request):
     return JsonResponse([], safe=False)
 
 class CategoryProducts(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (SessionAuthentication,)
-    
     serializer_class = ProductSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [IsAdminUser()]
+        return [AllowAny()]
+    
     def get(self, request, name):
         category = Categoria.objects.get(name=name)
         category_id = category.category_id
