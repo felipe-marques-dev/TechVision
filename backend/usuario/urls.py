@@ -6,4 +6,5 @@ urlpatterns = [
     re_path('login', views.UserLogin.as_view(), name='login'),
     re_path('logout', views.UserLogout.as_view(), name='logout'),
     re_path('usuario', views.UserView.as_view(), name='usuario'),
+    re_path('update/', views.UserUpdate.as_view(), name='update-user')
 ]

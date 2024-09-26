@@ -2,11 +2,12 @@ from django.contrib.auth import login, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
-from .serializers import CarrinhoItemSerializer, UserRegisterSerializer, UserLoginSerializer, UserSerializer
+from .serializers import CarrinhoItemSerializer, UserRegisterSerializer, UserLoginSerializer, UserSerializer, UserInfoSerializer
 from rest_framework import permissions, status
 from .validations import custom_validation, validate_email, validate_password
 from rest_framework import generics
-from .models import CarrinhoItem
+from .models import CarrinhoItem, User
+from django.views.decorators.csrf import csrf_exempt
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
@@ -51,3 +52,18 @@ class CarrinhoItemView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CarrinhoItem.objects.all()
     serializer_class = CarrinhoItemSerializer
     
+
+class UserUpdate(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+
+    def patch(self, request):
+        emailBody = request.data.get('email')
+        requestBody = request.data
+        user = User.objects.get(email=emailBody)
+        print(user)
+        serializer = UserInfoSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"atualizado": requestBody}, status=status.HTTP_200_OK)
+        return Response({"error": 'error'},  status=status.HTTP_400_BAD_REQUEST)
