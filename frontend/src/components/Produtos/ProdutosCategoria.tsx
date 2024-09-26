@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 import { client } from "../../services/client";
 import { useParams } from "react-router-dom";
 import ProdutoCard from "./ProdutoCard";
-
+import { H3 } from "../../styles/Carrossel/lista";
 
 export default function ProdutosCategoria(){
     const [produto, setProdutos] = useState<Produto[]>([]);
@@ -27,7 +27,7 @@ export default function ProdutosCategoria(){
     
     return (
         <div className="container my-4">
-            <h2 className="text-center mb-4">Produtos</h2>
+            <H3 className="text-center mb-4">{name}</H3>
             <div className="row g-4"> {/* g-4 para espaçamento consistente */}
                 {produto.map(produtos => (
                     <div className="col-6 col-md-4 col-lg-3" key={produtos.url_name}> {/* Colunas responsivas */}
