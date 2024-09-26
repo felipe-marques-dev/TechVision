@@ -71,20 +71,30 @@ function PrincipaisProdutos(props: ProdutosProps){
 
 
     const img = "ico-carrinho.png"
-    return(
-            <div>
+    return (
+        <div>
             <div className="text-center">
-                    <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0 h-25" >
-                        <H3 id="text-titulo"  className="d-flex justify-content-center ">{props.titulo}</H3>
+                <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0 h-25">
+                    <H3 id="text-titulo" className="d-flex justify-content-center">{props.titulo}</H3>
                 </div>
             </div>
             <div className="swiper-container mt-4">
                 <div className="swiper-wrapper">
-                {produtos.map(produto =>  (
-                                <Card className="swiper-slide" onClick={() => goToProduct(produto.url_name)} key={produto.url_name} style={{maxWidth: '300px', maxHeight: '420px', minHeight: '420px'}}>
-                                    <Card.Img variant="top" style={{width: "auto", maxHeight: "240px ", padding: '10px'}} src={produto.foto_1} />
-                                    <Card.Body>
-                                    <Card.Text
+                    {produtos.map(produto => (
+                        <Card className="swiper-slide" onClick={() => goToProduct(produto.url_name)} key={produto.url_name} style={{maxWidth: '300px', maxHeight: '420px', minHeight: '420px'}}>
+                            <Card.Img 
+                                variant="top" 
+                                style={{
+                                    width: "100%", 
+                                    height: "240px", 
+                                    objectFit: "contain",  // Ajusta a imagem sem cortar
+                                    objectPosition: "center", 
+                                    padding: '10px'
+                                }} 
+                                src={produto.foto_1} 
+                            />
+                            <Card.Body>
+                                <Card.Text
                                     className="fs-4"
                                     style={{
                                         color: 'gray',
@@ -92,26 +102,25 @@ function PrincipaisProdutos(props: ProdutosProps){
                                         marginBottom: '0px',
                                         marginTop: '1vh'
                                     }}
-                                    >
-                                       {`R$${((1.3 * produto.price).toFixed(0))}`}
-                                    </Card.Text>
-                                    <Card.Title 
-                                    className="fs-2"
-                                    >
-                                        {`R$${((produto.price.toFixed(2)).toString()).replace('.', ',')}`}
-                                    </Card.Title>
-                                    
-                                    <Card.Text>
-                                       {produto.description.length > 50 ? `${produto.description.slice(0, 50)}...`: `${produto.description}`}
-                                    </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                ))} 
-                <div className="swiper-pagination"></div>
+                                >
+                                    {`R$${((1.3 * produto.price).toFixed(0))}`}
+                                </Card.Text>
+                                <Card.Title className="fs-2">
+                                    {`R$${((produto.price.toFixed(2)).toString()).replace('.', ',')}`}
+                                </Card.Title>
+                                <Card.Text>
+                                    {produto.description.length > 50 ? `${produto.description.slice(0, 50)}...` : produto.description}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                    <div className="swiper-pagination"></div>
+                </div>
             </div>
-            </div> 
-            </div>
+        </div>
     );
+    
+    
     
 }
 
