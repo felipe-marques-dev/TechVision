@@ -3,7 +3,9 @@ import { client } from "../services/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav_bar } from "../components/NavBar/Navbar";
-import { DialogDemo } from "../components/Edit/Edit";
+import { DialogDemo } from "../components/Edit/EditProfile";
+import { PasswordValidation } from "../components/Edit/PasswordValidation";
+import { EditPassword } from "../components/Edit/EditPassword";
 
 interface Usuario {
     id: number;
@@ -48,13 +50,16 @@ export function Profile() {
             <Nav_bar />
             {user && (
                 <div className="center">
+                    <EditPassword />
                     <h2>{user.first_name}</h2>
                     <h2>{user.last_name}</h2>
                     <h2>{user.email}</h2>
                 </div>
             )}
-            
-            <DialogDemo/>
+            <div className="row">
+                <DialogDemo/>
+                <PasswordValidation />
+            </div>
 
             <form onSubmit={e => submitLogout(e)}>
                 <Button type="submit" variant="dark">Log out</Button>
