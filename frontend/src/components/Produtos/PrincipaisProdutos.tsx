@@ -8,21 +8,19 @@ import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import { useNavigateProducts } from "../../hooks/useNavigateProducts";
 import { H3 } from "../../styles/Carrossel/lista";
+import { Produto } from "../../types/Produto";
+import ProdutoCard from "./ProdutoCard";
 
-interface Produto{
-    name: string;
-    product_id: number;
-    price: number;
-    description: string;
-    url_name: string;
-    foto_1: string;
-}
 
 type ProdutosProps = {
     promotion: boolean;
     titulo: string;
 }
-function PrincipaisProdutos(props: ProdutosProps){
+
+type promotionProps = {
+    promotion: boolean;
+}
+function PrincipaisProdutos(props: promotionProps){
     const [produtos, setProdutos] = useState<Produto[]>([]);
     const {goToProduct} = useNavigateProducts();
     useEffect(() => {
@@ -71,6 +69,8 @@ function PrincipaisProdutos(props: ProdutosProps){
 
 
     const img = "ico-carrinho.png"
+    const promotionMap = produtos.map
+    const normalMap = produtos.filter(produto => produto.promotion).slice(0,5).map
     return (
         <div>
             <div className="text-center">
@@ -80,40 +80,12 @@ function PrincipaisProdutos(props: ProdutosProps){
             </div>
             <div className="swiper-container mt-4">
                 <div className="swiper-wrapper">
-                    {produtos.map(produto => (
-                        <Card className="swiper-slide" onClick={() => goToProduct(produto.url_name)} key={produto.url_name} style={{maxWidth: '300px', maxHeight: '420px', minHeight: '420px'}}>
-                            <Card.Img 
-                                variant="top" 
-                                style={{
-                                    width: "100%", 
-                                    height: "240px", 
-                                    objectFit: "contain",  // Ajusta a imagem sem cortar
-                                    objectPosition: "center", 
-                                    padding: '10px'
-                                }} 
-                                src={produto.foto_1} 
-                            />
-                            <Card.Body>
-                                <Card.Text
-                                    className="fs-4"
-                                    style={{
-                                        color: 'gray',
-                                        textDecoration: 'line-through',
-                                        marginBottom: '0px',
-                                        marginTop: '1vh'
-                                    }}
-                                >
-                                    {`R$${((1.3 * produto.price).toFixed(0))}`}
-                                </Card.Text>
-                                <Card.Title className="fs-2">
-                                    {`R$${((produto.price.toFixed(2)).toString()).replace('.', ',')}`}
-                                </Card.Title>
-                                <Card.Text>
-                                    {produto.description.length > 50 ? `${produto.description.slice(0, 50)}...` : produto.description}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    ))}
+                    {props.promotion?  produtos.filter(produto => produto.promotion).map( produtos =>
+                        <ProdutoCard url_name={produtos.url_name} price={produtos.price} foto_1={produtos.foto_1} description={produtos.description} />
+                    ):
+                    produtos.map(produtos =>
+                        <ProdutoCard url_name={produtos.url_name} price={produtos.price} foto_1={produtos.foto_1} description={produtos.description} />
+                    )}
                     <div className="swiper-pagination"></div>
                 </div>
             </div>
