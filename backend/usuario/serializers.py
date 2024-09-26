@@ -32,7 +32,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('email', 'first_name')
+        fields = ('email', 'first_name', 'last_name')
 
 class CarrinhoItemSerializer(serializers.ModelSerializer):
     class Meta:
