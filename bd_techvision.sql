@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/09/2024 às 19:05
--- Versão do servidor: 11.5.2-MariaDB
--- Versão do PHP: 8.2.12
+-- Generation Time: Sep 26, 2024 at 11:33 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `bd_techvision`
+-- Database: `bd_techvision`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `auth_group`
+-- Table structure for table `auth_group`
 --
 
 CREATE TABLE `auth_group` (
@@ -33,7 +33,7 @@ CREATE TABLE `auth_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `auth_group`
+-- Dumping data for table `auth_group`
 --
 
 INSERT INTO `auth_group` (`id`, `name`) VALUES
@@ -42,7 +42,7 @@ INSERT INTO `auth_group` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `auth_group_permissions`
+-- Table structure for table `auth_group_permissions`
 --
 
 CREATE TABLE `auth_group_permissions` (
@@ -52,7 +52,7 @@ CREATE TABLE `auth_group_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `auth_group_permissions`
+-- Dumping data for table `auth_group_permissions`
 --
 
 INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
@@ -76,7 +76,7 @@ INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `auth_permission`
+-- Table structure for table `auth_permission`
 --
 
 CREATE TABLE `auth_permission` (
@@ -87,7 +87,7 @@ CREATE TABLE `auth_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `auth_permission`
+-- Dumping data for table `auth_permission`
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
@@ -155,7 +155,7 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `compra_pedido`
+-- Table structure for table `compra_pedido`
 --
 
 CREATE TABLE `compra_pedido` (
@@ -170,7 +170,7 @@ CREATE TABLE `compra_pedido` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `compra_transportadora`
+-- Table structure for table `compra_transportadora`
 --
 
 CREATE TABLE `compra_transportadora` (
@@ -183,7 +183,7 @@ CREATE TABLE `compra_transportadora` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `corsheaders_corsmodel`
+-- Table structure for table `corsheaders_corsmodel`
 --
 
 CREATE TABLE `corsheaders_corsmodel` (
@@ -194,7 +194,7 @@ CREATE TABLE `corsheaders_corsmodel` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `django_admin_log`
+-- Table structure for table `django_admin_log`
 --
 
 CREATE TABLE `django_admin_log` (
@@ -209,7 +209,7 @@ CREATE TABLE `django_admin_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `django_admin_log`
+-- Dumping data for table `django_admin_log`
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id`, `object_id`, `object_repr`, `action_flag`, `change_message`) VALUES
@@ -258,12 +258,36 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 (43, '2024-09-19 16:30:44', 1, 20, '1', 'Categoria object (1)', 1, '[{\"added\": {}}]'),
 (44, '2024-09-19 16:33:32', 1, 20, '1', 'Categoria object (1)', 2, '[]'),
 (45, '2024-09-19 16:55:57', 1, 20, '2', 'Categoria object (2)', 1, '[{\"added\": {}}]'),
-(46, '2024-09-19 16:58:01', 1, 20, '3', 'Categoria object (3)', 1, '[{\"added\": {}}]');
+(46, '2024-09-19 16:58:01', 1, 20, '3', 'Categoria object (3)', 1, '[{\"added\": {}}]'),
+(47, '2024-09-26 21:03:51', 1, 11, '8', 'iphone bom e legal', 3, ''),
+(48, '2024-09-26 21:03:51', 1, 11, '4', 'Rodo de Cozinha Inox', 3, ''),
+(49, '2024-09-26 21:03:51', 1, 11, '3', 'Ralo Inox para Banheiro 10x10cm', 3, ''),
+(50, '2024-09-26 21:03:51', 1, 11, '2', 'TV Box XPlus', 3, ''),
+(51, '2024-09-26 21:03:51', 1, 11, '1', 'Fone de Ouvido sem fio JBL Wave Buds', 3, ''),
+(52, '2024-09-26 21:06:21', 1, 11, '9', 'Fone de Ouvido Bluetooth', 1, '[{\"added\": {}}]'),
+(53, '2024-09-26 21:09:32', 1, 11, '10', 'Monitor 4K Ultra HD', 1, '[{\"added\": {}}]'),
+(54, '2024-09-26 21:11:14', 1, 11, '11', 'Notebook Gamer', 1, '[{\"added\": {}}]'),
+(55, '2024-09-26 21:13:03', 1, 11, '12', 'Câmera de Segurança Wi-Fi', 1, '[{\"added\": {}}]'),
+(56, '2024-09-26 21:14:20', 1, 11, '13', 'Carregador Rápido USB-C', 1, '[{\"added\": {}}]'),
+(57, '2024-09-26 21:15:37', 1, 11, '14', 'Geladeira Frost Free', 1, '[{\"added\": {}}]'),
+(58, '2024-09-26 21:16:41', 1, 11, '15', 'Aspirador de Pó Robô', 1, '[{\"added\": {}}]'),
+(59, '2024-09-26 21:17:48', 1, 11, '12', 'Câmera de Segurança Wi-Fi', 2, '[{\"changed\": {\"fields\": [\"Foto 1\", \"Foto 2\", \"Foto 3\", \"Foto 4\"]}}]'),
+(60, '2024-09-26 21:18:09', 1, 11, '15', 'Aspirador de Pó Robô', 2, '[{\"changed\": {\"fields\": [\"Foto 1\", \"Foto 2\", \"Foto 3\", \"Foto 4\"]}}]'),
+(61, '2024-09-26 21:18:44', 1, 11, '13', 'Carregador Rápido USB-C', 2, '[{\"changed\": {\"fields\": [\"Foto 1\", \"Foto 2\", \"Foto 3\", \"Foto 4\"]}}]'),
+(62, '2024-09-26 21:20:30', 1, 11, '16', 'Máquina de Lavar 12kg', 1, '[{\"added\": {}}]'),
+(63, '2024-09-26 21:21:33', 1, 11, '17', 'Forno Micro-ondas', 1, '[{\"added\": {}}]'),
+(64, '2024-09-26 21:22:25', 1, 11, '18', 'Ventilador de Mesa 40cm', 1, '[{\"added\": {}}]'),
+(65, '2024-09-26 21:24:13', 1, 11, '19', 'Detergente Líquido 5L', 1, '[{\"added\": {}}]'),
+(66, '2024-09-26 21:24:56', 1, 11, '20', 'Desinfetante Multiuso', 1, '[{\"added\": {}}]'),
+(67, '2024-09-26 21:25:48', 1, 11, '21', 'Esfregão Giratório', 1, '[{\"added\": {}}]'),
+(68, '2024-09-26 21:26:29', 1, 11, '22', 'Limpa Vidros Spray', 1, '[{\"added\": {}}]'),
+(69, '2024-09-26 21:27:16', 1, 11, '23', 'Sabão em Pó 2kg', 1, '[{\"added\": {}}]'),
+(70, '2024-09-26 21:28:07', 1, 11, '14', 'Geladeira Frost Free', 2, '[{\"changed\": {\"fields\": [\"Foto 1\", \"Foto 2\", \"Foto 3\", \"Foto 4\"]}}]');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `django_content_type`
+-- Table structure for table `django_content_type`
 --
 
 CREATE TABLE `django_content_type` (
@@ -273,7 +297,7 @@ CREATE TABLE `django_content_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `django_content_type`
+-- Dumping data for table `django_content_type`
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
@@ -301,7 +325,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `django_migrations`
+-- Table structure for table `django_migrations`
 --
 
 CREATE TABLE `django_migrations` (
@@ -312,7 +336,7 @@ CREATE TABLE `django_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `django_migrations`
+-- Dumping data for table `django_migrations`
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
@@ -346,7 +370,7 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `django_session`
+-- Table structure for table `django_session`
 --
 
 CREATE TABLE `django_session` (
@@ -356,7 +380,7 @@ CREATE TABLE `django_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `django_session`
+-- Dumping data for table `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
@@ -368,13 +392,14 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('f1zznuf0v3htkwasutmlsxn1f7a1j6c6', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1spsuw:kksh13WFv7OXnFCO8JRfVcFYtEIF7bIoD_Iy9mFK7t0', '2024-09-29 17:20:10.932756'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
+('jd1x1pphsjn176h59gm46cmoiignydli', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1stve6:7pliRlkyl-Ym83UO33OkbW9ZMDJsRlEZDRwk6J74TUc', '2024-10-10 21:03:30.140033'),
 ('uccrk9cw3mgjt2moaz8clki7n44ftc0l', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1srJx0:wjeqkgacjboVaLVhh40AL9fQTq-AX3QfwbUalDHVWuU', '2024-10-03 16:24:14.578052'),
 ('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `produtos_categoria`
+-- Table structure for table `produtos_categoria`
 --
 
 CREATE TABLE `produtos_categoria` (
@@ -383,7 +408,7 @@ CREATE TABLE `produtos_categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `produtos_categoria`
+-- Dumping data for table `produtos_categoria`
 --
 
 INSERT INTO `produtos_categoria` (`category_id`, `name`) VALUES
@@ -394,7 +419,7 @@ INSERT INTO `produtos_categoria` (`category_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `produtos_produto`
+-- Table structure for table `produtos_produto`
 --
 
 CREATE TABLE `produtos_produto` (
@@ -414,20 +439,30 @@ CREATE TABLE `produtos_produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `produtos_produto`
+-- Dumping data for table `produtos_produto`
 --
 
 INSERT INTO `produtos_produto` (`product_id`, `name`, `categoria_id`, `sub_category`, `description`, `url_name`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
-(1, 'Fone de Ouvido sem fio JBL Wave Buds', 1, 'Fones de Ouvido', 'Fone de ouvido sem fio via bluetooth, carregamento com contato. Acompanha fio de carregamento e manual de instruções.', 'fone-sem-fio', 100, 400, 0, 'produtos/fone_jbl_1.jpg', 'produtos/fone_jbl_2.jpg', 'produtos/fone_jbl_3.jpg', 'produtos/fone_jbl_4.jfif'),
-(2, 'TV Box XPlus', 1, 'Assinatura', 'Tv Box XPlus com sistema Android imbutido e controle com sensor de movimento. Assinatura mensal e anual com valores acessíveis.', 'tv-box', 150, 300, 0, 'produtos/tvbox_1.jpeg', 'produtos/tvbox_2.jpg', 'produtos/tvbox_3.jfif', 'produtos/tvbox_4.jpg'),
-(3, 'Ralo Inox para Banheiro 10x10cm', 1, 'Banheiro', 'Ralo Inox com proporção 10x10 centímetros.', 'ralo-inox', 200, 30, 0, 'produtos/ralo_1.jpg', 'produtos/ralo_2.webp', 'produtos/ralo_3.webp', 'produtos/ralo4.jpg'),
-(4, 'Rodo de Cozinha Inox', 1, 'Cozinha', 'Rodo de mão Inox, com suporte de parede.', 'rodo-de-cozinha-inox', 50, 25, 0, 'produtos/i932895_amZChfD.webp', 'produtos/i932895_eVb37py.webp', 'produtos/i932895_3WLNFHY.webp', 'produtos/i932895_Apwywhp.webp'),
-(8, 'iphone bom e legal', 1, 'celular', 'e bom', 'iphone-bom-e-legal', 1, 12212, 0, 'produtos/i932895_lrzbvVY.webp', '', '', '');
+(9, 'Fone de Ouvido Bluetooth', 1, 'Áudio', 'Fone de ouvido sem fio com cancelamento de ruído.', 'fone-de-ouvido-bluetooth', 100, 199.99, 1, 'produtos/514YIKc7Y6L._AC_SY606_.jpg', 'produtos/51gDExNnUxL._AC_SY450_.jpg', 'produtos/41Ujnaq-hHL._AC_SY450_.jpg', 'produtos/61cqPw6yDL._AC_SX450_.jpg'),
+(10, 'Monitor 4K Ultra HD', 1, 'Monitores', 'Monitor com resolução 4K e suporte a HDR.', 'monitor-4k-ultra-hd', 50, 1299.9, 0, 'produtos/monitor-samsung-4k.jpeg', 'produtos/monitor-samsung-4k_2.jpeg', 'produtos/monitor-samsung-4k_3.jpeg', 'produtos/monitor-samsung-4k_4.jpeg'),
+(11, 'Notebook Gamer', 1, 'Computadores', 'Notebook potente com placa de vídeo dedicada para jogos.', 'notebook-gamer', 30, 4999.9, 1, 'produtos/51Xrp8x7KzL._AC_SX522_.jpg', 'produtos/519QIaXBGjL._AC_SX522_.jpg', 'produtos/61GKHNMNLxL._AC_SX522_.jpg', 'produtos/613PZt698DL._AC_SX522_.jpg'),
+(12, 'Câmera de Segurança Wi-Fi', 1, 'Segurança', 'Câmera de vigilância com visualização remota pelo celular.', 'camera-de-seguranca-wi-fi', 150, 149.99, 0, 'produtos/61XZlLdPRbL.__AC_SX300_SY300_QL70_ML2__Kalp8z7.jpg', 'produtos/71vwRhR1VL._AC_SX522__hxUEz2S.jpg', 'produtos/71StAp6vUsL._AC_SX522__xIXr10U.jpg', 'produtos/71loafHd-0L._AC_SX522__8LCXzYW.jpg'),
+(13, 'Carregador Rápido USB-C', 1, 'Acessórios', 'Carregador com tecnologia de carga rápida para smartphones e tablets.', 'carregador-rapido-usb-c', 200, 79.9, 1, 'produtos/512Ai3vCMDL._AC_SX522__K5SUuBt.jpg', 'produtos/615UirVVvBL._AC_SX522__c0jVm1p.jpg', 'produtos/61zf9gV3StL._AC_SX522__aZJRKBU.jpg', 'produtos/61RtJKoUn4L._AC_SX522__2vBkHkz.jpg'),
+(14, 'Geladeira Frost Free', 2, 'Eletrodomésticos', 'Geladeira moderna com tecnologia Frost Free e controle de temperatura.', 'geladeira-frost-free', 40, 2999.9, 0, 'produtos/41mpGL3MMOL._AC_SX522_.jpg', 'produtos/317DDhSXx2L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/61hWpeDr5ZL._AC_SX522_.jpg', 'produtos/51shegYAL1L._AC_SX522_.jpg'),
+(15, 'Aspirador de Pó Robô', 2, 'Limpeza', 'Aspirador robô que limpa automaticamente sua casa.', 'aspirador-de-po-robo', 80, 1199.9, 1, 'produtos/41qZ-qhBWL._AC_SX522__EehB8Fd.jpg', 'produtos/41Lxpzp0i1L._AC_SX522__cj6MEAp.jpg', 'produtos/41dIHJQEoOL._AC_SX522__E3qBPPN.jpg', 'produtos/61Njenu4dHL._AC_SX522__A01UPMx.jpg'),
+(16, 'Máquina de Lavar 12kg', 2, 'Lavanderia', 'Máquina de lavar roupas com capacidade de 12kg e várias opções de lavagem.', 'maquina-de-lavar-12kg', 30, 1999.9, 1, 'produtos/41Jz0XwOq6L._AC_SX466_.jpg', 'produtos/51XUZUaX32L._AC_SX466_.jpg', 'produtos/51RAdrX3QL._AC_SX466_.jpg', 'produtos/61SwlKumjcL._AC_SX466_.jpg'),
+(17, 'Forno Micro-ondas', 2, 'Cozinha', 'Micro-ondas com diversas funções de aquecimento e descongelamento.', 'forno-micro-ondas', 100, 499.9, 1, 'produtos/41BhqMPBn3L._AC_SX466_.jpg', 'produtos/51ckxzyH6WL._AC_SX466_.jpg', 'produtos/519NZRstKWL._AC_SX466_.jpg', 'produtos/51yO4XnZsYL._AC_SX466_.jpg'),
+(18, 'Ventilador de Mesa 40cm', 2, 'Climatização', 'Ventilador de mesa com três velocidades e oscilação automática.', 'ventilador-de-mesa-40cm', 150, 179.9, 0, 'produtos/81r2JLRu5L._AC_SY300_SX300_.jpg', 'produtos/61qlYmnBfEL._AC_SY606_.jpg', 'produtos/71DC19eYVL._AC_SX425_.jpg', 'produtos/71L-61yOQZL._AC_SX425_.jpg'),
+(19, 'Detergente Líquido 5L', 3, 'Cozinha', 'Detergente biodegradável para limpeza de louças.', 'detergente-liquido-5l', 500, 29.9, 1, 'produtos/71iwc-kCN6L.__AC_SX300_SY300_QL70_ML2_.jpg', '', '', ''),
+(20, 'Desinfetante Multiuso', 3, 'Produtos de Limpeza', 'Desinfetante para superfícies com ação bactericida.', 'desinfetante-multiuso', 300, 19.9, 0, 'produtos/41JMkvdEsNL._AC_SX425_.jpg', 'produtos/51zAkd4QDWL._AC_SX425_.jpg', 'produtos/51lLrVkfqAL._AC_SX425_.jpg', ''),
+(21, 'Esfregão Giratório', 3, 'Acessórios', 'Esfregão com balde giratório para facilitar a limpeza do chão.', 'esfregao-giratorio', 120, 99.9, 1, 'produtos/6162CgGP0L._AC_SY300_SX300_.jpg', 'produtos/71HNLLouJML._AC_SY450_.jpg', 'produtos/71hFjaDD9rL._AC_SY450_.jpg', ''),
+(22, 'Limpa Vidros Spray', 3, 'Produtos de Limpeza', 'Produto especial para limpeza e brilho em vidros.', 'limpa-vidros-spray', 200, 24.9, 0, 'produtos/61GWEj0j16L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/71UcJK2a40L._AC_SY355_.jpg', 'produtos/71ZzlrutfnL._AC_SY355_.jpg', ''),
+(23, 'Sabão em Pó 2kg', 3, 'Lavanderia', 'Sabão em pó eficaz para remoção de manchas e sujeiras.', 'sabao-em-po-2kg', 400, 39.9, 1, 'produtos/71Gb18PPs5L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/61AMsdP9XtL._AC_SX425_.jpg', 'produtos/71-ygFAW97L._AC_SX425_.jpg', '');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -444,11 +479,11 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-09-19 16:24:14', 1),
+(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-09-26 21:03:30', 1),
 (2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-09-15 17:20:10', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0);
@@ -456,7 +491,7 @@ INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario_carrinho`
+-- Table structure for table `usuario_carrinho`
 --
 
 CREATE TABLE `usuario_carrinho` (
@@ -468,7 +503,7 @@ CREATE TABLE `usuario_carrinho` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuario_carrinho`
+-- Dumping data for table `usuario_carrinho`
 --
 
 INSERT INTO `usuario_carrinho` (`cart_id`, `produto_id`, `user_id`, `created_at`, `updated_at`) VALUES
@@ -480,7 +515,7 @@ INSERT INTO `usuario_carrinho` (`cart_id`, `produto_id`, `user_id`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario_carrinhoitem`
+-- Table structure for table `usuario_carrinhoitem`
 --
 
 CREATE TABLE `usuario_carrinhoitem` (
@@ -491,21 +526,10 @@ CREATE TABLE `usuario_carrinhoitem` (
   `price` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `usuario_carrinhoitem`
---
-
-INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price`) VALUES
-(1, 5, 1, 2, 400),
-(2, 6, 1, 3, 0),
-(3, 6, 2, 1, 0),
-(4, 6, 2, 1, 0),
-(5, 1, 3, 12, 22);
-
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario_endereco`
+-- Table structure for table `usuario_endereco`
 --
 
 CREATE TABLE `usuario_endereco` (
@@ -521,7 +545,7 @@ CREATE TABLE `usuario_endereco` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuario_endereco`
+-- Dumping data for table `usuario_endereco`
 --
 
 INSERT INTO `usuario_endereco` (`adress_id`, `city`, `street`, `block`, `reference`, `cep`, `state`, `number`, `user_id`) VALUES
@@ -530,7 +554,7 @@ INSERT INTO `usuario_endereco` (`adress_id`, `city`, `street`, `block`, `referen
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario_groups`
+-- Table structure for table `usuario_groups`
 --
 
 CREATE TABLE `usuario_groups` (
@@ -540,7 +564,7 @@ CREATE TABLE `usuario_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuario_groups`
+-- Dumping data for table `usuario_groups`
 --
 
 INSERT INTO `usuario_groups` (`id`, `user_id`, `group_id`) VALUES
@@ -549,7 +573,7 @@ INSERT INTO `usuario_groups` (`id`, `user_id`, `group_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario_user_permissions`
+-- Table structure for table `usuario_user_permissions`
 --
 
 CREATE TABLE `usuario_user_permissions` (
@@ -559,25 +583,25 @@ CREATE TABLE `usuario_user_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuario_user_permissions`
+-- Dumping data for table `usuario_user_permissions`
 --
 
 INSERT INTO `usuario_user_permissions` (`id`, `user_id`, `permission_id`) VALUES
 (1, 2, 7);
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `auth_group`
+-- Indexes for table `auth_group`
 --
 ALTER TABLE `auth_group`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Índices de tabela `auth_group_permissions`
+-- Indexes for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD PRIMARY KEY (`id`),
@@ -585,14 +609,14 @@ ALTER TABLE `auth_group_permissions`
   ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
 
 --
--- Índices de tabela `auth_permission`
+-- Indexes for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
 
 --
--- Índices de tabela `compra_pedido`
+-- Indexes for table `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
   ADD PRIMARY KEY (`delivery_id`),
@@ -601,19 +625,19 @@ ALTER TABLE `compra_pedido`
   ADD KEY `user_id_id` (`user_id`);
 
 --
--- Índices de tabela `compra_transportadora`
+-- Indexes for table `compra_transportadora`
 --
 ALTER TABLE `compra_transportadora`
   ADD PRIMARY KEY (`carrier_id`);
 
 --
--- Índices de tabela `corsheaders_corsmodel`
+-- Indexes for table `corsheaders_corsmodel`
 --
 ALTER TABLE `corsheaders_corsmodel`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `django_admin_log`
+-- Indexes for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD PRIMARY KEY (`id`),
@@ -621,46 +645,46 @@ ALTER TABLE `django_admin_log`
   ADD KEY `content_type_id` (`content_type_id`);
 
 --
--- Índices de tabela `django_content_type`
+-- Indexes for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
 
 --
--- Índices de tabela `django_migrations`
+-- Indexes for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `django_session`
+-- Indexes for table `django_session`
 --
 ALTER TABLE `django_session`
   ADD PRIMARY KEY (`session_key`),
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
--- Índices de tabela `produtos_categoria`
+-- Indexes for table `produtos_categoria`
 --
 ALTER TABLE `produtos_categoria`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Índices de tabela `produtos_produto`
+-- Indexes for table `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `categoria` (`categoria_id`);
 
 --
--- Índices de tabela `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `usuario_carrinho`
+-- Indexes for table `usuario_carrinho`
 --
 ALTER TABLE `usuario_carrinho`
   ADD PRIMARY KEY (`cart_id`),
@@ -668,7 +692,7 @@ ALTER TABLE `usuario_carrinho`
   ADD KEY `cart_user_id` (`user_id`);
 
 --
--- Índices de tabela `usuario_carrinhoitem`
+-- Indexes for table `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
   ADD PRIMARY KEY (`cartitem_id`),
@@ -676,14 +700,14 @@ ALTER TABLE `usuario_carrinhoitem`
   ADD KEY `produto_id` (`produto_id`);
 
 --
--- Índices de tabela `usuario_endereco`
+-- Indexes for table `usuario_endereco`
 --
 ALTER TABLE `usuario_endereco`
   ADD PRIMARY KEY (`adress_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Índices de tabela `usuario_groups`
+-- Indexes for table `usuario_groups`
 --
 ALTER TABLE `usuario_groups`
   ADD PRIMARY KEY (`id`),
@@ -691,7 +715,7 @@ ALTER TABLE `usuario_groups`
   ADD KEY `group_id` (`group_id`);
 
 --
--- Índices de tabela `usuario_user_permissions`
+-- Indexes for table `usuario_user_permissions`
 --
 ALTER TABLE `usuario_user_permissions`
   ADD PRIMARY KEY (`id`),
@@ -699,130 +723,130 @@ ALTER TABLE `usuario_user_permissions`
   ADD KEY `permission_id` (`permission_id`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `auth_group`
+-- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `auth_group_permissions`
+-- AUTO_INCREMENT for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT de tabela `auth_permission`
+-- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT de tabela `compra_pedido`
+-- AUTO_INCREMENT for table `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
   MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `compra_transportadora`
+-- AUTO_INCREMENT for table `compra_transportadora`
 --
 ALTER TABLE `compra_transportadora`
   MODIFY `carrier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de tabela `corsheaders_corsmodel`
+-- AUTO_INCREMENT for table `corsheaders_corsmodel`
 --
 ALTER TABLE `corsheaders_corsmodel`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `django_admin_log`
+-- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
--- AUTO_INCREMENT de tabela `django_content_type`
+-- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT de tabela `django_migrations`
+-- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT de tabela `produtos_categoria`
+-- AUTO_INCREMENT for table `produtos_categoria`
 --
 ALTER TABLE `produtos_categoria`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `produtos_produto`
+-- AUTO_INCREMENT for table `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de tabela `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT de tabela `usuario_carrinho`
+-- AUTO_INCREMENT for table `usuario_carrinho`
 --
 ALTER TABLE `usuario_carrinho`
   MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
+-- AUTO_INCREMENT for table `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
   MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de tabela `usuario_endereco`
+-- AUTO_INCREMENT for table `usuario_endereco`
 --
 ALTER TABLE `usuario_endereco`
   MODIFY `adress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de tabela `usuario_groups`
+-- AUTO_INCREMENT for table `usuario_groups`
 --
 ALTER TABLE `usuario_groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `usuario_user_permissions`
+-- AUTO_INCREMENT for table `usuario_user_permissions`
 --
 ALTER TABLE `usuario_user_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Restrições para tabelas despejadas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `auth_group_permissions`
+-- Constraints for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
 
 --
--- Restrições para tabelas `auth_permission`
+-- Constraints for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
--- Restrições para tabelas `compra_pedido`
+-- Constraints for table `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
   ADD CONSTRAINT `adress_id` FOREIGN KEY (`endereco_id`) REFERENCES `usuario_endereco` (`adress_id`),
@@ -830,46 +854,46 @@ ALTER TABLE `compra_pedido`
   ADD CONSTRAINT `user_id_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
 
 --
--- Restrições para tabelas `django_admin_log`
+-- Constraints for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `django_admin_log_ibfk_2` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
--- Restrições para tabelas `produtos_produto`
+-- Constraints for table `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
   ADD CONSTRAINT `categoria` FOREIGN KEY (`categoria_id`) REFERENCES `produtos_categoria` (`category_id`);
 
 --
--- Restrições para tabelas `usuario_carrinho`
+-- Constraints for table `usuario_carrinho`
 --
 ALTER TABLE `usuario_carrinho`
   ADD CONSTRAINT `cart_user_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
 
 --
--- Restrições para tabelas `usuario_carrinhoitem`
+-- Constraints for table `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
   ADD CONSTRAINT `cart_id` FOREIGN KEY (`cart_id`) REFERENCES `usuario_carrinho` (`cart_id`),
   ADD CONSTRAINT `produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produtos_produto` (`product_id`);
 
 --
--- Restrições para tabelas `usuario_endereco`
+-- Constraints for table `usuario_endereco`
 --
 ALTER TABLE `usuario_endereco`
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
 
 --
--- Restrições para tabelas `usuario_groups`
+-- Constraints for table `usuario_groups`
 --
 ALTER TABLE `usuario_groups`
   ADD CONSTRAINT `usuario_groups_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `usuario_groups_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
 
 --
--- Restrições para tabelas `usuario_user_permissions`
+-- Constraints for table `usuario_user_permissions`
 --
 ALTER TABLE `usuario_user_permissions`
   ADD CONSTRAINT `usuario_user_permissions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
