@@ -33,15 +33,17 @@ export function ProdutoIndividual() {
     const imgSrc3 = produtos?.foto_3 || ''; 
     const imgSrc4 = produtos?.foto_4 || ''; 
     
-
+    const loadProdutos = async () => {
+        const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
+        const name = data.name.toString();
+        setProdutos(data);
+        if (data) {
+            setImgPrincipal(data.foto_1); // Inicializa com a foto principal
+        }
+        document.title = name;
+    };
     useEffect(() => {
-        const loadProdutos = async () => {
-            const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
-            setProdutos(data);
-            if (data) {
-                setImgPrincipal(data.foto_1); // Inicializa com a foto principal
-            }
-        };
+        
         loadProdutos();
     }, [url_product]);
 

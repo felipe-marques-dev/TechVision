@@ -43,7 +43,6 @@ export const pegarProdutos = async (path:string) => {
   export const pegarProdutoIndividual = async (path: string): Promise<Produto | null> => {
     try {
         const response: AxiosResponse<Produto> = await client.get(path);
-        console.log(response.data);
         return response.data; // Retorna o objeto Produto
     } catch (error) {
         console.error('Erro ao pegar produto individual:', error);
