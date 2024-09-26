@@ -89,7 +89,7 @@ export function DialogDemo() {
                                 />
                             </Form.Group>
                             <Form.Group controlId="lastName">
-                                <Form.Label>Último Nome</Form.Label>
+                                <Form.Label>Sobrenome</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={lastName}

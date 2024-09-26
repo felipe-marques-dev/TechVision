@@ -24,8 +24,8 @@ export function EditPassword() {
     const [currentUser, setCurrentUser] = useState(false);
     const [user, setUser] = useState<Usuario | null>(null);
     const [userPassword, setUserPassword] = useState('');
-    const [open, setOpen] = useState(false); // Estado para controlar o diálogo
-
+    const [open, setOpen] = useState(true); 
+    const [userEmail, setUserEmail] = useState('');
     
 
     useEffect(() => {
@@ -35,6 +35,7 @@ export function EditPassword() {
                 setCurrentUser(true);
                 setUser(res.data.user);
                 setUserPassword(res.data.user.password);
+                setUserEmail(res.data.user.email);
                 
             })
             .catch(function (error) {
@@ -47,7 +48,8 @@ export function EditPassword() {
     const handleSave = () => {
         if (user) {
             client.patch("/accounts/update/", {
-                password : setUserPassword
+                password : userPassword,
+                email: userEmail, 
             })
             .then(() => {
                 setUser((prev) => prev ? { ...prev, password: userPassword } : null);

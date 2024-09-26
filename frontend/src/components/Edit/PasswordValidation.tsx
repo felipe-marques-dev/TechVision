@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { client } from "../../services/client";
-
+import { EditPassword } from "./EditPassword";
 import { Form, Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import './Edit.css';
@@ -26,6 +26,7 @@ export function PasswordValidation() {
     const [valid, setValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [open, setOpen] = useState(false);
+    const [userEmail, setUserEmail] = useState('');
 
     useEffect(() => {
         document.title = 'Login';
@@ -33,6 +34,7 @@ export function PasswordValidation() {
             .then(function (res) {
                 setCurrentUser(true);
                 setUser(res.data.user); // Atualize o estado do usuário
+                setUserEmail(res.data.user.email);  
             })
             .catch(function (error) {
                 setCurrentUser(false);
@@ -51,18 +53,24 @@ export function PasswordValidation() {
         }
 
         setTimeout(() => {
-            client.post("accounts/login", { password: password })
+            client.post("accounts/login", { 
+                password: password,
+                email: userEmail,
+            })
                 .then(function (res) {
                     setCurrentUser(true);
                     setValid(true);
                     setIsLoading(false);
-                    toast.success("Login bem-sucedido!"); // Notificação de sucesso
+                    toast.success("Senha Válida!"); // Notificação de sucesso
+                    setOpen(false); 
+                    <EditPassword />
                 })
                 .catch(function (error) {
+                    toast.error("Erro ao fazer login!"); // Notificação de erro
                     setCurrentUser(false);
                     setValid(false);
                     setIsLoading(false);
-                    toast.error("Erro ao fazer login!"); // Notificação de erro
+                    
                 });
         }, 1500);
     }

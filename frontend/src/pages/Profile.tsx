@@ -7,6 +7,7 @@ import { DialogDemo } from "../components/Edit/EditProfile";
 import { PasswordValidation } from "../components/Edit/PasswordValidation";
 import { EditPassword } from "../components/Edit/EditPassword";
 
+
 interface Usuario {
     id: number;
     email:string;
@@ -48,15 +49,19 @@ export function Profile() {
     return (
         <>
             <Nav_bar />
+            <EditPassword/>
+            <div className="container">
             {user && (
-                <div className="center">
-                    <EditPassword />
-                    <h2>{user.first_name}</h2>
-                    <h2>{user.last_name}</h2>
+                <div className="container d-flex justify-content-center">
+                    <div className="row">
+                        <h1>{user.first_name}</h1>
+                        <h1>{user.last_name}</h1>
+                    </div>
                     <h2>{user.email}</h2>
                 </div>
             )}
-            <div className="row">
+            
+            <div className="col">
                 <DialogDemo/>
                 <PasswordValidation />
             </div>
@@ -64,6 +69,7 @@ export function Profile() {
             <form onSubmit={e => submitLogout(e)}>
                 <Button type="submit" variant="dark">Log out</Button>
             </form>
+            </div>
         </>
     );
 }
