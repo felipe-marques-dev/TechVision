@@ -67,3 +67,21 @@
     width: 5vh;
     padding-right: 5px;
 }
+
+/* Estilos para as imagens do produto */
+.img-left {
+    max-width: 100%; 
+    max-height: 130px; 
+    object-fit: contain; /* Mantém a proporção da imagem sem esticá-la ou cortá-la */
+    border-radius: 5px; 
+}
+
+/* Estilos para a imagem principal do produto */
+.main-img {
+    max-width: 100%; 
+    max-height: 400px; 
+    object-fit: contain; /* Mantém a proporção da imagem sem esticá-la ou cortá-la */
+    border-radius: 5px; 
+}
+
+

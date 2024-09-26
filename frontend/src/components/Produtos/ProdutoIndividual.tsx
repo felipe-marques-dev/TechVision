@@ -3,22 +3,8 @@ import { Nav_bar } from "../../components/NavBar/Navbar";
 import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
+import { Produto } from "../../types/Produto";
 
-export interface Produto {
-    name: string;
-    product_id: number;
-    category: string;
-    sub_category: string;
-    description: string;
-    url_name: string;
-    estoque: number;
-    price: number;
-    promotion: boolean;
-    foto_1: string;
-    foto_2?: string;
-    foto_3?: string;
-    foto_4?: string;
-}
 
 const ico_entregas = 'entregas.png';
 const ico_cartao = 'ico-cartao.jpg';
@@ -76,7 +62,12 @@ export function ProdutoIndividual() {
                                 )}
                             </div>
                             <div className="col">
-                                <img src={imgPrincipal || produtos.foto_1} id="img-prod" alt="Foto Principal" />
+                                <img 
+                                    src={imgPrincipal || produtos.foto_1} 
+                                    id="img-prod" 
+                                    alt="Foto Principal" 
+                                    className="main-img" 
+                                />
                             </div>
                             <div className="col" id="part2">
                                 <p id="tituloInd">{produtos.name}</p>
@@ -96,9 +87,15 @@ export function ProdutoIndividual() {
                             </div>
                             <div className="mt-5 d-flex justify-content-center">
                                 <div className="row" id="border-top-line">
-                                    <div className="col-4"><img src={`/images/${ico_entregas}`} id="ico" /> Entregas em 24h </div>
-                                    <div className="col-4"><img src={`/images/${ico_cartao}`} id="ico" /> Parcelamos em até 10x sem juros </div>
-                                    <div className="col-4"><img src={`/images/${ico_cadeado}`} id="ico" /> Site 100% seguro </div>
+                                    <div className="col-4">
+                                        <img src={`/images/${ico_entregas}`} id="ico" /> Entregas em 24h 
+                                    </div>
+                                    <div className="col-4">
+                                        <img src={`/images/${ico_cartao}`} id="ico" /> Parcelamos em até 10x sem juros 
+                                    </div>
+                                    <div className="col-4">
+                                        <img src={`/images/${ico_cadeado}`} id="ico" /> Site 100% seguro 
+                                    </div>
                                 </div>
                             </div>
                         </div>
