@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { client } from "../../services/client";
-import { Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import '../../styles/PrincipaisProdutos/principaisProdutos.css'; // Importa o arquivo CSS
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -12,10 +9,6 @@ import { Produto } from "../../types/Produto";
 import ProdutoCard from "./ProdutoCard";
 
 
-type ProdutosProps = {
-    promotion: boolean;
-    titulo: string;
-}
 
 type promotionProps = {
     promotion: boolean;
@@ -69,8 +62,6 @@ function PrincipaisProdutos(props: promotionProps){
 
 
     const img = "ico-carrinho.png"
-    const promotionMap = produtos.map
-    const normalMap = produtos.filter(produto => produto.promotion).slice(0,5).map
     return (
         <div>
             <div className="text-center">
