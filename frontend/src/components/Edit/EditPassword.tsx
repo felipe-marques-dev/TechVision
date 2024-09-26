@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import './Edit.css'
+import { ToastContainer, toast } from 'react-toastify';
+import './Edit.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 interface Usuario {
     id: number;
@@ -13,16 +16,17 @@ interface Usuario {
     last_name: string;
     is_verified: boolean;
     email: string;
+    password : string;
 }
 
-export function DialogDemo() {
+export function EditPassword() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(false);
     const [user, setUser] = useState<Usuario | null>(null);
-    const [ userEmail, setUserEmail ] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const [open, setOpen] = useState(false); // Estado para controlar o diálogo
 
+    
 
     useEffect(() => {
         document.title = 'Perfil';
@@ -30,62 +34,53 @@ export function DialogDemo() {
             .then(function (res) {
                 setCurrentUser(true);
                 setUser(res.data.user);
-                setUserEmail(res.data.user.email)
-                setFirstName(res.data.user.first_name);
-                setLastName(res.data.user.last_name);
+                setUserPassword(res.data.user.password);
+                
             })
             .catch(function (error) {
                 setCurrentUser(false);
                 navigate('/login');
+                
             });
     }, [navigate]);
 
     const handleSave = () => {
-        
         if (user) {
             client.patch("/accounts/update/", {
-                email: userEmail,
-                first_name: firstName,
-                last_name: lastName,
+                password : setUserPassword
             })
             .then(() => {
-                // Opção para atualizar o usuário localmente após a edição
-                setUser((prev) => prev ? { ...prev, first_name: firstName, last_name: lastName } : null);
+                setUser((prev) => prev ? { ...prev, password: userPassword } : null);
+                toast.success("Senha alterada com sucesso!")
+                setOpen(false); // Fecha o diálogo após o sucesso
             })
             .catch(error => {
                 console.error("Erro ao atualizar os dados:", error);
+                toast.error("Erro ao alterar senha")
             });
         }
     };
 
     return (
         <>
+            <ToastContainer />
             {currentUser && user && (
-                <Dialog.Root>
+                <Dialog.Root open={open} onOpenChange={setOpen}>
                     <Dialog.Trigger asChild>
-                        <Button variant="primary">Editar perfil</Button>
+                        <Button variant="primary">Editar Senha</Button>
                     </Dialog.Trigger>
                     <Dialog.Portal>
                         <Dialog.Overlay className="DialogOverlay" />
                         <Dialog.Content className="DialogContent">
                             <Dialog.Title className="DialogTitle">Editar perfil</Dialog.Title>
                             <Dialog.Description className="DialogDescription">
-                                Faça alterações no seu perfil aqui. Clique em salvar quando terminar.
+                                Faça alterações na sua senha aqui. Clique em salvar quando terminar.
                             </Dialog.Description>
                             <Form.Group controlId="firstName">
-                                <Form.Label>Primeiro Nome</Form.Label>
+                                <Form.Label>Nova senha</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="lastName">
-                                <Form.Label>Último Nome</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    onChange={(e) => setUserPassword(e.target.value)}
                                 />
                             </Form.Group>
                             <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
