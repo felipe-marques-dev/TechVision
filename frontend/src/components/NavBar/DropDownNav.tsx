@@ -5,11 +5,13 @@ import { CaretDownIcon } from '@radix-ui/react-icons';
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import '../../styles/NavBar/dropdown_styles.css';
 import { client } from '../../services/client';
+import { useNavigateCategory } from '../../hooks/useNavigateCategory';
 
 const DropdownMenuDemo: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const navigate = useNavigate(); // Inicializar useNavigate
+  const { goToCategory } = useNavigateCategory();
 
   useEffect(() => {
     client.get('produtos/categories/')
@@ -18,9 +20,6 @@ const DropdownMenuDemo: React.FC = () => {
       });
   }, []);
 
-  const handleCategoryClick = (categoria: string) => {
-    navigate(`/categoria/${categoria}`); // Redirecionar para a página da categoria
-  };
 
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
@@ -47,13 +46,13 @@ const DropdownMenuDemo: React.FC = () => {
         >
           {categorias.map(categoria => (
             <DropdownMenu.Item
+              onClick={() => goToCategory(categoria.name)}
               key={categoria.name}
               className="DropdownMenuItem"
               style={{
                 fontSize: '22px',
                 padding: '0px',
-              }}
-              onClick={() => handleCategoryClick(categoria.url_name)} // Ação de clique
+              }} // Ação de clique
             >
               {categoria.name}
             </DropdownMenu.Item>

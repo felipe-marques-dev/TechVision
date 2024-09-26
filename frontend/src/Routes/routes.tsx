@@ -10,6 +10,8 @@ import { Home } from "../pages/Home.tsx";
 import { Profile } from "../pages/Profile.tsx";
 import { ProdutoIndividual } from "../components/Produtos/ProdutoIndividual.tsx";
 import { Carrinho } from "../pages/Carrinho/index.tsx";
+import ProdutosCategoria from "../components/Produtos/ProdutosCategoria.tsx";
+import Categoria from "../pages/Categoria.tsx";
 export function AppRoutes(){
     return (
         <Router>
@@ -20,6 +22,7 @@ export function AppRoutes(){
                 <Route path="/profile" element={<Profile />} />
                 <Route path={"/produto/:url_name"} element={<ProdutoIndividual />}/>
                 <Route path="/carrinho" element={<Carrinho />} />
+                <Route path={"/categoria/:name"} element={<Categoria/>} />
             </Routes>
         </Router>
     )
