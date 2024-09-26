@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf ../backend/build && tsc -b && vite build && cp -r build ../backend/build && rm -rf build",
+    "build": "rmdir /s /q dist && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -21,7 +21,7 @@
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
-    "faker": "^6.6.6",
+    "faker": "^5.5.3",
     "framer-motion": "^11.5.4",
     "frontend": "file:",
     "konsta": "^4.0.0",
