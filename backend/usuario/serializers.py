@@ -38,3 +38,10 @@ class CarrinhoItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarrinhoItem
         fields = ('cartitem_id', 'cart', 'produto', 'quantity', 'price' )
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields= '__all__'
