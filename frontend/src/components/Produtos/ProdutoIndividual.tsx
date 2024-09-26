@@ -72,9 +72,11 @@ export function ProdutoIndividual() {
                             <div className="col" id="part2">
                                 <p id="tituloInd">{produtos.name}</p>
                                 <p className="preco-anterior" id="preco-anterior">
-                                    R${(produtos.price * 1.35).toFixed(2)}
+                                    R${(produtos.price * 1.35).toFixed(2).replace('.', ',')}
                                 </p>
-                                <p className="preco" id="preco-pdts">R${produtos.price.toFixed(2)}</p>
+                                <p className="preco" id="preco-pdts">
+                                    R${produtos.price.toFixed(2).replace('.', ',')}
+                                </p>
                                 <p className="descricao" id="descricao-pdts">{produtos.description}</p>
                                 <div className="row">
                                     <button className="btn" id="add-cart-pdt">
