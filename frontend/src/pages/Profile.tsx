@@ -49,7 +49,7 @@ export function Profile() {
     return (
         <>
             <Nav_bar />
-            <EditPassword/>
+
             <div className="container">
             {user && (
                 <div className="container d-flex justify-content-center">
