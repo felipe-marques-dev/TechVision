@@ -12,6 +12,8 @@ import { ProdutoIndividual } from "../components/Produtos/ProdutoIndividual.tsx"
 import { Carrinho } from "../pages/Carrinho/index.tsx";
 import ProdutosCategoria from "../components/Produtos/ProdutosCategoria.tsx";
 import Categoria from "../pages/Categoria.tsx";
+import { EsqueciMinhaSenha } from "../pages/EsqueciMinhaSenha.tsx";
+
 export function AppRoutes(){
     return (
         <Router>
@@ -23,6 +25,7 @@ export function AppRoutes(){
                 <Route path={"/produto/:url_name"} element={<ProdutoIndividual />}/>
                 <Route path="/carrinho" element={<Carrinho />} />
                 <Route path={"/categoria/:name"} element={<Categoria/>} />
+                <Route path="/esqueci_minha_senha" element={<EsqueciMinhaSenha/>} />
             </Routes>
         </Router>
     )
