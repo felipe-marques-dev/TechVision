@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { client } from "../services/client";
 import { Logo } from "../components/Logo";
-import { Form, Spinner } from "react-bootstrap";
+import { Container, Form, Spinner } from "react-bootstrap";
+import '../styles/loginECadastro.css';
+
 
 export function Login() {
 
@@ -35,7 +37,7 @@ export function Login() {
   }
 
   // Função para enviar os dados para realizar o login
-  function submitLogin(e: {currentTarget: any; stopPropagation(): unknown; preventDefault: () => void;}) {
+  function submitLogin(e: { currentTarget: any; stopPropagation(): unknown; preventDefault: () => void; }) {
     // Impede que a página recarregue automáticamente
     e.preventDefault();
     setIsLoading(true);
@@ -44,7 +46,7 @@ export function Login() {
       e.stopPropagation();
       return setIsLoading(false);
     }
-    
+
     // Define um intervalo de tempo para a função responder
     setTimeout(() => {
       // Envia requisição para o servidor 
@@ -64,7 +66,7 @@ export function Login() {
         setIsLoading(false);
       });
     }, 1500);
-    
+
   }
 
   if (currentUser) {
@@ -76,8 +78,8 @@ export function Login() {
       <div className="d-flex position-relative justify-content-center align-bottom p-4">
         <Logo />
       </div>
-      <div className="container-fluid mb-auto rounded-4 position-relative bg-white p-4 border-5 border-black" style={{ borderRadius: '20px', minWidth: "325px", width:"325px"}}>
-        <h1 className="d-flex justify-content-center" id="title" style={{fontSize: "40px"}}>Login</h1>
+      <Container fluid id="containerFluid" className="mb-auto rounded-4 position-relative bg-white p-4 border-5 border-black">
+        <h1 className="d-flex justify-content-center" id="title">Login</h1>
         <Form id="login-form" method="post" onSubmit={e => submitLogin(e)} noValidate>
           <Form.Group className="mb-3" id="email">
             <Form.Label htmlFor="inputEmail">Email</Form.Label><br />
@@ -85,14 +87,14 @@ export function Login() {
               type="email"
               name="email"
               id="inputEmail"
-              className="border-3 w-75"
+              className="border-3 rounded-3"
               onChange={e => setEmail(e.target.value)}
               required
-              isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))|| !valid}
+              isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || !valid}
             />
             {!valid ? (<Form.Control.Feedback type="invalid"><b>Senha ou Email inválidos</b></Form.Control.Feedback>) :
               (<Form.Control.Feedback type="invalid">
-                <b>Email Inválido.</b>
+                <b>Email Inválido</b>
               </Form.Control.Feedback>)}
           </Form.Group>
           <Form.Group className="mb-3" id="password" >
@@ -101,34 +103,42 @@ export function Login() {
               type="password"
               name="password"
               id="inputPassword"
-              className="border-3 w-75"
+              className="border-3 rounded-3"
               onChange={e => setPassword(e.target.value)}
               required
               isInvalid={password.length < 8 || !valid}
             />
             {!valid ? (<Form.Control.Feedback type="invalid"><b>Senha ou Email inválidos</b></Form.Control.Feedback>) :
               (<Form.Control.Feedback type="invalid">
-                <b>Senha Inválida.</b>
+                <b>Senha Inválida</b>
               </Form.Control.Feedback>)}
           </Form.Group>
 
-          <div className="col-12 d-flex justify-content-center">
-            <button
+          <div className="d-flex justify-content-center">
+            <Button
               type="submit"
-              className="btn btn-dark mt-4 rounded-4"
-              style={{ borderRadius: '10px' }}
+              className="btn btn-dark rounded-3 w-100"
               disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))}>
               {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}
-            </button>
+            </Button>
           </div>
           <br />
-          <p className="col-12 d-flex justify-content-center" style={{ fontSize: "15px" }}>Não possui uma conta?</p>
-          <div className="col-12 d-flex justify-content-center">
-            <Button id="form_btn" className="bg-white" onClick={onClick_form_btn} variant="light" style={{ border: "1px solid black" }}>Criar conta</Button>
-          </div>
+          <a href="/esqueci_minha_senha" className="text-primary d-flex justify-content-center" id="link">Esqueceu sua senha?</a>
         </Form>
-        <br />
+      </Container>
+      <br />
+      <div id="containerFluid" className="container-fluid position-relative p-0" >
+        <div className="d-flex justify-content-center p-0 m-0">
+          <div className="border-top mt-2 me-1" id="divisorLogin"></div>
+          <p> Não possui uma conta? </p>
+          <div className="border-top mt-2 ms-1" id="divisorLogin"></div>
+        </div>
+
+        <div className="col-12 d-flex justify-content-center">
+          <Button id="navigateToRegisterBtn" className="formBtn bg-white w-100 rounded-3" onClick={onClick_form_btn} variant="light">Criar conta</Button>
+        </div>
       </div>
+
     </div>
   );
 }

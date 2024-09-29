@@ -1,0 +1,50 @@
+#containerFluid{
+  min-width: 325px;
+  width: 325px;
+}
+
+#title{
+  font-size: 40px;
+}
+
+#inputEmail{
+  width: 213px;
+}
+
+#inputNome{
+  width: 213px;
+}
+
+#inputSobrenome{
+  width: 213px;
+}
+
+#inputPassword{
+  width: 213px;
+}
+
+#inputPasswordConfirm{
+  width: 213px;
+}
+
+#link:hover{
+  text-decoration: underline;
+}
+
+#divisorLogin{
+  height: 1px;
+  width: 79px;
+}
+
+#divisorCadastro{
+  height: 1px;
+  width: 85px;
+}
+
+p{
+  font-size: 15px;
+}
+
+#navigateToRegisterBtn, #navigateToLoginBtn{
+  border: 1px solid black;
+}
