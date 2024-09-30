@@ -3,6 +3,8 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework.serializers import ModelSerializer
 from .models import *
+from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 UserModel = get_user_model()
 
@@ -45,3 +47,37 @@ class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields= '__all__'
+
+class EmailSerializer(serializers.Serializer):
+   
+    class Meta:
+        model = User
+        fields = ("email",)
+
+class ResetPasswordSerializer(serializers.Serializer):
+    password = serializers.CharField()
+    class Meta:
+        model = User
+        fields = ("password",)
+
+    def validate(self, clean_data):
+        password = clean_data.get('password')
+        token = self.context.get("kwargs").get("token")
+        encoded_pk = self.context.get("kwargs").get("encoded_pk")
+    
+        if token is None or encoded_pk is None:
+            raise ValidationError("Dados ausentes")
+        
+        pk = urlsafe_base64_decode(encoded_pk).decode()
+        user = User.objects.get(pk=pk)
+
+        if not PasswordResetTokenGenerator().check_token(user, token):
+            raise ValidationError("Token invalido")
+
+        if password is None:
+            raise ValidationError("É necessário informar uma senha")
+
+        
+        user.set_password(password)
+        user.save()
+        return clean_data

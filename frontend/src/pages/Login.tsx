@@ -90,6 +90,7 @@ export function Login() {
               className="border-3 rounded-3"
               onChange={e => setEmail(e.target.value)}
               required
+              isValid={/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) || valid}
               isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || !valid}
             />
             {!valid ? (<Form.Control.Feedback type="invalid"><b>Senha ou Email inválidos</b></Form.Control.Feedback>) :
@@ -106,6 +107,7 @@ export function Login() {
               className="border-3 rounded-3"
               onChange={e => setPassword(e.target.value)}
               required
+              isValid={password.length > 8 || /^[a-z0-9.]/.test(password)}
               isInvalid={password.length < 8 || !valid}
             />
             {!valid ? (<Form.Control.Feedback type="invalid"><b>Senha ou Email inválidos</b></Form.Control.Feedback>) :
@@ -123,7 +125,7 @@ export function Login() {
             </Button>
           </div>
           <br />
-          <a href="/esqueci_minha_senha" className="text-primary d-flex justify-content-center" id="link">Esqueceu sua senha?</a>
+          <a href="/redefinicao-de-senha" className="text-primary d-flex justify-content-center" id="link">Esqueceu sua senha?</a>
         </Form>
       </Container>
       <br />

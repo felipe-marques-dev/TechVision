@@ -13,7 +13,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', generic.RedirectView.as_view(url='/accounts/login', permanent=False), name='login'),
     path('accounts/', include('usuario.urls')),
-    path('produtos/', include('produtos.urls'))
+    path('produtos/', include('produtos.urls')),
+    path('redefinicao-de-senha/', ResetPasswordVerify.as_view(), name='reset-password'),
+    path('redefinicao-de-senha/<str:encoded_pk>/<str:token>/', ResetPassword.as_view(), name='reset-password')
 ]
 
 # urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]

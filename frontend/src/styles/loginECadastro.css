@@ -3,28 +3,37 @@
   width: 325px;
 }
 
+#containerFluidRecuperacaoDeSenha{
+  min-width: 403px;
+  width: 403px;
+}
+
 #title{
   font-size: 40px;
 }
 
 #inputEmail{
-  width: 213px;
+  max-width: 213px;
+}
+
+#inputEmailRecuperacaoDeSenha, #inputPasswordConfirmRecuperacaoDeSenha, #inputPasswordRecuperacaoDeSenha{
+  max-width: 291px;
 }
 
 #inputNome{
-  width: 213px;
+  max-width: 213px;
 }
 
 #inputSobrenome{
-  width: 213px;
+  max-width: 213px;
 }
 
 #inputPassword{
-  width: 213px;
+  max-width: 213px;
 }
 
 #inputPasswordConfirm{
-  width: 213px;
+  max-width: 213px;
 }
 
 #link:hover{
