@@ -14,11 +14,12 @@ export function EsqueciMinhaSenhaVerificacao() {
   const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
   const [showSuccessful, setShowSuccessful] = useState(false);
-  const [message, setMessage] = useState('')
+
   const handleCloseSuccessful = () => {
     setShowSuccessful(false);
-    navigate(`${message}`);
   }
+
+  const handleCloseError= () => setShowError(false);
   
   useEffect(() => {
     // Alterar a tag title da pagina
@@ -37,6 +38,8 @@ export function EsqueciMinhaSenhaVerificacao() {
 
   async function submitResetPasswordVerify(e: { currentTarget: any; stopPropagation(): unknown; preventDefault: () => void; }) {
     e.preventDefault();
+    setIsLoading(true);
+
     // Envia requisição para o servidor 
     await client.post(
       "/redefinicao-de-senha/",
@@ -44,13 +47,13 @@ export function EsqueciMinhaSenhaVerificacao() {
         email: email,
       }
     ).then(function (res) {
-      setMessage(res.data.message);
       setValid(true);
       setIsLoading(false);
       setShowSuccessful(true);
     }).catch(function (error) {
       setValid(false);
       setIsLoading(false);
+      setShowError(true);
     });
   }
 
@@ -85,9 +88,10 @@ export function EsqueciMinhaSenhaVerificacao() {
           </Form.Group>
 
           <div className="d-flex justify-content-center">
-            <Button id="navigateToRegisterBtn" className="formBtn bg-white w-100 rounded-3 me-2" onClick={() => { navigate('/login') }} variant="light">Cancelar</Button>
+            <Button id="cancelBtn" className="formBtn bg-white w-100 rounded-3 me-2" onClick={() => { navigate('/login') }} variant="light">Cancelar</Button>
             <Button
               type="submit"
+              id="continueBtn"
               className="btn btn-dark rounded-3 w-100"
               disabled={isLoading || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))}>
               {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Continuar</p>)}
@@ -102,11 +106,23 @@ export function EsqueciMinhaSenhaVerificacao() {
 
       <Modal centered show={showSuccessful} onHide={handleCloseSuccessful} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Sucesso</Modal.Title>
+          <Modal.Title className="text-success">Sucesso!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Email com o link para a redefinição de senha foi enviado com sucesso!</Modal.Body>
+        <Modal.Body>Siga as instruções para a redefinição de senha no email que foi enviado.</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseSuccessful}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal centered show={showError} onHide={handleCloseError} animation={true}>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-danger">Erro!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Usuário não encontrado.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseError}>
             Close
           </Button>
         </Modal.Footer>
@@ -148,11 +164,11 @@ export function EsqueciMinhaSenha() {
       })
   }, []);
 
-  async function submitResetPasswordVerify(e: { currentTarget: any; stopPropagation(): unknown; preventDefault: () => void; }) {
+  async function submitResetPassword(e: { currentTarget: any; stopPropagation(): unknown; preventDefault: () => void; }) {
     e.preventDefault();
-    
-    // Envia requisição para o servidor 
     setIsLoading(true);
+    setTimeout(()=>{}, 1500);
+    // Envia requisição para o servidor 
     await client.patch(
       `/redefinicao-de-senha/${encoded_pk}/${token}/`,
       {
@@ -180,7 +196,7 @@ export function EsqueciMinhaSenha() {
       </div>
       <Container fluid id="containerFluidRecuperacaoDeSenha" className="mb-auto rounded-4 position-relative bg-white p-4 border-5 border-black">
         <h1 className="d-flex justify-content-center" id="title">Altere sua senha</h1>
-        <Form id="login-form" method="post" onSubmit={e => submitResetPasswordVerify(e)} noValidate>
+        <Form id="login-form" method="post" onSubmit={e => submitResetPassword(e)} noValidate>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="inputPassword" className="form-label">Informe sua nova senha.</Form.Label><br />
             <Form.Control
@@ -232,7 +248,7 @@ export function EsqueciMinhaSenha() {
 
       <Modal centered show={showError} onHide={handleCloseError} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Erro</Modal.Title>
+          <Modal.Title className="text-danger">Erro</Modal.Title>
         </Modal.Header>
         <Modal.Body>Token expirado!</Modal.Body>
         <Modal.Footer>
@@ -244,7 +260,7 @@ export function EsqueciMinhaSenha() {
 
       <Modal centered show={showSuccessful} onHide={handleCloseSuccessful} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Sucesso</Modal.Title>
+          <Modal.Title className="text-success">Sucesso</Modal.Title>
         </Modal.Header>
         <Modal.Body>Senha alterada com sucesso!</Modal.Body>
         <Modal.Footer>

@@ -1,0 +1,1 @@
+Olá,\nVocê está recebendo esse email, pois requisitou o serviço de 'esqueci minha senha'.\nSegue aqui o link para a redefinição de senha: {{reset_url}}\n\nAttenciosamente,\n\nEquipe TechVision

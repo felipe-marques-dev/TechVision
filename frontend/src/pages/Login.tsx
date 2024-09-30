@@ -119,6 +119,7 @@ export function Login() {
           <div className="d-flex justify-content-center">
             <Button
               type="submit"
+              id="sendBtn"
               className="btn btn-dark rounded-3 w-100"
               disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))}>
               {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}

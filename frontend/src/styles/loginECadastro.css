@@ -56,4 +56,14 @@ p{
 
 #navigateToRegisterBtn, #navigateToLoginBtn{
   border: 1px solid black;
+  height: 40px;
+}
+
+#continueBtn, #cancelBtn{
+  border: 1px solid black;
+  height: 40px;
+}
+
+#sendBtn{
+  height: 40px;
 }

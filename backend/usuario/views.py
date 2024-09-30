@@ -11,6 +11,8 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -79,6 +81,7 @@ class ResetPasswordVerify(APIView):
         serializer.is_valid(raise_exception=True)
         email = request.data.get('email')
         user = User.objects.filter(email=email).first()
+
         if user:
             encode_pk = urlsafe_base64_encode(force_bytes(user.pk))
             token = PasswordResetTokenGenerator().make_token(user)
@@ -90,14 +93,22 @@ class ResetPasswordVerify(APIView):
                 kwargs={"encoded_pk":encode_pk, "token":token}
             )
 
-            reset_url = reset_url
+            reset_url = f"localhost:3000{reset_url}"
 
-            return Response(
-                {
-                    "message": f"{reset_url}"
-                }, 
-                status=status.HTTP_200_OK
+            context = { "reset_url": reset_url }
+            html_content = render_to_string('mail/mail.html', context)
+            plain_content = render_to_string('mail/mail.txt', context)
+            print(html_content)
+            send_mail(
+                subject = "Redefinição de senha",
+                message = plain_content,
+                from_email = 'lucasleite.miguel10@gmail.com',
+                recipient_list = [f'{email}',],
+                html_message = html_content,
+                fail_silently = False,
             )
+
+            return Response(status=status.HTTP_200_OK)
         
         return Response(
             {"message":"Usuario nao existe"}, 

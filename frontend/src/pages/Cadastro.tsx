@@ -175,6 +175,7 @@ export function Cadastro() {
                     <div className="col-12 d-flex justify-content-center">
                         <Button
                             type="submit"
+                            id="sendBtn"
                             className="btn-dark rounded-3 w-100"
                             disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || password !== passwordConfirm}>
                             {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}
@@ -183,7 +184,7 @@ export function Cadastro() {
                 </Form>
             </Container>
             <br />
-            <div id="containerFluid" className="container-fluid position-relative p-0">
+            <div id="containerFluid" className="container-fluid position-relative p-0 mb-2">
                 <div className="d-flex justify-content-center p-0 m-0">
                     <div className="border-top mt-2 me-1" id="divisorCadastro"></div>
                     <p>Já possui uma conta?</p>

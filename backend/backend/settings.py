@@ -163,4 +163,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Não mexer nisso!!! Até integrarmos o site com uma api de email 
 # Isso registra todos os emails enviados ao console (para que você possa copiar o link de redefinição de senha do console).
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'lucasleite.miguel10@gmail.com' # conta gmail remetente
+EMAIL_HOST_PASSWORD = '' # senha definida na configuracao da conta google para o app em especifico
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465

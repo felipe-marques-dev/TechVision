@@ -1,0 +1,45 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <p>Olá,</p>
+    <p>Você está recebendo esse email, pois requisitou o serviço de 'esqueci minha senha'. Segue o link para a
+      redefinição de senha: <a href="http://{{ reset_url }}">Clique aqui</a>.</p>
+    <p>Atenciosamente,</p>
+    <p>Equipe TechVision</p>
+  </div>
+</body>
+
+</html>
