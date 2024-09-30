@@ -19,6 +19,8 @@ interface Usuario {
     password : string;
 }
 
+
+
 export function EditPassword() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(false);
@@ -29,14 +31,14 @@ export function EditPassword() {
     
 
     useEffect(() => {
-        document.title = 'Perfil';
+        document.title = 'Editar senha';
+        toast.success("Senha Válida!");
         client.get("/accounts/usuario")
             .then(function (res) {
                 setCurrentUser(true);
                 setUser(res.data.user);
                 setUserPassword(res.data.user.password);
                 setUserEmail(res.data.user.email);
-                
             })
             .catch(function (error) {
                 setCurrentUser(false);
@@ -44,6 +46,8 @@ export function EditPassword() {
                 
             });
     }, [navigate]);
+
+    
 
     const handleSave = () => {
         if (user) {
@@ -65,16 +69,13 @@ export function EditPassword() {
 
     return (
         <>
-            <ToastContainer />
+        <ToastContainer/>
             {currentUser && user && (
                 <Dialog.Root open={open} onOpenChange={setOpen}>
-                    <Dialog.Trigger asChild>
-                        <Button variant="primary">Editar Senha</Button>
-                    </Dialog.Trigger>
                     <Dialog.Portal>
                         <Dialog.Overlay className="DialogOverlay" />
                         <Dialog.Content className="DialogContent">
-                            <Dialog.Title className="DialogTitle">Editar perfil</Dialog.Title>
+                            <Dialog.Title className="DialogTitle">Editar Senha</Dialog.Title>
                             <Dialog.Description className="DialogDescription">
                                 Faça alterações na sua senha aqui. Clique em salvar quando terminar.
                             </Dialog.Description>

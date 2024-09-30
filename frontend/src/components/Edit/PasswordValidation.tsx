@@ -16,6 +16,7 @@ interface Usuario {
     last_name: string;
     is_verified: boolean;
     email: string;
+    password: string;
 }
 
 export function PasswordValidation() {
@@ -27,22 +28,23 @@ export function PasswordValidation() {
     const [isLoading, setIsLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [userEmail, setUserEmail] = useState('');
+    const [showEditPassword, setShowEditPassword] = useState(false);
 
     useEffect(() => {
         document.title = 'Login';
         client.get("/accounts/usuario")
-            .then(function (res) {
+            .then((res) => {
                 setCurrentUser(true);
-                setUser(res.data.user); // Atualize o estado do usuário
-                setUserEmail(res.data.user.email);  
+                setUser(res.data.user); 
+                setUserEmail(res.data.user.email);
             })
-            .catch(function (error) {
+            .catch((error) => {
                 setCurrentUser(false);
                 navigate('/login'); // Redireciona para login se não autenticado
             });
     }, [navigate]);
 
-    function submitLogin(e: {currentTarget: any; stopPropagation(): unknown; preventDefault: () => void;}) {
+    function submitLogin(e: { currentTarget: any; preventDefault: () => void; }) {
         e.preventDefault();
         setIsLoading(true);
 
@@ -54,30 +56,28 @@ export function PasswordValidation() {
 
         setTimeout(() => {
             client.post("accounts/login", { 
-                password: password,
                 email: userEmail,
+                password: password,
             })
-                .then(function (res) {
-                    setCurrentUser(true);
-                    setValid(true);
-                    setIsLoading(false);
-                    toast.success("Senha Válida!"); // Notificação de sucesso
-                    setOpen(false); 
-                    <EditPassword />
-                })
-                .catch(function (error) {
-                    toast.error("Erro ao fazer login!"); // Notificação de erro
-                    setCurrentUser(false);
-                    setValid(false);
-                    setIsLoading(false);
-                    
-                });
-        }, 1500);
+            .then((res) => {
+                setCurrentUser(true);
+                setValid(true);
+                setIsLoading(false);
+                setOpen(false); 
+                setShowEditPassword(true); 
+            })
+            .catch((error) => {
+                toast.error("Erro ao validar senha!"); 
+                setCurrentUser(false);
+                setValid(false);
+                setIsLoading(false);
+            });
+        }, 1000);
     }
 
     return (
         <>
-            <ToastContainer />
+            
             {currentUser && user && (
                 <>
                     <Button variant="primary" onClick={() => setOpen(true)}>Editar senha</Button>
@@ -90,13 +90,11 @@ export function PasswordValidation() {
                                     Faça alterações no seu perfil aqui. Clique em salvar quando terminar.
                                 </Dialog.Description>
                                 
-                                <div className="d-flex position-relative justify-content-center align-bottom p-4">
-                                </div>
                                 <div className="container-fluid mb-auto rounded-4 w-25 position-relative bg-white p-4" style={{ borderRadius: '20px', minWidth: "300px" }}>
                                     <h1 className="d-flex justify-content-center" id="title">Valide sua senha</h1>
                                     <Form id="login-form" method="post" onSubmit={submitLogin} noValidate>
                                         <Form.Group className="mb-3" id="password">
-                                            <Form.Label htmlFor="inputPassword">Insira sua senha antiga</Form.Label><br />
+                                            <Form.Label htmlFor="inputPassword">Insira sua senha atual</Form.Label><br />
                                             <Form.Control
                                                 type="password"
                                                 name="password"
@@ -136,6 +134,10 @@ export function PasswordValidation() {
                             </Dialog.Content>
                         </Dialog.Portal>
                     </Dialog.Root>
+                    <ToastContainer />
+
+                    {/* Renderiza EditPassword quando showEditPassword é true */}
+                    {showEditPassword && <EditPassword />}
                 </>
             )}
         </>

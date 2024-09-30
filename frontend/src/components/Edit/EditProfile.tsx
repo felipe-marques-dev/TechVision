@@ -46,25 +46,32 @@ export function DialogDemo() {
             });
     }, [navigate]);
 
-    const handleSave = () => {
+    const handleSave = async () => { // Tornando a função assíncrona
         if (user) {
-            client.patch("/accounts/update/", {
-                email: userEmail,
-                first_name: firstName,
-                last_name: lastName,
-            })
-            .then(() => {
-                setUser((prev) => prev ? { ...prev, first_name: firstName, last_name: lastName } : null);
-                notifysuccess();
-                setOpen(false); // Fecha o diálogo após o sucesso
-            })
-            .catch(error => {
+            try {
+                await client.patch("/accounts/update/", {
+                    email: userEmail,
+                    first_name: firstName,
+                    last_name: lastName,
+                });
+    
+                // Atualizando o estado do usuário
+                setUser(prev => prev ? { ...prev, first_name: firstName, last_name: lastName } : null);
+                setOpen(false); 
+                notifysuccess(); // Notificação de sucesso
+    
+                // Esperar 1.5 segundos antes de recarregar a página
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+    
+            } catch (error) {
                 console.error("Erro ao atualizar os dados:", error);
-                notifyerror();
-            });
+                notifyerror(); // Notificação de erro
+            }
         }
     };
-
+    
     return (
         <>
             <ToastContainer />
@@ -111,3 +118,7 @@ export function DialogDemo() {
         </>
     );
 }
+function then(arg0: () => void) {
+    throw new Error("Function not implemented.");
+}
+
