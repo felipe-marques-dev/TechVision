@@ -97,7 +97,7 @@ export function EditPassword() {
 
                             <Form.Group>
                                 <Form.Label>Confirme sua senha</Form.Label>
-                                <Form.Control id="formControl"
+                                <Form.Control style={{width:"90%"}}
                                     type="text"
                                     onChange={(e) => setUserPasswordConfirm(e.target.value)}
                                     required
