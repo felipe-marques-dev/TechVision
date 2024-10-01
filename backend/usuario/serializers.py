@@ -48,6 +48,13 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = User
         fields= '__all__'
 
+    def updatePassword(self, clean_data):
+        password = clean_data.get('password')
+        print(password)
+        user.make_password(password)
+        user.save()
+
+
 class EmailSerializer(serializers.Serializer):
    
     class Meta:

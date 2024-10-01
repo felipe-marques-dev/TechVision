@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import send_mail
+from django.contrib.auth.hashers import make_password
 from django.template.loader import render_to_string
 
 class UserRegister(APIView):
@@ -65,12 +66,23 @@ class UserUpdate(APIView):
 
     def patch(self, request):
         emailBody = request.data.get('email')
+        senhaBody = request.data.get('password')
         requestBody = request.data
         user = User.objects.get(email=emailBody)
-        serializer = UserInfoSerializer(user, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"atualizado": requestBody}, status=status.HTTP_200_OK)
+       
+
+        if senhaBody != None and len(senhaBody) >= 8:
+            senha_cripto = make_password(senhaBody)
+            requestSerializer = {'password':senha_cripto,'email': emailBody}
+            serializer = UserInfoSerializer(user, data=requestSerializer, partial=True)
+        else:
+            serializer = UserInfoSerializer(user, data=requestBody, partial=True)
+
+        
+        if serializer.is_valid():   
+                serializer.save()
+
+                return Response({"atualizado": requestBody}, status=status.HTTP_200_OK)
         return Response({"error": 'error'},  status=status.HTTP_400_BAD_REQUEST)
     
 class ResetPasswordVerify(APIView):

@@ -67,6 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
 
 class Endereco(models.Model):
     adress_id = models.AutoField(primary_key=True)
