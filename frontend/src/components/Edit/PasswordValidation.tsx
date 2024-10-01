@@ -20,7 +20,7 @@ interface Usuario {
 }
 
 export function PasswordValidation() {
-    const navigate = useNavigate();
+     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(false);
     const [user, setUser] = useState<Usuario | null>(null);
     const [password, setPassword] = useState('');
