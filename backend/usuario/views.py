@@ -12,7 +12,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import send_mail
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.template.loader import render_to_string
 
 class UserRegister(APIView):
@@ -47,6 +47,26 @@ class UserLogout(APIView):
         logout(request)
         return Response(status=status.HTTP_200_OK)
     
+
+class UserCheckPassword(APIView):
+    permission_class = (permissions.AllowAny,)
+    authentication_classes = (SessionAuthentication,)
+
+    def post(self, request):
+        # dados do corpo da  requisicao
+        emailBody = request.data.get('email')
+        senhaBody = request.data.get('password')
+        
+        user = User.objects.get(email=emailBody) # pega os dados do usuario no BD
+        passwordMatch =  user.check_password(senhaBody) # verifica se a senha é valida(retorna True ou False
+        
+        # se for True retorna 200
+        if passwordMatch is True:
+            return Response(status=status.HTTP_200_OK)
+        # se for False retorna 401
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+        
+
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)

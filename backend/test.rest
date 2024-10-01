@@ -32,3 +32,11 @@ X-CSRFToken: 2KYd9j6fQakarZUqBsASYYhwDQZOPR9L
 
 
 { "email": "felipe123@gmail.com", "first_name": "Pedro" }
+
+###
+
+POST http://127.0.0.1:8000/accounts/check/
+Content-Type: application/json
+X-CSRFToken: 2Wqc0QMN2nA62rqZcdEwnZvrOdxidDIH
+
+{ "email":"felipe123@gmail.com", "password": "password" }
