@@ -38,7 +38,6 @@ export function EditPassword() {
             .then(function (res) {
                 setCurrentUser(true);
                 setUser(res.data.user);
-                setUserPassword(res.data.user.password);
                 setUserEmail(res.data.user.email);
             })
             .catch(function (error) {
@@ -78,14 +77,11 @@ export function EditPassword() {
                         <Dialog.Content className="DialogContent">
                             <Dialog.Title className="DialogTitle"><h3 className="d-flex justify-content-center" id="title">Editar Senha </h3></Dialog.Title>
 
-                            <Form.Group className="mt-2" controlId="firstName">
+                            <Form.Group className="mt-2" >
                                 <Form.Label>Informe sua nova senha</Form.Label>
                                 <Form.Control id="formControl"
                                     type="text"
                                     onChange={(e) => setUserPassword(e.target.value)}
-                                    required
-                                    isValid={ userPassword.length > 8 || userPassword === userPasswordConfirm || /^[a-z0-9.]/.test(userPassword)}
-                                    isInvalid={!userPassword || userPassword.length < 8 || userPassword !== userPasswordConfirm || !(/^[a-z0-9.]/.test(userPassword))}
                                 />
                                 {(!userPassword || userPassword.length < 8 || !/^[a-z0-9.]/.test(userPassword)) ? (
                                     <Form.Control.Feedback type="invalid">
