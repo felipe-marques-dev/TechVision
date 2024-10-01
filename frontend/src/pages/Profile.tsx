@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Nav_bar } from "../components/NavBar/Navbar";
 import { DialogDemo } from "../components/Edit/EditProfile";
 import { PasswordValidation } from "../components/Edit/PasswordValidation";
-import { EditPassword } from "../components/Edit/EditPassword";
+import '../styles/profile.css';
 
 
 interface Usuario {
@@ -39,6 +39,7 @@ export function Profile() {
         client.post("accounts/logout", { withCredentials: true })
             .then(function (res) {
                 setCurrentUser(false);
+                navigate('/');
             });
     }
 
@@ -50,26 +51,47 @@ export function Profile() {
         <>
             <Nav_bar />
 
-            <div className="container">
-            {user && (
-                <div className="container d-flex justify-content-center">
-                    <div className="row">
-                        <h1>{user.first_name}</h1>
-                        <h1>{user.last_name}</h1>
+                {user && (
+                <div className="container d-flex justify-content-center" id="container">
+                  <div className="row">
+                  <h6>Nome</h6>
+                      <div className="d-flex">
+                          <h1 className="mb-0">{user.first_name}</h1>
+                          <h1 className="mb-0 ms-2">{user.last_name}</h1>
+                      </div>
+                      
+                    <div className="mb-3">
+                      <h6>Email</h6>
+                      <h1>{user.email}</h1>
+                 
+                    <h6>Senha</h6>
+                    <div>
+                      <input className="d-flex" type="password" defaultValue={"********"} />
                     </div>
-                    <h2>{user.email}</h2>
+                    </div>
+                  </div>
                 </div>
+           
+                
+              
             )}
             
-            <div className="col">
-                <DialogDemo/>
-                <PasswordValidation />
+            <div className="col d-flex justify-content-center" id="col">
+                <div className="row-fluid d-flex" id="row2">
+                    <div className="me-3">
+                        <DialogDemo />
+                    </div>
+                    <div className="me-3">
+                        <PasswordValidation />
+                    </div>
+                    <form className="d-flex align-items-center" onSubmit={e => submitLogout(e)}>
+                        <Button type="submit" variant="danger">Log out</Button>
+                    </form>
+                </div>
             </div>
 
-            <form onSubmit={e => submitLogout(e)}>
-                <Button type="submit" variant="dark">Log out</Button>
-            </form>
-            </div>
+
+                
         </>
     );
 }

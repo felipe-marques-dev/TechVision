@@ -16,7 +16,7 @@ interface Usuario {
     last_name: string;
     is_verified: boolean;
     email: string;
-    password : string;
+    password: string;
 }
 
 
@@ -26,9 +26,10 @@ export function EditPassword() {
     const [currentUser, setCurrentUser] = useState(false);
     const [user, setUser] = useState<Usuario | null>(null);
     const [userPassword, setUserPassword] = useState('');
-    const [open, setOpen] = useState(true); 
+    const [open, setOpen] = useState(true);
     const [userEmail, setUserEmail] = useState('');
-    
+    const [userPasswordConfirm, setUserPasswordConfirm] = useState('');
+
 
     useEffect(() => {
         document.title = 'Editar senha';
@@ -43,53 +44,80 @@ export function EditPassword() {
             .catch(function (error) {
                 setCurrentUser(false);
                 navigate('/login');
-                
+
             });
     }, [navigate]);
 
-    
+
 
     const handleSave = () => {
         if (user) {
             client.patch("/accounts/update/", {
-                password : userPassword,
-                email: userEmail, 
+                password: userPassword,
+                email: userEmail,
             })
-            .then(() => {
-                setUser((prev) => prev ? { ...prev, password: userPassword } : null);
-                toast.success("Senha alterada com sucesso!")
-                setOpen(false); // Fecha o diálogo após o sucesso
-            })
-            .catch(error => {
-                console.error("Erro ao atualizar os dados:", error);
-                toast.error("Erro ao alterar senha")
-            });
+                .then(() => {
+                    setUser((prev) => prev ? { ...prev, password: userPassword } : null);
+                    toast.success("Senha alterada com sucesso!")
+                    setOpen(false); // Fecha o diálogo após o sucesso
+                })
+                .catch(error => {
+                    console.error("Erro ao atualizar os dados:", error);
+                    toast.error("Erro ao alterar senha")
+                });
         }
     };
 
     return (
         <>
-        <ToastContainer/>
+            <ToastContainer />
             {currentUser && user && (
                 <Dialog.Root open={open} onOpenChange={setOpen}>
                     <Dialog.Portal>
                         <Dialog.Overlay className="DialogOverlay" />
                         <Dialog.Content className="DialogContent">
-                            <Dialog.Title className="DialogTitle">Editar Senha</Dialog.Title>
-                            <Dialog.Description className="DialogDescription">
-                                Faça alterações na sua senha aqui. Clique em salvar quando terminar.
-                            </Dialog.Description>
-                            <Form.Group controlId="firstName">
-                                <Form.Label>Nova senha</Form.Label>
-                                <Form.Control
+                            <Dialog.Title className="DialogTitle"><h3 className="d-flex justify-content-center" id="title">Editar Senha </h3></Dialog.Title>
+
+                            <Form.Group className="mt-2" controlId="firstName">
+                                <Form.Label>Informe sua nova senha</Form.Label>
+                                <Form.Control id="formControl"
                                     type="text"
                                     onChange={(e) => setUserPassword(e.target.value)}
+                                    required
+                                    isValid={ userPassword.length > 8 || userPassword === userPasswordConfirm || /^[a-z0-9.]/.test(userPassword)}
+                                    isInvalid={!userPassword || userPassword.length < 8 || userPassword !== userPasswordConfirm || !(/^[a-z0-9.]/.test(userPassword))}
                                 />
+                                {(!userPassword || userPassword.length < 8 || !/^[a-z0-9.]/.test(userPassword)) ? (
+                                    <Form.Control.Feedback type="invalid">
+                                        <b>Senha deve possuir no mínimo 8 caracteres </b>
+                                    </Form.Control.Feedback>
+                                ) : (
+                                    <Form.Control.Feedback type="invalid">
+                                        <b>As senhas não combinam</b>
+                                    </Form.Control.Feedback>
+                                )}
                             </Form.Group>
+                            '
+
+                            <Form.Group>
+                                <Form.Label>Confirme sua senha</Form.Label>
+                                <Form.Control id="formControl"
+                                    type="text"
+                                    onChange={(e) => setUserPasswordConfirm(e.target.value)}
+                                    required
+                                    isValid={userPassword.length > 8 || userPassword === userPasswordConfirm || /^[a-z0-9.]/.test(userPassword)}
+                                    isInvalid={userPassword.length < 8 || userPassword !== userPasswordConfirm || !(/^[a-z0-9.]/.test(userPassword))}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    <b>As senhas não combinam</b>
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+
                             <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
-                                <Button onClick={handleSave} className="Button green">Salvar alterações</Button>
+                                <Button onClick={handleSave} className="Button" variant="outline-primary">Salvar alterações</Button>
                                 <Dialog.Close asChild>
-                                    <Button className="IconButton" aria-label="Close">
+                                    <Button className="IconButton p-1 d-flex justify-content-center" variant="outline-dark" aria-label="Close">
                                         <Cross2Icon />
                                     </Button>
                                 </Dialog.Close>
