@@ -35,6 +35,10 @@ input {
   outline: none;
 }
 
+#formControl{
+  width: 95%;
+}
+
 .DialogTitle {
   margin: 0;
   font-weight: 500;
@@ -117,7 +121,7 @@ input {
 }
 
 .Input {
-  width: 100%;
+  width: 90px;
   flex: 1;
   display: inline-flex;
   align-items: center;

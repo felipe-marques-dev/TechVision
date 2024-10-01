@@ -80,18 +80,15 @@ export function PasswordValidation() {
             
             {currentUser && user && (
                 <>
-                    <Button variant="primary" onClick={() => setOpen(true)}>Editar senha</Button>
+                    <Button variant="outline-dark" onClick={() => setOpen(true)}>Editar senha</Button>
                     <Dialog.Root open={open} onOpenChange={setOpen}>
                         <Dialog.Portal>
                             <Dialog.Overlay className="DialogOverlay" />
                             <Dialog.Content className="DialogContent">
-                                <Dialog.Title className="DialogTitle">Editar senha</Dialog.Title>
-                                <Dialog.Description className="DialogDescription">
-                                    Faça alterações no seu perfil aqui. Clique em salvar quando terminar.
-                                </Dialog.Description>
+                                <Dialog.Title className="DialogTitle"><h3 className="d-flex justify-content-center" id="title">Valide sua senha</h3></Dialog.Title>
                                 
                                 <div className="container-fluid mb-auto rounded-4 w-25 position-relative bg-white p-4" style={{ borderRadius: '20px', minWidth: "300px" }}>
-                                    <h1 className="d-flex justify-content-center" id="title">Valide sua senha</h1>
+                                    
                                     <Form id="login-form" method="post" onSubmit={submitLogin} noValidate>
                                         <Form.Group className="mb-3" id="password">
                                             <Form.Label htmlFor="inputPassword">Insira sua senha atual</Form.Label><br />
@@ -126,7 +123,7 @@ export function PasswordValidation() {
                                 </div>
                                 <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
                                     <Dialog.Close asChild>
-                                        <Button className="IconButton" aria-label="Close">
+                                        <Button className="IconButton p-1 d-flex justify-content-center" variant="outline-dark" aria-label="Close">
                                             <Cross2Icon />
                                         </Button>
                                     </Dialog.Close>

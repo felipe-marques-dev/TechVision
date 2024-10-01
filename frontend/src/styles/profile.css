@@ -1,0 +1,29 @@
+#container{
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-top: 5vw;
+    max-width: 600px;
+    padding: 20px;
+}
+
+#container h6{
+    color:rgba(240, 248, 255, 0.664);
+    font-size: 20px;
+}
+
+#col h6{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#container h1{
+    font-size: 40px;
+    padding-bottom: 1vw;
+}
+
+#row2{
+    padding-top: 2vw;
+}
+

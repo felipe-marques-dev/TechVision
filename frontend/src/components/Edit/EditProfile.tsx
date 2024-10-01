@@ -6,7 +6,7 @@ import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { ToastContainer, toast } from 'react-toastify';
-import './Edit.css';
+import './Edit.css'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -78,35 +78,35 @@ export function DialogDemo() {
             {currentUser && user && (
                 <Dialog.Root open={open} onOpenChange={setOpen}>
                     <Dialog.Trigger asChild>
-                        <Button variant="primary">Editar perfil</Button>
+                        <Button variant="outline-primary">Editar perfil</Button>
                     </Dialog.Trigger>
                     <Dialog.Portal>
                         <Dialog.Overlay className="DialogOverlay" />
                         <Dialog.Content className="DialogContent">
-                            <Dialog.Title className="DialogTitle">Editar perfil</Dialog.Title>
-                            <Dialog.Description className="DialogDescription">
-                                Faça alterações no seu perfil aqui. Clique em salvar quando terminar.
-                            </Dialog.Description>
+                            <Dialog.Title className="DialogTitle"><h3 className="d-flex justify-content-center" id="title"> Editar perfil </h3></Dialog.Title>
+         
                             <Form.Group controlId="firstName">
                                 <Form.Label>Primeiro Nome</Form.Label>
-                                <Form.Control
+                                <Form.Control id="formControl"
                                     type="text"
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
                             <Form.Group controlId="lastName">
                                 <Form.Label>Sobrenome</Form.Label>
-                                <Form.Control
+                                <Form.Control id="formControl"
                                     type="text"
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
                             <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
-                                <Button onClick={handleSave} className="Button green">Salvar alterações</Button>
+                                <Button onClick={handleSave} className="Button" variant="outline-primary">Salvar alterações</Button>
                                 <Dialog.Close asChild>
-                                    <Button className="IconButton" aria-label="Close">
+                                    <Button className="IconButton p-1 d-flex justify-content-center" variant="outline-dark" aria-label="Close">
                                         <Cross2Icon />
                                     </Button>
                                 </Dialog.Close>
