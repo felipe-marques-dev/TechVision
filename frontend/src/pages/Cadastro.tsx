@@ -72,12 +72,6 @@ export function Cadastro() {
         e.preventDefault();
         setIsLoading(true);
 
-        console.log(email);
-        console.log(firstName);
-        console.log(lastName);
-        console.log(password);
-        console.log(passwordConfirm);
-
         setTimeout(() => {
             client.post(
                 "accounts/cadastro",
@@ -212,7 +206,7 @@ export function Cadastro() {
                             type="submit"
                             id="sendBtn"
                             className="btn-dark rounded-3 w-100"
-                            disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || password !== passwordConfirm}>
+                            disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || password !== passwordConfirm || !valid}>
                             {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}
                         </Button>
                     </div>
