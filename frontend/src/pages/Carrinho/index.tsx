@@ -69,9 +69,9 @@ export function Carrinho() {
             <div className="col-8">
               {produtos.length > 0 ? (
                 produtos.map(item => (
-                  <div className="cart-item row align-items-center" key={item.produto.product_id}>
+                  <div className="cart-item row align-items-center" id="box" key={item.produto.product_id}>
                     <div className="col-md-3">
-                    <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false}/>
+                    <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false} className="imgLoader" />
                     </div>
                     <div className="col">
                       <p className="nome-carrinho">{item.produto.name}</p>

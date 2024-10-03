@@ -41,3 +41,15 @@
     border-radius: 10px;
     transition: 0.6s;
 }
+
+.imgLoader{
+    max-width: 200px;
+    border-radius: 20px;
+}
+
+#box{
+    border: rgba(133, 26, 187, 0.466) solid 1px;
+    border-radius: 20px;
+    margin: 1vw;
+    padding: 1vh;
+}
