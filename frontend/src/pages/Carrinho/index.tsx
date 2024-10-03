@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import '../../styles/Carrinho/carrinho.css';
 import { H3 } from "../../styles/Carrossel/lista";
 import Calculo from "./Calculo";
+import { ImageLoader } from "../../components/ImageLoader";
+import { ToastContainer, toast } from 'react-toastify';
 
 interface Produto {
   name: string;
@@ -15,11 +17,18 @@ interface Produto {
   foto_1: string;
 }
 
+interface Item {
+  produto: Produto;
+  quantity: number;
+}
+
 export function Carrinho() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<boolean>(false);
-  const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
+  const [deleted, setDeleted] = useState<boolean>(false)
+
 
   // Verificar sessão do usuário
   useEffect(() => {
@@ -35,24 +44,49 @@ export function Carrinho() {
       });
   }, [navigate]);
 
-  
   useEffect(() => {
     if (emailUser) {
-      client.post('/accounts/cart/', { email: emailUser })
+      client.post('/accounts/cart/', { email: emailUser})
         .then(response => {
           setProdutos(response.data.itens); 
-          console.log(response.data.itens); 
+          response.data.itens.forEach(() => {
+          });
         })
         .catch(error => {
           console.log("Erro ao buscar produtos", error);
         });
     }
-  }, [emailUser]);
+  }, [emailUser, deleted]);
 
-    console.log(produtos.length)
+  const handleDelete = async (product_id:number) => { 
+    if (emailUser) {
+        const url = `/accounts/cart/${product_id}`;
+        try {
+          client.delete(url, {
+            headers: {
+              email: emailUser,
+          },
+          data: {
+              email : emailUser,
+              product_id: product_id,  // Inclua outros dados que você precisar
+          }
+        }
+          );
+          toast.warning("Você retirou o item do seu carrinho!");
+          setDeleted(true)
+        } catch (error) {
+            console.error("Erro ao remover produto", error);
+            toast.error("Erro ao retirar item do carrinho");
+        }
+    }
+};
+
+
+
   return (
     <div>
       <Nav_bar />
+      <ToastContainer />
       {currentUser && (
         <div className="container-fluid">
           <div className="col d-flex justify-content-center fs-1 ">
@@ -61,21 +95,22 @@ export function Carrinho() {
 
           <div className="row">
             <div className="col-8">
-              {produtos.length  >= 0 ? (
-                produtos.map(produto => (
-                  <div className="cart-item row align-items-center" key={produto.product_id}>
+              {produtos.length > 0 ? (
+                produtos.map(item => (
+                  <div className="cart-item row align-items-center" id="box" key={item.produto.product_id}>
                     <div className="col-md-3">
-                      <img src={produto.foto_1} alt={produto.name} />
+                    <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false} className="imgLoader" />
                     </div>
                     <div className="col">
-                      <p className="nome-carrinho">{produto.name}</p>
-                      <p>{produto.description}</p>
+                      <p className="nome-carrinho">{item.produto.name}</p>
+                      <p>{item.produto.description}</p>
+                      <p>Quantidade: {item.quantity}</p>
                     </div>
 
                     <div className="col text-center">
                       <div className="row" style={{ width: 200 }}>
-                        <p>R$ {produto.price}</p>
-                        <button className="btn btn-danger btn-sm">Remover</button>
+                        <p>R$ {item.produto.price}</p>
+                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.produto.product_id)}>Remover</button>
                       </div>
                     </div>
                   </div>

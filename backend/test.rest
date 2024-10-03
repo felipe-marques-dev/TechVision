@@ -48,3 +48,24 @@ Content-Type: application/json
 X-CSRFToken: TtqFmNgw3OBISwLHZSEBNzT1oP8jvMSD
 
 { "email":"felipe12345@gmail.com"}
+
+
+### 
+
+
+DELETE  http://127.0.0.1:8000/accounts/cart/
+Content-Type: application/json
+X-CSRFToken: mz2WE2goHyd1fA7gCwoW4rAndb4JtNJU
+
+{ "email":"felipe12345@gmail.com", "product_id":"13"}
+
+
+
+### 
+
+
+PATCH  http://127.0.0.1:8000/accounts/cart/
+Content-Type: application/json
+X-CSRFToken: TtqFmNgw3OBISwLHZSEBNzT1oP8jvMSD
+
+{ "email":"felipe12345@gmail.com", "product_id":"12", "quantity": "12"}

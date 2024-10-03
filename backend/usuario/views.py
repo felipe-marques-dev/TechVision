@@ -49,20 +49,40 @@ class UserLogout(APIView):
 
 class UserCart(APIView):
     authentication_classes = (SessionAuthentication,)
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # Pega os produtos do carrinho do usuario
     def post(self, request):
         emailBody= request.data.get('email')
 
         user = User.objects.get(email=emailBody)
         print(user)
-        print(user.id)
         cart = Carrinho.objects.get(user_id  = user)
         cartItem = cart.itens.all()
-        for iten in cartItem:
-            print(iten.produto.name, iten.produto.price )
         serializer = CarrinhoItemSerializer(cartItem, many=True)
-        print(serializer.data)
         return Response({"itens": serializer.data}, status=status.HTTP_200_OK)
+
+    # Delete um produto do carrinho
+    def delete(self, request):
+        
+        productBody = request.data.get('product_id')
+        cartItem = CarrinhoItem.objects.get(produto_id = productBody)
+        cartItem.delete()        
+        return Response({'data': 'deletado!' }, status=status.HTTP_200_OK)
+    
+    # Muda a quantidade de produtos de um item do carrinho
+    def patch(self, request):
+        quantityBody = request.data.get('quantity')
+        productBody = request.data.get('product_id')
+
+        
+        cartItem = CarrinhoItem.objects.get(produto_id = productBody, status=status.HTTP_200_OK)
+        cartItem.quantity = (quantityBody)
+        cartItem.save()
+
+        return Response({"data": "alterado!"}, status=status.HTTP_200_OK)
+        
+
+
 
 
 
@@ -83,6 +103,7 @@ class UserCheckPassword(APIView):
             return Response(status=status.HTTP_200_OK)
         # se for False retorna 401
         return Response(status=status.HTTP_400_UNAUTHORIZED)
+    
 
 
         
