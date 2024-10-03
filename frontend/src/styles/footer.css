@@ -1,0 +1,32 @@
+#p-footer{
+    font-size: 10px; 
+    color: rgba(190, 190, 190, 0.507); 
+    margin-top: 0.5vw;
+}
+
+#footer{
+    background-color: black;
+    height: fit-content;
+    color: white;
+}
+
+#img-footer{
+    max-width: 300px;
+    padding: 1vh;
+}   
+
+#contatos1{
+    text-decoration: none;
+    padding-top: 1vw;
+    font-size: 15px;
+}
+
+#ico-ctt{
+    max-width: 70px;
+    padding: 1vh;
+}
+
+#ico-ctt2{
+    max-width: 70px;
+    padding: 1vh;
+}

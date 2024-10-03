@@ -93,7 +93,7 @@ export function EditPassword() {
                                     </Form.Control.Feedback>
                                 )}
                             </Form.Group>
-                            '
+                            
 
                             <Form.Group>
                                 <Form.Label>Confirme sua senha</Form.Label>
