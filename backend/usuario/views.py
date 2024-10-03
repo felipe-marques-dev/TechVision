@@ -50,6 +50,7 @@ class UserLogout(APIView):
 class UserCart(APIView):
     authentication_classes = (SessionAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    # Pega os produtos do carrinho do usuario
     def post(self, request):
         emailBody= request.data.get('email')
 
@@ -60,17 +61,16 @@ class UserCart(APIView):
         serializer = CarrinhoItemSerializer(cartItem, many=True)
         return Response({"itens": serializer.data}, status=status.HTTP_200_OK)
 
+    # Delete um produto do carrinho
     def delete(self, request):
         
-        emailBody= request.data.get('email')
         productBody = request.data.get('product_id')
-        user = User.objects.get(email=emailBody)
         cartItem = CarrinhoItem.objects.get(produto_id = productBody)
         cartItem.delete()        
         return Response({'data': 'deletado!' }, status=status.HTTP_200_OK)
     
+    # Muda a quantidade de produtos de um item do carrinho
     def patch(self, request):
-        emailBody= request.data.get('email')
         quantityBody = request.data.get('quantity')
         productBody = request.data.get('product_id')
 
@@ -79,7 +79,7 @@ class UserCart(APIView):
         cartItem.quantity = (quantityBody)
         cartItem.save()
 
-        return Response({"data": "alterado!"})
+        return Response({"data": "alterado!"}, status=status.HTTP_200_OK)
         
 
 
