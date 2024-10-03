@@ -67,13 +67,23 @@ class UserCart(APIView):
         user = User.objects.get(email=emailBody)
         cartItem = CarrinhoItem.objects.get(produto_id = productBody)
         cartItem.delete()        
-        return Response({'data': 'deletado!' })
+        return Response({'data': 'deletado!' }, status=status.HTTP_200_OK)
     
     def patch(self, request):
         emailBody= request.data.get('email')
         quantityBody = request.data.get('quantity')
+        productBody = request.data.get('product_id')
 
         
+        cartItem = CarrinhoItem.objects.get(produto_id = productBody, status=status.HTTP_200_OK)
+        cartItem.quantity = (quantityBody)
+        cartItem.save()
+
+        return Response({"data": "alterado!"})
+        
+
+
+
 
 
 class UserCheckPassword(APIView):
