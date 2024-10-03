@@ -1,4 +1,5 @@
 import { Nav_bar } from "../components/NavBar/Navbar";
+import { Footer } from "../components/Footer";
 import ProdutosCategoria from "../components/Produtos/ProdutosCategoria";
 
 export default function Categoria(){
@@ -6,6 +7,7 @@ export default function Categoria(){
         <>
         <Nav_bar/>
         <ProdutosCategoria />
+        <Footer />
         </>
 
     )

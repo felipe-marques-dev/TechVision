@@ -3,6 +3,7 @@ import { client } from "../services/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav_bar } from "../components/NavBar/Navbar";
+import { Footer } from "../components/Footer";
 import { DialogDemo } from "../components/Edit/EditProfile";
 import { PasswordValidation } from "../components/Edit/PasswordValidation";
 import '../styles/profile.css';
@@ -89,8 +90,8 @@ export function Profile() {
                     </form>
                 </div>
             </div>
-
-
+            
+            <Footer />
                 
         </>
     );

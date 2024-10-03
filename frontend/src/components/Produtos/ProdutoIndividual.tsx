@@ -88,19 +88,19 @@ export function ProdutoIndividual() {
                                 </div>
                             </div>
                             <div className="mt-5 d-flex justify-content-center">
-                                <div className="row" id="border-top-line">
-                                    <div className="col-4">
-                                        <img src={`/images/${ico_entregas}`} id="ico" /> Entregas em 24h 
-                                    </div>
-                                    <div className="col-4">
-                                        <img src={`/images/${ico_cartao}`} id="ico" /> Parcelamos em até 10x sem juros 
-                                    </div>
-                                    <div className="col-4">
-                                        <img src={`/images/${ico_cadeado}`} id="ico" /> Site 100% seguro 
+                                <div className="row d-flex justify-content-evenly" id="border-top-line">    
+                                        <div className="col-4">
+                                            <img src={`/images/${ico_entregas}`} id="ico" /> Entregas em 24h 
+                                        </div>
+                                        <div className="col-4">
+                                            <img src={`/images/${ico_cartao}`} id="ico" /> Parcelamos em até 10x sem juros 
+                                        </div>
+                                        <div className="col-4">
+                                            <img src={`/images/${ico_cadeado}`} id="ico" /> Site 100% seguro 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     ) : (
                         <p>Não há produtos disponíveis.</p>
                     )}
