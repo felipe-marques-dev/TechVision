@@ -55,15 +55,25 @@ class UserCart(APIView):
 
         user = User.objects.get(email=emailBody)
         print(user)
-        print(user.id)
         cart = Carrinho.objects.get(user_id  = user)
         cartItem = cart.itens.all()
-        for iten in cartItem:
-            print(iten.produto.name, iten.produto.price )
         serializer = CarrinhoItemSerializer(cartItem, many=True)
-        print(serializer.data)
         return Response({"itens": serializer.data}, status=status.HTTP_200_OK)
 
+    def delete(self, request):
+        
+        emailBody= request.data.get('email')
+        productBody = request.data.get('product_id')
+        user = User.objects.get(email=emailBody)
+        cartItem = CarrinhoItem.objects.get(produto_id = productBody)
+        cartItem.delete()        
+        return Response({'data': 'deletado!' })
+    
+    def patch(self, request):
+        emailBody= request.data.get('email')
+        quantityBody = request.data.get('quantity')
+
+        
 
 
 class UserCheckPassword(APIView):
@@ -83,6 +93,7 @@ class UserCheckPassword(APIView):
             return Response(status=status.HTTP_200_OK)
         # se for False retorna 401
         return Response(status=status.HTTP_400_UNAUTHORIZED)
+    
 
 
         
