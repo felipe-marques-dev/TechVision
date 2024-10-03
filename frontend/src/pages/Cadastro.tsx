@@ -4,14 +4,15 @@ import { client } from "../services/client";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { Logo } from "../components/Logo";
 import '../styles/loginECadastro.css';
+import { StepSeparator } from "@chakra-ui/react";
 
 export function Cadastro() {
 
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(false);
     const [email, setEmail] = useState('');
-    const [first_name, setFirst_name] = useState('');
-    const [last_name, setLast_name] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [valid, setValid] = useState(true);
@@ -37,19 +38,53 @@ export function Cadastro() {
         return navigate('/login');
     }
 
+    const clearErrors = () => {
+        setValid(true);
+    }
+    
+    const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setEmail(event.target.value);
+    }
+    
+    const handleChangeFirstName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setFirstName(event.target.value);
+    }
+    
+    const handleChangeLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setLastName(event.target.value);
+    }
+    
+    const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setPassword(event.target.value);
+    }
+    const handleChangePasswordConfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setPasswordConfirm(event.target.value);
+    }
+    
     // Função para enviar os dados para realizar o cadastro
     function submitRegistration(e: { preventDefault: () => void; }) {
         // Impede que a página recarregue automáticamente
         e.preventDefault();
         setIsLoading(true);
 
+        console.log(email);
+        console.log(firstName);
+        console.log(lastName);
+        console.log(password);
+        console.log(passwordConfirm);
+
         setTimeout(() => {
             client.post(
                 "accounts/cadastro",
                 {
                     email: email,
-                    first_name: first_name,
-                    last_name: last_name,
+                    first_name: firstName,
+                    lastName: lastName,
                     password: password,
                 }
             )
@@ -97,7 +132,7 @@ export function Cadastro() {
                             name="email"
                             id="inputEmail"
                             className="border-3 rounded-3"
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={handleChangeEmail}
                             required
                             isValid={/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) || valid}
                             isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || !valid}
@@ -116,10 +151,10 @@ export function Cadastro() {
                             name="first_name"
                             id="inputNome"
                             className="border-3 rounded-3"
-                            onChange={e => setFirst_name(e.target.value)}
+                            onChange={handleChangeFirstName}
                             required
-                            isValid={first_name !== ""}
-                            isInvalid={first_name === "" || !(/^[a-z0-9.]/i.test(first_name))}
+                            isValid={firstName !== ""}
+                            isInvalid={firstName === "" || !(/^[a-z0-9.]/i.test(firstName))}
                         />
                         <Form.Control.Feedback type="invalid" >
                             <b>Campo não preenchido</b>
@@ -129,13 +164,13 @@ export function Cadastro() {
                         <Form.Label htmlFor="inputSobrenome" className="form-label">Sobrenome</Form.Label><br />
                         <Form.Control
                             type="text"
-                            name="last_name"
+                            name="lastName"
                             id="inputSobrenome"
                             className="border-3 rounded-3"
-                            onChange={e => setLast_name(e.target.value)}
+                            onChange={handleChangeLastName}
                             required
-                            isValid={last_name !== ""}
-                            isInvalid={last_name == "" || !(/^[a-z0-9.]/i.test(last_name))} />
+                            isValid={lastName !== ""}
+                            isInvalid={lastName == "" || !(/^[a-z0-9.]/i.test(lastName))} />
                         <Form.Control.Feedback type="invalid" >
                             <b>Campo não preenchido</b>
                         </Form.Control.Feedback>
@@ -147,7 +182,7 @@ export function Cadastro() {
                             name="password"
                             id="inputPassword"
                             className="border-3 rounded-3"
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={handleChangePassword}
                             required
                             isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password)}
                             isInvalid={password.length < 8 || password !== passwordConfirm || !(/^[a-z0-9.]/.test(password))}
@@ -164,7 +199,7 @@ export function Cadastro() {
                             name="passwordConfirm"
                             id="inputPasswordConfirm"
                             className="border-3 rounded-3"
-                            onChange={e => setPasswordConfirm(e.target.value)}
+                            onChange={handleChangePasswordConfirm}
                             required
                             isValid={password.length > 8 || password === passwordConfirm || /^[a-z0-9.]/.test(password)}
                             isInvalid={password.length < 8 || password !== passwordConfirm || !(/^[a-z0-9.]/.test(password))} />
