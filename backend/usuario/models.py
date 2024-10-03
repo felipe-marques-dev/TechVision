@@ -85,7 +85,7 @@ class Endereco(models.Model):
 
 class Carrinho(models.Model):
     cart_id = models.AutoField(primary_key=True) 
-    user = models.ForeignKey(User, models.CASCADE, related_name='carrinho')
+    user = models.OneToOneField(User, models.CASCADE, related_name='carrinho')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

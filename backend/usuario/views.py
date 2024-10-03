@@ -46,11 +46,29 @@ class UserLogout(APIView):
     def post(self, request):
         logout(request)
         return Response(status=status.HTTP_200_OK)
-    
+
+class UserCart(APIView):
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        emailBody= request.data.get('email')
+
+        user = User.objects.get(email=emailBody)
+        print(user)
+        print(user.id)
+        cart = Carrinho.objects.get(user_id  = user)
+        cartItem = cart.itens.all()
+        for iten in cartItem:
+            print(iten.produto.name, iten.produto.price )
+        serializer = CarrinhoItemSerializer(cartItem, many=True)
+        print(serializer.data)
+        return Response({"itens": serializer.data}, status=status.HTTP_200_OK)
+
+
 
 class UserCheckPassword(APIView):
     permission_class = (permissions.AllowAny,)
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (SessionAuthentication)
 
     def post(self, request):
         # dados do corpo da  requisicao
@@ -64,7 +82,9 @@ class UserCheckPassword(APIView):
         if passwordMatch is True:
             return Response(status=status.HTTP_200_OK)
         # se for False retorna 401
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
+        return Response(status=status.HTTP_400_UNAUTHORIZED)
+
+
         
 
 class UserView(APIView):
@@ -75,10 +95,6 @@ class UserView(APIView):
         serializer = UserSerializer(request.user)
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
-class CarrinhoItemView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CarrinhoItem.objects.all()
-    serializer_class = CarrinhoItemSerializer
-    
 
 class UserUpdate(APIView):
     permission_classes = (permissions.IsAuthenticated,)

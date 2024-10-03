@@ -35,6 +35,20 @@ export function Login() {
   function onClick_form_btn() {
     return navigate('/cadastro');
   }
+  
+  const clearErrors = () => {
+        setValid(true);
+  }
+
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setEmail(event.target.value);
+    }
+    
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+        clearErrors();
+        setPassword(event.target.value);
+    }
 
   // Função para enviar os dados para realizar o login
   function submitLogin(e: { currentTarget: any; stopPropagation(): unknown; preventDefault: () => void; }) {
@@ -88,7 +102,7 @@ export function Login() {
               name="email"
               id="inputEmail"
               className="border-3 rounded-3"
-              onChange={e => setEmail(e.target.value)}
+              onChange={handleChangeEmail}
               required
               isValid={/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) || valid}
               isInvalid={email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || !valid}
@@ -105,7 +119,7 @@ export function Login() {
               name="password"
               id="inputPassword"
               className="border-3 rounded-3"
-              onChange={e => setPassword(e.target.value)}
+              onChange={handleChangePassword}
               required
               isValid={password.length > 8 || /^[a-z0-9.]/.test(password)}
               isInvalid={password.length < 8 || !valid}
@@ -121,7 +135,7 @@ export function Login() {
               type="submit"
               id="sendBtn"
               className="btn btn-dark rounded-3 w-100"
-              disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email))}>
+              disabled={isLoading || password.length < 8 || email === "" || !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) || !valid}>
               {isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Enviar</p>)}
             </Button>
           </div>
