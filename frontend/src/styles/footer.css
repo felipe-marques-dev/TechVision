@@ -6,7 +6,7 @@
 
 #footer{
     background-color: black;
-    height: fit-content;
+    padding-bottom: 1px;
     color: white;
 }
 
