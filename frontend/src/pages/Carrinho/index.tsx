@@ -34,7 +34,6 @@ export function Carrinho() {
       .then(response => {
         setCurrentUser(true);
         setEmail(response.data.user.email);
-  
       })
       .catch(error => {
         setCurrentUser(false);
@@ -47,14 +46,38 @@ export function Carrinho() {
     if (emailUser) {
       client.post('/accounts/cart/', { email: emailUser })
         .then(response => {
-          setProdutos(response.data.itens); // Atribui diretamente o array de itens
-          console.log(response.data.itens); 
+          setProdutos(response.data.itens); 
+          response.data.itens.forEach((item: { produto: { product_id: any; }; }) => {
+          });
+          
         })
         .catch(error => {
           console.log("Erro ao buscar produtos", error);
         });
     }
   }, [emailUser]);
+
+  const handleDelete = async (product_id: any) => { 
+    console.log("Email do usuário:", emailUser); // Verifique o email
+    if (emailUser) {
+        const url = `/accounts/cart/${product_id}`;
+        console.log("URL para deletar:", url); 
+        try {
+            await client.delete(url, {
+                headers: {
+                    'email': emailUser,
+                },
+            });
+        } catch (error) {
+            console.error("Erro ao remover produto", error);
+        }
+    }
+};
+
+
+
+
+
 
   return (
     <div>
@@ -82,7 +105,7 @@ export function Carrinho() {
                     <div className="col text-center">
                       <div className="row" style={{ width: 200 }}>
                         <p>R$ {item.produto.price}</p>
-                        <button className="btn btn-danger btn-sm">Remover</button>
+                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.produto.product_id)}>Remover</button>
                       </div>
                     </div>
                   </div>
