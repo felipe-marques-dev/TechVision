@@ -5,19 +5,17 @@
 }
 
 #footer{
-    background-color: black;
-    padding-bottom: 1px;
+    background-color: rgb(17, 17, 17);
     color: white;
+    min-width: 780px;
 }
 
-#img-footer{
-    max-width: 300px;
-    padding: 1vh;
+#logo-techvision{
+    width: 150px;
 }   
 
 #contatos1{
     text-decoration: none;
-    padding-top: 1vw;
     font-size: 15px;
 }
 
@@ -29,4 +27,14 @@
 #ico-ctt2{
     max-width: 70px;
     padding: 1vh;
+}
+
+#sub-footer{
+    background-color: black;
+    color: white;
+    min-width: 780px;
+}
+
+#link-footer:hover{
+  text-decoration: underline;
 }

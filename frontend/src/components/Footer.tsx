@@ -1,48 +1,47 @@
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa6';
 import '../styles/footer.css';
 
 export function Footer() {
-    const instagram = 'instagram.png';
-    const facebook = 'facebook.png';
-    const whatsapp = 'whatsapp.jpg';
     const logo_tech_vision = 'logo_tech_vision.png';
 
     return (
-    <div className='container-fluid static-bottom p-0 w-100 mt-5 mb-0'>
-            <div className=" p-0 m-0" id="footer">
-                <div className="d-flex justify-content-evenly mb-3 p-0">
-                    <div className="text-center">
-                        <img src={`/images/${logo_tech_vision}`} id="img-footer" alt="Logo" className="me-2" />
-                        <div>
-                            <div>CNPJ: 00.000.000/0000-00</div>
-                            <div>Endereço: Avenida Matheus Conegero, 395</div>
-                            <div>Horário de funcionamento: das 9h às 18h</div>
-                        </div>
-                    </div>
+        <>
+            <div className="d-flex flex-wrap row p-4 mb-0 mt-5 text-center me-0" id="footer">
+
+
+                <div className='my-3 ms-3 col'>
+                    <div>© 2024 Atena | CNPJ 00.000.000/0000-00</div>
+                    <div>Avenida Matheus Conegero, 395</div>
+                    <div>Horário de funcionamento das 9h às 18h</div>
                 </div>
 
-                <div className="d-flex justify-content-evenly p-0">
-                    <div className="text-center">
-                        <a target="self" className="link-light d-flex align-items-center" href="#">
-                            <img src={`/images/${instagram}`} id="ico-ctt" alt="Instagram" />
-                            Instagram
-                        </a>
-                    </div>
+                <div className='my-3 col'>
+                    <div><a href="" id='link-footer'>Termos e condições de uso</a> | <a href="" id='link-footer'>Política de Privacidade</a></div>
+                </div>
 
-                    <div className="text-center">
-                        <a target="self" className="link-light d-flex align-items-center" href="#">
-                            <img src={`/images/${facebook}`} id="ico-ctt2" alt="Facebook" />
-                            Facebook
-                        </a>
+                <div className="p-0 my-3 col">
+                    <div className='mb-3'>
+                        <b className='me-3'>Redes Sociais</b>
                     </div>
-                    
-                    <div className="text-center">
-                        <a target="self" className="link-light d-flex align-items-center" href="#">
-                            <img src={`/images/${whatsapp}`} id="ico-ctt2" alt="WhatsApp" />
-                            Fale conosco!
-                        </a>
+                    <div className='d-flex justify-content-center'>
+                    <a className='me-3' target="self" href="#">
+                        <FaInstagram size={25}/>
+                    </a>
+
+                    <a target="self" className="me-3" href="#">
+                        <FaFacebook size={25}/>
+                    </a>
+
+                    <a target="self" className="me-3" href="#">
+                        <FaWhatsapp size={27}/>
+                    </a>
                     </div>
                 </div>
             </div>
-        </div>
+            <div className='d-flex justify-content-center align-items-center mb-0 p-2 me-0' id='sub-footer'>
+                Desenvolvido por
+                <img src={`/images/${logo_tech_vision}`} id="logo-techvision" alt="Logo" className='my-2' />
+            </div>
+        </>
     )
 }

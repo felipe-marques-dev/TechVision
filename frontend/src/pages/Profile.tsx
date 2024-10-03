@@ -67,7 +67,7 @@ export function Profile() {
                  
                     <h6>Senha</h6>
                     <div>
-                      <input className="d-flex" type="password" defaultValue={"********"} />
+                      <input className="d-flex" type="password" defaultValue={"********"} readOnly />
                     </div>
                     </div>
                   </div>
@@ -77,7 +77,7 @@ export function Profile() {
               
             )}
             
-            <div className="col d-flex justify-content-center" id="col">
+            <div className="col d-flex justify-content-center p-3 mb-5" id="col">
                 <div className="row-fluid d-flex" id="row2">
                     <div className="me-3">
                         <DialogDemo />
