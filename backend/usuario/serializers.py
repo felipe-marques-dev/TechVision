@@ -5,7 +5,7 @@ from rest_framework.serializers import ModelSerializer
 from .models import *
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-
+from produtos.serializers import ProductSerializer
 UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -36,11 +36,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ('email', 'first_name', 'last_name')
 
-class CarrinhoItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CarrinhoItem
-        fields = ('cartitem_id', 'cart', 'produto', 'quantity', 'price' )
-
 
 class UserInfoSerializer(serializers.ModelSerializer):
     
@@ -60,6 +55,19 @@ class EmailSerializer(serializers.Serializer):
     class Meta:
         model = User
         fields = ("email",)
+
+
+class ProdutoSerializer(serializers.Serializer):
+
+    class Meta:
+        model = Produto
+        fields = "__all__"
+
+class CarrinhoItemSerializer(serializers.ModelSerializer):
+    produto = ProductSerializer()
+    class Meta:
+        model = CarrinhoItem
+        fields = ["produto", "quantity"]    
 
 class ResetPasswordSerializer(serializers.Serializer):
     password = serializers.CharField()
