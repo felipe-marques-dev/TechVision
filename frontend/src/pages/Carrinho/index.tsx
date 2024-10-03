@@ -4,7 +4,6 @@ import { client } from "../../services/client";
 import { useNavigate } from "react-router-dom";
 import '../../styles/Carrinho/carrinho.css'
 import { H3 } from  "../../styles/Carrossel/lista";
-import { Input } from "@chakra-ui/react";
 import Calculo from "./Calculo";
 
 interface Produto {
@@ -27,8 +26,11 @@ export function Carrinho() {
     client.get("/accounts/usuario")
       .then(response => {
         setCurrentUser(true);
+        console.log(response.data.user.email)
         // Carregar produtos quando o usuário estiver autenticado
-        client.get('/produtos/itens')
+        client.post('/accounts/cart/', {
+          'email': response.data.user.email
+        })
           .then(response => {
             setProdutos(response.data);
           })
