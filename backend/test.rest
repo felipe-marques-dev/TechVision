@@ -55,9 +55,9 @@ X-CSRFToken: TtqFmNgw3OBISwLHZSEBNzT1oP8jvMSD
 
 DELETE  http://127.0.0.1:8000/accounts/cart/
 Content-Type: application/json
-X-CSRFToken: TtqFmNgw3OBISwLHZSEBNzT1oP8jvMSD
+X-CSRFToken: mz2WE2goHyd1fA7gCwoW4rAndb4JtNJU
 
-{ "email":"felipe12345@gmail.com", "product_id":"12"}
+{ "email":"felipe12345@gmail.com", "product_id":"13"}
 
 
 

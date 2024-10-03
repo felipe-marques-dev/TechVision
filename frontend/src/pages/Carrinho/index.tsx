@@ -26,6 +26,8 @@ export function Carrinho() {
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
+  const [deleted, setDeleted] = useState<boolean>(false)
+
 
   // Verificar sessão do usuário
   useEffect(() => {
@@ -41,41 +43,41 @@ export function Carrinho() {
       });
   }, [navigate]);
 
-  // Buscar produtos quando o email do usuário for definido
   useEffect(() => {
     if (emailUser) {
-      client.post('/accounts/cart/', { email: emailUser })
+      client.post('/accounts/cart/', { email: emailUser})
         .then(response => {
           setProdutos(response.data.itens); 
-          response.data.itens.forEach((item: { produto: { product_id: any; }; }) => {
+          response.data.itens.forEach(() => {
           });
-          
         })
         .catch(error => {
           console.log("Erro ao buscar produtos", error);
         });
     }
-  }, [emailUser]);
+  }, [emailUser, deleted]);
 
-  const handleDelete = async (product_id: any) => { 
-    console.log("Email do usuário:", emailUser); // Verifique o email
+  const handleDelete = async (product_id:number) => { 
     if (emailUser) {
         const url = `/accounts/cart/${product_id}`;
         console.log("URL para deletar:", url); 
         try {
-            await client.delete(url, {
-                headers: {
-                    'email': emailUser,
-                },
-            });
+          client.delete(url, {
+            headers: {
+              email: emailUser,
+          },
+          data: {
+              email : emailUser,
+              product_id: product_id,  // Inclua outros dados que você precisar
+          }
+        }
+          );
+          setDeleted(true)
         } catch (error) {
             console.error("Erro ao remover produto", error);
         }
     }
 };
-
-
-
 
 
 
