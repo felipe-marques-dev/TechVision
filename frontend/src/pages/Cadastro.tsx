@@ -78,7 +78,7 @@ export function Cadastro() {
                 {
                     email: email,
                     first_name: firstName,
-                    lastName: lastName,
+                    last_name: lastName,
                     password: password,
                 }
             )

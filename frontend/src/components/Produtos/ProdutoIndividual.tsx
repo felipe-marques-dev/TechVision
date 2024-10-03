@@ -4,6 +4,7 @@ import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
 import { Produto } from "../../types/Produto";
+import { Footer } from "../Footer";
 
 
 const ico_entregas = 'entregas.png';
@@ -106,6 +107,7 @@ export function ProdutoIndividual() {
                     )}
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

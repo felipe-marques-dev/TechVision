@@ -7,9 +7,9 @@ export function Footer() {
     const logo_tech_vision = 'logo_tech_vision.png';
 
     return (
-        <>
-            <div className="container-fluid" id="footer">
-                <div className="d-flex justify-content-evenly mt-3 mb-3">
+    <div className='container-fluid static-bottom p-0 w-100 mt-5 mb-0'>
+            <div className=" p-0 m-0" id="footer">
+                <div className="d-flex justify-content-evenly mb-3 p-0">
                     <div className="text-center">
                         <img src={`/images/${logo_tech_vision}`} id="img-footer" alt="Logo" className="me-2" />
                         <div>
@@ -20,7 +20,7 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="d-flex justify-content-evenly mb-3">
+                <div className="d-flex justify-content-evenly p-0">
                     <div className="text-center">
                         <a target="self" className="link-light d-flex align-items-center" href="#">
                             <img src={`/images/${instagram}`} id="ico-ctt" alt="Instagram" />
@@ -43,6 +43,6 @@ export function Footer() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
