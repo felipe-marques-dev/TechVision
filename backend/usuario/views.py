@@ -49,7 +49,7 @@ class UserLogout(APIView):
 
 class UserCart(APIView):
     authentication_classes = (SessionAuthentication,)
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     def post(self, request):
         emailBody= request.data.get('email')
 
