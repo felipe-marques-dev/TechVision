@@ -6,6 +6,7 @@ import '../../styles/Carrinho/carrinho.css';
 import { H3 } from "../../styles/Carrossel/lista";
 import Calculo from "./Calculo";
 import { ImageLoader } from "../../components/ImageLoader";
+import { ToastContainer, toast } from 'react-toastify';
 
 interface Produto {
   name: string;
@@ -60,7 +61,6 @@ export function Carrinho() {
   const handleDelete = async (product_id:number) => { 
     if (emailUser) {
         const url = `/accounts/cart/${product_id}`;
-        console.log("URL para deletar:", url); 
         try {
           client.delete(url, {
             headers: {
@@ -72,9 +72,11 @@ export function Carrinho() {
           }
         }
           );
+          toast.warning("Você retirou o item do seu carrinho!");
           setDeleted(true)
         } catch (error) {
             console.error("Erro ao remover produto", error);
+            toast.error("Erro ao retirar item do carrinho");
         }
     }
 };
@@ -84,6 +86,7 @@ export function Carrinho() {
   return (
     <div>
       <Nav_bar />
+      <ToastContainer />
       {currentUser && (
         <div className="container-fluid">
           <div className="col d-flex justify-content-center fs-1 ">
