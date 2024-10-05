@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { client } from "../services/client";
 import { ImageLoader } from "./ImageLoader";
+import { A } from "../styles/NavBar/navbar";
 
 interface Produto {
   product_id: number;
@@ -9,7 +10,7 @@ interface Produto {
   url_name: string; // Certifique-se de que esse campo existe em seu API
 }
 
-interface SearchBarProps{
+interface SearchBarProps {
   width: string;
 }
 
@@ -28,7 +29,7 @@ export const SearchBar = (props: SearchBarProps) => {
   }, [termoBusca]);
 
   return (
-    <div className="container position-relative d-flex flex-column align-items-center" style={{padding: '0'}}>
+    <div className="container position-relative d-flex flex-column align-items-center" style={{ padding: '0' }}>
       {/* Barra de pesquisa */}
       <div className={`d-flex col-5 bg-white w-${props.width}  border border-white rounded-pill justify-content-center`} role="search">
         <input
@@ -40,7 +41,7 @@ export const SearchBar = (props: SearchBarProps) => {
           onChange={(e) => setTermoBusca(e.target.value)}
         />
       </div>
-      
+
       {/* Resultados da pesquisa */}
       {sugestoes.length > 0 && (
         <div
@@ -49,21 +50,23 @@ export const SearchBar = (props: SearchBarProps) => {
         >
           <ul className="list-unstyled mb-0" style={{ padding: 0, margin: 0 }}>
             {sugestoes.map((produto) => (
-              <li
-                key={produto.product_id}
-                className="d-flex align-items-center p-2 border-bottom"
-                style={{ width: '100%' }}
-              >
-                <ImageLoader
-                  onClick={produto.url_name}
-                  src={`http://localhost:8000/media/${produto.foto_1}`}
-                  erro={false}
-                  style={{ width: '60px', height: '60px', marginRight: '10px' }} // Ajuste o tamanho da imagem e o espaçamento
-                />
-                <div className="fs-5" style={{ flex: 1 }}>
-                  {produto.name}
-                </div>
-              </li>
+              <a href={`/produto/${produto.url_name}`}>
+                <li
+                  key={produto.product_id}
+                  className="d-flex align-items-center p-2 border-bottom"
+                  style={{ width: '100%' }}
+                >
+                  <ImageLoader
+                    onClick={produto.url_name}
+                    src={`http://localhost:8000/media/${produto.foto_1}`}
+                    erro={false}
+                    style={{ width: '60px', height: '60px', marginRight: '10px' }} // Ajuste o tamanho da imagem e o espaçamento
+                  />
+                  <div className="fs-5" style={{ flex: 1 }}>
+                    {produto.name}
+                  </div>
+                </li>
+              </a>
             ))}
           </ul>
         </div>
