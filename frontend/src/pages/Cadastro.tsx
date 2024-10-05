@@ -5,6 +5,7 @@ import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { Logo } from "../components/Logo";
 import '../styles/loginECadastro.css';
 import { StepSeparator } from "@chakra-ui/react";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export function Cadastro() {
 
@@ -18,20 +19,7 @@ export function Cadastro() {
     const [valid, setValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        // Alterar a tag title da pagina
-        document.title = 'Cadastro';
-        // fazer a requisicao para 
-        //ver o status de sessao 
-        // do usuario
-        client.get("/accounts/usuario")
-            .then(function (res) {
-                setCurrentUser(true);
-            })
-            .catch(function (error) {
-                setCurrentUser(false);
-            })
-    }, []);
+    useCurrentUser('Cadastro');
 
     // Funcionalidade para trocar de página
     function onClickFormBtn() {

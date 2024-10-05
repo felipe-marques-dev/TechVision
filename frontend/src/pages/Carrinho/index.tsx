@@ -7,20 +7,7 @@ import { H3 } from "../../styles/Carrossel/lista";
 import Calculo from "./Calculo";
 import { ImageLoader } from "../../components/ImageLoader";
 import { ToastContainer, toast } from 'react-toastify';
-
-interface Produto {
-  name: string;
-  product_id: number;
-  price: number;
-  description: string;
-  url_name: string;
-  foto_1: string;
-}
-
-interface Item {
-  produto: Produto;
-  quantity: number;
-}
+import { Item } from "../../types/Produto";
 
 export function Carrinho() {
   const navigate = useNavigate();
@@ -28,7 +15,6 @@ export function Carrinho() {
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
   const [deleted, setDeleted] = useState<boolean>(false)
-
 
   // Verificar sessão do usuário
   useEffect(() => {
@@ -42,13 +28,13 @@ export function Carrinho() {
         setCurrentUser(false);
         navigate('/login');
       });
-  }, [navigate]);
+  }, [currentUser]);
 
   useEffect(() => {
     if (emailUser) {
-      client.post('/accounts/cart/', { email: emailUser})
+      client.post('/accounts/cart/', { email: emailUser })
         .then(response => {
-          setProdutos(response.data.itens); 
+          setProdutos(response.data.itens);
           response.data.itens.forEach(() => {
           });
         })
@@ -58,30 +44,38 @@ export function Carrinho() {
     }
   }, [emailUser, deleted]);
 
-  const handleDelete = async (product_id:number) => { 
+  const handleDelete = async (product_id: number) => {
     if (emailUser) {
-        const url = `/accounts/cart/${product_id}`;
-        try {
-          client.delete(url, {
-            headers: {
-              email: emailUser,
+      const url = `/accounts/cart/${product_id}`;
+      try {
+        client.delete(url, {
+          headers: {
+            email: emailUser,
           },
           data: {
-              email : emailUser,
-              product_id: product_id,  // Inclua outros dados que você precisar
+            email: emailUser,
+            product_id: product_id,  // Inclua outros dados que você precisar
           }
         }
-          );
-          toast.warning("Você retirou o item do seu carrinho!");
-          setDeleted(true)
-        } catch (error) {
-            console.error("Erro ao remover produto", error);
-            toast.error("Erro ao retirar item do carrinho");
-        }
+        );
+        toast.warning("Você retirou o item do seu carrinho!");
+        setDeleted(true)
+      } catch (error) {
+        console.error("Erro ao remover produto", error);
+        toast.error("Erro ao retirar item do carrinho");
+      }
     }
-};
+  };
 
 
+
+  function continuarComprandoBtn(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    navigate('/');
+  }
+
+  function irParaPagamentoBtn(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    navigate('/pagamento');
+  }
 
   return (
     <div>
@@ -99,7 +93,7 @@ export function Carrinho() {
                 produtos.map(item => (
                   <div className="cart-item row align-items-center" id="box" key={item.produto.product_id}>
                     <div className="col-md-3">
-                    <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false} className="imgLoader" />
+                      <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false} className="imgLoader" />
                     </div>
                     <div className="col">
                       <p className="nome-carrinho">{item.produto.name}</p>
@@ -128,10 +122,8 @@ export function Carrinho() {
                 <h5>ENTREGA</h5>
                 <Calculo />
 
-                <a href="pagamento.html">
-                  <button className="botao">Ir para o pagamento</button>
-                </a>
-                <button className="botao-carrinho">Continuar comprando</button>
+                <button className="botao" onClick={irParaPagamentoBtn}>Ir para o pagamento</button>
+                <button className="botao-carrinho" onClick={continuarComprandoBtn}>Continuar comprando</button>
               </div>
             </div>
           </div>

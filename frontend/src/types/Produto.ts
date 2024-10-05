@@ -13,3 +13,8 @@ export interface Produto {
     foto_3?: string;
     foto_4?: string;
 }
+
+export interface Item {
+  produto: Produto;
+  quantity: number;
+}

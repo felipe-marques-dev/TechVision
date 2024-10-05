@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { client } from "../services/client";
 import { Logo } from "../components/Logo";
 import { Container, Form, Spinner } from "react-bootstrap";
 import '../styles/loginECadastro.css';
-
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export function Login() {
 
@@ -15,21 +15,8 @@ export function Login() {
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    // Alterar a tag title da pagina
-    document.title = 'Login';
-    // fazer a requisicao para 
-    //ver o status de sessao 
-    // do usuario
-    client.get("/accounts/usuario")
-      .then(function (res) {
-        setCurrentUser(true);
-      })
-      .catch(function (error) {
-        setCurrentUser(false);
-      })
-  }, []);
+  
+  useCurrentUser('Login');
 
   // Funcionalidade para trocar de página
   function onClick_form_btn() {

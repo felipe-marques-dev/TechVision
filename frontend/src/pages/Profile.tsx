@@ -7,15 +7,7 @@ import { Footer } from "../components/Footer";
 import { DialogDemo } from "../components/Edit/EditProfile";
 import { PasswordValidation } from "../components/Edit/PasswordValidation";
 import '../styles/profile.css';
-
-
-interface Usuario {
-    id: number;
-    email:string;
-    first_name: string;
-    last_name: string;
-    is_verified: boolean;
-}
+import { Usuario } from "../types/Usuario";
 
 export function Profile() {
     const navigate = useNavigate();
@@ -33,7 +25,7 @@ export function Profile() {
                 setCurrentUser(false);
                 navigate('/login');
             });
-    }, [navigate]);
+    }, []);
 
     function submitLogout(e: { preventDefault: () => void; }) {
         e.preventDefault();
@@ -52,31 +44,28 @@ export function Profile() {
         <>
             <Nav_bar />
 
-                {user && (
+            {user && (
                 <div className="container d-flex justify-content-center" id="container">
-                  <div className="row">
-                  <h6>Nome</h6>
-                      <div className="d-flex">
-                          <h1 className="mb-0">{user.first_name}</h1>
-                          <h1 className="mb-0 ms-2">{user.last_name}</h1>
-                      </div>
-                      
-                    <div className="mb-3">
-                      <h6>Email</h6>
-                      <h1>{user.email}</h1>
-                 
-                    <h6>Senha</h6>
-                    <div>
-                      <input className="d-flex" type="password" defaultValue={"********"} readOnly />
+                    <div className="row">
+                        <h6>Nome</h6>
+                        <div className="d-flex">
+                            <h1 className="mb-0">{user.first_name}</h1>
+                            <h1 className="mb-0 ms-2">{user.last_name}</h1>
+                        </div>
+
+                        <div className="mb-3">
+                            <h6>Email</h6>
+                            <h1>{user.email}</h1>
+
+                            <h6>Senha</h6>
+                            <div>
+                                <input className="d-flex" type="password" defaultValue={"********"} readOnly />
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                  </div>
                 </div>
-           
-                
-              
             )}
-            
+
             <div className="col d-flex justify-content-center my-5" id="col">
                 <div className="row-fluid d-flex p-0 mt-0" id="row2">
                     <div className="me-3">
@@ -92,11 +81,10 @@ export function Profile() {
             </div>
 
             {/* div provisória para deixar o footer na posição correta */}
-            <div className="mb-5" style={{height: "20px"}}></div>
-            
+            <div className="mb-5" style={{ height: "20px" }}></div>
+
             <Footer />
-                
+
         </>
     );
 }
- 

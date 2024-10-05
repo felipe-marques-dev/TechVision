@@ -13,7 +13,7 @@ type MinhaContaProps = {
 
 export const LoginNavBar = (props: LoginProps) => {
     return(
-    <A href="/login" ><Div 
+    <A href="/profile" ><Div 
     className="nav-link" 
     style={{
         fontSize: '28px'
