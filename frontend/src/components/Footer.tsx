@@ -6,7 +6,7 @@ export function Footer() {
 
     return (
         <div className='static-bottom mt-5'>
-            <div className="d-flex flex-wrap row p-4 mb-0 mt-5 text-center me-0" id="footer">
+            <div className="d-flex flex-wrap row p-5 mb-0 mt-5 text-center me-0" id="footer">
 
 
                 <div className='my-3 ms-3 col'>
@@ -38,9 +38,9 @@ export function Footer() {
                     </div>
                 </div>
             </div>
-            <div className='d-flex justify-content-center align-items-center mb-0 p-2 me-0' id='sub-footer'>
+            <div className='d-flex justify-content-center align-items-center mb-0 p-0 me-0' id='sub-footer'>
                 Desenvolvido por
-                <img src={`/images/${logo_tech_vision}`} id="logo-techvision" alt="Logo" className='my-2' />
+                <img src={`/images/${logo_tech_vision}`} id="logo-techvision" alt="Logo" className='m-0' />
             </div>
         </div>
     )
