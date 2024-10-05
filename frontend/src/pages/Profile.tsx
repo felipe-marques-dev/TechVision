@@ -77,19 +77,22 @@ export function Profile() {
               
             )}
             
-            <div className="col d-flex justify-content-center p-3 mb-5" id="col">
-                <div className="row-fluid d-flex" id="row2">
+            <div className="col d-flex justify-content-center my-5" id="col">
+                <div className="row-fluid d-flex p-0 mt-0" id="row2">
                     <div className="me-3">
                         <DialogDemo />
                     </div>
                     <div className="me-3">
                         <PasswordValidation />
                     </div>
-                    <form className="d-flex align-items-center" onSubmit={e => submitLogout(e)}>
+                    <form onSubmit={e => submitLogout(e)}>
                         <Button type="submit" variant="danger">Log out</Button>
                     </form>
                 </div>
             </div>
+
+            {/* div provisória para deixar o footer na posição correta */}
+            <div className="mb-5" style={{height: "20px"}}></div>
             
             <Footer />
                 
