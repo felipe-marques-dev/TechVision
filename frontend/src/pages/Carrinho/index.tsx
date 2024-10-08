@@ -62,7 +62,7 @@ export function Carrinho() {
             product_id: product_id,
           }
         });
-        toast.warning("Você retirou o item do seu carrinho!");
+        toast.success("Você retirou o item do seu carrinho!");
         setProdutos(produtos.filter(item => item.produto.product_id !== product_id)); // Remove o item localmente
       } catch (error) {
         console.error("Erro ao remover produto", error);

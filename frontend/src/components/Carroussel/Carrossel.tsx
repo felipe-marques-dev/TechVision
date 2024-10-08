@@ -1,70 +1,65 @@
-import {useEffect, useState} from "react";
-
+import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { H3 } from  "../../styles/Carrossel/lista";
-
-import { ImageLoader } from '../ImageLoader';
+import { H3 } from "../../styles/Carrossel/lista";
 import { Carroussel } from "../../types/Carroussel";
+import { pegarCarroussel } from "./pegarCarroussel";
 // Tipos requeridos pelo useState
 
-function Carrossel(){
+function Carrossel() {
     const [carroussel, setCarroussel] = useState<Carroussel[]>([]);
     const [errors, setErrors] = useState<Map<string, boolean>>(new Map());  // Custom hook que leva até a página do produto
-    
+
     // faz a busca dos produtos
     useEffect(() => {
         const loadCarroussel = async () => {
-          const {carroussel, errors } = await pegarCarroussel('/carroussel');
-          setCarroussel(carroussel);
-          setErrors(errors);
+            const { carroussel, errors } = await pegarCarroussel('/carroussel');
+            setCarroussel(carroussel);
+            setErrors(errors);
         }
         loadCarroussel();
-        }, []);
+    }, []);
 
 
     // Retorna o carrossel com os produtos ( iteração pelo .map())
     return (
-        <div className="mt-auto" style={{ zIndex: -1 }}>
-            <div id="texto-titulo" className="col d-flex justify-content-center fs-1 p-0 m-0 h-25">
-                <H3 id="text-titulo" className="d-flex justify-content-center mt-5">Em destaque</H3>
-            </div>
-    
+        <div className="m-0 p-0" style={{ zIndex: -1 }}>
+
             <Carousel
-                className="carousel carousel-dark slide justify-content-center"
+                className="carousel carousel-dark slide justify-content-start"
                 style={{
                     marginTop: "3vh",
                     alignItems: 'end',
                 }}
             >
-                {produtos_list.slice(0,5).map(produto => (
+                {carroussel.slice(0, 5).map(carroussel => (
                     <Carousel.Item
-                        key={produto.url_name}
+                        key={carroussel.url}
                         style={{
-                            height: '400px',
+                            height: '300px',
                             marginBottom: '2vh',
                         }}
                     >
-                        <ImageLoader
-                            onClick={produto.url_name}
-                            src={produto.foto_1}
-                            className="w-25 d-flex justify-content-center"
-                            erro={errors.get(produto.url_name) || false}
-                            style={{
-                                cursor: 'pointer',
-                                maxHeight: '400px',
-                                width: '100%',
-                                minWidth: '350px',
-                                margin: '0 auto',
-                                objectFit: 'contain',  // Ajusta a imagem sem cortar
-                                objectPosition: 'center',  // Centraliza a imagem
-                            }}
-                        />
+                        <a href={carroussel.url}>
+                            <img
+                                src={carroussel.foto}
+                                className="d-flex justify-content-center"
+                                erro={errors.get(carroussel.url) || false}
+                                style={{
+                                    cursor: 'pointer',
+                                    width: '100%',
+                                    minWidth: '350px',
+                                    margin: '0',
+                                    objectFit: 'contain',  // Ajusta a imagem sem cortar
+                                    objectPosition: 'center',  // Centraliza a imagem
+                                }}
+                            />
+                        </a>
                     </Carousel.Item>
                 ))}
             </Carousel>
         </div>
     );
-    
+
 
 }
 
