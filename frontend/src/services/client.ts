@@ -23,7 +23,8 @@ axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
 
 export const client = axios.create({
   headers: {
-    'X-CSRFToken': csrftoken
+    'X-CSRFToken': csrftoken,
+    'Access-Control-Allow-Origin': '*'
   },
   withCredentials: true,
   baseURL: "http://localhost:8000"

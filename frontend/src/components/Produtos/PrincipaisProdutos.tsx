@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { client } from "../../services/client";
 import '../../styles/PrincipaisProdutos/principaisProdutos.css'; // Importa o arquivo CSS
 import Swiper from 'swiper';
@@ -8,30 +8,26 @@ import { H3 } from "../../styles/Carrossel/lista";
 import { Produto } from "../../types/Produto";
 import ProdutoCard from "./ProdutoCard";
 
-
-
 type promotionProps = {
     promotion: boolean;
 }
-function PrincipaisProdutos(props: promotionProps){
+
+function PrincipaisProdutos(props: promotionProps) {
     const [produtos, setProdutos] = useState<Produto[]>([]);
-    const {goToProduct} = useNavigateProducts();
+    const { goToProduct } = useNavigateProducts();
     useEffect(() => {
         client.get('/produtos/itens')
-                .then(response =>{
-                    setProdutos(response.data)
-        })
-        .catch(error => {
-            console.log("Ops! Ocorreu um erro ao buscar os produtos.")
-        })
+            .then(response => {
+                setProdutos(response.data)
+            })
+            .catch(error => {
+                console.log("Ops! Ocorreu um erro ao buscar os produtos.")
+            })
     }, []);
 
-
-    let produtoPrice: number = 0
-    
     React.useEffect(() => {
         new Swiper('.swiper-container', {
-            slidesPerView: 3, // Exibe 3 slides visíveis de cada vez
+            slidesPerView: 1, // Exibe 3 slides visíveis de cada vez
             spaceBetween: 10, // Espaço entre os slides
             loop: true, // Faz o carrossel rodar em loop infinito
             navigation: {
@@ -53,15 +49,13 @@ function PrincipaisProdutos(props: promotionProps){
                     spaceBetween: 20,
                 },
                 1024: {
-                    slidesPerView: 3,
+                    slidesPerView: 5,
                     spaceBetween: 30,
                 },
             },
         });
     }, []);
 
-
-    const img = "ico-carrinho.png"
     return (
         <div>
             <div className="text-center">
@@ -71,20 +65,17 @@ function PrincipaisProdutos(props: promotionProps){
             </div>
             <div className="swiper-container mt-4">
                 <div className="swiper-wrapper">
-                    {props.promotion?  produtos.filter(produto => produto.promotion).map( produtos =>
+                    {props.promotion ? produtos.filter(produto => produto.promotion).map(produtos =>
                         <ProdutoCard url_name={produtos.url_name} price={produtos.price} foto_1={produtos.foto_1} description={produtos.description} />
-                    ):
-                    produtos.map(produtos =>
-                        <ProdutoCard url_name={produtos.url_name} price={produtos.price} foto_1={produtos.foto_1} description={produtos.description} />
-                    )}
+                    ) :
+                        produtos.map(produtos =>
+                            <ProdutoCard url_name={produtos.url_name} price={produtos.price} foto_1={produtos.foto_1} description={produtos.description} />
+                        )}
                     <div className="swiper-pagination"></div>
                 </div>
             </div>
         </div>
     );
-    
-    
-    
 }
 
 
