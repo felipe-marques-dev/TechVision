@@ -19,13 +19,17 @@ export function Profile() {
         client.get("/accounts/usuario")
             .then(function (res) {
                 setCurrentUser(true);
-                setUser(res.data.user); // Assumindo que res.data é um objeto do usuário
+                setUser(res.data.user); // Carregar o usuário inicialmente
             })
             .catch(function (error) {
                 setCurrentUser(false);
                 navigate('/login');
             });
     }, []);
+
+    const handleProfileUpdate = (updatedUser: Usuario) => {
+        setUser(updatedUser); // Atualiza o estado do usuário com as novas informações
+    };
 
     function submitLogout(e: { preventDefault: () => void; }) {
         e.preventDefault();
@@ -43,7 +47,6 @@ export function Profile() {
     return (
         <>
             <Nav_bar />
-
             {user && (
                 <div className="container d-flex justify-content-center" id="container">
                     <div className="row">
@@ -69,7 +72,7 @@ export function Profile() {
             <div className="col d-flex justify-content-center my-5" id="col">
                 <div className="row-fluid d-flex p-0 mt-0" id="row2">
                     <div className="me-3">
-                        <DialogDemo />
+                        <DialogDemo onProfileUpdate={handleProfileUpdate} /> 
                     </div>
                     <div className="me-3">
                         <PasswordValidation />
@@ -84,7 +87,6 @@ export function Profile() {
             <div className="mb-5" style={{ height: "20px" }}></div>
 
             <Footer />
-
         </>
     );
 }

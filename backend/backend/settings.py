@@ -63,7 +63,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'usuario.apps.UsuarioConfig',
     'produtos',
-    'compra'
+    'compra',
+    'carroussel'
 ]
 
 

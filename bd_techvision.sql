@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03-Out-2024 às 15:23
+-- Tempo de geração: 08/10/2024 às 16:22
 -- Versão do servidor: 11.5.2-MariaDB
--- versão do PHP: 8.2.12
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_group`
+-- Estrutura para tabela `auth_group`
 --
 
 CREATE TABLE `auth_group` (
@@ -33,7 +33,7 @@ CREATE TABLE `auth_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `auth_group`
+-- Despejando dados para a tabela `auth_group`
 --
 
 INSERT INTO `auth_group` (`id`, `name`) VALUES
@@ -42,7 +42,7 @@ INSERT INTO `auth_group` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_group_permissions`
+-- Estrutura para tabela `auth_group_permissions`
 --
 
 CREATE TABLE `auth_group_permissions` (
@@ -52,7 +52,7 @@ CREATE TABLE `auth_group_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `auth_group_permissions`
+-- Despejando dados para a tabela `auth_group_permissions`
 --
 
 INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
@@ -76,7 +76,7 @@ INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_permission`
+-- Estrutura para tabela `auth_permission`
 --
 
 CREATE TABLE `auth_permission` (
@@ -87,7 +87,7 @@ CREATE TABLE `auth_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `auth_permission`
+-- Despejando dados para a tabela `auth_permission`
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
@@ -155,7 +155,7 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `compra_pedido`
+-- Estrutura para tabela `compra_pedido`
 --
 
 CREATE TABLE `compra_pedido` (
@@ -170,7 +170,7 @@ CREATE TABLE `compra_pedido` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `compra_transportadora`
+-- Estrutura para tabela `compra_transportadora`
 --
 
 CREATE TABLE `compra_transportadora` (
@@ -183,7 +183,7 @@ CREATE TABLE `compra_transportadora` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `corsheaders_corsmodel`
+-- Estrutura para tabela `corsheaders_corsmodel`
 --
 
 CREATE TABLE `corsheaders_corsmodel` (
@@ -194,7 +194,7 @@ CREATE TABLE `corsheaders_corsmodel` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `django_admin_log`
+-- Estrutura para tabela `django_admin_log`
 --
 
 CREATE TABLE `django_admin_log` (
@@ -209,7 +209,7 @@ CREATE TABLE `django_admin_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `django_admin_log`
+-- Despejando dados para a tabela `django_admin_log`
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id`, `object_id`, `object_repr`, `action_flag`, `change_message`) VALUES
@@ -288,7 +288,7 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `django_content_type`
+-- Estrutura para tabela `django_content_type`
 --
 
 CREATE TABLE `django_content_type` (
@@ -298,7 +298,7 @@ CREATE TABLE `django_content_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `django_content_type`
+-- Despejando dados para a tabela `django_content_type`
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
@@ -326,7 +326,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `django_migrations`
+-- Estrutura para tabela `django_migrations`
 --
 
 CREATE TABLE `django_migrations` (
@@ -337,7 +337,7 @@ CREATE TABLE `django_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `django_migrations`
+-- Despejando dados para a tabela `django_migrations`
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
@@ -367,12 +367,13 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (24, 'produtos', '0002_alter_produto_url_name', '2024-09-15 17:24:11.771854'),
 (25, 'produtos', '0003_alter_produto_foto_1_alter_produto_foto_2_and_more', '2024-09-15 17:24:52.749943'),
 (26, 'produtos', '0002_category', '2024-09-19 16:21:16.081527'),
-(27, 'usuario', '0002_alter_carrinho_user_remove_carrinhoitem_produto_and_more', '2024-10-03 12:09:27.328436');
+(27, 'usuario', '0002_alter_carrinho_user_remove_carrinhoitem_produto_and_more', '2024-10-03 12:09:27.328436'),
+(28, 'usuario', '0002_carrinhoitem_price_ind', '2024-10-08 14:16:01.084249');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `django_session`
+-- Estrutura para tabela `django_session`
 --
 
 CREATE TABLE `django_session` (
@@ -382,12 +383,13 @@ CREATE TABLE `django_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `django_session`
+-- Despejando dados para a tabela `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('0oti68b8iacpm7os58a5ckc66emc5vjh', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1swJsh:WfKnA6yS_iU6HEKjobKzt4O_YHdKmlVbY_JIwkghZ-8', '2024-10-17 11:20:27.972767'),
 ('21512wjrhdedbrsalilq50dboqx0ltni', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1sny1N:paKFe5XD62wkAAj4GNHexeAPylbnplIdqEpXgcP176A', '2024-09-24 10:22:53.560445'),
+('ajc4h4w8983x2rimbfwe9xj7bfx6nx23', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1syAcm:X2tFlJqQjvCWyMHss56CfqTHnQScsC4_kojYkh4jWtg', '2024-10-22 13:51:40.634469'),
 ('b80ehir8jysfrtyk8ghu9y5gva0ilyas', '.eJxVjEEOwiAQRe_C2hCgDAwu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWQZx-t0T5wW0H5U7tNss8t3WZktwVedAur3Ph5-Vw_w4q9fqtgZnBMAafMIN3puSEgRw6O9iB2EAoCrUDHUY_omeXkIlUyUEBWi3eH-XEN6M:1sj0wE:w3l-tstaDpgO3oUO7dTBdpLPpaj-Mth7miZK-rgjqFI', '2024-09-10 18:29:06.843108'),
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
 ('c60ir59vz41lsp0klr4g4phdtunt63mx', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1siuxu:0pXmvK-6uRUSpalY29C71uln7g3rwxNcDG0xRUCep8U', '2024-09-10 12:06:26.231567'),
@@ -398,12 +400,13 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
 ('jd1x1pphsjn176h59gm46cmoiignydli', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1stve6:7pliRlkyl-Ym83UO33OkbW9ZMDJsRlEZDRwk6J74TUc', '2024-10-10 21:03:30.140033'),
 ('uccrk9cw3mgjt2moaz8clki7n44ftc0l', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1srJx0:wjeqkgacjboVaLVhh40AL9fQTq-AX3QfwbUalDHVWuU', '2024-10-03 16:24:14.578052'),
+('uijp1cps4du8ov2h9wauq4u1fts1gm9r', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1sy8TR:EZJilCL2dmRpmtE4-vp7v4RbMsnVgGQ0mq5khc_vEOk', '2024-10-22 11:33:53.250792'),
 ('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produtos_categoria`
+-- Estrutura para tabela `produtos_categoria`
 --
 
 CREATE TABLE `produtos_categoria` (
@@ -412,7 +415,7 @@ CREATE TABLE `produtos_categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `produtos_categoria`
+-- Despejando dados para a tabela `produtos_categoria`
 --
 
 INSERT INTO `produtos_categoria` (`category_id`, `name`) VALUES
@@ -423,7 +426,7 @@ INSERT INTO `produtos_categoria` (`category_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produtos_produto`
+-- Estrutura para tabela `produtos_produto`
 --
 
 CREATE TABLE `produtos_produto` (
@@ -443,7 +446,7 @@ CREATE TABLE `produtos_produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `produtos_produto`
+-- Despejando dados para a tabela `produtos_produto`
 --
 
 INSERT INTO `produtos_produto` (`product_id`, `name`, `categoria_id`, `sub_category`, `description`, `url_name`, `estoque`, `price`, `promotion`, `foto_1`, `foto_2`, `foto_3`, `foto_4`) VALUES
@@ -466,7 +469,7 @@ INSERT INTO `produtos_produto` (`product_id`, `name`, `categoria_id`, `sub_categ
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario`
+-- Estrutura para tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -483,20 +486,20 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-10-03 11:20:27', 1),
+(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-10-08 11:33:53', 1),
 (2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-09-15 17:20:10', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0),
-(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-10-03 11:19:55', 0);
+(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-10-08 13:51:40', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario_carrinho`
+-- Estrutura para tabela `usuario_carrinho`
 --
 
 CREATE TABLE `usuario_carrinho` (
@@ -508,7 +511,7 @@ CREATE TABLE `usuario_carrinho` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario_carrinho`
+-- Despejando dados para a tabela `usuario_carrinho`
 --
 
 INSERT INTO `usuario_carrinho` (`cart_id`, `produto_id`, `user_id`, `created_at`, `updated_at`) VALUES
@@ -521,7 +524,7 @@ INSERT INTO `usuario_carrinho` (`cart_id`, `produto_id`, `user_id`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario_carrinhoitem`
+-- Estrutura para tabela `usuario_carrinhoitem`
 --
 
 CREATE TABLE `usuario_carrinhoitem` (
@@ -529,20 +532,21 @@ CREATE TABLE `usuario_carrinhoitem` (
   `cart_id` int(11) NOT NULL,
   `produto_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` decimal(10,0) NOT NULL
+  `price_ind` double(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario_carrinhoitem`
+-- Despejando dados para a tabela `usuario_carrinhoitem`
 --
 
-INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price`) VALUES
-(6, 7, 15, 2, 200);
+INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price_ind`) VALUES
+(6, 7, 15, 2, 200),
+(11, 7, 12, 1, 150);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario_endereco`
+-- Estrutura para tabela `usuario_endereco`
 --
 
 CREATE TABLE `usuario_endereco` (
@@ -558,7 +562,7 @@ CREATE TABLE `usuario_endereco` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario_endereco`
+-- Despejando dados para a tabela `usuario_endereco`
 --
 
 INSERT INTO `usuario_endereco` (`adress_id`, `city`, `street`, `block`, `reference`, `cep`, `state`, `number`, `user_id`) VALUES
@@ -567,7 +571,7 @@ INSERT INTO `usuario_endereco` (`adress_id`, `city`, `street`, `block`, `referen
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario_groups`
+-- Estrutura para tabela `usuario_groups`
 --
 
 CREATE TABLE `usuario_groups` (
@@ -577,7 +581,7 @@ CREATE TABLE `usuario_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario_groups`
+-- Despejando dados para a tabela `usuario_groups`
 --
 
 INSERT INTO `usuario_groups` (`id`, `user_id`, `group_id`) VALUES
@@ -586,7 +590,7 @@ INSERT INTO `usuario_groups` (`id`, `user_id`, `group_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario_user_permissions`
+-- Estrutura para tabela `usuario_user_permissions`
 --
 
 CREATE TABLE `usuario_user_permissions` (
@@ -596,7 +600,7 @@ CREATE TABLE `usuario_user_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario_user_permissions`
+-- Despejando dados para a tabela `usuario_user_permissions`
 --
 
 INSERT INTO `usuario_user_permissions` (`id`, `user_id`, `permission_id`) VALUES
@@ -607,14 +611,14 @@ INSERT INTO `usuario_user_permissions` (`id`, `user_id`, `permission_id`) VALUES
 --
 
 --
--- Índices para tabela `auth_group`
+-- Índices de tabela `auth_group`
 --
 ALTER TABLE `auth_group`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Índices para tabela `auth_group_permissions`
+-- Índices de tabela `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD PRIMARY KEY (`id`),
@@ -622,14 +626,14 @@ ALTER TABLE `auth_group_permissions`
   ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
 
 --
--- Índices para tabela `auth_permission`
+-- Índices de tabela `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
 
 --
--- Índices para tabela `compra_pedido`
+-- Índices de tabela `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
   ADD PRIMARY KEY (`delivery_id`),
@@ -638,19 +642,19 @@ ALTER TABLE `compra_pedido`
   ADD KEY `user_id_id` (`user_id`);
 
 --
--- Índices para tabela `compra_transportadora`
+-- Índices de tabela `compra_transportadora`
 --
 ALTER TABLE `compra_transportadora`
   ADD PRIMARY KEY (`carrier_id`);
 
 --
--- Índices para tabela `corsheaders_corsmodel`
+-- Índices de tabela `corsheaders_corsmodel`
 --
 ALTER TABLE `corsheaders_corsmodel`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `django_admin_log`
+-- Índices de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD PRIMARY KEY (`id`),
@@ -658,53 +662,53 @@ ALTER TABLE `django_admin_log`
   ADD KEY `content_type_id` (`content_type_id`);
 
 --
--- Índices para tabela `django_content_type`
+-- Índices de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
 
 --
--- Índices para tabela `django_migrations`
+-- Índices de tabela `django_migrations`
 --
 ALTER TABLE `django_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `django_session`
+-- Índices de tabela `django_session`
 --
 ALTER TABLE `django_session`
   ADD PRIMARY KEY (`session_key`),
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
--- Índices para tabela `produtos_categoria`
+-- Índices de tabela `produtos_categoria`
 --
 ALTER TABLE `produtos_categoria`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Índices para tabela `produtos_produto`
+-- Índices de tabela `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `categoria` (`categoria_id`);
 
 --
--- Índices para tabela `usuario`
+-- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `usuario_carrinho`
+-- Índices de tabela `usuario_carrinho`
 --
 ALTER TABLE `usuario_carrinho`
   ADD PRIMARY KEY (`cart_id`),
   ADD KEY `product_id` (`produto_id`);
 
 --
--- Índices para tabela `usuario_carrinhoitem`
+-- Índices de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
   ADD PRIMARY KEY (`cartitem_id`),
@@ -712,14 +716,14 @@ ALTER TABLE `usuario_carrinhoitem`
   ADD KEY `produto_id` (`produto_id`);
 
 --
--- Índices para tabela `usuario_endereco`
+-- Índices de tabela `usuario_endereco`
 --
 ALTER TABLE `usuario_endereco`
   ADD PRIMARY KEY (`adress_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Índices para tabela `usuario_groups`
+-- Índices de tabela `usuario_groups`
 --
 ALTER TABLE `usuario_groups`
   ADD PRIMARY KEY (`id`),
@@ -727,7 +731,7 @@ ALTER TABLE `usuario_groups`
   ADD KEY `group_id` (`group_id`);
 
 --
--- Índices para tabela `usuario_user_permissions`
+-- Índices de tabela `usuario_user_permissions`
 --
 ALTER TABLE `usuario_user_permissions`
   ADD PRIMARY KEY (`id`),
@@ -735,7 +739,7 @@ ALTER TABLE `usuario_user_permissions`
   ADD KEY `permission_id` (`permission_id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -790,7 +794,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT de tabela `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de tabela `produtos_categoria`
@@ -820,7 +824,7 @@ ALTER TABLE `usuario_carrinho`
 -- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
-  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_endereco`
@@ -841,24 +845,24 @@ ALTER TABLE `usuario_user_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `auth_group_permissions`
+-- Restrições para tabelas `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
 
 --
--- Limitadores para a tabela `auth_permission`
+-- Restrições para tabelas `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
--- Limitadores para a tabela `compra_pedido`
+-- Restrições para tabelas `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
   ADD CONSTRAINT `adress_id` FOREIGN KEY (`endereco_id`) REFERENCES `usuario_endereco` (`adress_id`),
@@ -866,40 +870,40 @@ ALTER TABLE `compra_pedido`
   ADD CONSTRAINT `user_id_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
 
 --
--- Limitadores para a tabela `django_admin_log`
+-- Restrições para tabelas `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `django_admin_log_ibfk_2` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
--- Limitadores para a tabela `produtos_produto`
+-- Restrições para tabelas `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
   ADD CONSTRAINT `categoria` FOREIGN KEY (`categoria_id`) REFERENCES `produtos_categoria` (`category_id`);
 
 --
--- Limitadores para a tabela `usuario_carrinhoitem`
+-- Restrições para tabelas `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
   ADD CONSTRAINT `cart_id` FOREIGN KEY (`cart_id`) REFERENCES `usuario_carrinho` (`cart_id`),
   ADD CONSTRAINT `produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produtos_produto` (`product_id`);
 
 --
--- Limitadores para a tabela `usuario_endereco`
+-- Restrições para tabelas `usuario_endereco`
 --
 ALTER TABLE `usuario_endereco`
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
 
 --
--- Limitadores para a tabela `usuario_groups`
+-- Restrições para tabelas `usuario_groups`
 --
 ALTER TABLE `usuario_groups`
   ADD CONSTRAINT `usuario_groups_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `usuario_groups_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
 
 --
--- Limitadores para a tabela `usuario_user_permissions`
+-- Restrições para tabelas `usuario_user_permissions`
 --
 ALTER TABLE `usuario_user_permissions`
   ADD CONSTRAINT `usuario_user_permissions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`),

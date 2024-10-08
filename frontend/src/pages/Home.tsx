@@ -1,4 +1,4 @@
-import Carrossel from "../components/Carrossel";
+import Carrossel from "../components/Carroussel/Carrossel";
 import { Nav_bar } from "../components/NavBar/Navbar";
 import PrincipaisProdutos from "../components/Produtos/PrincipaisProdutos";
 import { Footer } from "../components/Footer";
