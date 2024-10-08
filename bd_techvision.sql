@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/10/2024 às 16:22
+-- Tempo de geração: 08/10/2024 às 20:56
 -- Versão do servidor: 11.5.2-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -150,7 +150,31 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (57, 'Can add categoria', 20, 'add_categoria'),
 (58, 'Can change categoria', 20, 'change_categoria'),
 (59, 'Can delete categoria', 20, 'delete_categoria'),
-(60, 'Can view categoria', 20, 'view_categoria');
+(60, 'Can view categoria', 20, 'view_categoria'),
+(61, 'Can add carroussel', 21, 'add_carroussel'),
+(62, 'Can change carroussel', 21, 'change_carroussel'),
+(63, 'Can delete carroussel', 21, 'delete_carroussel'),
+(64, 'Can view carroussel', 21, 'view_carroussel');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `carroussel_carroussel`
+--
+
+CREATE TABLE `carroussel_carroussel` (
+  `carroussel_id` int(11) NOT NULL,
+  `foto` varchar(100) NOT NULL,
+  `url` varchar(3000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `carroussel_carroussel`
+--
+
+INSERT INTO `carroussel_carroussel` (`carroussel_id`, `foto`, `url`) VALUES
+(1, 'carroussel/D_NQ_748437-MLA79576182488_102024-OO.webp', 'https://www.mercadolivre.com.br/dia-das-criancas#D'),
+(4, 'carroussel/1727102704854-22x.webp', 'https://lista.mercadolivre.com.br/_Container_ddc-games#deal_print_id=0c9bb0d0-85a6-11ef-b4c7-db911e0386b6&c_id=mainslideritem-normal&c_element_order=4&c_campaign=23.09_MS_GAMER&c_uid=0c9bb0d0-85a6-11ef-b4c7-db911e0386b6');
 
 -- --------------------------------------------------------
 
@@ -283,7 +307,9 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 (68, '2024-09-26 21:26:29', 1, 11, '22', 'Limpa Vidros Spray', 1, '[{\"added\": {}}]'),
 (69, '2024-09-26 21:27:16', 1, 11, '23', 'Sabão em Pó 2kg', 1, '[{\"added\": {}}]'),
 (70, '2024-09-26 21:28:07', 1, 11, '14', 'Geladeira Frost Free', 2, '[{\"changed\": {\"fields\": [\"Foto 1\", \"Foto 2\", \"Foto 3\", \"Foto 4\"]}}]'),
-(71, '2024-10-03 11:20:57', 1, 14, '7', 'Carrinho object (7)', 1, '[{\"added\": {}}]');
+(71, '2024-10-03 11:20:57', 1, 14, '7', 'Carrinho object (7)', 1, '[{\"added\": {}}]'),
+(72, '2024-10-08 18:16:20', 2, 21, '1', 'https://www.mercadolivre.com.br/dia-das-criancas#D', 2, '[{\"changed\": {\"fields\": [\"Foto\"]}}]'),
+(73, '2024-10-08 18:49:58', 2, 21, '4', 'https://lista.mercadolivre.com.br/_Container_ddc-games#deal_print_id=0c9bb0d0-85a6-11ef-b4c7-db911e0386b6&c_id=mainslideritem-normal&c_element_order=4&c_campaign=23.09_MS_GAMER&c_uid=0c9bb0d0-85a6-11e', 1, '[{\"added\": {}}]');
 
 -- --------------------------------------------------------
 
@@ -305,6 +331,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (17, 'admin', 'logentry'),
 (2, 'auth', 'group'),
 (1, 'auth', 'permission'),
+(21, 'carroussel', 'carroussel'),
 (8, 'compra', 'carrier'),
 (9, 'compra', 'delivery'),
 (12, 'compra', 'pedido'),
@@ -368,7 +395,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (25, 'produtos', '0003_alter_produto_foto_1_alter_produto_foto_2_and_more', '2024-09-15 17:24:52.749943'),
 (26, 'produtos', '0002_category', '2024-09-19 16:21:16.081527'),
 (27, 'usuario', '0002_alter_carrinho_user_remove_carrinhoitem_produto_and_more', '2024-10-03 12:09:27.328436'),
-(28, 'usuario', '0002_carrinhoitem_price_ind', '2024-10-08 14:16:01.084249');
+(28, 'carroussel', '0001_initial', '2024-10-08 12:07:25.083451'),
+(29, 'carroussel', '0002_alter_carroussel_url', '2024-10-08 18:15:04.828688');
 
 -- --------------------------------------------------------
 
@@ -389,10 +417,11 @@ CREATE TABLE `django_session` (
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('0oti68b8iacpm7os58a5ckc66emc5vjh', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1swJsh:WfKnA6yS_iU6HEKjobKzt4O_YHdKmlVbY_JIwkghZ-8', '2024-10-17 11:20:27.972767'),
 ('21512wjrhdedbrsalilq50dboqx0ltni', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1sny1N:paKFe5XD62wkAAj4GNHexeAPylbnplIdqEpXgcP176A', '2024-09-24 10:22:53.560445'),
-('ajc4h4w8983x2rimbfwe9xj7bfx6nx23', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1syAcm:X2tFlJqQjvCWyMHss56CfqTHnQScsC4_kojYkh4jWtg', '2024-10-22 13:51:40.634469'),
+('b0ydl5x4k2zlyeeoyldn81rgfs68ujgf', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1syAfV:ufFuBIz0HfUAKjUfjNaHErE91vows7J_aaR7sTyeAbo', '2024-10-22 13:54:29.436172'),
 ('b80ehir8jysfrtyk8ghu9y5gva0ilyas', '.eJxVjEEOwiAQRe_C2hCgDAwu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWQZx-t0T5wW0H5U7tNss8t3WZktwVedAur3Ph5-Vw_w4q9fqtgZnBMAafMIN3puSEgRw6O9iB2EAoCrUDHUY_omeXkIlUyUEBWi3eH-XEN6M:1sj0wE:w3l-tstaDpgO3oUO7dTBdpLPpaj-Mth7miZK-rgjqFI', '2024-09-10 18:29:06.843108'),
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
 ('c60ir59vz41lsp0klr4g4phdtunt63mx', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1siuxu:0pXmvK-6uRUSpalY29C71uln7g3rwxNcDG0xRUCep8U', '2024-09-10 12:06:26.231567'),
+('cprfscjtrmuq5kg75rra1fpn1h4w7wa2', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1syADl:GdynYGcvQSD73TvlWFGYP3Z9q6zKRYOhymcwBxxvq-w', '2024-10-22 13:25:49.411385'),
 ('edeowszhehzl5dsv3scfkfcgcoo5xt8e', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1siwXr:nQdUi7POBfGyExmmBiKYphSQ7aQPdDQV-nS2qpqTmUQ', '2024-09-10 13:47:39.772701'),
 ('f1zznuf0v3htkwasutmlsxn1f7a1j6c6', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1spsuw:kksh13WFv7OXnFCO8JRfVcFYtEIF7bIoD_Iy9mFK7t0', '2024-09-29 17:20:10.932756'),
 ('gdg5p9j0r14d2b6e58i21fjfw94wgody', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1swJhA:gjpvo7Z3lXak-doXei2_1rmFqRuIQL2lTZePcenpnWE', '2024-10-17 11:08:32.214277'),
@@ -400,7 +429,6 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
 ('jd1x1pphsjn176h59gm46cmoiignydli', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1stve6:7pliRlkyl-Ym83UO33OkbW9ZMDJsRlEZDRwk6J74TUc', '2024-10-10 21:03:30.140033'),
 ('uccrk9cw3mgjt2moaz8clki7n44ftc0l', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1srJx0:wjeqkgacjboVaLVhh40AL9fQTq-AX3QfwbUalDHVWuU', '2024-10-03 16:24:14.578052'),
-('uijp1cps4du8ov2h9wauq4u1fts1gm9r', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1sy8TR:EZJilCL2dmRpmtE4-vp7v4RbMsnVgGQ0mq5khc_vEOk', '2024-10-22 11:33:53.250792'),
 ('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
 
 -- --------------------------------------------------------
@@ -490,11 +518,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-10-08 11:33:53', 1),
-(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-09-15 17:20:10', 1),
+(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-10-03 11:20:27', 1),
+(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-10-08 13:54:29', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0),
-(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-10-08 13:51:40', 0);
+(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-10-03 11:19:55', 0);
 
 -- --------------------------------------------------------
 
@@ -515,7 +543,6 @@ CREATE TABLE `usuario_carrinho` (
 --
 
 INSERT INTO `usuario_carrinho` (`cart_id`, `produto_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, '2024-09-10 10:24:51', '2024-09-10 10:26:09'),
 (2, 1, 2, '2024-09-10 10:24:51', '2024-09-10 10:26:09'),
 (5, 0, 11, '2024-09-10 14:19:01', '2024-09-10 14:19:01'),
 (6, 0, 1, '2024-09-10 14:41:52', '2024-09-10 14:44:40'),
@@ -540,8 +567,7 @@ CREATE TABLE `usuario_carrinhoitem` (
 --
 
 INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price_ind`) VALUES
-(6, 7, 15, 2, 200),
-(11, 7, 12, 1, 150);
+(6, 7, 15, 2, 200);
 
 -- --------------------------------------------------------
 
@@ -631,6 +657,13 @@ ALTER TABLE `auth_group_permissions`
 ALTER TABLE `auth_permission`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
+
+--
+-- Índices de tabela `carroussel_carroussel`
+--
+ALTER TABLE `carroussel_carroussel`
+  ADD PRIMARY KEY (`carroussel_id`),
+  ADD UNIQUE KEY `url` (`url`) USING HASH;
 
 --
 -- Índices de tabela `compra_pedido`
@@ -758,7 +791,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de tabela `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT de tabela `carroussel_carroussel`
+--
+ALTER TABLE `carroussel_carroussel`
+  MODIFY `carroussel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `compra_pedido`
@@ -782,19 +821,19 @@ ALTER TABLE `corsheaders_corsmodel`
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `produtos_categoria`
@@ -824,7 +863,7 @@ ALTER TABLE `usuario_carrinho`
 -- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
-  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_endereco`
