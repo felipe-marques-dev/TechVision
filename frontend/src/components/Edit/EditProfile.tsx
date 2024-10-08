@@ -2,13 +2,11 @@ import { Button, Form } from "react-bootstrap";
 import { client } from "../../services/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { ToastContainer, toast } from 'react-toastify';
-import './Edit.css'
+import './Edit.css';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 interface Usuario {
     id: number;
@@ -18,14 +16,19 @@ interface Usuario {
     email: string;
 }
 
-export function DialogDemo() {
+interface DialogDemoProps {
+    onProfileUpdate: (updatedUser: Usuario) => void; // Novo prop
+}
+
+export function DialogDemo({ onProfileUpdate }: DialogDemoProps) {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(false);
     const [user, setUser] = useState<Usuario | null>(null);
     const [userEmail, setUserEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [open, setOpen] = useState(false); // Estado para controlar o diálogo
+    const [open, setOpen] = useState(false);
+    const [edited, setEdited] = useState<boolean>(false);
 
     const notifysuccess = () => toast.success("Perfil editado com sucesso!");
     const notifyerror = () => toast.warning("Erro ao editar perfil!");
@@ -44,9 +47,9 @@ export function DialogDemo() {
                 setCurrentUser(false);
                 navigate('/login');
             });
-    }, [navigate]);
+    }, [navigate, edited]);
 
-    const handleSave = async () => { // Tornando a função assíncrona
+    const handleSave = async () => {
         if (user) {
             try {
                 await client.patch("/accounts/update/", {
@@ -54,24 +57,21 @@ export function DialogDemo() {
                     first_name: firstName,
                     last_name: lastName,
                 });
-    
-                // Atualizando o estado do usuário
-                setUser(prev => prev ? { ...prev, first_name: firstName, last_name: lastName } : null);
-                setOpen(false); 
-                notifysuccess(); // Notificação de sucesso
-    
-                // Esperar 1.5 segundos antes de recarregar a página
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
-    
+
+                const updatedUser = { ...user, first_name: firstName, last_name: lastName }; // Novo usuário atualizado
+                setUser(updatedUser);
+                onProfileUpdate(updatedUser); // Chama o callback com o usuário atualizado
+
+                setOpen(false);
+                notifysuccess();
+
             } catch (error) {
                 console.error("Erro ao atualizar os dados:", error);
-                notifyerror(); // Notificação de erro
+                notifyerror();
             }
         }
     };
-    
+
     return (
         <>
             <ToastContainer />
@@ -83,11 +83,13 @@ export function DialogDemo() {
                     <Dialog.Portal>
                         <Dialog.Overlay className="DialogOverlay" />
                         <Dialog.Content className="DialogContent">
-                            <Dialog.Title className="DialogTitle"><h3 className="d-flex justify-content-center" id="title"> Editar perfil </h3></Dialog.Title>
+                            <Dialog.Title className="DialogTitle">
+                                <h3 className="d-flex justify-content-center" id="title"> Editar perfil </h3>
+                            </Dialog.Title>
          
                             <Form.Group controlId="firstName">
                                 <Form.Label>Primeiro Nome</Form.Label>
-                                <Form.Control id="formControl"
+                                <Form.Control
                                     type="text"
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
@@ -96,7 +98,7 @@ export function DialogDemo() {
                             </Form.Group>
                             <Form.Group controlId="lastName">
                                 <Form.Label>Sobrenome</Form.Label>
-                                <Form.Control id="formControl"
+                                <Form.Control
                                     type="text"
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
@@ -118,7 +120,3 @@ export function DialogDemo() {
         </>
     );
 }
-function then(arg0: () => void) {
-    throw new Error("Function not implemented.");
-}
-
