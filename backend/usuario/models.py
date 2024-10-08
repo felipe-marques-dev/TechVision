@@ -94,7 +94,7 @@ class CarrinhoItem(models.Model):
     cart = models.ForeignKey(Carrinho, related_name="itens", on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price_ind = models.FloatField()
 
     
     def get_produto_nome(self):
