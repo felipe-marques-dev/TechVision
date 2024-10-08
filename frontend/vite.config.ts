@@ -14,4 +14,13 @@ export default defineConfig({
       },
     },
   },
+  preview :{
+      proxy: {
+        "/itens": {
+          target: 'http://localhost:8000/produtos/itens/',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        }
+      },
+  },
 });
