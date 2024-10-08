@@ -8,15 +8,20 @@ import Calculo from "./Calculo";
 import { ImageLoader } from "../../components/ImageLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import { Item } from "../../types/Produto";
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Stack,
+} from '@chakra-ui/react';
 
 export function Carrinho() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
-  const [deleted, setDeleted] = useState<boolean>(false)
-  const [quantityProduct, setQuantityProduct] = useState<boolean>(false)
-
 
   // Verificar sessão do usuário
   useEffect(() => {
@@ -32,26 +37,23 @@ export function Carrinho() {
       });
   }, [currentUser]);
 
-
   useEffect(() => {
     if (emailUser) {
       client.post('/accounts/cart/', { email: emailUser })
         .then(response => {
           setProdutos(response.data.itens);
-          response.data.itens.forEach(() => {
-          });
         })
         .catch(error => {
           console.log("Erro ao buscar produtos", error);
         });
     }
-  }, [emailUser, deleted, quantityProduct]);
+  }, [emailUser]);
 
   const handleDelete = async (product_id: number) => {
     if (emailUser) {
       const url = `/accounts/cart/${product_id}`;
       try {
-        client.delete(url, {
+        await client.delete(url, {
           headers: {
             email: emailUser,
           },
@@ -59,10 +61,9 @@ export function Carrinho() {
             email: emailUser,
             product_id: product_id,
           }
-        }
-        );
+        });
         toast.warning("Você retirou o item do seu carrinho!");
-        setDeleted(true)
+        setProdutos(produtos.filter(item => item.produto.product_id !== product_id)); // Remove o item localmente
       } catch (error) {
         console.error("Erro ao remover produto", error);
         toast.error("Erro ao retirar item do carrinho");
@@ -70,45 +71,41 @@ export function Carrinho() {
     }
   };
 
-  const handleQuantityChange = async (produto_id: number, quantity: number) => {
+  const handleQuantityChange = async (product_id: number, quantity: number) => {
     if (quantity < 1) {
-        toast.error("A quantidade deve ser pelo menos 1.");
-        return;
+      toast.error("A quantidade deve ser pelo menos 1.");
+      return;
     }
 
     if (emailUser) {
-        const url = `/accounts/cart/${produto_id}`;
-        try {
-            await client.patch(url, {
-                email: emailUser,
-                produto_id,
-                quantity,
-            });
+      const url = `/accounts/cart/`;
+      try {
+        await client.patch(url, {
+          email: emailUser,
+          product_id,
+          quantity,
+        });
 
-            setProdutos(prevProdutos =>
-                prevProdutos.map(item =>
-                    item.produto.product_id === produto_id
-                        ? { ...item, quantity }
-                        : item
-                )
-            );
-        } catch (error) {
-            console.error("Erro ao mudar quantidade do produto", error);
-            toast.error("Erro ao mudar quantidade");
-        }
+        setProdutos(prevProdutos =>
+          prevProdutos.map(item =>
+            item.produto.product_id === product_id
+              ? { ...item, quantity } // Atualiza a quantidade localmente
+              : item
+          )
+        );
+      } catch (error) {
+        console.error("Erro ao mudar quantidade do produto", error);
+        toast.error("Erro ao mudar quantidade");
+      }
     }
-};
+  };
+ 
 
-
-
-
-
-
-  function continuarComprandoBtn(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  function continuarComprandoBtn(event: MouseEvent<HTMLButtonElement>): void {
     navigate('/');
   }
 
-  function irParaPagamentoBtn(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  function irParaPagamentoBtn(event: MouseEvent<HTMLButtonElement>): void {
     navigate('/pagamento');
   }
 
@@ -134,26 +131,28 @@ export function Carrinho() {
                       <p className="nome-carrinho">{item.produto.name}</p>
                       <p>{item.produto.description}</p>
                       <p>Quantidade:
-                        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-                          <button
-                            onClick={() => handleQuantityChange(item.produto.product_id, Math.max(1, item.quantity - 1))}
-                            style={{ marginRight: '5px' }}
-                          >
-                            -
-                          </button>
-                          <input
-                            type="number"
-                            value={item.quantity}
-                            min="1"
-                            readOnly // Tornamos o input somente leitura
-                            style={{ width: '60px', textAlign: 'center' }}
-                          />
-                          <button
-                            onClick={() => handleQuantityChange(item.produto.product_id, item.quantity + 1)}
-                            style={{ marginLeft: '5px' }}
-                          >
-                            +
-                          </button>
+                        <div>
+                          <Stack shouldWrapChildren direction='row'>
+                            <NumberInput 
+                              size='xs' 
+                              maxW={90} 
+                              value={item.quantity} // Usar value em vez de defaultValue
+                              min={1}
+                              onChange={(valueString) => {
+                                const value = parseInt(valueString);
+                                if (!isNaN(value)) {
+                                  handleQuantityChange(item.produto.product_id, value); // Chamar a função aqui
+                                }
+                              }}
+                            >
+                            <NumberInputField />
+                              <NumberInputStepper>
+                                <NumberIncrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity )} />
+                                <NumberDecrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity )} />
+                              </NumberInputStepper>
+                            </NumberInput>
+                          </Stack>
+
                         </div>
                       </p>
                     </div>
@@ -178,7 +177,6 @@ export function Carrinho() {
                 <p><strong>Frete:</strong> R$ 0,00</p>
                 <h5>ENTREGA</h5>
                 <Calculo />
-
                 <button className="botao" onClick={irParaPagamentoBtn}>Ir para o pagamento</button>
                 <button className="botao-carrinho" onClick={continuarComprandoBtn}>Continuar comprando</button>
               </div>
