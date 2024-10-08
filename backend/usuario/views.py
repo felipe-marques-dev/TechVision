@@ -75,7 +75,7 @@ class UserCart(APIView):
         productBody = request.data.get('product_id')
 
         
-        cartItem = CarrinhoItem.objects.get(produto_id = productBody, status=status.HTTP_200_OK)
+        cartItem = CarrinhoItem.objects.get(produto_id = productBody)
         cartItem.quantity = (quantityBody)
         cartItem.save()
 
