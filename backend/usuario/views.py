@@ -82,8 +82,21 @@ class UserCart(APIView):
         return Response({"data": "alterado!"}, status=status.HTTP_200_OK)
         
 
+class ItemCartUser(APIView):
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
 
+    def post(self, request):
+        requestBody = request.data
+        emailBody = request.data.get('email')
+        productBody = request.data.get('product_id')
 
+        user = User.objects.get(email=emailBody)
+        cartUser = Carrinho.objects.get(user_id=user.id)
+        produtouser = Produto.objects.get(product_id=productBody)
+        CarrinhoItem.objects.create(cart_id=cartUser.cart_id, produto_id=productBody, quantity=1, price_ind=produtouser.price )
+       
+        return Response("sucesso!", status=status.HTTP_201_CREATED)
 
 
 class UserCheckPassword(APIView):
