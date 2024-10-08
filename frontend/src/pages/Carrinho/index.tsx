@@ -15,6 +15,8 @@ export function Carrinho() {
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
   const [deleted, setDeleted] = useState<boolean>(false)
+  const [quantityProduct, setQuantityProduct] = useState<boolean>(false)
+
 
   // Verificar sessão do usuário
   useEffect(() => {
@@ -30,6 +32,7 @@ export function Carrinho() {
       });
   }, [currentUser]);
 
+
   useEffect(() => {
     if (emailUser) {
       client.post('/accounts/cart/', { email: emailUser })
@@ -42,7 +45,7 @@ export function Carrinho() {
           console.log("Erro ao buscar produtos", error);
         });
     }
-  }, [emailUser, deleted]);
+  }, [emailUser, deleted, quantityProduct]);
 
   const handleDelete = async (product_id: number) => {
     if (emailUser) {
@@ -54,7 +57,7 @@ export function Carrinho() {
           },
           data: {
             email: emailUser,
-            product_id: product_id,  // Inclua outros dados que você precisar
+            product_id: product_id,
           }
         }
         );
@@ -66,6 +69,38 @@ export function Carrinho() {
       }
     }
   };
+
+  const handleQuantityChange = async (produto_id: number, quantity: number) => {
+    if (quantity < 1) {
+        toast.error("A quantidade deve ser pelo menos 1.");
+        return;
+    }
+
+    if (emailUser) {
+        const url = `/accounts/cart/${produto_id}`;
+        try {
+            await client.patch(url, {
+                email: emailUser,
+                produto_id,
+                quantity,
+            });
+
+            setProdutos(prevProdutos =>
+                prevProdutos.map(item =>
+                    item.produto.product_id === produto_id
+                        ? { ...item, quantity }
+                        : item
+                )
+            );
+        } catch (error) {
+            console.error("Erro ao mudar quantidade do produto", error);
+            toast.error("Erro ao mudar quantidade");
+        }
+    }
+};
+
+
+
 
 
 
@@ -98,7 +133,29 @@ export function Carrinho() {
                     <div className="col">
                       <p className="nome-carrinho">{item.produto.name}</p>
                       <p>{item.produto.description}</p>
-                      <p>Quantidade: {item.quantity}</p>
+                      <p>Quantidade:
+                        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
+                          <button
+                            onClick={() => handleQuantityChange(item.produto.product_id, Math.max(1, item.quantity - 1))}
+                            style={{ marginRight: '5px' }}
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            value={item.quantity}
+                            min="1"
+                            readOnly // Tornamos o input somente leitura
+                            style={{ width: '60px', textAlign: 'center' }}
+                          />
+                          <button
+                            onClick={() => handleQuantityChange(item.produto.product_id, item.quantity + 1)}
+                            style={{ marginLeft: '5px' }}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </p>
                     </div>
 
                     <div className="col text-center">
