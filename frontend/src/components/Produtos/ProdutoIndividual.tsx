@@ -79,7 +79,7 @@ export function ProdutoIndividual() {
         <ToastContainer />
             <Nav_bar />
             <div className="container-fluid m-0 p-0 border-0">
-                <div className="flex-wrap d-flex" id="produtoInd">
+                <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
                     {produtos ? (
                         <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
                             <div className="col-sm-2 d-none d-md-block" id="img-left">
