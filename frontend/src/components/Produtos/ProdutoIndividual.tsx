@@ -42,10 +42,10 @@ export function ProdutoIndividual() {
         <>
             <Nav_bar />
             <div className="container-fluid">
-                <div className="col" id="produtoInd">
+                <div className="flex-wrap d-flex" id="produtoInd">
                     {produtos ? (
                         <div className="row" key={produtos.url_name}>
-                            <div className="col-sm-2" id="img-left">
+                            <div className="col-sm-2 d-none d-md-block" id="img-left">
                                 {produtos.foto_2 && (
                                     <a className="card w-50" href="#" onClick={() => handleImageClick(imgSrc2)}>
                                         <img className="img-left" src={produtos.foto_2} alt="Foto 2" />
@@ -58,6 +58,23 @@ export function ProdutoIndividual() {
                                 )}
                                 {produtos.foto_4 && (
                                     <a className="card w-50" href="#" onClick={() => handleImageClick(imgSrc4)}>
+                                        <img className="img-left" src={produtos.foto_4} alt="Foto 4" />
+                                    </a>
+                                )}
+                            </div>
+                            <div className="d-flex my-3 d-block d-md-none" id="img-left">
+                                {produtos.foto_2 && (
+                                    <a className="card w-50 p-1" href="#" onClick={() => handleImageClick(imgSrc2)}>
+                                        <img className="img-left" src={produtos.foto_2} alt="Foto 2" />
+                                    </a>
+                                )}
+                                {produtos.foto_3 && (
+                                    <a className="card w-50 p-1" href="#" onClick={() => handleImageClick(imgSrc3)}>
+                                        <img className="img-left" src={produtos.foto_3} alt="Foto 3" />
+                                    </a>
+                                )}
+                                {produtos.foto_4 && (
+                                    <a className="card w-50 p-1" href="#" onClick={() => handleImageClick(imgSrc4)}>
                                         <img className="img-left" src={produtos.foto_4} alt="Foto 4" />
                                     </a>
                                 )}
@@ -107,7 +124,6 @@ export function ProdutoIndividual() {
                     )}
                 </div>
             </div>
-            <Footer/>
         </>
     );
 }
