@@ -21,10 +21,10 @@ function Carrossel() {
 
     // Retorna o carrossel com os produtos ( iteração pelo .map())
     return (
-        <div className="m-0 p-0" style={{ zIndex: -1, minWidth: "100%", height: "100%", }}>
+        <div className="m-0 p-0 border-0" style={{ zIndex: -2, minWidth: "100%", height: "100%", }}>
 
             <Carousel
-                className="carousel carousel-dark slide m-0 p-0 d-flex justify-content-center"
+                className="carousel carousel-dark slide m-0 p-0 d-flex justify-content-center border-0"
             >
                 {carroussel.slice(0, 5).map(carroussel => (
                     <Carousel.Item
@@ -37,14 +37,15 @@ function Carrossel() {
                         <a href={carroussel.url}>
                             <img
                                 src={carroussel.foto}
-                                className="d-flex justify-content-center p-0 m-0"
+                                className="d-flex justify-content-center p-0 m-0 border-0"
                                 erro={errors.get(carroussel.url) || false}
                                 style={{
                                     cursor: 'pointer',
                                     width: '100%',
                                     height: '100%',
                                     objectFit: 'cover',
-                                    objectPosition: 'center'
+                                    objectPosition: 'center',
+                                    zIndex: -2
                                 }}
                             />
                         </a>
