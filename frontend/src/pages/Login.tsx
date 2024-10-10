@@ -6,6 +6,7 @@ import { Logo } from "../components/Logo";
 import { Container, Form, Spinner } from "react-bootstrap";
 import '../styles/loginECadastro.css';
 import { useCurrentUser } from "../hooks/useCurrentUser";
+import { ToastContainer, toast } from 'react-toastify';
 
 export function Login() {
 
@@ -61,10 +62,12 @@ export function Login() {
         setCurrentUser(true);
         setValid(true);
         setIsLoading(false);
+        toast.success("Login realizado com sucesso!");
       }).catch(function (error) {
         setCurrentUser(false);
         setValid(false);
         setIsLoading(false);
+        toast.error("Erro ao realizar login");
       });
     }, 1500);
 
@@ -79,6 +82,7 @@ export function Login() {
       <div className="d-flex position-relative justify-content-center align-bottom p-4">
         <Logo />
       </div>
+    <ToastContainer />
       <Container fluid id="containerFluid" className="mb-auto rounded-4 position-relative bg-white p-4 border-5 border-black">
         <h1 className="d-flex justify-content-center" id="title">Login</h1>
         <Form id="login-form" method="post" onSubmit={e => submitLogin(e)} noValidate>
