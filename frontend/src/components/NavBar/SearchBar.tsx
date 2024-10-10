@@ -24,7 +24,7 @@ export const SearchBar = () => {
   }, [termoBusca]);
 
   return (
-    <div className="container position-relative d-flex flex-column align-items-center">
+    <div className="position-relative d-flex flex-column align-items-center">
       {/* Barra de pesquisa */}
       <div className="d-flex col-5 bg-white border border-white rounded-pill" role="search">
         <input
@@ -41,7 +41,7 @@ export const SearchBar = () => {
       {sugestoes.length > 0 && (
         <div
           className="search-results position-fixed w-50 p-2 bg-dark rounded border border-secondary"
-          style={{ zIndex: 1000, marginTop: '5vh' }}
+          style={{ zIndex: 1000, marginTop: '5vh', width: '100%'}}
         >
           <ul className="list-unstyled mb-0" style={{ padding: 0, margin: 0 }}>
             {sugestoes.map((produto) => (
