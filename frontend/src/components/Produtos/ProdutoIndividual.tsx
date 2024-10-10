@@ -24,6 +24,7 @@ export function ProdutoIndividual() {
     const imgSrc3 = produtos?.foto_3 || ''; 
     const imgSrc4 = produtos?.foto_4 || ''; 
     const [emailUser, setEmail] = useState<string>('');
+    const [carrinho, setCarrinho] = useState<{ [key: number]: number }>({});
     
     const loadProdutos = async () => {
         const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
@@ -57,20 +58,27 @@ export function ProdutoIndividual() {
           });
       }, [currentUser]);
 
-    const handleAdd = async (product_id: number) => {
+      const handleAdd = async (product_id: number) => {
         if (emailUser) {
-          try {
-            await client.post('accounts/add-item/', { email: emailUser, product_id: product_id})
-            toast("Você adicionou o item ao seu carrinho!", {
-            autoClose: 2000,
-            });
-          }catch (error) {
-            console.error("Erro ao adicionar item ao carrinho", error);
-            toast.error("Erro ao adicionar item ao carrinho");
-          }
+            if (carrinho[product_id]) {
+                setCarrinho(prev => ({ ...prev, [product_id]: prev[product_id] + 1 }));
+                toast.warning(`Quantidade do item aumentada! Agora você tem ${carrinho[product_id] + 1}.`, {
+                    autoClose: 2000,
+                });
+            } else {
+                setCarrinho(prev => ({ ...prev, [product_id]: 1 }));
+                try {
+                    await client.post('accounts/add-item/', { email: emailUser, product_id: product_id });
+                    toast("Você adicionou o item ao seu carrinho!", {
+                        autoClose: 2000,
+                    });
+                } catch (error) {
+                    console.error("Erro ao adicionar item ao carrinho", error);
+                    toast.error("Erro ao adicionar item ao carrinho");
+                }
+            }
         }
-      };
-
+    };
 
     return (
         <>
