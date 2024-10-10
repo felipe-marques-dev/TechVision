@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { client } from "../../services/client";
 import { Nav_bar } from "../../components/NavBar/Navbar";
 import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
 import { Produto } from "../../types/Produto";
+import { useNavigate } from "react-router-dom";
 import { Footer } from "../Footer";
+import { ToastContainer, toast } from 'react-toastify';
+import { url } from "inspector";
 
 
 const ico_entregas = 'entregas.png';
@@ -12,6 +16,8 @@ const ico_cartao = 'ico-cartao.jpg';
 const ico_cadeado = 'ico-cadeado.png';
 
 export function ProdutoIndividual() {
+    const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState<boolean>(false);
     const { url_name } = useParams<{ url_name: string }>();
     const url_product = url_name?.toString();
     const [produtos, setProdutos] = useState<Produto | null>(null);
@@ -19,6 +25,7 @@ export function ProdutoIndividual() {
     const imgSrc2 = produtos?.foto_2 || ''; 
     const imgSrc3 = produtos?.foto_3 || ''; 
     const imgSrc4 = produtos?.foto_4 || ''; 
+    const [emailUser, setEmail] = useState<string>('');
     
     const loadProdutos = async () => {
         const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
@@ -29,17 +36,48 @@ export function ProdutoIndividual() {
         }
         document.title = name;
     };
+
+
     useEffect(() => {
-        
+
+ 
         loadProdutos();
     }, [url_product]);
 
     const handleImageClick = (img: string) => {
         setImgPrincipal(img);
     };
+    
+    useEffect(() => {
+        client.get("/accounts/usuario")
+          .then(response => {
+            setCurrentUser(true);
+            setEmail(response.data.user.email);
+          })
+          .catch(error => {
+            setCurrentUser(false);
+            navigate('/login');
+          });
+      }, [currentUser]);
+
+    const handleAdd = async (product_id: number) => {
+        if (emailUser) {
+          try {
+            await client.post('accounts/add-item/', { email: emailUser, product_id: product_id})
+            toast("Você adicionou o item ao seu carrinho!", {
+            autoClose: 2000,
+            });
+          }catch (error) {
+            console.error("Erro ao adicionar item ao carrinho", error);
+            toast.error("Erro ao adicionar item ao carrinho");
+          }
+        }
+      };
+
 
     return (
         <>
+        <ToastContainer />
             <Nav_bar />
             <div className="container-fluid">
                 <div className="col" id="produtoInd">
@@ -80,7 +118,7 @@ export function ProdutoIndividual() {
                                 </p>
                                 <p className="descricao" id="descricao-pdts">{produtos.description}</p>
                                 <div className="row">
-                                    <button className="btn" id="add-cart-pdt">
+                                    <button onClick={() => handleAdd (produtos.product_id)} className="btn" id="add-cart-pdt">
                                         Adicionar ao carrinho
                                     </button>
                                     <button className="btn" id="add-cart-pdt">
