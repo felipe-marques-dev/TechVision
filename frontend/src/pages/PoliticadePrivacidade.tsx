@@ -1,5 +1,5 @@
 import { Nav_bar } from "../components/NavBar/Navbar";
-import { FooterDesktop } from "../components/Footer/FooterDesktop";
+import { Footer } from "../components/Footer/Footer";
 
 export function PoliticadePrivacidade() {
 
@@ -46,7 +46,7 @@ export function PoliticadePrivacidade() {
             <p>Esperamos que esteja esclarecido e, como mencionado anteriormente, se houver algo que você não tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.</p>
             <p>Esta política é efetiva a partir de 10 de outubro de 2024.</p>
         </div>
-        <FooterDesktop />
+        <Footer />
      </>
     )
 

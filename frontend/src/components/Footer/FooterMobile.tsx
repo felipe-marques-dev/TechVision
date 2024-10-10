@@ -16,7 +16,7 @@ export function FooterMobile() {
                 </div>
 
                 <div className='my-3 col'>
-                    <div><a href="" id='link-footer'>Termos e condições de uso</a> | <a href="" id='link-footer'>Política de Privacidade</a></div>
+                    <div><a href="/termos-de-uso" id='link-footer'>Termos e condições de uso</a> | <a href="/politica-de-privacidade" id='link-footer'>Política de Privacidade</a></div>
                 </div>
 
                 <div className="p-0 my-3 col">

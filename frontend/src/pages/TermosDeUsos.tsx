@@ -1,17 +1,17 @@
 import { Nav_bar } from "../components/NavBar/Navbar";
-import { FooterDesktop } from "../components/Footer/FooterDesktop";
+import { Footer } from "../components/Footer/Footer";
 
-export function TermoseUsos() {
+export function TermosDeUsos() {
 
     return (
         <>
             <Nav_bar />
             <div className="container p-5" style={{ color: 'rgb(68, 68, 68)' }}>
-            <h2>1. Termos</h2>
+            <h2>Termos</h2>
             <p>
                 Ao acessar ao site <a href="https://atena-cyber.com" target="_blank" rel="noopener noreferrer">AtenaCyber</a>, concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis e concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não concordar com algum desses termos, está proibido de usar ou acessar este site. Os materiais contidos neste site são protegidos pelas leis de direitos autorais e marcas comerciais aplicáveis.
             </p>
-            <h2>2. Uso de Licença</h2>
+            <h2>Uso de Licença</h2>
             <p>
                 É concedida permissão para baixar temporariamente uma cópia dos materiais (informações ou software) no site AtenaCyber, apenas para visualização transitória pessoal e não comercial. Esta é a concessão de uma licença, não uma transferência de título e, sob esta licença, você não pode:
             </p>
@@ -25,7 +25,7 @@ export function TermoseUsos() {
             <p>
                 Esta licença será automaticamente rescindida se você violar alguma dessas restrições e poderá ser rescindida por AtenaCyber a qualquer momento. Ao encerrar a visualização desses materiais ou após o término desta licença, você deve apagar todos os materiais baixados em sua posse, seja em formato eletrônico ou impresso.
             </p>
-            <h2>3. Isenção de responsabilidade</h2>
+            <h2>Isenção de responsabilidade</h2>
             <ol>
                 <li>
                     Os materiais no site da AtenaCyber são fornecidos 'como estão'. AtenaCyber não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização, adequação a um fim específico ou não violação de propriedade intelectual ou outra violação de direitos.
@@ -34,15 +34,15 @@ export function TermoseUsos() {
                     Além disso, o AtenaCyber não garante ou faz qualquer representação relativa à precisão, aos resultados prováveis ou à confiabilidade do uso dos materiais em seu site ou de outra forma relacionado a esses materiais ou em sites vinculados a este site.
                 </li>
             </ol>
-            <h2>4. Limitações</h2>
+            <h2>Limitações</h2>
             <p>
                 Em nenhum caso o AtenaCyber ou seus fornecedores serão responsáveis por quaisquer danos (incluindo, sem limitação, danos por perda de dados ou lucro ou devido a interrupção dos negócios) decorrentes do uso ou da incapacidade de usar os materiais em AtenaCyber, mesmo que AtenaCyber ou um representante autorizado da AtenaCyber tenha sido notificado oralmente ou por escrito da possibilidade de tais danos. Como algumas jurisdições não permitem limitações em garantias implícitas, ou limitações de responsabilidade por danos consequentes ou incidentais, essas limitações podem não se aplicar a você.
             </p>
-            <h2>5. Precisão dos materiais</h2>
+            <h2>Precisão dos materiais</h2>
             <p>
                 Os materiais exibidos no site da AtenaCyber podem incluir erros técnicos, tipográficos ou fotográficos. AtenaCyber não garante que qualquer material em seu site seja preciso, completo ou atual. AtenaCyber pode fazer alterações nos materiais contidos em seu site a qualquer momento, sem aviso prévio. No entanto, AtenaCyber não se compromete a atualizar os materiais.
             </p>
-            <h2>6. Links</h2>
+            <h2>Links</h2>
             <p>
                 O AtenaCyber não analisou todos os sites vinculados ao seu site e não é responsável pelo conteúdo de nenhum site vinculado. A inclusão de qualquer link não implica endosse por AtenaCyber do site. O uso de qualquer site vinculado é por conta e risco do usuário.
             </p>
@@ -55,7 +55,7 @@ export function TermoseUsos() {
                 Estes termos e condições são regidos e interpretados de acordo com as leis do AtenaCyber e você se submete irrevogavelmente à jurisdição exclusiva dos tribunais naquele estado ou localidade.
             </p>
         </div>
-        <FooterDesktop />
+        <Footer />
      </>
     )
 

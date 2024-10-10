@@ -5,11 +5,9 @@ import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
 import { Produto } from "../../types/Produto";
-import { FooterDesktop } from "../Footer/FooterDesktop";
+import { Footer } from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import { url } from "inspector";
-
 
 const ico_entregas = 'entregas.png';
 const ico_cartao = 'ico-cartao.jpg';
@@ -164,7 +162,7 @@ export function ProdutoIndividual() {
                 </div>
             </div>
 
-            <FooterDesktop />
+            <Footer />
         </>
     );
 }
