@@ -15,7 +15,7 @@ export const NavMenuMobile = () => {
 
   return (
     <>
-      <nav className="navbar bg-black" style={{zIndex: "1"}}>
+      <nav className="navbar bg-black border-bottom m-0" style={{zIndex: "1", height: "150px"}}>
         <Div className="container-fluid border border-black" id="header">
           <Div className="collapse navbar-collapse d-flex" id="navbarSupportedContent" >
             {/* Menu mobile */}
