@@ -76,7 +76,9 @@ export function ProdutoIndividual() {
 
     return (
         <>
-        <ToastContainer />
+        <ToastContainer 
+        position="bottom-left"
+        />
             <Nav_bar />
             <div className="container-fluid m-0 p-0 border-0">
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
