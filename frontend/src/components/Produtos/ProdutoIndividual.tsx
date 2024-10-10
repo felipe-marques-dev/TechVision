@@ -88,7 +88,7 @@ export function ProdutoIndividual() {
         position="bottom-left"
         />
             <Nav_bar />
-            <div className="container-fluid m-0 p-0 border-0">
+            <div className="container-fluid mt-5 p-0 border-0">
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
                     {produtos ? (
                         <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
