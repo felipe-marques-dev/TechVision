@@ -16,6 +16,7 @@ import {
   NumberDecrementStepper,
   Stack,
 } from '@chakra-ui/react';
+import { FooterDesktop } from "../../components/Footer/FooterDesktop";
 
 export function Carrinho() {
   const navigate = useNavigate();
@@ -23,7 +24,6 @@ export function Carrinho() {
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
 
-  // Verificar sessão do usuário
   useEffect(() => {
     document.title = 'Carrinho';
     client.get("/accounts/usuario")
@@ -100,6 +100,11 @@ export function Carrinho() {
     }
   };
  
+  const calcularTotal = () => {
+    return produtos.reduce((total, item) => {
+      return total + (item.produto.price * item.quantity);
+    }, 0).toFixed(2); 
+  };
 
   function continuarComprandoBtn(event: MouseEvent<HTMLButtonElement>): void {
     navigate('/');
@@ -145,21 +150,20 @@ export function Carrinho() {
                                 }
                               }}
                             >
-                            <NumberInputField />
+                              <NumberInputField />
                               <NumberInputStepper>
-                                <NumberIncrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity )} />
-                                <NumberDecrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity )} />
+                                <NumberIncrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity + 1)} />
+                                <NumberDecrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity - 1)} />
                               </NumberInputStepper>
                             </NumberInput>
                           </Stack>
-
                         </div>
                       </p>
                     </div>
 
                     <div className="col text-center">
                       <div className="row" style={{ width: 200 }}>
-                        <p>R$ {item.produto.price}</p>
+                        <p>R$ {item.produto.price.toFixed(2)}</p>
                         <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.produto.product_id)}>Remover</button>
                       </div>
                     </div>
@@ -173,7 +177,7 @@ export function Carrinho() {
             <div className="col d-flex" style={{ padding: 80 }}>
               <div className="summary">
                 <h5>RESUMO</h5>
-                <p><strong>Valor dos Produtos:</strong> R$ 4.899,80</p>
+                <p><strong>Valor dos Produtos:</strong> R$ {calcularTotal()}</p>
                 <p><strong>Frete:</strong> R$ 0,00</p>
                 <h5>ENTREGA</h5>
                 <Calculo />
@@ -184,6 +188,7 @@ export function Carrinho() {
           </div>
         </div>
       )}
+      <FooterDesktop />
     </div>
   );
 }

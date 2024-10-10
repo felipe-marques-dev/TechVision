@@ -13,6 +13,8 @@ import { Carrinho } from "../pages/Carrinho/index.tsx";
 import ProdutosCategoria from "../components/Produtos/ProdutosCategoria.tsx";
 import Categoria from "../pages/Categoria.tsx";
 import { EsqueciMinhaSenhaVerificacao, EsqueciMinhaSenha } from "../pages/EsqueciMinhaSenha.tsx";
+import { TermoseUsos } from "../pages/TermoseUsos.tsx";
+import { PoliticadePrivacidade } from "../pages/PoliticadePrivacidade.tsx";
 
 export function AppRoutes(){
     return (
@@ -24,6 +26,8 @@ export function AppRoutes(){
                 <Route path="/profile" element={<Profile />} />
                 <Route path={"/produto/:url_name"} element={<ProdutoIndividual />}/>
                 <Route path="/carrinho" element={<Carrinho />} />
+                <Route path="/termoseusos" element={<TermoseUsos />} />
+                <Route path="/privacidade" element={<PoliticadePrivacidade />} />
                 <Route path={"/categoria/:name"} element={<Categoria/>} />
                 <Route path="/redefinicao-de-senha/" element={<EsqueciMinhaSenhaVerificacao />} />
                 <Route path="/redefinicao-de-senha/:encoded_pk/:token/" element={<EsqueciMinhaSenha />} />

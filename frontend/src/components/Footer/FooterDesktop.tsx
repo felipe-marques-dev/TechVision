@@ -16,7 +16,7 @@ export function FooterDesktop() {
                 </div>
 
                 <div className='my-3 col'>
-                    <div><a href="" id='link-footer'>Termos e condições de uso</a> | <a href="" id='link-footer'>Política de Privacidade</a></div>
+                    <div><a href="/termoseusos" id='link-footer'>Termos e condições de uso</a> | <a href="/privacidade" id='link-footer'>Política de Privacidade</a></div>
                 </div>
 
                 <div className="p-0 my-3 col">

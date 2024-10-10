@@ -5,7 +5,7 @@ import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
 import { Produto } from "../../types/Produto";
-import { Footer } from "../Footer/Footer";
+import { FooterDesktop } from "../Footer/FooterDesktop";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { url } from "inspector";
@@ -76,7 +76,9 @@ export function ProdutoIndividual() {
 
     return (
         <>
-        <ToastContainer />
+        <ToastContainer 
+        position="bottom-left"
+        />
             <Nav_bar />
             <div className="container-fluid mt-2 p-0 border-0">
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
@@ -161,7 +163,8 @@ export function ProdutoIndividual() {
                     )}
                 </div>
             </div>
-            <Footer/>
+
+            <FooterDesktop />
         </>
     );
 }
