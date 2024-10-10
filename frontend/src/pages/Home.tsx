@@ -1,7 +1,7 @@
 import Carrossel from "../components/Carroussel/Carrossel";
 import { Nav_bar } from "../components/NavBar/Navbar";
 import PrincipaisProdutos from "../components/Produtos/PrincipaisProdutos";
-import { Footer } from "../components/Footer";
+import { Footer } from "../components/Footer/Footer";
 export function Home(){
     return(
         <div>

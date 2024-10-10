@@ -38,3 +38,13 @@
 #link-footer:hover{
   text-decoration: underline;
 }
+
+#footer-mobile{
+    background-color: rgb(17, 17, 17);
+    color: white;
+}
+
+#sub-footer-mobile{
+    background-color: black;
+    color: white;
+}

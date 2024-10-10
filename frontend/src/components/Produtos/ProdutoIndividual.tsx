@@ -5,8 +5,8 @@ import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
 import { Produto } from "../../types/Produto";
+import { Footer } from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
-import { Footer } from "../Footer";
 import { ToastContainer, toast } from 'react-toastify';
 import { url } from "inspector";
 
@@ -56,7 +56,6 @@ export function ProdutoIndividual() {
           })
           .catch(error => {
             setCurrentUser(false);
-            navigate('/login');
           });
       }, [currentUser]);
 
@@ -79,10 +78,10 @@ export function ProdutoIndividual() {
         <>
         <ToastContainer />
             <Nav_bar />
-            <div className="container-fluid">
-                <div className="flex-wrap d-flex" id="produtoInd">
+            <div className="container-fluid m-0 p-0 border-0">
+                <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
                     {produtos ? (
-                        <div className="row" key={produtos.url_name}>
+                        <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
                             <div className="col-sm-2 d-none d-md-block" id="img-left">
                                 {produtos.foto_2 && (
                                     <a className="card w-50" href="#" onClick={() => handleImageClick(imgSrc2)}>
@@ -162,7 +161,11 @@ export function ProdutoIndividual() {
                     )}
                 </div>
             </div>
+<<<<<<< HEAD
             <Footer />
+=======
+            <Footer/>
+>>>>>>> b40de146b810563ea380f4c72d3f6338444f9361
         </>
     );
 }

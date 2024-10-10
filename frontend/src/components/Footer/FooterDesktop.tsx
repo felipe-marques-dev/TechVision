@@ -1,7 +1,7 @@
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa6';
-import '../styles/footer.css';
+import '../../styles/footer.css';
 
-export function Footer() {
+export function FooterDesktop() {
     const logo_tech_vision = 'logo_tech_vision.png';
 
     return (

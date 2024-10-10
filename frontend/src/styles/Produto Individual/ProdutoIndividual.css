@@ -1,5 +1,6 @@
 #produtoInd{
     margin: 4vw;
+    z-index: -3;
 }
 
 #tituloInd{
@@ -20,6 +21,9 @@
     width: 2.5vh;
 }
 
+#row-images{
+    z-index: 0;
+}
 
 #add-cart-pdt{
     text-decoration: none;
