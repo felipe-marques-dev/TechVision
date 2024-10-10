@@ -1,5 +1,5 @@
 import { Nav_bar } from "../components/NavBar/Navbar";
-import { Footer } from "../components/Footer";
+import { FooterDesktop } from "../components/Footer/FooterDesktop";
 
 export function TermoseUsos() {
 
@@ -55,7 +55,7 @@ export function TermoseUsos() {
                 Estes termos e condições são regidos e interpretados de acordo com as leis do AtenaCyber e você se submete irrevogavelmente à jurisdição exclusiva dos tribunais naquele estado ou localidade.
             </p>
         </div>
-        <Footer />
+        <FooterDesktop />
      </>
     )
 
