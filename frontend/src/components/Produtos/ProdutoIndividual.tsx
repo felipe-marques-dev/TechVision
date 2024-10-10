@@ -162,6 +162,7 @@ export function ProdutoIndividual() {
                     )}
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

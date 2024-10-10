@@ -16,6 +16,7 @@ import {
   NumberDecrementStepper,
   Stack,
 } from '@chakra-ui/react';
+import { Footer } from "../../components/Footer";
 
 export function Carrinho() {
   const navigate = useNavigate();
@@ -173,7 +174,7 @@ export function Carrinho() {
             <div className="col d-flex" style={{ padding: 80 }}>
               <div className="summary">
                 <h5>RESUMO</h5>
-                <p><strong>Valor dos Produtos:</strong> R$ 4.899,80</p>
+                <p><strong>Valor dos Produtos:</strong> R$1322,00</p>
                 <p><strong>Frete:</strong> R$ 0,00</p>
                 <h5>ENTREGA</h5>
                 <Calculo />
@@ -184,6 +185,7 @@ export function Carrinho() {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }
