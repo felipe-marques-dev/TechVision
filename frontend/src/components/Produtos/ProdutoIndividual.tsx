@@ -36,17 +36,14 @@ export function ProdutoIndividual() {
         document.title = name;
     };
 
-
     useEffect(() => {
-
- 
         loadProdutos();
     }, [url_product]);
 
     const handleImageClick = (img: string) => {
         setImgPrincipal(img);
     };
-    
+
     useEffect(() => {
         client.get("/accounts/usuario")
           .then(response => {
@@ -56,26 +53,32 @@ export function ProdutoIndividual() {
           .catch(error => {
             setCurrentUser(false);
           });
-      }, [currentUser]);
+    }, [currentUser]);
 
-      const handleAdd = async (product_id: number) => {
+    const handleAdd = async (product_id: number) => {
         if (emailUser) {
-            if (carrinho[product_id]) {
-                setCarrinho(prev => ({ ...prev, [product_id]: prev[product_id] + 1 }));
-                toast.warning(`Quantidade do item aumentada! Agora você tem ${carrinho[product_id] + 1}.`, {
-                    autoClose: 2000,
-                });
-            } else {
-                setCarrinho(prev => ({ ...prev, [product_id]: 1 }));
-                try {
+            const newQuantity = (carrinho[product_id] || 0) + 1;
+            setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
+
+            try {
+                if (carrinho[product_id]) {
+                    await client.patch('accounts/cart/', {
+                        email: emailUser,
+                        product_id: product_id,
+                        quantity: newQuantity,
+                    });
+                    toast.warning(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
+                        autoClose: 2000,
+                    });
+                } else {
                     await client.post('accounts/add-item/', { email: emailUser, product_id: product_id });
                     toast("Você adicionou o item ao seu carrinho!", {
                         autoClose: 2000,
                     });
-                } catch (error) {
-                    console.error("Erro ao adicionar item ao carrinho", error);
-                    toast.error("Erro ao adicionar item ao carrinho");
                 }
+            } catch (error) {
+                console.error("Erro ao atualizar item no carrinho", error);
+                toast.error("Erro ao atualizar item no carrinho");
             }
         }
     };
@@ -83,7 +86,7 @@ export function ProdutoIndividual() {
     return (
         <>
         <ToastContainer 
-        position="bottom-left"
+        position="top-center"
         />
             <Nav_bar />
             <div className="container-fluid mt-5 p-0 border-0">
