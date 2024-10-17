@@ -1,4 +1,4 @@
-import { Box, Collapse, Flex, IconButton, SlideFade } from "@chakra-ui/react";
+import { Box, Collapse, Flex, IconButton, SlideFade, useMediaQuery } from "@chakra-ui/react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react"
@@ -12,7 +12,8 @@ export const NavMenuMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<[]>([]);
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
-
+  const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
+  
   return (
     <>
       <nav className="navbar bg-black border-bottom m-0" style={{zIndex: "1", height: "150px"}}>
@@ -39,18 +40,18 @@ export const NavMenuMobile = () => {
               w="full"
               display={{ base: isOpen ? "block" : "none", md: "block"}}
             >
-              <Flex flexDir="column" bg="black" className="position-relative">
+              <Flex flexDir="column" bg="black" className="position-relative p-0">
 
-                <nav className="navbar m-0 p-0">
-                  <Div className="container-fluid d-flex justify-content-md-center position-relative text-center align-items-center p-0" id="header">
+                <nav className="navbar p-0">
+                  <Div className={`container-fluid d-flex ${isLargerThanMD? 'justify-content-center':'justify-content-md-center'} position-relative text-center align-items-center p-0`} id="header">
                     {/* Categorias */}
-                    <div className="row p-0 me-2">
+                    <div className={`row p-0`}>
                       <DropDownNav></DropDownNav>
                     </div>
                     {/* Outras opcoes */}
-                    <div className="p-0 m-0" style={{fontSize: "22px"}}>
-                      <A className="p-0" href="/assinatura"> Assinatura</A>
-                      </div>
+                    <div className="row p-0" style={{fontSize: "22px"}}>
+                      <A className="p-0 m-0" href="/assinatura">Assinatura</A>
+                    </div>
                   </Div>
                 </nav>
               </Flex>
