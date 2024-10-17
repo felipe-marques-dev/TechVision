@@ -1,8 +1,4 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
 from .serializer import CarrousselSerializer
-from rest_framework.response import Response
-from rest_framework import status, permissions
 from rest_framework import generics
 from .models import Carroussel
 from rest_framework.permissions import IsAdminUser, AllowAny
