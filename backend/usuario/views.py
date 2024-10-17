@@ -101,7 +101,7 @@ class ItemCartUser(APIView):
 
 class UserCheckPassword(APIView):
     permission_class = (permissions.AllowAny,)
-    authentication_classes = (SessionAuthentication)
+    authentication_classes = (SessionAuthentication,)
     def post(self, request):
         # dados do corpo da  requisicao
         emailBody = request.data.get('email')
