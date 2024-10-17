@@ -4,8 +4,7 @@
 }
 
 #containerFluidRecuperacaoDeSenha{
-  min-width: 403px;
-  width: 403px;
+  width: 325px;
 }
 
 #title{
@@ -17,7 +16,7 @@
 }
 
 #inputEmailRecuperacaoDeSenha, #inputPasswordConfirmRecuperacaoDeSenha, #inputPasswordRecuperacaoDeSenha{
-  max-width: 291px;
+  max-width: 212px;
 }
 
 #inputNome{

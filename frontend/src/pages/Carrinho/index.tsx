@@ -72,10 +72,6 @@ export function Carrinho() {
   };
 
   const handleQuantityChange = async (product_id: number, quantity: number) => {
-    if (quantity < 1) {
-      toast.error("A quantidade deve ser pelo menos 1.");
-      return;
-    }
 
     if (emailUser) {
       const url = `/accounts/cart/`;
@@ -89,7 +85,7 @@ export function Carrinho() {
         setProdutos(prevProdutos =>
           prevProdutos.map(item =>
             item.produto.product_id === product_id
-              ? { ...item, quantity } // Atualiza a quantidade localmente
+              ? { ...item, quantity } 
               : item
           )
         );
@@ -99,18 +95,18 @@ export function Carrinho() {
       }
     }
   };
- 
+
   const calcularTotal = () => {
     return produtos.reduce((total, item) => {
       return total + (item.produto.price * item.quantity);
     }, 0).toFixed(2); 
   };
 
-  function continuarComprandoBtn(event: MouseEvent<HTMLButtonElement>): void {
+  function continuarComprandoBtn() {
     navigate('/');
   }
 
-  function irParaPagamentoBtn(event: MouseEvent<HTMLButtonElement>): void {
+  function irParaPagamentoBtn() {
     navigate('/pagamento');
   }
 
@@ -141,19 +137,23 @@ export function Carrinho() {
                             <NumberInput 
                               size='xs' 
                               maxW={90} 
-                              value={item.quantity} // Usar value em vez de defaultValue
+                              value={item.quantity}
                               min={1}
                               onChange={(valueString) => {
                                 const value = parseInt(valueString);
                                 if (!isNaN(value)) {
-                                  handleQuantityChange(item.produto.product_id, value); // Chamar a função aqui
+                                  handleQuantityChange(item.produto.product_id, value);
                                 }
                               }}
                             >
                               <NumberInputField />
                               <NumberInputStepper>
-                                <NumberIncrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity + 1)} />
-                                <NumberDecrementStepper onClick={() => handleQuantityChange(item.produto.product_id, item.quantity - 1)} />
+                                <NumberIncrementStepper 
+                                  onClick={() => handleQuantityChange(item.produto.product_id, item.quantity )} 
+                                />
+                                <NumberDecrementStepper 
+                                  onClick={() => handleQuantityChange(item.produto.product_id, item.quantity)} 
+                                />
                               </NumberInputStepper>
                             </NumberInput>
                           </Stack>
