@@ -34,12 +34,16 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1',
     'http://localhost:3000',
     'http://localhost:4173',
-    'http://10.109.7.37:4173'
+    'http://10.109.7.37:4173',
+    'https://f4a8-201-91-14-234.ngrok-free.app'
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = {
     'http://localhost:3000',
     'http://localhost:4173',
+    'https://f4a8-201-91-14-234.ngrok-free.app'
 
 }
 CORS_ALLOW_CREDENTIALS = True

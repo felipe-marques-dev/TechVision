@@ -8,6 +8,7 @@ import { Produto } from "../../types/Produto";
 import { Footer } from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import { useMediaQuery } from "@chakra-ui/react";
 
 const ico_entregas = 'entregas.png';
 const ico_cartao = 'ico-cartao.jpg';
@@ -34,6 +35,7 @@ export function ProdutoIndividual() {
     const imgSrc4 = produtos?.foto_4 || ''; 
     const [emailUser, setEmail] = useState<string>('');
     const [carrinho, setCarrinho] = useState<{ [key: number]: number }>({});
+    const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
     
     const loadProdutos = async () => {
         const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
@@ -136,39 +138,39 @@ export function ProdutoIndividual() {
                         <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
                             <div className="col-sm-2 d-none d-md-block" id="img-left">
                                 {produtos.foto_2 && (
-                                    <a className="card w-50" href="#" onClick={() => handleImageClick(imgSrc2)}>
+                                    <a className="card w-50 mb-2" href="#" onClick={() => handleImageClick(imgSrc2)}>
                                         <img className="img-left" src={produtos.foto_2} alt="Foto 2" />
                                     </a>
                                 )}
                                 {produtos.foto_3 && (
-                                    <a className="card w-50" href="#" onClick={() => handleImageClick(imgSrc3)}>
+                                    <a className="card w-50 mb-2" href="#" onClick={() => handleImageClick(imgSrc3)}>
                                         <img className="img-left" src={produtos.foto_3} alt="Foto 3" />
                                     </a>
                                 )}
                                 {produtos.foto_4 && (
-                                    <a className="card w-50" href="#" onClick={() => handleImageClick(imgSrc4)}>
+                                    <a className="card w-50 mb-2" href="#" onClick={() => handleImageClick(imgSrc4)}>
                                         <img className="img-left" src={produtos.foto_4} alt="Foto 4" />
                                     </a>
                                 )}
                             </div>
                             <div className="d-flex my-3 d-block d-md-none" id="img-left">
                                 {produtos.foto_2 && (
-                                    <a className="card w-50 p-1" href="#" onClick={() => handleImageClick(imgSrc2)}>
+                                    <a className="card w-50 p-1 me-2" href="#" onClick={() => handleImageClick(imgSrc2)}>
                                         <img className="img-left" src={produtos.foto_2} alt="Foto 2" />
                                     </a>
                                 )}
                                 {produtos.foto_3 && (
-                                    <a className="card w-50 p-1" href="#" onClick={() => handleImageClick(imgSrc3)}>
+                                    <a className="card w-50 p-1 me-2" href="#" onClick={() => handleImageClick(imgSrc3)}>
                                         <img className="img-left" src={produtos.foto_3} alt="Foto 3" />
                                     </a>
                                 )}
                                 {produtos.foto_4 && (
-                                    <a className="card w-50 p-1" href="#" onClick={() => handleImageClick(imgSrc4)}>
+                                    <a className="card w-50 p-1 me-2" href="#" onClick={() => handleImageClick(imgSrc4)}>
                                         <img className="img-left" src={produtos.foto_4} alt="Foto 4" />
                                     </a>
                                 )}
                             </div>
-                            <div className="col">
+                            <div className={`d-flex ${isLargerThanMD ? 'col' : 'row m-0 p-0' }`}>
                                 <img 
                                     src={imgPrincipal || produtos.foto_1} 
                                     id="img-prod" 
