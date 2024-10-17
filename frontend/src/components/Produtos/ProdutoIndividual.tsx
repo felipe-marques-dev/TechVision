@@ -14,6 +14,15 @@ const ico_entregas = 'entregas.png';
 const ico_cartao = 'ico-cartao.jpg';
 const ico_cadeado = 'ico-cadeado.png';
 
+interface CartItem {
+    produto: {
+        product_id: number;
+
+    };
+    quantity: number;
+}
+
+
 export function ProdutoIndividual() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState<boolean>(false);
@@ -58,36 +67,64 @@ export function ProdutoIndividual() {
     }, [currentUser]);
 
     const handleAdd = async (product_id: number) => {
-        if (currentUser == false){
-            navigate ("/login")
+        if (!currentUser) {
+            navigate("/login");
+            return;
         }
-
-        if (emailUser) {
-            const newQuantity = (carrinho[product_id] || 0) + 1;
-            setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
-
-            try {
-                if (carrinho[product_id]) {
-                    await client.patch('accounts/cart/', {
-                        email: emailUser,
-                        product_id: product_id,
-                        quantity: newQuantity,
-                    });
-                    toast.warning(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
-                        autoClose: 2000,
-                    });
-                } else {
-                    await client.post('accounts/add-item/', { email: emailUser, product_id: product_id });
-                    toast("Você adicionou o item ao seu carrinho!", {
-                        autoClose: 2000,
-                    });
-                }
-            } catch (error) {
-                console.error("Erro ao atualizar item no carrinho", error);
-                toast.error("Erro ao atualizar item no carrinho");
+    
+        // Verifica a quantidade atual no carrinho
+        const currentQuantity = carrinho[product_id] || 0;
+        const newQuantity = currentQuantity + 1;
+        setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
+    
+        try {
+            if (currentQuantity > 0) {
+                // Se o item já existe, faz um PATCH para atualizar a quantidade
+                await client.patch('accounts/cart/', {
+                    email: emailUser,
+                    product_id: product_id,
+                    quantity: newQuantity,
+                });
+                toast.warning(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
+                    autoClose: 2000,
+                });
+            } else {
+                // Se o item não existe, faz um POST para adicioná-lo
+                await client.post('accounts/add-item/', { email: emailUser, product_id: product_id });
+                toast("Você adicionou o item ao seu carrinho!", {
+                    autoClose: 2000,
+                });
             }
+        } catch (error) {
+            console.error("Erro ao atualizar item no carrinho", error);
+            toast.error("Erro ao atualizar item no carrinho");
         }
     };
+    
+
+    useEffect(() => {
+        if (emailUser) {
+            const fetchCartItems = async () => {
+                try {
+                    const response = await client.post('/accounts/cart/', { email: emailUser });
+                    const cartItems: CartItem[] = response.data.itens; // Definindo o tipo aqui
+    
+                    const newCarrinho: { [key: number]: number } = {};
+                    cartItems.forEach((item: CartItem) => { // Usando o tipo definido
+                        newCarrinho[item.produto.product_id] = item.quantity;
+                    });
+                    setCarrinho(newCarrinho);
+                } catch (error) {
+                    console.log("Erro ao buscar produtos do carrinho", error);
+                }
+            };
+    
+            fetchCartItems();
+        }
+    }, [emailUser]);
+    
+    
+    
 
     return (
         <>
