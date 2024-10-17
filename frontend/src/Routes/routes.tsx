@@ -15,6 +15,7 @@ import Categoria from "../pages/Categoria.tsx";
 import { EsqueciMinhaSenhaVerificacao, EsqueciMinhaSenha } from "../pages/EsqueciMinhaSenha.tsx";
 import { TermosDeUsos } from "../pages/TermosDeUsos.tsx";
 import { PoliticadePrivacidade } from "../pages/PoliticadePrivacidade.tsx";
+import { Assinatura } from "../pages/Assinatura.tsx";
 
 export function AppRoutes(){
     return (
@@ -24,6 +25,7 @@ export function AppRoutes(){
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path ="/assinatura" element={<Assinatura />} />
                 <Route path={"/produto/:url_name"} element={<ProdutoIndividual />}/>
                 <Route path="/carrinho" element={<Carrinho />} />
                 <Route path="/termos-de-uso" element={<TermosDeUsos />} />
