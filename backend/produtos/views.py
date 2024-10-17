@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .models import Produto
 from .serializers import ProductSerializer,CategorySerializer
 from rest_framework import generics
@@ -7,10 +6,9 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from .models import Produto, Categoria
 from django.db.models import Q
-from django.db.models import Count
 from rest_framework.views import APIView
-from rest_framework import permissions, status
-from rest_framework.authentication import SessionAuthentication
+
+
 # API de produtos
 class ProductListCreate(generics.ListCreateAPIView):
     queryset = Produto.objects.all()
@@ -46,6 +44,8 @@ class CategoryList(generics.ListCreateAPIView):
             return [IsAdminUser()]
         return [AllowAny()]
 
+
+# API de categorias individual
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Categoria.objects.all()
     serializer_class = CategorySerializer
@@ -66,9 +66,12 @@ def sugestoes_produtos(request):
         return JsonResponse(list(produtos), safe=False)
     return JsonResponse([], safe=False)
 
+
+# API de produtos por categorias
 class CategoryProducts(APIView):
     serializer_class = ProductSerializer
 
+    # Restringe POST apenas para admins
     def get_permissions(self):
         if self.request.method == 'POST':
             return [IsAdminUser()]
@@ -77,8 +80,6 @@ class CategoryProducts(APIView):
     def get(self, request, name):
         category = Categoria.objects.get(name=name)
         category_id = category.category_id
-        print(category_id)
         produtos = Produto.objects.filter(categoria=category_id)
-        print(produtos)
         serializer = ProductSerializer(produtos, many=True, context={'request': request})
         return Response({'products': serializer.data})

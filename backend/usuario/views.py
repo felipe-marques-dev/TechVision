@@ -26,10 +26,10 @@ class UserRegister(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication,)
-    ##
     def post(self, request):
         data = request.data
         assert validate_email(data)
@@ -40,6 +40,7 @@ class UserLogin(APIView):
             login(request, user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         
+        
 class UserLogout(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
@@ -47,33 +48,33 @@ class UserLogout(APIView):
         logout(request)
         return Response(status=status.HTTP_200_OK)
 
+
 class UserCart(APIView):
     authentication_classes = (SessionAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
     # Pega os produtos do carrinho do usuario
     def post(self, request):
         emailBody= request.data.get('email')
-
         user = User.objects.get(email=emailBody)
-        print(user)
         cart = Carrinho.objects.get(user_id  = user)
         cartItem = cart.itens.all()
         serializer = CarrinhoItemSerializer(cartItem, many=True)
+
         return Response({"itens": serializer.data}, status=status.HTTP_200_OK)
 
     # Delete um produto do carrinho
     def delete(self, request):
-        
         productBody = request.data.get('product_id')
+        
         cartItem = CarrinhoItem.objects.get(produto_id = productBody)
         cartItem.delete()        
+
         return Response({'data': 'deletado!' }, status=status.HTTP_200_OK)
     
     # Muda a quantidade de produtos de um item do carrinho
     def patch(self, request):
         quantityBody = request.data.get('quantity')
         productBody = request.data.get('product_id')
-
         
         cartItem = CarrinhoItem.objects.get(produto_id = productBody)
         cartItem.quantity = (quantityBody)
@@ -87,7 +88,6 @@ class ItemCartUser(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
-        requestBody = request.data
         emailBody = request.data.get('email')
         productBody = request.data.get('product_id')
 
@@ -102,7 +102,6 @@ class ItemCartUser(APIView):
 class UserCheckPassword(APIView):
     permission_class = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication)
-
     def post(self, request):
         # dados do corpo da  requisicao
         emailBody = request.data.get('email')
@@ -116,15 +115,11 @@ class UserCheckPassword(APIView):
             return Response(status=status.HTTP_200_OK)
         # se for False retorna 401
         return Response(status=status.HTTP_400_UNAUTHORIZED)
-    
 
-
-        
 
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
-    ##
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
@@ -133,7 +128,6 @@ class UserView(APIView):
 class UserUpdate(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
-
     def patch(self, request):
         emailBody = request.data.get('email')
         senhaBody = request.data.get('password')
@@ -142,7 +136,7 @@ class UserUpdate(APIView):
        
 
         if senhaBody != None and len(senhaBody) >= 8:
-            senha_cripto = make_password(senhaBody)
+            senha_cripto = make_password(senhaBody) #criptografa a senha
             requestSerializer = {'password':senha_cripto,'email': emailBody}
             serializer = UserInfoSerializer(user, data=requestSerializer, partial=True)
         else:
@@ -155,6 +149,7 @@ class UserUpdate(APIView):
                 return Response({"atualizado": requestBody}, status=status.HTTP_200_OK)
         return Response({"error": 'error'},  status=status.HTTP_400_BAD_REQUEST)
     
+
 class ResetPasswordVerify(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -196,6 +191,7 @@ class ResetPasswordVerify(APIView):
             {"message":"Usuario nao existe"}, 
             status=status.HTTP_400_BAD_REQUEST
         )
+
 
 class ResetPassword(APIView):
     permission_classes = (permissions.AllowAny,)

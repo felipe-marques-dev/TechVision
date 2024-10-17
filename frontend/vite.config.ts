@@ -19,8 +19,10 @@ export default defineConfig({
         "/itens": {
           target: 'http://localhost:8000/produtos/itens/',
           changeOrigin: true,
+          secure: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         }
       },
+      cors: false,
   },
 });
