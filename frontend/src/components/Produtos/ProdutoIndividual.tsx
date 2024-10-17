@@ -56,6 +56,10 @@ export function ProdutoIndividual() {
     }, [currentUser]);
 
     const handleAdd = async (product_id: number) => {
+        if (currentUser == false){
+            navigate ("/login")
+        }
+
         if (emailUser) {
             const newQuantity = (carrinho[product_id] || 0) + 1;
             setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
