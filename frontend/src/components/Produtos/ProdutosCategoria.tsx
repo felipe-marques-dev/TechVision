@@ -27,10 +27,10 @@ export default function ProdutosCategoria(){
     
     return (
         <div className="container my-4">
-            <H3 className="text-center mb-4">{name}</H3>
-            <div className="row g-4"> {/* g-4 para espaçamento consistente */}
+            <H3 className="text-center mb-4 d-flex justify-content-center">{name}</H3>
+            <div className="row justify-content-md-start"> {/* g-4 para espaçamento consistente */}
                 {produto.map(produtos => (
-                    <div className="col-6 col-md-4 col-lg-3" key={produtos.url_name}> {/* Colunas responsivas */}
+                    <div className="col-md-auto d-flex justify-content-center" key={produtos.url_name}> {/* Colunas responsivas */}
                         <ProdutoCard 
                             url_name={produtos.url_name} 
                             price={produtos.price} 

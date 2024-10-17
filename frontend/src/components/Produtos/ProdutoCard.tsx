@@ -7,7 +7,7 @@ export default function ProdutoCard(props: Produto) {
     const { goToProduct } = useNavigateProducts();
 
     return (
-        <Card className="swiper-slide" onClick={() => goToProduct(props.url_name)} key={props.url_name} style={{ width: '300px', maxHeight: '420px', minHeight: '420px' }}>
+        <Card className="swiper-slide mb-4" onClick={() => goToProduct(props.url_name)} key={props.url_name} style={{ width: '306px', maxHeight: '420px', minHeight: '420px' }}>
             <Card.Img
                 variant="top"
                 style={{
