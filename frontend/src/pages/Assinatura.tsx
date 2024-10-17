@@ -75,30 +75,31 @@ export function Assinatura() {
             </VStack>
   
             <Box p={4}>
-              <Box display="flex" alignItems="center">
+              <Box display="flex" alignItems="start">
                 <Image
-                  src="/images/streamings.jpg"
-                  alt="Streamings"
-                  boxSize="400px"
-                  objectFit="cover"
-                  mr={4} 
+                     src="/images/streamings.jpg"
+                     alt="Streamings"
+                     boxSize="400px"
+                     objectFit="cover"
+                     borderRadius="md"
+                     mr={4}
                 />
                 <Text>
                 <VStack align="start" spacing={4}>
                 <Heading as="h3" size="lg">
                   Todos os Canais Liberados
                 </Heading>
-                <Text>
+                <Text textAlign={"justify"}>
                   Cansou de travamentos e de pagar uma fortuna por meia dúzia de canais? Nossa plataforma é a Solução.
                 </Text>
-                <Text>
+                <Text textAlign={"justify"}>
                   ✅ Todos os Canais Pagos
                   <br />
                   ✅ Todos os Canais Abertos
                   <br />
                   ✅ Canais 24h de Desenhos, Filmes, Animes, Séries...
                 </Text>
-                <Text mb={4}>
+                <Text textAlign={"justify"} mb={4}>
                   Globo, SBT, Rede TV, Record TV, Band, Dazn, Pay-Per-View, HBO Max, Premiere, Estaduais, Canais de Esporte, SporTV, ESPN, Fox Sports, A&E, Cinemax, Film & Art, FX, MegaPix, Paramount, Space, SyFy, TBS, TCM, TNT, Warner Channel, Todos os Canais Telecine, Todos os Canais HBO, Todos os Canais Star, Todos os Canais Discovery, Todos os Canais de Documentários, Canais de Arte, Todos os Canais Infantis, Todos os Canais de Notícias Nacionais e Internacionais, Canais de Séries, Animes, Religiosos, NBA, NFL, F1, Eleven
                 </Text>
               </VStack>
@@ -114,7 +115,7 @@ export function Assinatura() {
               </Box>
             )}
   
-            <Button mt={4} colorScheme="teal" isDisabled={!selectedPlan}>
+            <Button mt={4} colorScheme="purple" isDisabled={!selectedPlan}>
               Confirmar Assinatura
             </Button>
           </Box>
