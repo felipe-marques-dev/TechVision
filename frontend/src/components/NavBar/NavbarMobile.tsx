@@ -40,19 +40,19 @@ export const NavMenuMobile = () => {
               w="full"
               display={{ base: isOpen ? "block" : "none", md: "block"}}
             >
-              <Flex flexDir="column" bg="black" className="position-relative p-0">
+              <Flex flexDir="column" bg="black" className="m-0 p-0">
 
                 <nav className="navbar p-0">
-                  <Div className={`container-fluid d-flex ${isLargerThanMD? 'justify-content-center':'justify-content-md-center'} position-relative text-center align-items-center p-0`} id="header">
+                  <a className={`row d-flex ${isLargerThanMD? 'justify-content-center':'justify-content-md-center'} m-0 p-0`} id="header">
                     {/* Categorias */}
-                    <div className={`row p-0`}>
+                    <div className={`row p-0 m-0`}>
                       <DropDownNav></DropDownNav>
                     </div>
                     {/* Outras opcoes */}
-                    <div className="row p-0" style={{fontSize: "22px"}}>
+                    <div className="row p-0 m-0" style={{fontSize: "22px"}}>
                       <A className="p-0 m-0" href="/assinatura">Assinatura</A>
                     </div>
-                  </Div>
+                  </a>
                 </nav>
               </Flex>
             </Box>
