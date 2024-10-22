@@ -20,19 +20,22 @@
 .nome-carrinho{
     font-weight: 800;
     font-size: 20px;
+    width: 100%;
 }
 
 .botao-carrinho{
-    margin: 1vh;
     background-color: #841abb;
     padding: 1vh;
+    width: 100%;
     color: white;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .botao{
     padding: 1vh;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .botao:hover{

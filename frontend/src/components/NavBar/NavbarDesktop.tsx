@@ -32,15 +32,19 @@ export function NavbarDesktop() {
     <div className="bg-black">
       <nav className="navbar" >
         <Div className="container-fluid" id="header">
-          <Div className="collapse navbar-collapse d-flex" id="navbarSupportedContent" >
+          <Div className="collapse navbar-collapse d-flex justify-content-between" >
             {/* Logo */}
             <Div className="navbar-brand" ><Logo /></Div>
-            {/* Barra de pesquisa */}
-            <SearchBar width="50"/>
-            {/* Mostra o nome do usuario */}
-            <div className="navbar-nav ms-auto">
-              <LoginNavBar loggedIn={loggedIn} userName={userInfo} />
+            <div className="ms-4">
+              <DropDownNav></DropDownNav>
             </div>
+          <div className="ms-1"><A className="m-0 p-0" href="/assinatura" style={{fontSize: "22px"}}>Assinatura</A></div>
+            {/* Barra de pesquisa */}
+            <div className="w-50" style={{minWidth: '25%'}}>
+              <SearchBar width="75"/>
+            </div>
+            {/* Mostra o nome do usuario */}
+              <LoginNavBar loggedIn={loggedIn} userName={userInfo} />
             {/* Carrinho */}
             <div className="navbar-nav ms-1">
               <A href="/carrinho" ><Div className="nav-link" ><FaCartShopping style={{ width: "40px" }} /></Div></A>
@@ -52,12 +56,9 @@ export function NavbarDesktop() {
       <nav className="navbar m-0 p-0">
         {/* Categorias */}
         <Div className="container-fluid d-flex justify-content-center" id="header">
-          <div className="ms-3 text-center">
-          <DropDownNav></DropDownNav>
-          </div>
+          
           
           {/* Outras opcoes */}
-          <div className="ms-5"><A className="m-0 p-0" href="/assinatura" style={{fontSize: "22px"}}>Assinatura</A></div>
         </Div>
       </nav>
     </div >
