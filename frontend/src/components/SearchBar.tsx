@@ -29,7 +29,7 @@ export const SearchBar = (props: SearchBarProps) => {
   }, [termoBusca]);
 
   return (
-    <div className="container position-relative d-flex flex-column align-items-center" style={{ padding: '0' }}>
+    <div className="container position-relative m-0 d-flex flex-column align-items-center" style={{ padding: '0' }}>
       {/* Barra de pesquisa */}
       <div className={`d-flex col-5 bg-white w-${props.width}  border border-white rounded-pill justify-content-center`} role="search">
         <input

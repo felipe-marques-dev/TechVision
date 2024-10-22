@@ -16,7 +16,7 @@ import {
   NumberDecrementStepper,
   Stack,
 } from '@chakra-ui/react';
-import { FooterDesktop } from "../../components/Footer/FooterDesktop";
+import { Footer } from "../../components/Footer/Footer";
 
 export function Carrinho() {
   const navigate = useNavigate();
@@ -115,22 +115,22 @@ export function Carrinho() {
       <Nav_bar />
       <ToastContainer />
       {currentUser && (
-        <div className="container-fluid">
-          <div className="col d-flex justify-content-center fs-1 ">
+        <div className="container-fluid row d-flex justify-content-center m-0 p-0">
+          <div className="col d-flex justify-content-center">
             <H3 id="text-titulo" style={{ padding: 0 }}>Carrinho</H3>
           </div>
 
-          <div className="row">
-            <div className="col-8">
+          <div className="row d-flex justify-content-center m-0">
+            <div className="col-md-12 col-lg-8">
               {produtos.length > 0 ? (
                 produtos.map(item => (
                   <div className="cart-item row align-items-center" id="box" key={item.produto.product_id}>
-                    <div className="col-md-3">
+                    <div className="col-md-1 col-lg-3 d-flex justify-content-center">
                       <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false} className="imgLoader" />
                     </div>
-                    <div className="col">
-                      <p className="nome-carrinho">{item.produto.name}</p>
-                      <p>{item.produto.description}</p>
+                    <div className="col-sm-10 col-md-6">
+                      <p className="nome-carrinho text-md-center text-lg-start">{item.produto.name}</p>
+                      <p className="text-md-center text-lg-start">{item.produto.description}</p>
                       <p>Quantidade:
                         <div>
                           <Stack shouldWrapChildren direction='row'>
@@ -161,10 +161,10 @@ export function Carrinho() {
                       </p>
                     </div>
 
-                    <div className="col text-center">
-                      <div className="row" style={{ width: 200 }}>
-                        <p>R$ {item.produto.price.toFixed(2)}</p>
-                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.produto.product_id)}>Remover</button>
+                    <div className="col text-center d-flex justify-content-center">
+                      <div className="row d-flex" style={{ width: 200 }}>
+                        <p className="fs-4 fw-semibold">R$ {item.produto.price.toFixed(2)}</p>
+                        <p className="btn btn-danger btn-sm" style={{width: 200}} onClick={() => handleDelete(item.produto.product_id)}>Remover</p>
                       </div>
                     </div>
                   </div>
@@ -174,21 +174,20 @@ export function Carrinho() {
               )}
             </div>
 
-            <div className="col d-flex" style={{ padding: 80 }}>
-              <div className="summary">
+            <div className="col-md-8 col-lg-4 d-flex justify-content-md-center pt-4">
+              <div className="row w-md-75 col-md-8" style={{ height: '200px'}}>
                 <h5>RESUMO</h5>
                 <p><strong>Valor dos Produtos:</strong> R$ {calcularTotal()}</p>
-                <p><strong>Frete:</strong> R$ 0,00</p>
-                <h5>ENTREGA</h5>
-                <Calculo />
-                <button className="botao" onClick={irParaPagamentoBtn}>Ir para o pagamento</button>
-                <button className="botao-carrinho" onClick={continuarComprandoBtn}>Continuar comprando</button>
+                <div className="justify-content-center">
+                <p className="botao" onClick={irParaPagamentoBtn}>Ir para o pagamento</p>
+                <p className="botao-carrinho" onClick={continuarComprandoBtn}>Continuar comprando</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
-      <FooterDesktop />
+      <Footer />
     </div>
   );
 }
