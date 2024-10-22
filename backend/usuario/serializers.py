@@ -17,7 +17,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user_obj.first_name = clean_data['first_name']
         user_obj.last_name = clean_data['last_name']
         user_obj.save()
-        return user_obj
+        carrinho = Carrinho.objects.create(user_id=user_obj.id)
+        return user_obj, carrinho
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
