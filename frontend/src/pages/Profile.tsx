@@ -51,12 +51,12 @@ export function Profile() {
         <>
             <Nav_bar />
             {user && (
-                <div className="container d-flex justify-content-center" id="container">
-                    <div className="row">
-                        <h6>Nome</h6>
-                        <div className="d-flex">
-                            <h1 className="mb-0">{user.first_name}</h1>
-                            <h1 className="mb-0 ms-2">{user.last_name}</h1>
+                <div className="container d-flex justify-content-center object-fit-fill" id="container">
+                    <div className="row w-100 mx-auto">
+                        <h6 >Nome</h6>
+                        <div className="d-flex mx-auto">
+                            <h1 className="">{user.first_name}</h1>
+                            <h1 className="ms-2">{user.last_name}</h1>
                         </div>
 
                         <div className="mb-3">
