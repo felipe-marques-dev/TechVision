@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Carousel, Spinner } from "react-bootstrap";
 import { Carroussel } from "../types/Carroussel";
 import { client } from "../services/client";
+import { Loading } from "./Loading";
 // Tipos requeridos pelo useState
 
 function Carrossel() {
@@ -16,7 +17,6 @@ function Carrossel() {
             setCarroussel(response.data);
         }, (error) => {
             setErrors(error);
-            console.log(errors);
         })
         }
         loadCarroussel();
@@ -26,9 +26,7 @@ function Carrossel() {
     // Retorna o carrossel com os produtos ( iteração pelo .map())
     return (
         <div className="m-0 p-0 border-0" style={{ zIndex: -2, minWidth: "100%", height: "450px", }}>
-            <Suspense fallback={<div className="d-flex justify-content-center align-items-center" style={{ height: "450px" }}>
-                <Spinner animation="border" />
-            </div>}>
+            <Suspense fallback={<Loading height="450px" withPhrase={false} />}>
                 <Carousel
                     className="carousel carousel-dark slide m-0 p-0 d-flex justify-content-center border-0"
                     style={{ height: "450px" }}

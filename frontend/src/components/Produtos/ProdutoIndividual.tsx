@@ -9,6 +9,8 @@ import { Footer } from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { useMediaQuery } from "@chakra-ui/react";
+import { Loading } from "../Loading";
+import { NotFound } from "../404";
 
 const ico_entregas = 'entregas.png';
 const ico_cartao = 'ico-cartao.jpg';
@@ -30,20 +32,23 @@ export function ProdutoIndividual() {
     const url_product = url_name?.toString();
     const [produtos, setProdutos] = useState<Produto | null>(null);
     const [imgPrincipal, setImgPrincipal] = useState<string>("");
-    const imgSrc2 = produtos?.foto_2 || ''; 
-    const imgSrc3 = produtos?.foto_3 || ''; 
-    const imgSrc4 = produtos?.foto_4 || ''; 
+    const imgSrc2 = produtos?.foto_2 || '';
+    const imgSrc3 = produtos?.foto_3 || '';
+    const imgSrc4 = produtos?.foto_4 || '';
     const [emailUser, setEmail] = useState<string>('');
     const [carrinho, setCarrinho] = useState<{ [key: number]: number }>({});
     const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
-    
+    const [error, setError] = useState<boolean>(false);
+
     const loadProdutos = async () => {
         const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
-        const name = data.name.toString();
-        setProdutos(data);
-        if (data) {
-            setImgPrincipal(data.foto_1); // Inicializa com a foto principal
+        let name: any;
+        if (!data) {
+            return setError(true);
         }
+        setProdutos(data);
+        name = data.name.toString();
+        setImgPrincipal(data.foto_1); // Inicializa com a foto principal
         document.title = name;
     };
 
@@ -57,13 +62,13 @@ export function ProdutoIndividual() {
 
     useEffect(() => {
         client.get("/accounts/usuario")
-          .then(response => {
-            setCurrentUser(true);
-            setEmail(response.data.user.email);
-          })
-          .catch(error => {
-            setCurrentUser(false);
-          });
+            .then(response => {
+                setCurrentUser(true);
+                setEmail(response.data.user.email);
+            })
+            .catch(error => {
+                setCurrentUser(false);
+            });
     }, [currentUser]);
 
     const handleAdd = async (product_id: number) => {
@@ -71,12 +76,12 @@ export function ProdutoIndividual() {
             navigate("/login");
             return;
         }
-    
+
         // Verifica a quantidade atual no carrinho
         const currentQuantity = carrinho[product_id] || 0;
         const newQuantity = currentQuantity + 1;
         setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
-    
+
         try {
             if (currentQuantity > 0) {
                 // Se o item já existe, faz um PATCH para atualizar a quantidade
@@ -100,7 +105,7 @@ export function ProdutoIndividual() {
             toast.error("Erro ao atualizar item no carrinho");
         }
     };
-    
+
 
     useEffect(() => {
         if (emailUser) {
@@ -108,7 +113,7 @@ export function ProdutoIndividual() {
                 try {
                     const response = await client.post('/accounts/cart/', { email: emailUser });
                     const cartItems: CartItem[] = response.data.itens; // Definindo o tipo aqui
-    
+
                     const newCarrinho: { [key: number]: number } = {};
                     cartItems.forEach((item: CartItem) => { // Usando o tipo definido
                         newCarrinho[item.produto.product_id] = item.quantity;
@@ -118,23 +123,24 @@ export function ProdutoIndividual() {
                     console.log("Erro ao buscar produtos do carrinho", error);
                 }
             };
-    
+
             fetchCartItems();
         }
     }, [emailUser]);
-    
-    
-    
+
+    if(error){
+        return <NotFound/>;
+    }
 
     return (
         <>
-        <ToastContainer 
-        position="top-center"
-        />
+            <ToastContainer
+                position="top-center"
+            />
             <Nav_bar />
-            <div className="container-fluid mt-5 p-0 border-0">
+            <div className="container-fluid mt-5 p-0 border-0" style={{ minHeight: "550px" }}>
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
-                    {produtos ? (
+                    {produtos || error ? (
                         <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
                             <div className="col-sm-2 d-none d-md-block" id="img-left">
                                 {produtos.foto_2 && (
@@ -170,12 +176,12 @@ export function ProdutoIndividual() {
                                     </a>
                                 )}
                             </div>
-                            <div className={`d-flex ${isLargerThanMD ? 'col' : 'row m-0 p-0' }`}>
-                                <img 
-                                    src={imgPrincipal || produtos.foto_1} 
-                                    id="img-prod" 
-                                    alt="Foto Principal" 
-                                    className="main-img" 
+                            <div className={`d-flex ${isLargerThanMD ? 'col' : 'row m-0 p-0'}`}>
+                                <img
+                                    src={imgPrincipal || produtos.foto_1}
+                                    id="img-prod"
+                                    alt="Foto Principal"
+                                    className="main-img"
                                 />
                             </div>
                             <div className="col" id="part2">
@@ -188,7 +194,7 @@ export function ProdutoIndividual() {
                                 </p>
                                 <p className="descricao" id="descricao-pdts">{produtos.description}</p>
                                 <div className="row">
-                                    <button onClick={() => handleAdd (produtos.product_id)} className="btn" id="add-cart-pdt">
+                                    <button onClick={() => handleAdd(produtos.product_id)} className="btn" id="add-cart-pdt">
                                         Adicionar ao carrinho
                                     </button>
                                     <button className="btn" id="add-cart-pdt">
@@ -197,21 +203,21 @@ export function ProdutoIndividual() {
                                 </div>
                             </div>
                             <div className="mt-5 d-flex justify-content-center">
-                                <div className="row d-flex justify-content-evenly" id="border-top-line">    
-                                        <div className="col-4">
-                                            <img src={`/images/${ico_entregas}`} id="ico" /> Entregas em 24h 
-                                        </div>
-                                        <div className="col-4">
-                                            <img src={`/images/${ico_cartao}`} id="ico" /> Parcelamos em até 10x sem juros 
-                                        </div>
-                                        <div className="col-4">
-                                            <img src={`/images/${ico_cadeado}`} id="ico" /> Site 100% seguro 
-                                        </div>
+                                <div className="row d-flex justify-content-evenly" id="border-top-line">
+                                    <div className="col-4">
+                                        <img src={`/images/${ico_entregas}`} id="ico" /> Entregas em 24h
+                                    </div>
+                                    <div className="col-4">
+                                        <img src={`/images/${ico_cartao}`} id="ico" /> Parcelamos em até 10x sem juros
+                                    </div>
+                                    <div className="col-4">
+                                        <img src={`/images/${ico_cadeado}`} id="ico" /> Site 100% seguro
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     ) : (
-                        <p>Não há produtos disponíveis.</p>
+                        <Loading height="550px" withPhrase={true}/>
                     )}
                 </div>
             </div>
