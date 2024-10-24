@@ -1,10 +1,10 @@
-import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import GlobalStyle from './styles/global.ts';
-import { ChakraProvider } from '@chakra-ui/react'
-import React from 'react';
 import { Loading } from './components/Loading.tsx';
+import React from 'react';
+import { StrictMode, Suspense } from 'react';
+import GlobalStyle from './styles/global.ts';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ChakraProvider } from '@chakra-ui/react'
 
 const App = React.lazy(() => import("./App.tsx"));
 
