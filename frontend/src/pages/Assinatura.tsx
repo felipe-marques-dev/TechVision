@@ -3,7 +3,7 @@ import { Nav_bar } from "../components/NavBar/Navbar";
 import { client } from "../services/client";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import { FooterDesktop } from "../components/Footer/FooterDesktop";
+import { Footer } from "../components/Footer/Footer";
 import { Box, Checkbox, VStack, Text, Image, Heading, Button } from '@chakra-ui/react';
 
 export function Assinatura() {
@@ -28,7 +28,7 @@ export function Assinatura() {
     {
       id: 'annual',
       nome: 'Plano Anual',
-      valor: 'R$ 350,00',
+      valor: 'R$ 400,00',
       descricao: 'Acesso por 1 ano com o maior desconto.',
     },
   ];
@@ -75,34 +75,35 @@ export function Assinatura() {
             </VStack>
   
             <Box p={4}>
-              <Box display="flex" alignItems="start">
+              <Box display={{ base: "block", md: "flex" }} alignItems="start">
                 <Image
-                     src="/images/streamings.jpg"
-                     alt="Streamings"
-                     boxSize="400px"
-                     objectFit="cover"
-                     borderRadius="md"
-                     mr={4}
+                  src="/images/streamings.jpg"
+                  alt="Streamings"
+                  boxSize={{ base: "100%", md: "400px" }} 
+                  objectFit="cover"
+                  borderRadius="md"
+                  mb={{ base: 4, md: 0 }} 
+                  mr={4}
                 />
-                <Text>
-                <VStack align="start" spacing={4}>
-                <Heading as="h3" size="lg">
-                  Todos os Canais Liberados
-                </Heading>
-                <Text textAlign={"justify"}>
-                  Cansou de travamentos e de pagar uma fortuna por meia dúzia de canais? Nossa plataforma é a Solução.
-                </Text>
-                <Text textAlign={"justify"}>
-                  ✅ Todos os Canais Pagos
-                  <br />
-                  ✅ Todos os Canais Abertos
-                  <br />
-                  ✅ Canais 24h de Desenhos, Filmes, Animes, Séries...
-                </Text>
-                <Text textAlign={"justify"} mb={4}>
-                  Globo, SBT, Rede TV, Record TV, Band, Dazn, Pay-Per-View, HBO Max, Premiere, Estaduais, Canais de Esporte, SporTV, ESPN, Fox Sports, A&E, Cinemax, Film & Art, FX, MegaPix, Paramount, Space, SyFy, TBS, TCM, TNT, Warner Channel, Todos os Canais Telecine, Todos os Canais HBO, Todos os Canais Star, Todos os Canais Discovery, Todos os Canais de Documentários, Canais de Arte, Todos os Canais Infantis, Todos os Canais de Notícias Nacionais e Internacionais, Canais de Séries, Animes, Religiosos, NBA, NFL, F1, Eleven
-                </Text>
-              </VStack>
+                <Text flex="1"> 
+                  <VStack align="start" spacing={4}>
+                    <Heading as="h3" size="lg">
+                      Todos os Canais Liberados
+                    </Heading>
+                    <Text textAlign={"justify"}>
+                      Cansou de travamentos e de pagar uma fortuna por meia dúzia de canais? Nossa plataforma é a Solução.
+                    </Text>
+                    <Text textAlign={"justify"}>
+                      ✅ Todos os Canais Pagos
+                      <br />
+                      ✅ Todos os Canais Abertos
+                      <br />
+                      ✅ Canais 24h de Desenhos, Filmes, Animes, Séries...
+                    </Text>
+                    <Text textAlign={"justify"} mb={4}>
+                      Globo, SBT, Rede TV, Record TV, Band, Dazn, Pay-Per-View, HBO Max, Premiere, Estaduais, Canais de Esporte, SporTV, ESPN, Fox Sports, A&E, Cinemax, Film & Art, FX, MegaPix, Paramount, Space, SyFy, TBS, TCM, TNT, Warner Channel, Todos os Canais Telecine, Todos os Canais HBO, Todos os Canais Star, Todos os Canais Discovery, Todos os Canais de Documentários, Canais de Arte, Todos os Canais Infantis, Todos os Canais de Notícias Nacionais e Internacionais, Canais de Séries, Animes, Religiosos, NBA, NFL, F1, Eleven
+                    </Text>
+                  </VStack>
                 </Text>
               </Box>
             </Box>
@@ -121,7 +122,8 @@ export function Assinatura() {
           </Box>
         </div>
       )}
-      <FooterDesktop />
+      <Footer />
     </div>
   );
+  
 }  
