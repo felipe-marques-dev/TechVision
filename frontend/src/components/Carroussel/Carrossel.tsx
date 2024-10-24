@@ -1,8 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { Carousel, Spinner } from "react-bootstrap";
 import { Carroussel } from "../../types/Carroussel";
-import { pegarCarroussel } from "./pegarCarroussel";
-import axios from "axios";
 import { client } from "../../services/client";
 // Tipos requeridos pelo useState
 
@@ -16,10 +14,9 @@ function Carrossel() {
         await client.get('/carroussel')
         .then((response) => {
             setCarroussel(response.data);
-            console.log(response.data);
         }, (error) => {
             setErrors(error);
-            console.log(error);
+            console.log(errors);
         })
         }
         loadCarroussel();
