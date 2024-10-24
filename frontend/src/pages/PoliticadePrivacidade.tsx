@@ -1,7 +1,11 @@
 import { Nav_bar } from "../components/NavBar/Navbar";
 import { Footer } from "../components/Footer/Footer";
+import { useEffect } from "react";
 
 export function PoliticadePrivacidade() {
+useEffect(() => {
+        document.title = 'Política de Privacidade';
+    });
 
     return (
         <>

@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { Carousel, Spinner } from "react-bootstrap";
-import { Carroussel } from "../../types/Carroussel";
-import { client } from "../../services/client";
+import { Carroussel } from "../types/Carroussel";
+import { client } from "../services/client";
 // Tipos requeridos pelo useState
 
 function Carrossel() {

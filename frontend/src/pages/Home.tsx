@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import React from "react";
 import { Spinner } from "react-bootstrap";
 
-const Carrossel = React.lazy(() => import("../components/Carroussel/Carrossel"));
+const Carrossel = React.lazy(() => import("../components/Carrossel"));
 
 export function Home() {
     return (

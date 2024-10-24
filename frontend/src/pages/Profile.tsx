@@ -15,7 +15,6 @@ export function Profile() {
     const [user, setUser] = useState<Usuario | null>(null);
 
     useEffect(() => {
-        document.title = 'Perfil';
         client.get("/accounts/usuario")
             .then(function (res) {
                 setCurrentUser(true);
@@ -26,6 +25,10 @@ export function Profile() {
                 navigate('/login');
             });
     }, []);
+
+    useEffect(() => {
+        document.title = 'Perfil';
+    });
 
     const handleProfileUpdate = (updatedUser: Usuario) => {
         setUser(updatedUser); // Atualiza o estado do usuário com as novas informações

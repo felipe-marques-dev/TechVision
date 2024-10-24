@@ -11,6 +11,7 @@ export default function ProdutosCategoria(){
     const { name } = useParams<{name: string}>()
 
     useEffect(() => {
+        document.title = `${name}`;
         const loadProdutos = async () => {
             try {
                 const response: AxiosResponse<Produto[]> = await client.get(`produtos/categories-filter/${name}`);
