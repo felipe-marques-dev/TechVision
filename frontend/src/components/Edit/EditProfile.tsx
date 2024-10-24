@@ -81,31 +81,33 @@ export function DialogDemo({ onProfileUpdate }: DialogDemoProps) {
                         <Button variant="outline-primary">Editar perfil</Button>
                     </Dialog.Trigger>
                     <Dialog.Portal>
-                        <Dialog.Overlay className="DialogOverlay" />
+                        <Dialog.Overlay className="DialogOverlay d-flex justify-content-center" />
                         <Dialog.Content className="DialogContent">
                             <Dialog.Title className="DialogTitle">
                                 <h3 className="d-flex justify-content-center" id="title"> Editar perfil </h3>
                             </Dialog.Title>
          
-                            <Form.Group controlId="firstName">
-                                <Form.Label>Primeiro Nome</Form.Label>
+                            <Form.Group controlId="firstName" className="mx-auto object-fit-fill mb-3">
+                                <Form.Label className="w-50 d-flex justify-content-start" style={{marginLeft: '37px'}}>Primeiro Nome</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={firstName}
+                                    className="w-75 mx-auto"
                                     onChange={(e) => setFirstName(e.target.value)}
                                     required
-                                />
+                                />  
                             </Form.Group>
-                            <Form.Group controlId="lastName">
-                                <Form.Label>Sobrenome</Form.Label>
+                            <Form.Group controlId="lastName" className=" mx-auto object-fit-fill">
+                                <Form.Label className="w-50 d-flex justify-content-start"  style={{marginLeft: '37px'}}>Sobrenome</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    className="w-75 mx-auto"
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
                                     required
                                 />
                             </Form.Group>
-                            <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
+                            <div className="d-flex justify-content-center" style={{ marginTop: 25 }}>
                                 <Button onClick={handleSave} className="Button" variant="outline-primary">Salvar alterações</Button>
                                 <Dialog.Close asChild>
                                     <Button className="IconButton p-1 d-flex justify-content-center" variant="outline-dark" aria-label="Close">
