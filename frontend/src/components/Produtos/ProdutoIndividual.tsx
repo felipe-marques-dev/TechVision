@@ -138,7 +138,7 @@ export function ProdutoIndividual() {
                 position="top-center"
             />
             <Nav_bar />
-            <div className="container-fluid mt-5 p-0 border-0" style={{ minHeight: "550px" }}>
+            <div className="container-fluid mt-5 p-0 border-0">
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
                     {produtos || error ? (
                         <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
