@@ -142,7 +142,7 @@ export function ProdutoIndividual() {
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
                     {produtos || error ? (
                         <div className={`row me-2 ${isLargerThanMD ? 'col' : 'row ms-2 p-0'}`} id="row-images" key={produtos.url_name}>
-                            <div className="col-sm-2 d-none d-md-block" id="img-left">
+                            <div className="col-sm-2 d-none d-md-block ms-2" id="img-left">
                                 {produtos.foto_2 && (
                                     <a className="card w-50 mb-2" href="#" onClick={() => handleImageClick(imgSrc2)}>
                                         <img className="img-left" src={produtos.foto_2} alt="Foto 2" />
