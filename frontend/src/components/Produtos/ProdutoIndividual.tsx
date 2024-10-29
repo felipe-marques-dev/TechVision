@@ -141,7 +141,7 @@ export function ProdutoIndividual() {
             <div className="container-fluid mt-5 p-0 border-0">
                 <div className="flex-wrap d-flex m-0 p-0" id="produtoInd">
                     {produtos || error ? (
-                        <div className="row m-0 p-0" id="row-images" key={produtos.url_name}>
+                        <div className={`row me-2 ${isLargerThanMD ? 'col' : 'row ms-2 p-0'}`} id="row-images" key={produtos.url_name}>
                             <div className="col-sm-2 d-none d-md-block" id="img-left">
                                 {produtos.foto_2 && (
                                     <a className="card w-50 mb-2" href="#" onClick={() => handleImageClick(imgSrc2)}>
@@ -184,7 +184,7 @@ export function ProdutoIndividual() {
                                     className="main-img"
                                 />
                             </div>
-                            <div className="col" id="part2">
+                            <div className="col m-0 p-0" id="part2">
                                 <p id="tituloInd">{produtos.name}</p>
                                 <p className="preco-anterior" id="preco-anterior">
                                     R${(produtos.price * 1.35).toFixed(2).replace('.', ',')}
@@ -193,7 +193,7 @@ export function ProdutoIndividual() {
                                     R${produtos.price.toFixed(2).replace('.', ',')}
                                 </p>
                                 <p className="descricao" id="descricao-pdts">{produtos.description}</p>
-                                <div className="row">
+                                <div className="row m-0 p-0">
                                     <button onClick={() => handleAdd(produtos.product_id)} className="btn" id="add-cart-pdt">
                                         Adicionar ao carrinho
                                     </button>
