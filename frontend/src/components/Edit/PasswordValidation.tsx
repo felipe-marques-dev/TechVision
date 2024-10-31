@@ -122,9 +122,6 @@ export function PasswordValidation() {
                         </Dialog.Portal>
                     </Dialog.Root>
                     <ToastContainer />
-
-                    {/* Renderiza EditPassword quando showEditPassword é true */}
-                    {showEditPassword && <EditPassword />}
                 </>
             )}
         </>

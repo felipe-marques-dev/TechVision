@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav_bar } from "../components/NavBar/Navbar";
 import { Footer } from "../components/Footer/Footer";
-import { EditFirstName } from "../components/Edit/EditProfile";
+import { EditFirstName, EditLastName } from "../components/Edit/EditProfile";
 import { PasswordValidation } from "../components/Edit/PasswordValidation";
 import '../styles/profile.css';
 import { Usuario } from "../types/Usuario";
@@ -57,16 +57,17 @@ export function Profile() {
 
                         <div className="d-flex-column mb-3 align-items-center">
                             <h6>Sobrenome</h6>
-                            <EditFirstName userEmail={user.email} firstName={user.last_name} lastName={user.last_name} />
+                            <EditLastName userEmail={user.email} lastName={user.last_name} />
                         </div>
 
                         <div className="mb-3">
                             <h6>Email</h6>
-                            <h1>{user.email}</h1>
+                            <div id="titulo">{user.email}</div>
 
-                            <h6>Senha</h6>
                             <div>
-                                <input className="d-flex" type="password" defaultValue={"********"} readOnly />
+                                <label htmlFor="password"><h6>Senha</h6>
+                                <input className="d-flex" id="password" type="password" defaultValue={"********"} readOnly />
+                                </label>
                             </div>
                         </div>
                     </div>
