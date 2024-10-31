@@ -6,20 +6,9 @@ import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { ToastContainer, toast } from 'react-toastify';
-import './Edit.css';
+import '../../styles/Edit.css';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-interface Usuario {
-    id: number;
-    first_name: string;
-    last_name: string;
-    is_verified: boolean;
-    email: string;
-    password: string;
-}
-
-
+import { Usuario } from "../../types/Usuario";
 
 export function EditPassword() {
     const navigate = useNavigate();

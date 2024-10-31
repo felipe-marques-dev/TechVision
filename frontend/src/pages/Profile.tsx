@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nav_bar } from "../components/NavBar/Navbar";
 import { Footer } from "../components/Footer/Footer";
-import { DialogDemo } from "../components/Edit/EditProfile";
+import { EditFirstName } from "../components/Edit/EditProfile";
 import { PasswordValidation } from "../components/Edit/PasswordValidation";
 import '../styles/profile.css';
 import { Usuario } from "../types/Usuario";
@@ -24,19 +24,15 @@ export function Profile() {
                 setCurrentUser(false);
                 navigate('/login');
             });
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         document.title = 'Perfil';
     });
 
-    const handleProfileUpdate = (updatedUser: Usuario) => {
-        setUser(updatedUser); // Atualiza o estado do usuário com as novas informações
-    };
-
-    function submitLogout(e: { preventDefault: () => void; }) {
+    async function submitLogout(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        client.post("accounts/logout", { withCredentials: true })
+        await client.post("accounts/logout", { withCredentials: true })
             .then(function (res) {
                 setCurrentUser(false);
                 navigate('/');
@@ -44,7 +40,7 @@ export function Profile() {
     }
 
     if (!currentUser) {
-        return null; // Não redirecionar diretamente, apenas retornar null
+        return navigate('/login');
     }
 
     return (
@@ -53,10 +49,15 @@ export function Profile() {
             {user && (
                 <div className="container d-flex justify-content-center object-fit-fill" id="container">
                     <div className="row w-100 mx-auto">
-                        <h6 >Nome</h6>
-                        <div className="d-flex mx-auto">
-                            <h1 className="">{user.first_name}</h1>
-                            <h1 className="ms-2">{user.last_name}</h1>
+
+                        <div className="d-flex-column my-3 align-items-center">
+                            <h6>Nome</h6>
+                            <EditFirstName userEmail={user.email} firstName={user.first_name} />
+                        </div>
+
+                        <div className="d-flex-column mb-3 align-items-center">
+                            <h6>Sobrenome</h6>
+                            <EditFirstName userEmail={user.email} firstName={user.last_name} lastName={user.last_name} />
                         </div>
 
                         <div className="mb-3">
@@ -75,7 +76,7 @@ export function Profile() {
             <div className="col d-flex justify-content-center my-5" id="col">
                 <div className="row-fluid d-flex p-0 mt-0" id="row2">
                     <div className="me-3">
-                        <DialogDemo onProfileUpdate={handleProfileUpdate} /> 
+
                     </div>
                     <div className="me-3">
                         <PasswordValidation />

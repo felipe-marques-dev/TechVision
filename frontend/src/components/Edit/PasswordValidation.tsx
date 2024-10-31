@@ -5,19 +5,11 @@ import { client } from "../../services/client";
 import { EditPassword } from "./EditPassword";
 import { Form, Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
-import './Edit.css';
+import '../../styles/Edit.css';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-
-interface Usuario {
-    id: number;
-    first_name: string;
-    last_name: string;
-    is_verified: boolean;
-    email: string;
-    password: string;
-}
+import { Usuario } from "../../types/Usuario";
 
 export function PasswordValidation() {
      const navigate = useNavigate();
@@ -51,7 +43,7 @@ export function PasswordValidation() {
         if (password.length < 8) {
             setValid(false);
             setIsLoading(false);
-            return;
+            return null;
         }
 
         setTimeout(() => {

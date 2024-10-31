@@ -1,124 +1,115 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Container, Form, Modal, Spinner } from "react-bootstrap";
 import { client } from "../../services/client";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import * as Dialog from '@radix-ui/react-dialog';
-import { Cross2Icon } from '@radix-ui/react-icons';
-import { ToastContainer, toast } from 'react-toastify';
-import './Edit.css';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import '../../styles/Edit.css';
+import { Usuario } from "../../types/Usuario";
 
-interface Usuario {
-    id: number;
-    first_name: string;
-    last_name: string;
-    is_verified: boolean;
-    email: string;
-}
+export function EditFirstName({userEmail, firstName}: Usuario) {
+    const [firstNameModified, setFirstNameModified] = useState('');
+    const [showSuccessful, setShowSuccessful] = useState(false);
+    const [show, setShow] = useState(false);
+    const [showError, setShowError] = useState(false);
 
-interface DialogDemoProps {
-    onProfileUpdate: (updatedUser: Usuario) => void; // Novo prop
-}
+    const handleCloseSuccessful = () => {
+        setShowSuccessful(false);
+    }
 
-export function DialogDemo({ onProfileUpdate }: DialogDemoProps) {
-    const navigate = useNavigate();
-    const [currentUser, setCurrentUser] = useState(false);
-    const [user, setUser] = useState<Usuario | null>(null);
-    const [userEmail, setUserEmail] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [open, setOpen] = useState(false);
-    const [edited, setEdited] = useState<boolean>(false);
+    const handleClose = () => {
+        setShow(false);
+    }
 
-    const notifysuccess = () => toast.success("Perfil editado com sucesso!");
-    const notifyerror = () => toast.warning("Erro ao editar perfil!");
+    const handleCloseError = () => {
+        setShowError(false);
+    }
 
-    useEffect(() => {
-        document.title = 'Perfil';
-        client.get("/accounts/usuario")
-            .then(function (res) {
-                setCurrentUser(true);
-                setUser(res.data.user);
-                setUserEmail(res.data.user.email);
-                setFirstName(res.data.user.first_name);
-                setLastName(res.data.user.last_name);
-            })
-            .catch(function (error) {
-                setCurrentUser(false);
-                navigate('/login');
-            });
-    }, [navigate, edited]);
+    const handleSave = () => {
+        console.log("firstName: " + firstNameModified.trim());
 
-    const handleSave = async () => {
-        if (user) {
-            try {
-                await client.patch("/accounts/update/", {
-                    email: userEmail,
-                    first_name: firstName,
-                    last_name: lastName,
+        client.patch("/accounts/update/", {
+            email: userEmail,
+            first_name: firstNameModified.trim(),
+        })
+            .then((res) => {
+                setShowSuccessful(true);
+                console.log(res.data);
+                handleClose();
+            },
+                (error) => {
+                    setShowError(true);
+                    handleClose();
+                    console.log(error);
                 });
-
-                const updatedUser = { ...user, first_name: firstName, last_name: lastName }; // Novo usuário atualizado
-                setUser(updatedUser);
-                onProfileUpdate(updatedUser); // Chama o callback com o usuário atualizado
-
-                setOpen(false);
-                notifysuccess();
-
-            } catch (error) {
-                console.error("Erro ao atualizar os dados:", error);
-                notifyerror();
-            }
-        }
+        setFirstNameModified("");
     };
 
     return (
         <>
-            <ToastContainer />
-            {currentUser && user && (
-                <Dialog.Root open={open} onOpenChange={setOpen}>
-                    <Dialog.Trigger asChild>
-                        <Button variant="outline-primary">Editar perfil</Button>
-                    </Dialog.Trigger>
-                    <Dialog.Portal>
-                        <Dialog.Overlay className="DialogOverlay d-flex justify-content-center" />
-                        <Dialog.Content className="DialogContent">
-                            <Dialog.Title className="DialogTitle">
-                                <h3 className="d-flex justify-content-center" id="title"> Editar perfil </h3>
-                            </Dialog.Title>
-         
-                            <Form.Group controlId="firstName" className="mx-auto object-fit-fill mb-3">
-                                <Form.Label className="w-50 d-flex justify-content-start" style={{marginLeft: '37px'}}>Primeiro Nome</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    value={firstName}
-                                    className="w-75 mx-auto"
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                    required
-                                />  
-                            </Form.Group>
-                            <Form.Group controlId="lastName" className=" mx-auto object-fit-fill">
-                                <Form.Label className="w-50 d-flex justify-content-start"  style={{marginLeft: '37px'}}>Sobrenome</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    className="w-75 mx-auto"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    required
-                                />
-                            </Form.Group>
-                            <div className="d-flex justify-content-center" style={{ marginTop: 25 }}>
-                                <Button onClick={handleSave} className="Button" variant="outline-primary">Salvar alterações</Button>
-                                <Dialog.Close asChild>
-                                    <Button className="IconButton p-1 d-flex justify-content-center" variant="outline-dark" aria-label="Close">
-                                        <Cross2Icon />
-                                    </Button>
-                                </Dialog.Close>
-                            </div>
-                        </Dialog.Content>
-                    </Dialog.Portal>
-                </Dialog.Root>
-            )}
+        <div className="m-0 p-0 d-flex align-items-center">
+            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{firstName}</Button>
+        </div>
+            
+                <Modal centered show={show} onHide={() => handleClose()} animation={true}>
+                    <Modal.Header closeButton>
+                        <Modal.Title className="outline-primary d-flex justify-content-center">
+                            <h2 className="d-flex justify-content-center">Editar Nome</h2>
+                            </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form.Group controlId="firstName" className="mx-auto object-fit-fill mb-3">
+                            <Form.Label className="w-50 d-flex justify-content-start" style={{ marginLeft: '37px' }}>Nome Atual</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={firstName}
+                                className="w-75 mx-auto"
+                                onChange={(e) => setFirstNameModified(e.target.value)}
+                                disabled={true}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="lastName" className=" mx-auto object-fit-fill">
+                            <Form.Label className="w-50 d-flex justify-content-start" style={{ marginLeft: '37px' }}>Novo Nome</Form.Label>
+                            <Form.Control
+                                type="text"
+                                className="w-75 mx-auto"
+                                onChange={(e) => setFirstNameModified(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => handleClose()}>
+                            Close
+                        </Button>
+                        <Button
+                            onClick={handleSave}
+                            className="Button"
+                            variant="outline-primary"
+                            disabled={firstNameModified === firstName || firstNameModified === "" || firstNameModified === null}
+                        >Salvar alterações</Button>
+                    </Modal.Footer>
+                </Modal>
+
+            <Modal centered show={showSuccessful} onHide={handleCloseSuccessful} animation={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-success">Sucesso!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Perfil foi atualizado.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseSuccessful}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal centered show={showError} onHide={handleCloseError} animation={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-danger">Erro!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Não foi possível atualizar o seu perfil. Por Favor tente novamente mais tarde.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseError}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }

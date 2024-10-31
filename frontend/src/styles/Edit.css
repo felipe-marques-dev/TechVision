@@ -10,6 +10,10 @@ input {
   all: unset;
 }
 
+#titulo {
+  font-size: 30px;
+}
+
 .DialogOverlay {
   background-color: var(--black-a9);
   position: fixed;
