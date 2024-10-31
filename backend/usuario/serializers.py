@@ -46,7 +46,6 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
     def updatePassword(self, clean_data):
         password = clean_data.get('password')
-        print(password)
         user.make_password(password)
         user.save()
 

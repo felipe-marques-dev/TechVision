@@ -7,7 +7,6 @@ class CustomUserManager(BaseUserManager):
     """
     Gerenciador personalizado para o modelo de usuario.
     """
-
     def create_user(self, email, password=None, first_name='', last_name='', **extra_fields):
         """
         Cria e salva um usuário com username, email e senha.

@@ -5,14 +5,12 @@ from rest_framework.authentication import SessionAuthentication
 from .serializers import *
 from rest_framework import permissions, status
 from .validations import *
-from rest_framework import generics
 from .models import CarrinhoItem, User
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import send_mail
-from django.contrib.auth.hashers import make_password, check_password
 from django.template.loader import render_to_string
 
 class UserRegister(APIView):
@@ -100,7 +98,7 @@ class ItemCartUser(APIView):
 
 
 class UserCheckPassword(APIView):
-    permission_class = (permissions.AllowAny,)
+    permission_class = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
     def post(self, request):
         # dados do corpo da  requisicao
@@ -108,7 +106,7 @@ class UserCheckPassword(APIView):
         senhaBody = request.data.get('password')
         
         user = User.objects.get(email=emailBody) # pega os dados do usuario no BD
-        passwordMatch =  user.check_password(senhaBody) # verifica se a senha é valida(retorna True ou False
+        passwordMatch =  user.check_password(senhaBody) # verifica se a senha é valida(retorna True ou False)
         
         # se for True retorna 200
         if passwordMatch is True:
@@ -133,11 +131,9 @@ class UserUpdate(APIView):
         senhaBody = request.data.get('password')
         requestBody = request.data
         user = User.objects.get(email=emailBody)
-       
 
         if senhaBody != None and len(senhaBody) >= 8:
-            senha_cripto = make_password(senhaBody) #criptografa a senha
-            requestSerializer = {'password':senha_cripto,'email': emailBody}
+            requestSerializer = {'password':senhaBody, 'email': emailBody}
             serializer = UserInfoSerializer(user, data=requestSerializer, partial=True)
         else:
             serializer = UserInfoSerializer(user, data=requestBody, partial=True)
