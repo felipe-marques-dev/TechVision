@@ -1,9 +1,7 @@
-import { Button, Col, Container, Form, Modal, Spinner } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { client } from "../../services/client";
 import { useEffect, useState } from "react";
 import '../../styles/Edit.css';
-import { Usuario } from "../../types/Usuario";
-import { useMediaQuery } from "@chakra-ui/react";
 
 type userFirstNameProps = {
     userEmail: string,
@@ -130,8 +128,6 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
     
-    const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
-
     useEffect(() => {
         setLastNameModified(lastName);
     }, []);
