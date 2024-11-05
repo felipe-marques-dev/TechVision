@@ -19,7 +19,6 @@ export function EditPassword() {
     const [userEmail, setUserEmail] = useState('');
     const [userPasswordConfirm, setUserPasswordConfirm] = useState('');
 
-
     useEffect(() => {
         document.title = 'Editar senha';
         toast.success("Senha Válida!");
@@ -58,8 +57,9 @@ export function EditPassword() {
 
     return (
         <>
-            <ToastContainer />
-            {currentUser && user && (
+<div className="m-0 p-0 d-flex align-items-center">
+            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>********</Button>
+        </div>
                 <Dialog.Root open={open} onOpenChange={setOpen}>
                     <Dialog.Portal>
                         <Dialog.Overlay className="DialogOverlay" />
@@ -110,7 +110,6 @@ export function EditPassword() {
                         </Dialog.Content>
                     </Dialog.Portal>
                 </Dialog.Root>
-            )}
         </>
     );
 }

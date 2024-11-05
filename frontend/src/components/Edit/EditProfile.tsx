@@ -5,14 +5,22 @@ import '../../styles/Edit.css';
 import { Usuario } from "../../types/Usuario";
 import { useMediaQuery } from "@chakra-ui/react";
 
-export function EditFirstName({userEmail, firstName}: Usuario) {
+type userFirstNameProps = {
+    userEmail: string,
+    firstName: string,
+}
+
+type userLastNameProps = {
+    userEmail: string,
+    lastName: string,
+}
+
+export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
     const [firstNameModified, setFirstNameModified] = useState('');
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
     
-    const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
-
     useEffect(() => {
         setFirstNameModified(firstName);
     }, []);
@@ -57,23 +65,21 @@ export function EditFirstName({userEmail, firstName}: Usuario) {
                             </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Group controlId="firstName" className="mb-3">
+                        <Form.Group controlId="firstName" className="mb-3" id="controlGroup" >
                             <Form.Label className="d-flex justify-content-start">Nome Atual</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={firstName}
                                 disabled={true}
-                                style={{width: isLargerThanMD?"440px":"268px"}}
                             />
                         </Form.Group>
-                        <Form.Group controlId="newFirstName" className=" mx-auto object-fit-fill">
+                        <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
                             <Form.Label className="d-flex justify-content-start">Novo Nome</Form.Label>
                             <Form.Control
                                 type="text"
                                 id="input"
                                 value={firstNameModified}
                                 onChange={(e) => setFirstNameModified(e.target.value)}
-                                style={{width: isLargerThanMD?"440px":"268px"}}
                             />
                         </Form.Group>
                     </Modal.Body>
@@ -118,7 +124,7 @@ export function EditFirstName({userEmail, firstName}: Usuario) {
     );
 }
 
-export function EditLastName({userEmail, lastName}: Usuario) {
+export function EditLastName({userEmail, lastName} : userLastNameProps) {
     const [lastNameModified, setLastNameModified] = useState('');
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
@@ -170,23 +176,21 @@ export function EditLastName({userEmail, lastName}: Usuario) {
                             </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Group controlId="firstName" className="mb-3">
+                        <Form.Group controlId="firstName" className="mb-3" id="controlGroup">
                             <Form.Label className="d-flex justify-content-start">Sobrenome Atual</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={lastName}
                                 disabled={true}
-                                style={{width: isLargerThanMD?"440px":"268px"}}
                             />
                         </Form.Group>
-                        <Form.Group controlId="newFirstName" className=" mx-auto object-fit-fill">
+                        <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
                             <Form.Label className="d-flex justify-content-start">Novo Sobrenome</Form.Label>
                             <Form.Control
                                 type="text"
                                 id="input"
                                 value={lastNameModified}
                                 onChange={(e) => setLastNameModified(e.target.value)}
-                                style={{width: isLargerThanMD?"440px":"268px"}}
                             />
                         </Form.Group>
                     </Modal.Body>
