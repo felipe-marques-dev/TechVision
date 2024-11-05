@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/10/2024 às 20:56
+-- Tempo de geração: 05/11/2024 às 19:48
 -- Versão do servidor: 11.5.2-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -154,7 +154,15 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (61, 'Can add carroussel', 21, 'add_carroussel'),
 (62, 'Can change carroussel', 21, 'change_carroussel'),
 (63, 'Can delete carroussel', 21, 'delete_carroussel'),
-(64, 'Can view carroussel', 21, 'view_carroussel');
+(64, 'Can view carroussel', 21, 'view_carroussel'),
+(65, 'Can add pedido itens', 22, 'add_pedidoitens'),
+(66, 'Can change pedido itens', 22, 'change_pedidoitens'),
+(67, 'Can delete pedido itens', 22, 'delete_pedidoitens'),
+(68, 'Can view pedido itens', 22, 'view_pedidoitens'),
+(69, 'Can add pedido item', 23, 'add_pedidoitem'),
+(70, 'Can change pedido item', 23, 'change_pedidoitem'),
+(71, 'Can delete pedido item', 23, 'delete_pedidoitem'),
+(72, 'Can view pedido item', 23, 'view_pedidoitem');
 
 -- --------------------------------------------------------
 
@@ -184,25 +192,58 @@ INSERT INTO `carroussel_carroussel` (`carroussel_id`, `foto`, `url`) VALUES
 
 CREATE TABLE `compra_pedido` (
   `delivery_id` int(11) NOT NULL,
-  `endereco_id` int(11) DEFAULT NULL,
-  `transportadora_id` int(11) DEFAULT NULL,
   `status` varchar(50) NOT NULL,
-  `frete` double NOT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `compra_pedido`
+--
+
+INSERT INTO `compra_pedido` (`delivery_id`, `status`, `user_id`) VALUES
+(27, 'Aprovado', 30),
+(28, 'Aprovado', 30),
+(29, 'Aprovado', 30),
+(30, 'Aprovado', 30),
+(31, 'Aprovado', 30),
+(32, 'Aprovado', 30),
+(33, 'Aprovado', 30),
+(34, 'Aprovado', 30),
+(35, 'Aprovado', 30),
+(36, 'Aprovado', 30),
+(37, 'Aprovado', 30);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `compra_transportadora`
+-- Estrutura para tabela `compra_pedidoitem`
 --
 
-CREATE TABLE `compra_transportadora` (
-  `carrier_id` int(11) NOT NULL,
-  `name` varchar(40) DEFAULT NULL,
-  `cnpj` varchar(14) DEFAULT NULL,
-  `description` varchar(150) DEFAULT NULL
+CREATE TABLE `compra_pedidoitem` (
+  `pedidoItem_id` int(11) NOT NULL,
+  `pedido_id` int(11) NOT NULL,
+  `produto_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `compra_pedidoitem`
+--
+
+INSERT INTO `compra_pedidoitem` (`pedidoItem_id`, `pedido_id`, `produto_id`, `quantity`) VALUES
+(32, 27, 12, 1),
+(33, 28, 13, 1),
+(34, 29, 14, 1),
+(35, 30, 16, 1),
+(36, 30, 17, 1),
+(37, 31, 16, 1),
+(38, 31, 17, 1),
+(39, 32, 16, 1),
+(40, 32, 17, 1),
+(41, 33, 16, 1),
+(42, 33, 17, 1),
+(43, 35, 16, 1),
+(44, 35, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -309,7 +350,8 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 (70, '2024-09-26 21:28:07', 1, 11, '14', 'Geladeira Frost Free', 2, '[{\"changed\": {\"fields\": [\"Foto 1\", \"Foto 2\", \"Foto 3\", \"Foto 4\"]}}]'),
 (71, '2024-10-03 11:20:57', 1, 14, '7', 'Carrinho object (7)', 1, '[{\"added\": {}}]'),
 (72, '2024-10-08 18:16:20', 2, 21, '1', 'https://www.mercadolivre.com.br/dia-das-criancas#D', 2, '[{\"changed\": {\"fields\": [\"Foto\"]}}]'),
-(73, '2024-10-08 18:49:58', 2, 21, '4', 'https://lista.mercadolivre.com.br/_Container_ddc-games#deal_print_id=0c9bb0d0-85a6-11ef-b4c7-db911e0386b6&c_id=mainslideritem-normal&c_element_order=4&c_campaign=23.09_MS_GAMER&c_uid=0c9bb0d0-85a6-11e', 1, '[{\"added\": {}}]');
+(73, '2024-10-08 18:49:58', 2, 21, '4', 'https://lista.mercadolivre.com.br/_Container_ddc-games#deal_print_id=0c9bb0d0-85a6-11ef-b4c7-db911e0386b6&c_id=mainslideritem-normal&c_element_order=4&c_campaign=23.09_MS_GAMER&c_uid=0c9bb0d0-85a6-11e', 1, '[{\"added\": {}}]'),
+(74, '2024-11-05 13:20:10', 1, 11, '15', 'Aspirador de Pó Robô', 3, '');
 
 -- --------------------------------------------------------
 
@@ -335,6 +377,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (8, 'compra', 'carrier'),
 (9, 'compra', 'delivery'),
 (12, 'compra', 'pedido'),
+(23, 'compra', 'pedidoitem'),
+(22, 'compra', 'pedidoitens'),
 (13, 'compra', 'transportadora'),
 (3, 'contenttypes', 'contenttype'),
 (18, 'corsheaders', 'corsmodel'),
@@ -427,7 +471,9 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('gdg5p9j0r14d2b6e58i21fjfw94wgody', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1swJhA:gjpvo7Z3lXak-doXei2_1rmFqRuIQL2lTZePcenpnWE', '2024-10-17 11:08:32.214277'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
+('jab4dlxyr7eyoa34p25daakp0zf7kqu0', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1t8Jg4:xBlD3SDbT_E0KdvJzfxqqAKAbCgaRHSjnEmceHk0pL8', '2024-11-19 13:33:00.037534'),
 ('jd1x1pphsjn176h59gm46cmoiignydli', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1stve6:7pliRlkyl-Ym83UO33OkbW9ZMDJsRlEZDRwk6J74TUc', '2024-10-10 21:03:30.140033'),
+('mqusnu05jnlhcrevsghiig0tddgb3b01', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1t8MFE:SsO5wqBFDEDozg_EJNs8NZJlI-foY288wTgkgqRRRj4', '2024-11-19 16:17:28.921479'),
 ('uccrk9cw3mgjt2moaz8clki7n44ftc0l', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1srJx0:wjeqkgacjboVaLVhh40AL9fQTq-AX3QfwbUalDHVWuU', '2024-10-03 16:24:14.578052'),
 ('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
 
@@ -484,7 +530,6 @@ INSERT INTO `produtos_produto` (`product_id`, `name`, `categoria_id`, `sub_categ
 (12, 'Câmera de Segurança Wi-Fi', 1, 'Segurança', 'Câmera de vigilância com visualização remota pelo celular.', 'camera-de-seguranca-wi-fi', 150, 149.99, 0, 'produtos/61XZlLdPRbL.__AC_SX300_SY300_QL70_ML2__Kalp8z7.jpg', 'produtos/71vwRhR1VL._AC_SX522__hxUEz2S.jpg', 'produtos/71StAp6vUsL._AC_SX522__xIXr10U.jpg', 'produtos/71loafHd-0L._AC_SX522__8LCXzYW.jpg'),
 (13, 'Carregador Rápido USB-C', 1, 'Acessórios', 'Carregador com tecnologia de carga rápida para smartphones e tablets.', 'carregador-rapido-usb-c', 200, 79.9, 1, 'produtos/512Ai3vCMDL._AC_SX522__K5SUuBt.jpg', 'produtos/615UirVVvBL._AC_SX522__c0jVm1p.jpg', 'produtos/61zf9gV3StL._AC_SX522__aZJRKBU.jpg', 'produtos/61RtJKoUn4L._AC_SX522__2vBkHkz.jpg'),
 (14, 'Geladeira Frost Free', 2, 'Eletrodomésticos', 'Geladeira moderna com tecnologia Frost Free e controle de temperatura.', 'geladeira-frost-free', 40, 2999.9, 0, 'produtos/41mpGL3MMOL._AC_SX522_.jpg', 'produtos/317DDhSXx2L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/61hWpeDr5ZL._AC_SX522_.jpg', 'produtos/51shegYAL1L._AC_SX522_.jpg'),
-(15, 'Aspirador de Pó Robô', 2, 'Limpeza', 'Aspirador robô que limpa automaticamente sua casa.', 'aspirador-de-po-robo', 80, 1199.9, 1, 'produtos/41qZ-qhBWL._AC_SX522__EehB8Fd.jpg', 'produtos/41Lxpzp0i1L._AC_SX522__cj6MEAp.jpg', 'produtos/41dIHJQEoOL._AC_SX522__E3qBPPN.jpg', 'produtos/61Njenu4dHL._AC_SX522__A01UPMx.jpg'),
 (16, 'Máquina de Lavar 12kg', 2, 'Lavanderia', 'Máquina de lavar roupas com capacidade de 12kg e várias opções de lavagem.', 'maquina-de-lavar-12kg', 30, 1999.9, 1, 'produtos/41Jz0XwOq6L._AC_SX466_.jpg', 'produtos/51XUZUaX32L._AC_SX466_.jpg', 'produtos/51RAdrX3QL._AC_SX466_.jpg', 'produtos/61SwlKumjcL._AC_SX466_.jpg'),
 (17, 'Forno Micro-ondas', 2, 'Cozinha', 'Micro-ondas com diversas funções de aquecimento e descongelamento.', 'forno-micro-ondas', 100, 499.9, 1, 'produtos/41BhqMPBn3L._AC_SX466_.jpg', 'produtos/51ckxzyH6WL._AC_SX466_.jpg', 'produtos/519NZRstKWL._AC_SX466_.jpg', 'produtos/51yO4XnZsYL._AC_SX466_.jpg'),
 (18, 'Ventilador de Mesa 40cm', 2, 'Climatização', 'Ventilador de mesa com três velocidades e oscilação automática.', 'ventilador-de-mesa-40cm', 150, 179.9, 0, 'produtos/81r2JLRu5L._AC_SY300_SX300_.jpg', 'produtos/61qlYmnBfEL._AC_SY606_.jpg', 'produtos/71DC19eYVL._AC_SX425_.jpg', 'produtos/71L-61yOQZL._AC_SX425_.jpg'),
@@ -518,11 +563,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(1, 'Nome', 'Sobrenome', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-10-03 11:20:27', 1),
+(1, 'Felipe', 'Marques', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-11-05 16:17:28', 1),
 (2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-10-08 13:54:29', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0),
-(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-10-03 11:19:55', 0);
+(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-11-05 16:04:23', 0);
 
 -- --------------------------------------------------------
 
@@ -567,32 +612,9 @@ CREATE TABLE `usuario_carrinhoitem` (
 --
 
 INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price_ind`) VALUES
-(6, 7, 15, 2, 200);
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `usuario_endereco`
---
-
-CREATE TABLE `usuario_endereco` (
-  `adress_id` int(11) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `street` varchar(20) NOT NULL,
-  `block` varchar(20) NOT NULL,
-  `reference` varchar(30) NOT NULL,
-  `cep` varchar(8) NOT NULL,
-  `state` varchar(2) NOT NULL,
-  `number` int(5) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `usuario_endereco`
---
-
-INSERT INTO `usuario_endereco` (`adress_id`, `city`, `street`, `block`, `reference`, `cep`, `state`, `number`, `user_id`) VALUES
-(2, 'asdad', 'asdadd', 'adadas', 'sdadad', 'asdasds', 'ad', 213213, 2);
+(15, 7, 12, 1, 150),
+(16, 6, 11, 1, 5000),
+(17, 6, 16, 1, 2000);
 
 -- --------------------------------------------------------
 
@@ -670,15 +692,15 @@ ALTER TABLE `carroussel_carroussel`
 --
 ALTER TABLE `compra_pedido`
   ADD PRIMARY KEY (`delivery_id`),
-  ADD KEY `adress_id` (`endereco_id`),
-  ADD KEY `carrier_id` (`transportadora_id`),
   ADD KEY `user_id_id` (`user_id`);
 
 --
--- Índices de tabela `compra_transportadora`
+-- Índices de tabela `compra_pedidoitem`
 --
-ALTER TABLE `compra_transportadora`
-  ADD PRIMARY KEY (`carrier_id`);
+ALTER TABLE `compra_pedidoitem`
+  ADD PRIMARY KEY (`pedidoItem_id`),
+  ADD KEY `produto` (`produto_id`),
+  ADD KEY `pedido_id` (`pedido_id`);
 
 --
 -- Índices de tabela `corsheaders_corsmodel`
@@ -749,13 +771,6 @@ ALTER TABLE `usuario_carrinhoitem`
   ADD KEY `produto_id` (`produto_id`);
 
 --
--- Índices de tabela `usuario_endereco`
---
-ALTER TABLE `usuario_endereco`
-  ADD PRIMARY KEY (`adress_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Índices de tabela `usuario_groups`
 --
 ALTER TABLE `usuario_groups`
@@ -791,7 +806,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de tabela `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de tabela `carroussel_carroussel`
@@ -803,13 +818,13 @@ ALTER TABLE `carroussel_carroussel`
 -- AUTO_INCREMENT de tabela `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT de tabela `compra_transportadora`
+-- AUTO_INCREMENT de tabela `compra_pedidoitem`
 --
-ALTER TABLE `compra_transportadora`
-  MODIFY `carrier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `compra_pedidoitem`
+  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de tabela `corsheaders_corsmodel`
@@ -821,13 +836,13 @@ ALTER TABLE `corsheaders_corsmodel`
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `django_migrations`
@@ -863,13 +878,7 @@ ALTER TABLE `usuario_carrinho`
 -- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
-  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de tabela `usuario_endereco`
---
-ALTER TABLE `usuario_endereco`
-  MODIFY `adress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_groups`
@@ -904,9 +913,14 @@ ALTER TABLE `auth_permission`
 -- Restrições para tabelas `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
-  ADD CONSTRAINT `adress_id` FOREIGN KEY (`endereco_id`) REFERENCES `usuario_endereco` (`adress_id`),
-  ADD CONSTRAINT `carrier_id` FOREIGN KEY (`transportadora_id`) REFERENCES `compra_transportadora` (`carrier_id`),
   ADD CONSTRAINT `user_id_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
+
+--
+-- Restrições para tabelas `compra_pedidoitem`
+--
+ALTER TABLE `compra_pedidoitem`
+  ADD CONSTRAINT `pedido_id` FOREIGN KEY (`pedido_id`) REFERENCES `compra_pedido` (`delivery_id`),
+  ADD CONSTRAINT `produto` FOREIGN KEY (`produto_id`) REFERENCES `produtos_produto` (`product_id`);
 
 --
 -- Restrições para tabelas `django_admin_log`
@@ -927,12 +941,6 @@ ALTER TABLE `produtos_produto`
 ALTER TABLE `usuario_carrinhoitem`
   ADD CONSTRAINT `cart_id` FOREIGN KEY (`cart_id`) REFERENCES `usuario_carrinho` (`cart_id`),
   ADD CONSTRAINT `produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produtos_produto` (`product_id`);
-
---
--- Restrições para tabelas `usuario_endereco`
---
-ALTER TABLE `usuario_endereco`
-  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`);
 
 --
 -- Restrições para tabelas `usuario_groups`
