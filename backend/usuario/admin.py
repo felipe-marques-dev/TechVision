@@ -1,19 +1,9 @@
 from django.contrib import admin
-from .models import Endereco, User, Carrinho, CarrinhoItem
+from .models import User, Carrinho, CarrinhoItem
 from produtos.models import Produto
 
 # Register your models here.
 
-
-# Adiciona o Address ao painel de Admin
-@admin.register(Endereco)
-class AdressAdmin(admin.ModelAdmin):
-    list_display = ('user_email', 'street', 'number', 'block', 'reference', 'state', 'cep', 'city')
-    search_fields = ('user__email', 'street', 'city')
-
-    def user_email(self, obj):
-        return obj.user.email
-    user_email.short_description = 'Email do Usuário'
 
 class CarrinhoItemInline(admin.TabularInline):
     model = CarrinhoItem

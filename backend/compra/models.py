@@ -1,5 +1,5 @@
 from django.db import models
-from usuario.models import Endereco, User
+from usuario.models import User
 from produtos.models import Produto
 class Transportadora(models.Model):
     carrier_id = models.AutoField(primary_key=True)
