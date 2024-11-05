@@ -17,6 +17,7 @@ import { TermosDeUsos } from "../pages/TermosDeUsos.tsx";
 import { PoliticadePrivacidade } from "../pages/PoliticadePrivacidade.tsx";
 import { Assinatura } from "../pages/Assinatura.tsx";
 import { NotFound } from "../components/404.tsx";
+import { ResumoCompra } from "../pages/ResumoCompra.tsx";
 
 export function AppRoutes(){
     return (
@@ -33,6 +34,7 @@ export function AppRoutes(){
                 <Route path="/politica-de-privacidade" element={<PoliticadePrivacidade />} />
                 <Route path={"/categoria/:name"} element={<Categoria/>} />
                 <Route path="/redefinicao-de-senha/" element={<EsqueciMinhaSenhaVerificacao />} />
+                <Route path="/resumo-compra/" element={<ResumoCompra />} />
                 <Route path="/redefinicao-de-senha/:encoded_pk/:token/" element={<EsqueciMinhaSenha />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
