@@ -15,6 +15,7 @@ urlpatterns = [
     path('login/', generic.RedirectView.as_view(url='/accounts/login', permanent=False), name='login'),
     path('accounts/', include('usuario.urls')),
     path('produtos/', include('produtos.urls')),
+    path('compra/', include('compra.urls')),
     path('redefinicao-de-senha/', ResetPasswordVerify.as_view(), name='reset-password'),
     path('redefinicao-de-senha/<str:encoded_pk>/<str:token>/', ResetPassword.as_view(), name='reset-password'),
     path('carroussel/', CarrousselView.as_view(), name='carroussel'),

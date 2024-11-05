@@ -1,6 +1,6 @@
 from django.db import models
 from usuario.models import Endereco, User
-
+from produtos.models import Produto
 class Transportadora(models.Model):
     carrier_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=40)
@@ -17,8 +17,11 @@ class Pedido(models.Model):
     ]
 
     delivery_id = models.AutoField(primary_key=True)
-    endereco = models.ForeignKey(Endereco, on_delete=models.SET_DEFAULT, default='excluido/nao setado', null=True, related_name='pedidos')
-    transportadora = models.ForeignKey(Transportadora, on_delete=models.SET_DEFAULT, default='excluido/nao setado', null=True, related_name='pedidos')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pedidos")
-    status = models.CharField(max_length=40, choices=STATUS_CHOICES, default="pendente")
-    frete = models.FloatField()
+    status = models.CharField(max_length=40, choices=STATUS_CHOICES, default="Aprovado")
+
+class PedidoItem(models.Model):
+    pedidoItem_id = models.AutoField(primary_key=True)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
