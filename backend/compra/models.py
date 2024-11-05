@@ -22,6 +22,6 @@ class Pedido(models.Model):
 
 class PedidoItem(models.Model):
     pedidoItem_id = models.AutoField(primary_key=True)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="itens")
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)

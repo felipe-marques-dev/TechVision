@@ -85,3 +85,11 @@ Content-Type: application/json
 X-CSRFToken: Z7eWZFxOkaWQbkrBfkg2rb7eQ8sLV1bY
 
 { "email":"felipe12345@gmail.com", "products":[16, 17] }
+
+###
+
+POST http://127.0.0.1:8000/compra/compra-itens/
+Content-Type: application/json
+X-CSRFToken: Z7eWZFxOkaWQbkrBfkg2rb7eQ8sLV1bY
+
+{ "email":"felipe12345@gmail.com", "pedido_id":35 }
