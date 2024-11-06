@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../services/client";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { Logo } from "../components/Logo";
 import '../styles/loginECadastro.css';
-import { StepSeparator } from "@chakra-ui/react";
 import { useCurrentUser } from "../hooks/useCurrentUser";
-import { ToastContainer, toast } from 'react-toastify';
 
 export function Cadastro() {
 
@@ -75,7 +73,6 @@ export function Cadastro() {
                 // se o cadastro não retornar nenhum erro
                 .then((res) => {
                     setValid(true);
-                    console.log(valid);
                     client.post(
                         "accounts/login",
                         {
@@ -84,7 +81,6 @@ export function Cadastro() {
                         }
                     ).then(function (res) {
                         setCurrentUser(true);
-                        toast.success("Cadastro realizado com sucesso!");
                     });
                 },
                     // se o email já está sendo utilizado retorna um erro
@@ -92,14 +88,13 @@ export function Cadastro() {
                     (error) => {
                         setCurrentUser(false);
                         setValid(false);
-                        toast.error("Erro ao realizar cadastro");
                     });
             return setIsLoading(false);
         }, 1500);
     }
 
     if (currentUser) {
-        return navigate('/profile');
+        return navigate('/');
     }
 
     return (
@@ -107,7 +102,6 @@ export function Cadastro() {
             <div className="d-flex position-relative justify-content-center align-bottom p-4">
                 <Logo />
             </div>
-            <ToastContainer />
             <Container fluid id="containerFluid" className="mb-3 rounded-4 bg-white border-5 border-black p-4">
                 <h1 className="d-flex justify-content-center" id="title">Cadastre-se</h1>
                 <Form className="w-100" id="cadastro-form" method="post" onSubmit={e => submitRegistration(e)}>
