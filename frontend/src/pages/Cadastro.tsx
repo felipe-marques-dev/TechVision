@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../services/client";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { Logo } from "../components/Logo";
 import '../styles/loginECadastro.css';
-import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export function Cadastro() {
 
@@ -18,7 +17,21 @@ export function Cadastro() {
     const [valid, setValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
-    useCurrentUser('Cadastro');
+    useEffect(() => {
+        // Alterar a tag title da pagina
+        document.title = "Cadastro";
+        // fazer a requisicao para 
+        //ver o status de sessao 
+        // do usuario
+        client.get("/accounts/usuario")
+            .then((res) => {
+                setCurrentUser(true);
+            },
+                (error) => {
+                    setCurrentUser(false);
+                });
+
+    }, []);
 
     // Funcionalidade para trocar de página
     function onClickFormBtn() {
@@ -28,22 +41,22 @@ export function Cadastro() {
     const clearErrors = () => {
         setValid(true);
     }
-    
+
     const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         clearErrors();
         setEmail(event.target.value);
     }
-    
+
     const handleChangeFirstName = (event: React.ChangeEvent<HTMLInputElement>) => {
         clearErrors();
         setFirstName(event.target.value);
     }
-    
+
     const handleChangeLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
         clearErrors();
         setLastName(event.target.value);
     }
-    
+
     const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         clearErrors();
         setPassword(event.target.value);
@@ -52,45 +65,46 @@ export function Cadastro() {
         clearErrors();
         setPasswordConfirm(event.target.value);
     }
-    
+
     // Função para enviar os dados para realizar o cadastro
     function submitRegistration(e: { preventDefault: () => void; }) {
         // Impede que a página recarregue automáticamente
         e.preventDefault();
         setIsLoading(true);
 
-        setTimeout(() => {
-            client.post(
-                "accounts/cadastro",
-                {
-                    email: email,
-                    first_name: firstName,
-                    last_name: lastName,
-                    password: password,
-                }
-            )
-                // faz o login automaticamente 
-                // se o cadastro não retornar nenhum erro
-                .then((res) => {
-                    setValid(true);
-                    client.post(
-                        "accounts/login",
-                        {
-                            email: email,
-                            password: password,
-                        }
-                    ).then(function (res) {
-                        setCurrentUser(true);
-                    });
-                },
-                    // se o email já está sendo utilizado retorna um erro
-                    // no campo de email
-                    (error) => {
-                        setCurrentUser(false);
-                        setValid(false);
-                    });
-            return setIsLoading(false);
-        }, 1500);
+        // Define um intervalo de tempo para a função responder
+        //    setTimeout(() => {
+        client.post(
+            "accounts/cadastro",
+            {
+                email: email,
+                first_name: firstName,
+                last_name: lastName,
+                password: password,
+            }
+        )
+            // faz o login automaticamente 
+            // se o cadastro não retornar nenhum erro
+            .then((res) => {
+                setValid(true);
+                client.post(
+                    "accounts/login",
+                    {
+                        email: email,
+                        password: password,
+                    }
+                ).then(function (res) {
+                    setCurrentUser(true);
+                });
+            },
+                // se o email já está sendo utilizado retorna um erro
+                // no campo de email
+                (error) => {
+                    setCurrentUser(false);
+                    setValid(false);
+                });
+        return setIsLoading(false);
+        //   }, 1500);
     }
 
     if (currentUser) {

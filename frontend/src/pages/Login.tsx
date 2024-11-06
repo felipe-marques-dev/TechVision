@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { client } from "../services/client";
 import { Logo } from "../components/Logo";
 import { Container, Form, Spinner } from "react-bootstrap";
 import '../styles/loginECadastro.css';
-import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export function Login() {
 
@@ -15,27 +14,41 @@ export function Login() {
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  
-  useCurrentUser('Login');
+
+  useEffect(() => {
+    // Alterar a tag title da pagina
+    document.title = "Login";
+    // fazer a requisicao para 
+    //ver o status de sessao 
+    // do usuario
+    client.get("/accounts/usuario")
+      .then((res) => {
+        setCurrentUser(true);
+      },
+        (error) => {
+          setCurrentUser(false);
+        });
+
+  }, []);
 
   // Funcionalidade para trocar de página
   function onClick_form_btn() {
     return navigate('/cadastro');
   }
-  
+
   const clearErrors = () => {
-        setValid(true);
+    setValid(true);
   }
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-        clearErrors();
-        setEmail(event.target.value);
-    }
-    
+    clearErrors();
+    setEmail(event.target.value);
+  }
+
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        clearErrors();
-        setPassword(event.target.value);
-    }
+    clearErrors();
+    setPassword(event.target.value);
+  }
 
   // Função para enviar os dados para realizar o login
   function submitLogin(e: { currentTarget: any; stopPropagation(): unknown; preventDefault: () => void; }) {
@@ -49,24 +62,24 @@ export function Login() {
     }
 
     // Define um intervalo de tempo para a função responder
-    setTimeout(() => {
-      // Envia requisição para o servidor 
-      client.post(
-        "accounts/login",
-        {
-          email: email,
-          password: password,
-        }
-      ).then(function (res) {
-        setCurrentUser(true);
-        setValid(true);
-        setIsLoading(false);
-      }).catch(function (error) {
-        setCurrentUser(false);
-        setValid(false);
-        setIsLoading(false);
-      });
-    }, 1500);
+    //  setTimeout(() => {
+    // Envia requisição para o servidor 
+    client.post(
+      "accounts/login",
+      {
+        email: email,
+        password: password,
+      }
+    ).then(function (res) {
+      setCurrentUser(true);
+      setValid(true);
+      setIsLoading(false);
+    }).catch(function (error) {
+      setCurrentUser(false);
+      setValid(false);
+      setIsLoading(false);
+    });
+    //   }, 1500);
 
   }
 
