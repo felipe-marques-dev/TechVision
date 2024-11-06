@@ -44,10 +44,11 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = User
         fields= '__all__'
 
-    def updatePassword(self, clean_data):
+    def updatePassword(self, user, clean_data):
         password = clean_data.get('password')
-        user.make_password(password)
-        user.save()
+        if password:
+            user.set_password(password)
+            user.save()
 
 
 class EmailSerializer(serializers.Serializer):

@@ -1,14 +1,14 @@
 POST http://127.0.0.1:8000/accounts/login
 Content-Type: application/json
 
-{ "email": "felipe12345@gmail.com", "password": "password" }
+{ "email": "felipe1234566@gmail.com", "password": "pedro123456" }
 
 ###
 
 POST http://127.0.0.1:8000/accounts/cadastro
 Content-Type: application/json
 
-{ "first_name": "lucas", "last_name": "leite", "email": "felipe12345@gmail.com", "password": "password" }
+{ "first_name": "lucas", "last_name": "leite", "email": "felipe1234566@gmail.com", "password": "password" }
 
 ###
 
@@ -28,10 +28,10 @@ Content-Type: application/json
 
 PATCH http://127.0.0.1:8000/accounts/update/
 Content-Type: application/json
-X-CSRFToken: 2KYd9j6fQakarZUqBsASYYhwDQZOPR9L
+X-CSRFToken: xKKqSh1ofMq24EQHAgE6ioXC81W2PTnD
 
 
-{ "email": "felipe123@gmail.com", "first_name": "Pedro" }
+{ "email": "felipe1234566@gmail.com", "password": "pedro123456" }
 
 ###
 

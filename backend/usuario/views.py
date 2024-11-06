@@ -132,17 +132,20 @@ class UserUpdate(APIView):
         requestBody = request.data
         user = User.objects.get(email=emailBody)
 
-        if senhaBody != None and len(senhaBody) >= 8:
-            requestSerializer = {'password':senhaBody, 'email': emailBody}
-            serializer = UserInfoSerializer(user, data=requestSerializer, partial=True)
+        if senhaBody != None:
+            clean_data = {'password':senhaBody, 'email': emailBody}
+            serializer = UserInfoSerializer(user, data=clean_data, partial=True)
+            if serializer.is_valid():
+                serializer.updatePassword(user, clean_data)
+                return Response({"senha alterada"}, status=status.HTTP_200_OK)
+            
         else:
             serializer = UserInfoSerializer(user, data=requestBody, partial=True)
-
         
-        if serializer.is_valid():   
+            if serializer.is_valid():
                 serializer.save()
+                return Response({"dados atualizados": requestBody}, status=status.HTTP_200_OK)
 
-                return Response({"atualizado": requestBody}, status=status.HTTP_200_OK)
         return Response({"error": 'error'},  status=status.HTTP_400_BAD_REQUEST)
     
 
