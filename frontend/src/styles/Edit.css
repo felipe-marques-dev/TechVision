@@ -18,6 +18,10 @@ input {
   margin-right: 1.6em;
 }
 
+#controlGroupUpdate{
+  margin-right: 3.12em;
+}
+
 .DialogOverlay {
   background-color: var(--black-a9);
   position: fixed;
@@ -39,12 +43,9 @@ input {
   padding: 25px;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .DialogContent:focus {
   outline: none;
-}
-
-#formControl{
-  width: 95%;
 }
 
 .DialogTitle {

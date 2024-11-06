@@ -1,6 +1,6 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { client } from "../../services/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import '../../styles/Edit.css';
 
 type userFirstNameProps = {
@@ -14,14 +14,10 @@ type userLastNameProps = {
 }
 
 export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
-    const [firstNameModified, setFirstNameModified] = useState('');
+    const [firstNameModified, setFirstNameModified] = useState(firstName);
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
-    
-    useEffect(() => {
-        setFirstNameModified(firstName);
-    }, []);
 
     const handleCloseSuccessful = () => {
         setShowSuccessful(false);
@@ -123,14 +119,10 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
 }
 
 export function EditLastName({userEmail, lastName} : userLastNameProps) {
-    const [lastNameModified, setLastNameModified] = useState('');
+    const [lastNameModified, setLastNameModified] = useState(lastName);
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
-    
-    useEffect(() => {
-        setLastNameModified(lastName);
-    }, []);
 
     const handleCloseSuccessful = () => {
         setShowSuccessful(false);
