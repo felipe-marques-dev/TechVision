@@ -169,7 +169,7 @@ class ResetPasswordVerify(APIView):
                 kwargs={"encoded_pk":encode_pk, "token":token}
             )
 
-            reset_url = f"localhost:3000{reset_url}"
+            reset_url = f"localhost:4173{reset_url}"
 
             context = { "reset_url": reset_url }
             html_content = render_to_string('mail/mail.html', context)
