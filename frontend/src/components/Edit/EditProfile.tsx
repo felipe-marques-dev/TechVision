@@ -49,7 +49,7 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
     return (
         <>
         <div className="m-0 p-0 d-flex align-items-center">
-            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{firstName}</Button>
+            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{firstName.length > 15 ? `${firstName.slice(0, 15)}...` : firstName}</Button>
         </div>
             
                 <Modal centered show={show} onHide={() => handleClose()} animation={true}>
@@ -154,7 +154,7 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
     return (
         <>
         <div className="m-0 p-0 d-flex align-items-center">
-            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{lastName}</Button>
+            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}</Button>
         </div>
             
                 <Modal centered show={show} onHide={() => handleClose()} animation={true}>
