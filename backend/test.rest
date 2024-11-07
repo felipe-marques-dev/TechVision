@@ -1,7 +1,7 @@
 POST http://127.0.0.1:8000/accounts/login
 Content-Type: application/json
 
-{ "email": "felipe1234566@gmail.com", "password": "pedro123456" }
+{ "email": "usuariosuper@exemplo.com", "password": "senha_segura" }
 
 ###
 
@@ -45,9 +45,9 @@ X-CSRFToken: 2Wqc0QMN2nA62rqZcdEwnZvrOdxidDIH
 
 POST http://127.0.0.1:8000/accounts/cart/
 Content-Type: application/json
-X-CSRFToken: Z7eWZFxOkaWQbkrBfkg2rb7eQ8sLV1bY
+X-CSRFToken: QMRkerEsJire1RxwxucDhQeCvT7mFx2m
 
-{ "email":"felipe12345@gmail.com"}
+{ "email":"usuariosuper@exemplo.com"}
 
 
 ### 
@@ -82,14 +82,14 @@ X-CSRFToken: Z7eWZFxOkaWQbkrBfkg2rb7eQ8sLV1bY
 
 POST http://127.0.0.1:8000/compra/compra-create/
 Content-Type: application/json
-X-CSRFToken: Z7eWZFxOkaWQbkrBfkg2rb7eQ8sLV1bY
+X-CSRFToken: QMRkerEsJire1RxwxucDhQeCvT7mFx2m
 
-{ "email":"felipe12345@gmail.com", "products":[16, 17] }
+{ "email":"usuariosuper@exemplo.com", "products":[16, 17], "valor_total":5000 }
 
 ###
 
 POST http://127.0.0.1:8000/compra/compra-itens/
 Content-Type: application/json
-X-CSRFToken: Z7eWZFxOkaWQbkrBfkg2rb7eQ8sLV1bY
+X-CSRFToken: QMRkerEsJire1RxwxucDhQeCvT7mFx2m
 
-{ "email":"felipe12345@gmail.com", "pedido_id":35 }
+{ "email":"usuariosuper@exemplo.com", "pedido_id": 69 }

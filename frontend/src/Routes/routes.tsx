@@ -34,7 +34,7 @@ export function AppRoutes(){
                 <Route path="/politica-de-privacidade" element={<PoliticadePrivacidade />} />
                 <Route path={"/categoria/:name"} element={<Categoria/>} />
                 <Route path="/redefinicao-de-senha/" element={<EsqueciMinhaSenhaVerificacao />} />
-                <Route path="/resumo-compra/" element={<ResumoCompra />} />
+                <Route path="/resumo-compra/:compra_id" element={<ResumoCompra />} />
                 <Route path="/redefinicao-de-senha/:encoded_pk/:token/" element={<EsqueciMinhaSenha />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

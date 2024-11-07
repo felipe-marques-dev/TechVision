@@ -18,7 +18,6 @@ class CompraInfoSerializer(serializers.ModelSerializer):
 
 class CompraItemSerializer(serializers.ModelSerializer):
         produto = ProductSerializer()
-
         class Meta:
              model = PedidoItem
              fields = ['pedidoItem_id', 'pedido_id', 'produto', 'quantity']

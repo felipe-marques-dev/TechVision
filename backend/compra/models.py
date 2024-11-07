@@ -19,6 +19,7 @@ class Pedido(models.Model):
     delivery_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pedidos")
     status = models.CharField(max_length=40, choices=STATUS_CHOICES, default="Aprovado")
+    valor_total = models.FloatField()
 
 class PedidoItem(models.Model):
     pedidoItem_id = models.AutoField(primary_key=True)

@@ -2,8 +2,51 @@ import { Nav_bar } from "../components/NavBar/Navbar"
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BsCheckCircle } from "react-icons/bs";
 import { Footer } from "../components/Footer/Footer";
+import { useEffect, useState } from "react";
+import { client } from "../services/client";
+import { useNavigate, useParams } from "react-router-dom";
+import { AxiosResponse } from "axios";
+import { error } from "console";
+
 
 export function ResumoCompra(){
+    const navigate = useNavigate();
+    const [compraInfo, setCompraInfo] = useState([])
+    const [compraPrice, setCompraPrice] = useState(0)
+    const [currentUser, setCurrentUser] = useState<boolean>(false);
+    const [emailUser, setEmail] = useState<string>('');
+    const { compra_id } = useParams<{ compra_id: string }>();
+    const {produtosComprados, setProdutosComprados} = useState<[]>([]);
+
+    const loadCompra = async () => {
+      if (emailUser){
+        const response: AxiosResponse = await client.post('/compra/compra-itens', { email: emailUser, pedido_id: compra_id })
+        setCompraInfo(response.data.pedidos)
+        setCompraPrice(response.data.valor_total)
+        console.log(compraInfo)
+        console.log(response.data.pedidos)
+      }
+    }
+
+    useEffect(() => {
+      client.get("/accounts/usuario")
+        .then(response => {
+          setCurrentUser(true);
+          setEmail(response.data.user.email);
+          loadCompra()
+        })
+        .catch(error => {
+          setCurrentUser(false);
+          navigate('/login');
+        });
+    }, [currentUser]);
+
+    const createProductList = () => {
+      compraInfo.forEach((produto) => {
+        setProdutosComprados()
+      }); 
+    }
+
     return (
         <>
 
@@ -11,7 +54,7 @@ export function ResumoCompra(){
                  <div className="d-flex flex-column justify-content-center align-items-center p-4" style={{minHeight: "100vh", textAlign: 'justify'}}>
                     <BsCheckCircle size={70} color="green" className="mx-auto"/>
                     <h1>Parabéns!</h1>
-                    <p className="w-75  fs-5 text-wrap">Olá, [Nome do Cliente]!<br></br>
+                    <p className="w-75  fs-5 text-wrap">Olá, {emailUser}!<br></br>
 <br></br>
 Gostaríamos de começar dizendo um muito obrigado por escolher a nossa loja para a sua compra! Estamos muito felizes por você ter confiado em nós, e queremos que saiba que ficamos emocionados em tê-lo como cliente.
 <br></br>
@@ -19,9 +62,9 @@ Gostaríamos de começar dizendo um muito obrigado por escolher a nossa loja par
 Seu pedido foi processado com sucesso e já estamos trabalhando para garantir que tudo chegue até você de forma rápida e segura. Aqui está um resumo do seu pedido:
 <br></br>
 <br></br>
-Número do pedido: [Número do Pedido]<br></br>
-Itens comprados: [Listar os itens]<br></br>
-Valor total: [Valor Total]<br></br>
+Número do pedido: {compra_id}<br></br>
+
+Valor total: R$ {compraPrice}<br></br>
 <br></br>
 Em breve, você receberá um e-mail de confirmação com todos os detalhes e o código de rastreamento para acompanhar o status da entrega.
 <br></br><br></br>

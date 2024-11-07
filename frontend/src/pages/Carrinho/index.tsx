@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import '../../styles/Carrinho/carrinho.css';
 import { H3 } from "../../styles/Carrossel/lista";
 import Calculo from "./Calculo";
+import 'react-toastify/dist/ReactToastify.css';
 import { ImageLoader } from "../../components/ImageLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import { Item } from "../../types/Produto";
@@ -23,6 +24,7 @@ export function Carrinho() {
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
+  const [compra_id, setCompra_id] = useState(0)
 
   useEffect(() => {
     document.title = 'Carrinho';
@@ -42,6 +44,7 @@ export function Carrinho() {
       client.post('/accounts/cart/', { email: emailUser })
         .then(response => {
           setProdutos(response.data.itens);
+          console.log(produtos)
         })
         .catch(error => {
           console.log("Erro ao buscar produtos", error);
@@ -63,7 +66,8 @@ export function Carrinho() {
           }
         });
         toast.success("Você retirou o item do seu carrinho!");
-        setProdutos(produtos.filter(item => item.produto.product_id !== product_id)); 
+        setProdutos(produtos.filter(item => item.produto.product_id !== product_id));
+        console.log(produtos)
       } catch (error) {
         console.error("Erro ao remover produto", error);
         toast.error("Erro ao retirar item do carrinho");
@@ -107,8 +111,39 @@ export function Carrinho() {
   }
 
   function irParaPagamentoBtn() {
-    navigate('/pagamento');
+    client.post('/accounts/cart/', { email: emailUser })
+          .then(response => {
+            setProdutos(response.data.itens);
+          })
+          .catch(error => {
+            console.log("Erro ao buscar produtos", error);
+          });
+    
+    const productArray: number[] = [];
+    produtos.forEach((item) => {
+      productArray.push(item.produto.product_id)
+    });
+    console.log(productArray)
+    
+    
+    var compra = 0;
+    client.post('/compra/compra-create/', 
+    {
+      email: emailUser,
+      products: productArray,
+      valor_total: calcularTotal()
+    })
+    .then(response => {
+            compra = response.data.compra_id;
+            console.log(compra)
+              navigate(`/resumo-compra/${compra}`);
+    })
+    .catch(error => {
+            console.log("Erro ao buscar produtos", error);
+    }); 
+    console.log('teste')
   }
+
 
   return (
     <div>
