@@ -10,14 +10,12 @@ import { SearchBar } from "../SearchBar";
 
 export const NavMenuMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState<[]>([]);
-  const [loggedIn, setLoggedIn] = useState<boolean>(false)
   const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
   
   return (
     <>
-      <nav className="navbar bg-black border-bottom m-0" style={{zIndex: "1", height: "150px"}}>
-        <Div className="container-fluid border border-black" id="header">
+      <nav className="navbar bg-black border-bottom border-black m-0 p-0" style={{zIndex: "1", height: "150px"}}>
+        <Div className="container-fluid border border-black m-0 p-0" id="header">
           <Div className="collapse navbar-collapse d-flex" id="navbarSupportedContent" >
             {/* Menu mobile */}
             <IconButton
@@ -32,7 +30,7 @@ export const NavMenuMobile = () => {
             <Collapse in={isOpen} animateOpacity> 
             <Box
               p="2rem 8rem"
-              m="0 !important"
+              className="border border-black"
               bgColor="black"
               position="absolute"
               top="100%"
@@ -42,15 +40,15 @@ export const NavMenuMobile = () => {
             >
               <Flex flexDir="column" bg="black" className="m-0 p-0">
 
-                <nav className="navbar p-0">
-                  <a className={`row d-flex ${isLargerThanMD? 'justify-content-center':'justify-content-md-center'} m-0 p-0`} id="header">
+                <nav className="navbar d-flex justify-content-center m-0 p-0">
+                  <a className={`row`} id="header">
                     {/* Categorias */}
-                    <div className={`row p-0 m-0`}>
+                    <div className={`row text-center m-0 p-0`}>
                       <DropDownNav></DropDownNav>
                     </div>
                     {/* Outras opcoes */}
-                    <div className="row p-0 m-0" style={{fontSize: "22px"}}>
-                      <A className="p-0 m-0" href="/assinatura">Assinatura</A>
+                    <div className="row text-center m-0 p-0" style={{fontSize: "22px"}}>
+                      <A href="/assinatura">Assinatura</A>
                     </div>
                   </a>
                 </nav>
