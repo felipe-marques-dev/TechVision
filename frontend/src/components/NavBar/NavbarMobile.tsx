@@ -1,16 +1,15 @@
-import { Box, Collapse, Flex, IconButton, SlideFade, useMediaQuery } from "@chakra-ui/react";
+import { Box, Collapse, Flex, IconButton } from "@chakra-ui/react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react"
 import { A, Button, Div } from "../../styles/NavBar/navbar";
 import { Logo } from "../Logo";
-import { FaCartShopping, FaMagnifyingGlass, FaRegUser } from "react-icons/fa6";
+import { FaCartShopping, FaRegUser } from "react-icons/fa6";
 import DropDownNav from "./DropDownNav";
 import { SearchBar } from "../SearchBar";
 
 export const NavMenuMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
   
   return (
     <>

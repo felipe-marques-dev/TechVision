@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { Nav_bar } from "../../components/NavBar/Navbar";
-import { client } from "../../services/client";
+import { Nav_bar } from "../components/NavBar/Navbar";
+import { client } from "../services/client";
 import { useNavigate } from "react-router-dom";
-import '../../styles/Carrinho/carrinho.css';
-import { H3 } from "../../styles/Carrossel/lista";
-import Calculo from "./Calculo";
+import '../styles/Carrinho/carrinho.css';
+import { H3 } from "../styles/Carrossel/lista";
 import 'react-toastify/dist/ReactToastify.css';
-import { ImageLoader } from "../../components/ImageLoader";
+import { ImageLoader } from "../components/ImageLoader";
 import { ToastContainer, toast } from 'react-toastify';
-import { Item } from "../../types/Produto";
+import { Item } from "../types/Produto";
 import {
   NumberInput,
   NumberInputField,
@@ -17,7 +16,7 @@ import {
   NumberDecrementStepper,
   Stack,
 } from '@chakra-ui/react';
-import { Footer } from "../../components/Footer/Footer";
+import { Footer } from "../components/Footer/Footer";
 
 export function Carrinho() {
   const navigate = useNavigate();

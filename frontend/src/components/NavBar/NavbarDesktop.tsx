@@ -4,7 +4,6 @@ import { Logo } from "../Logo"
 import { LoginNavBar, MinhaContaNavBar } from "./AuthenticateNavBar"
 import { client } from "../../services/client"
 import { FaCartShopping } from "react-icons/fa6";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import DropDownNav from "./DropDownNav"
 import { useMediaQuery } from "@chakra-ui/react"
 import { NavMenuMobile } from "./NavbarMobile"
@@ -38,11 +37,9 @@ export function NavbarDesktop() {
             <div className="ms-4">
               <DropDownNav></DropDownNav>
             </div>
-          <div className="ms-1"><A className="m-0 p-0" href="/assinatura" style={{fontSize: "22px"}}>Assinatura</A></div>
+          <div className="ms-4"><A className="m-0 p-0" href="/assinatura" style={{fontSize: "22px"}}>Assinatura</A></div>
             {/* Barra de pesquisa */}
-            <div className="w-50" style={{minWidth: '25%'}}>
               <SearchBar width="75"/>
-            </div>
             {/* Mostra o nome do usuario */}
               <LoginNavBar loggedIn={loggedIn} userName={userInfo} />
             {/* Carrinho */}
@@ -58,7 +55,6 @@ export function NavbarDesktop() {
         <Div className="container-fluid d-flex justify-content-center" id="header">
           
           
-          {/* Outras opcoes */}
         </Div>
       </nav>
     </div >

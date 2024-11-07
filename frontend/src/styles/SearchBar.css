@@ -1,0 +1,28 @@
+#inputGroup {
+  height: 5vh;
+}
+
+#formControl {
+  border-radius: 40rem 0rem 0rem 40rem;
+}
+
+#suggestions{
+  z-index: 1000;
+  margin-top: 5vh;
+  background-color: white;
+  color: black;
+  width: 40vw;
+}
+
+#itemSuggestions:hover{
+  background-color: lightgrey;
+}
+
+#itemSuggestions:target{
+  background-color: lightgrey;
+}
+
+#buttonSearch {
+  border-radius: 0rem 40rem 40rem 0rem;
+  width: 30px;
+}

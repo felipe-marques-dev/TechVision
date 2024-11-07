@@ -9,7 +9,7 @@ import { Cadastro } from "../pages/Cadastro.tsx";
 import { Home } from "../pages/Home.tsx";
 import { Profile } from "../pages/Profile.tsx";
 import { ProdutoIndividual } from "../components/Produtos/ProdutoIndividual.tsx";
-import { Carrinho } from "../pages/Carrinho/index.tsx";
+import { Carrinho } from "../pages/Carrinho.tsx";
 import ProdutosCategoria from "../components/Produtos/ProdutosCategoria.tsx";
 import Categoria from "../pages/Categoria.tsx";
 import { EsqueciMinhaSenhaVerificacao, EsqueciMinhaSenha } from "../pages/EsqueciMinhaSenha.tsx";
@@ -18,6 +18,7 @@ import { PoliticadePrivacidade } from "../pages/PoliticadePrivacidade.tsx";
 import { Assinatura } from "../pages/Assinatura.tsx";
 import { NotFound } from "../components/404.tsx";
 import { ResumoCompra } from "../pages/ResumoCompra.tsx";
+import ResultadoPesquisa from "../pages/ResultadoPesquisa.tsx";
 
 export function AppRoutes(){
     return (
@@ -36,6 +37,7 @@ export function AppRoutes(){
                 <Route path="/redefinicao-de-senha/" element={<EsqueciMinhaSenhaVerificacao />} />
                 <Route path="/resumo-compra/:compra_id" element={<ResumoCompra />} />
                 <Route path="/redefinicao-de-senha/:encoded_pk/:token/" element={<EsqueciMinhaSenha />} />
+                <Route path={"/pesquisa"} element={<ResultadoPesquisa />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>

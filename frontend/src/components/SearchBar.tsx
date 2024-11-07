@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { client } from "../services/client";
-import { ImageLoader } from "./ImageLoader";
-import { A } from "../styles/NavBar/navbar";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { Button, Form, InputGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import "../styles/SearchBar.css"
 
 interface Produto {
   product_id: number;
@@ -15,11 +17,30 @@ interface SearchBarProps {
 }
 
 export const SearchBar = (props: SearchBarProps) => {
+  const navigate = useNavigate();
   const [termoBusca, setTermoBusca] = useState<string>('');
   const [sugestoes, setSugestoes] = useState<Produto[]>([]);
+  const [using, setUsing] = useState(true)
+
+
+  const handleSubmit = () => {
+    if (termoBusca.trim() === ""){
+      return null;
+    }
+    else{
+      setUsing(false)
+      return navigate(`/pesquisa?q=${termoBusca}`);
+    }
+  }
+
+  const handleEnterPress = (event: { key: string; }) => {
+    if (event.key === 'Enter' && termoBusca.trim() !== "")
+      handleSubmit();
+  }
 
   useEffect(() => {
-    if (termoBusca.length > 2) {
+    setUsing(true);
+    if (termoBusca.length > 0) {
       client.get(`/produtos/sugestoes/?q=${termoBusca}`)
         .then(response => setSugestoes(response.data))
         .catch(error => console.error(error));
@@ -29,48 +50,54 @@ export const SearchBar = (props: SearchBarProps) => {
   }, [termoBusca]);
 
   return (
-    <div className="container position-relative m-0 d-flex flex-column align-items-center" style={{ padding: '0' }}>
+    <div className="container position-relative m-0 d-flex flex-column align-items-center p-0">
       {/* Barra de pesquisa */}
-      <div className={`d-flex col-5 bg-white w-${props.width}  border border-white rounded-pill justify-content-center`} role="search">
-        <input
-          className="form-control border border-white rounded-pill"
+      <InputGroup className={`d-flex col-5 bg-black w-${props.width} border-0 justify-content-center`} role="search" id="inputGroup" >
+        <Form.Control
+          className="form-control border-0"
           type="search"
           placeholder="Pesquisar produtos..."
           aria-label="Search"
           value={termoBusca}
           onChange={(e) => setTermoBusca(e.target.value)}
+          onKeyDown={handleEnterPress}
+          id="formControl"
         />
-      </div>
-
-      {/* Resultados da pesquisa */}
-      {sugestoes.length > 0 && (
-        <div
-          className={`search-results position-fixed w-${props.width} p-2 rounded border border-secondary`}
-          style={{ zIndex: 1000, marginTop: '5vh', backgroundColor: 'black' }}
-        >
-          <ul className="list-unstyled mb-0" style={{ padding: 0, margin: 0 }}>
-            {sugestoes.map((produto) => (
-              <a href={`/produto/${produto.url_name}`}>
-                <li
-                  key={produto.product_id}
-                  className="d-flex align-items-center p-2 border-bottom"
-                  style={{ width: '100%' }}
-                >
-                  <ImageLoader
-                    onClick={produto.url_name}
-                    src={`http://localhost:8000/media/${produto.foto_1}`}
-                    erro={false}
-                    style={{ width: '60px', height: '60px', marginRight: '10px' }} // Ajuste o tamanho da imagem e o espaçamento
-                  />
-                  <div className="fs-5" style={{ flex: 1 }}>
+        {/* Resultados da pesquisa */}
+        {sugestoes.length > 0 && using && (
+          <div
+            className={`search-results position-fixed p-2 rounded border border-secondary me-5`}
+            id="suggestions"
+          >
+            <ul className="list-unstyled mb-0">
+              {sugestoes.map((produto) => (
+                <a  href={`/produto/${produto.url_name}`}>
+                  <li
+                    id="itemSuggestions"
+                    key={produto.product_id}
+                    className="d-flex align-items-center p-2"
+                  >
                     {produto.name}
-                  </div>
-                </li>
-              </a>
-            ))}
-          </ul>
-        </div>
-      )}
+                  </li>
+                </a>
+              ))}
+            </ul>
+          </div>
+        )}
+        <Button
+          className="m-0 border-0 text-center"
+          id="buttonSearch"
+          variant="dark"
+          onClick={handleSubmit}
+        >
+          <div className="d-flex justify-content-center text-center">
+            <FaMagnifyingGlass color="white" />
+          </div>
+        </Button>
+
+      </InputGroup>
+
     </div>
-  );
+
+  )
 };
