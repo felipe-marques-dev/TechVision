@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/11/2024 às 19:48
+-- Tempo de geração: 07/11/2024 às 19:05
 -- Versão do servidor: 11.5.2-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -193,25 +193,117 @@ INSERT INTO `carroussel_carroussel` (`carroussel_id`, `foto`, `url`) VALUES
 CREATE TABLE `compra_pedido` (
   `delivery_id` int(11) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `valor_total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `compra_pedido`
 --
 
-INSERT INTO `compra_pedido` (`delivery_id`, `status`, `user_id`) VALUES
-(27, 'Aprovado', 30),
-(28, 'Aprovado', 30),
-(29, 'Aprovado', 30),
-(30, 'Aprovado', 30),
-(31, 'Aprovado', 30),
-(32, 'Aprovado', 30),
-(33, 'Aprovado', 30),
-(34, 'Aprovado', 30),
-(35, 'Aprovado', 30),
-(36, 'Aprovado', 30),
-(37, 'Aprovado', 30);
+INSERT INTO `compra_pedido` (`delivery_id`, `status`, `user_id`, `valor_total`) VALUES
+(27, 'Aprovado', 30, 0),
+(28, 'Aprovado', 30, 0),
+(29, 'Aprovado', 30, 0),
+(30, 'Aprovado', 30, 0),
+(31, 'Aprovado', 30, 0),
+(32, 'Aprovado', 30, 0),
+(33, 'Aprovado', 30, 0),
+(34, 'Aprovado', 30, 0),
+(35, 'Aprovado', 30, 0),
+(36, 'Aprovado', 30, 0),
+(37, 'Aprovado', 30, 0),
+(38, 'Aprovado', 1, 0),
+(39, 'Aprovado', 1, 0),
+(40, 'Aprovado', 1, 0),
+(41, 'Aprovado', 1, 0),
+(42, 'Aprovado', 1, 0),
+(43, 'Aprovado', 1, 0),
+(44, 'Aprovado', 1, 0),
+(45, 'Aprovado', 1, 0),
+(46, 'Aprovado', 1, 0),
+(47, 'Aprovado', 1, 0),
+(48, 'Aprovado', 1, 5000),
+(49, 'Aprovado', 1, 149.99),
+(50, 'Aprovado', 1, 948.99),
+(51, 'Aprovado', 1, 948.99),
+(52, 'Aprovado', 1, 869.09),
+(53, 'Aprovado', 1, 869.09),
+(54, 'Aprovado', 1, 869.09),
+(55, 'Aprovado', 1, 869.09),
+(56, 'Aprovado', 1, 869.09),
+(57, 'Aprovado', 1, 869.09),
+(58, 'Aprovado', 1, 869.09),
+(59, 'Aprovado', 1, 869.09),
+(60, 'Aprovado', 1, 869.09),
+(61, 'Aprovado', 1, 869.09),
+(62, 'Aprovado', 1, 869.09),
+(63, 'Aprovado', 1, 869.09),
+(64, 'Aprovado', 1, 869.09),
+(65, 'Aprovado', 1, 869.09),
+(66, 'Aprovado', 1, 869.09),
+(67, 'Aprovado', 1, 869.09),
+(68, 'Aprovado', 1, 869.09),
+(69, 'Aprovado', 1, 869.09),
+(70, 'Aprovado', 1, 869.09),
+(71, 'Aprovado', 1, 1188.69),
+(72, 'Aprovado', 1, 149.99),
+(73, 'Aprovado', 1, 1949.79),
+(74, 'Aprovado', 1, 3949.69),
+(75, 'Aprovado', 1, 4449.59),
+(76, 'Aprovado', 1, 5449.39),
+(77, 'Aprovado', 1, 5449.39),
+(78, 'Aprovado', 1, 5449.39),
+(79, 'Aprovado', 1, 2149.89),
+(80, 'Aprovado', 1, 2149.89),
+(81, 'Aprovado', 1, 2149.89),
+(82, 'Aprovado', 1, 2149.89),
+(83, 'Aprovado', 1, 2149.89),
+(84, 'Aprovado', 1, 2149.89),
+(85, 'Aprovado', 1, 2149.89),
+(86, 'Aprovado', 1, 2149.89),
+(87, 'Aprovado', 1, 2149.89),
+(88, 'Aprovado', 1, 3999.8),
+(89, 'Aprovado', 1, 5000),
+(90, 'Aprovado', 1, 5000),
+(91, 'Aprovado', 1, 5000),
+(92, 'Aprovado', 1, 5000),
+(93, 'Aprovado', 1, 5000),
+(94, 'Aprovado', 1, 5000),
+(95, 'Aprovado', 1, 3999.8),
+(96, 'Aprovado', 1, 5999.7),
+(97, 'Aprovado', 1, 13999.3),
+(98, 'Aprovado', 1, 13999.3),
+(99, 'Aprovado', 1, 15299.2),
+(100, 'Aprovado', 1, 149.99),
+(101, 'Aprovado', 1, 1999.9),
+(102, 'Aprovado', 1, 1999.9),
+(103, 'Aprovado', 1, 1299.9),
+(104, 'Aprovado', 1, 1299.9),
+(105, 'Aprovado', 1, 79.9),
+(106, 'Aprovado', 1, 79.9),
+(107, 'Aprovado', 1, 499.9),
+(108, 'Aprovado', 1, 15299.2),
+(109, 'Aprovado', 1, 1999.9),
+(110, 'Aprovado', 1, 1299.9),
+(111, 'Aprovado', 1, 1999.9),
+(112, 'Aprovado', 1, 179.9),
+(113, 'Aprovado', 1, 179.9),
+(114, 'Aprovado', 1, 179.9),
+(115, 'Aprovado', 1, 149.99),
+(116, 'Aprovado', 1, 1299.9),
+(117, 'Aprovado', 1, 1999.9),
+(118, 'Aprovado', 1, 499.9),
+(119, 'Aprovado', 1, 4999.9),
+(120, 'Aprovado', 1, 2059),
+(121, 'Aprovado', 1, 499.9),
+(122, 'Aprovado', 1, 499.9),
+(123, 'Aprovado', 1, 199.99),
+(124, 'Aprovado', 1, 19.9),
+(125, 'Aprovado', 1, 39.9),
+(126, 'Aprovado', 1, 199.99),
+(127, 'Aprovado', 1, 1999.9),
+(128, 'Aprovado', 1, 499.9);
 
 -- --------------------------------------------------------
 
@@ -231,19 +323,16 @@ CREATE TABLE `compra_pedidoitem` (
 --
 
 INSERT INTO `compra_pedidoitem` (`pedidoItem_id`, `pedido_id`, `produto_id`, `quantity`) VALUES
-(32, 27, 12, 1),
-(33, 28, 13, 1),
-(34, 29, 14, 1),
-(35, 30, 16, 1),
-(36, 30, 17, 1),
-(37, 31, 16, 1),
-(38, 31, 17, 1),
-(39, 32, 16, 1),
-(40, 32, 17, 1),
-(41, 33, 16, 1),
-(42, 33, 17, 1),
-(43, 35, 16, 1),
-(44, 35, 17, 1);
+(1, 120, 13, 7),
+(2, 120, 17, 3),
+(3, 121, 17, 1),
+(4, 122, 17, 1),
+(5, 123, 9, 1),
+(6, 124, 20, 1),
+(7, 125, 23, 1),
+(8, 126, 9, 1),
+(9, 127, 16, 1),
+(10, 128, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -474,7 +563,9 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('jab4dlxyr7eyoa34p25daakp0zf7kqu0', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1t8Jg4:xBlD3SDbT_E0KdvJzfxqqAKAbCgaRHSjnEmceHk0pL8', '2024-11-19 13:33:00.037534'),
 ('jd1x1pphsjn176h59gm46cmoiignydli', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1stve6:7pliRlkyl-Ym83UO33OkbW9ZMDJsRlEZDRwk6J74TUc', '2024-10-10 21:03:30.140033'),
 ('mqusnu05jnlhcrevsghiig0tddgb3b01', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1t8MFE:SsO5wqBFDEDozg_EJNs8NZJlI-foY288wTgkgqRRRj4', '2024-11-19 16:17:28.921479'),
+('uap8aj77kgjjju5mzocguvao8qlm3wee', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1t94o0:2iADbhGrZAX5knGiPkaP4zrEL5kLwSpjCRuU_3lAP4k', '2024-11-21 15:52:20.566529'),
 ('uccrk9cw3mgjt2moaz8clki7n44ftc0l', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1srJx0:wjeqkgacjboVaLVhh40AL9fQTq-AX3QfwbUalDHVWuU', '2024-10-03 16:24:14.578052'),
+('uin2mv9dx8mu4lgxgrl4iabn7sqebo8v', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1t9134:P0F7SPmqbKilgPlNliWOEyYdxx4uOEnsBVRhFQi3Flk', '2024-11-21 11:51:38.392484'),
 ('vv9oiy7dbg8mxmxm0dc017nftlbxbo0s', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1smCP9:JwROeA8IGzeLPtvCzovm2CwsBNAOnID8zKZsZmFhk78', '2024-09-19 13:20:07.960941');
 
 -- --------------------------------------------------------
@@ -563,7 +654,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
-(1, 'Felipe', 'Marques', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-11-05 16:17:28', 1),
+(1, 'Felipe', 'Marques', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-11-07 15:52:20', 1),
 (2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-10-08 13:54:29', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0),
@@ -612,9 +703,8 @@ CREATE TABLE `usuario_carrinhoitem` (
 --
 
 INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price_ind`) VALUES
-(15, 7, 12, 1, 150),
-(16, 6, 11, 1, 5000),
-(17, 6, 16, 1, 2000);
+(28, 6, 13, 4, 80),
+(29, 6, 17, 3, 500);
 
 -- --------------------------------------------------------
 
@@ -818,13 +908,13 @@ ALTER TABLE `carroussel_carroussel`
 -- AUTO_INCREMENT de tabela `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de tabela `compra_pedidoitem`
 --
 ALTER TABLE `compra_pedidoitem`
-  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `corsheaders_corsmodel`
@@ -878,7 +968,7 @@ ALTER TABLE `usuario_carrinho`
 -- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
-  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_groups`
