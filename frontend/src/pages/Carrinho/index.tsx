@@ -120,8 +120,10 @@ export function Carrinho() {
           });
     
     const productArray: number[] = [];
+    const quantityArray: number[] = [];
     produtos.forEach((item) => {
       productArray.push(item.produto.product_id)
+      quantityArray.push(item.quantity)
     });
     console.log(productArray)
     
@@ -131,6 +133,7 @@ export function Carrinho() {
     {
       email: emailUser,
       products: productArray,
+      quantity: quantityArray,
       valor_total: calcularTotal()
     })
     .then(response => {

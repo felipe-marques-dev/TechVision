@@ -15,12 +15,13 @@ class CompraCreate(APIView):
         emailBody= request.data.get('email')
         products = request.data.get('products')
         valorBody= request.data.get('valor_total')
+        quantityBody = request.data.get('quantity')
         user = User.objects.get(email=emailBody)
         PedidoAtual = Pedido.objects.create(user= user, status='Aprovado', valor_total=valorBody)
         if products:
-            for id in products:
+            for idx, id in enumerate(products): 
                 produtoDesejado = Produto.objects.get(product_id = id)
-                PedidoItem.objects.create(pedido= PedidoAtual, produto = produtoDesejado, quantity = 1)
+                PedidoItem.objects.create(pedido = PedidoAtual, produto = produtoDesejado, quantity = quantityBody[idx])
             return Response({"compra_id": PedidoAtual.delivery_id}, status=status.HTTP_200_OK)
 
 
@@ -42,4 +43,3 @@ class CompraItens(APIView):
         serializer = CompraItemSerializer(todos_itens,  many=True)
 
         return Response({"pedidos": serializer.data, 'valor_total': pedido.valor_total}, status=status.HTTP_200_OK)
-    

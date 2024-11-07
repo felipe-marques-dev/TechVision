@@ -62,10 +62,15 @@ Gostaríamos de começar dizendo um muito obrigado por escolher a nossa loja par
 Seu pedido foi processado com sucesso e já estamos trabalhando para garantir que tudo chegue até você de forma rápida e segura. Aqui está um resumo do seu pedido:
 <br></br>
 <br></br>
-Número do pedido: {compra_id}<br></br>
-
-Valor total: R$ {compraPrice}<br></br>
+<h5>Número do pedido: {compra_id}</h5>
 <br></br>
+<h5>Valor total: R${compraPrice}</h5><br></br>
+
+Produtos comprados:
+{compraInfo.map((item) => 
+  <h5>{item.quantity}x {item.produto.name}</h5>
+)}
+<br></br><br></br>
 Em breve, você receberá um e-mail de confirmação com todos os detalhes e o código de rastreamento para acompanhar o status da entrega.
 <br></br><br></br>
 O que esperar a seguir:

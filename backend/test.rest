@@ -84,7 +84,7 @@ POST http://127.0.0.1:8000/compra/compra-create/
 Content-Type: application/json
 X-CSRFToken: QMRkerEsJire1RxwxucDhQeCvT7mFx2m
 
-{ "email":"usuariosuper@exemplo.com", "products":[16, 17], "valor_total":5000 }
+{ "email":"usuariosuper@exemplo.com", "products":[16, 17], "quantity": [2,4], "valor_total":5000 }
 
 ###
 
