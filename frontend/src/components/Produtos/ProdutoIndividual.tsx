@@ -90,7 +90,7 @@ export function ProdutoIndividual() {
                     product_id: product_id,
                     quantity: newQuantity,
                 });
-                toast.warning(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
+                toast(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
                     autoClose: 2000,
                 });
             } else {
@@ -128,14 +128,14 @@ export function ProdutoIndividual() {
         }
     }, [emailUser]);
 
-    if(error){
-        return <NotFound/>;
+    if (error) {
+        return <NotFound />;
     }
 
     return (
         <>
             <ToastContainer
-                position="top-center"
+                draggable
             />
             <Nav_bar />
             <div className="container-fluid mt-5 p-0 border-0">
@@ -217,7 +217,7 @@ export function ProdutoIndividual() {
                             </div>
                         </div>
                     ) : (
-                        <Loading height="550px" withPhrase={true}/>
+                        <Loading height="550px" withPhrase={true} />
                     )}
                 </div>
             </div>
