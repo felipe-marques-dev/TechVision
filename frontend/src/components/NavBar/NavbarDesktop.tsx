@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react"
-import { Div, Button, A } from "../../styles/NavBar/navbar"
+import { useEffect, useState } from "react"
+import { Div, A } from "../../styles/NavBar/navbar"
 import { Logo } from "../Logo"
-import { LoginNavBar, MinhaContaNavBar } from "./AuthenticateNavBar"
+import { LoginNavBar } from "./AuthenticateNavBar"
 import { client } from "../../services/client"
 import { FaCartShopping } from "react-icons/fa6";
 import DropDownNav from "./DropDownNav"
-import { useMediaQuery } from "@chakra-ui/react"
-import { NavMenuMobile } from "./NavbarMobile"
-import { SearchBar } from "../SearchBar"
+import { SearchBar } from "./SearchBar"
 
 export function NavbarDesktop() {
 

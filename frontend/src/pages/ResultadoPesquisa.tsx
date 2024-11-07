@@ -17,8 +17,6 @@ export default function ResultadoPesquisa() {
       client.get(`/produtos/sugestoes/?q=${termoBusca}`)
         .then(response => {
           setSugestoes(response.data)
-
-          console.log(response.data);
         })
         .catch(error => console.error(error));
     } else {
