@@ -4,6 +4,7 @@ import React from 'react';
 import { StrictMode, Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ChakraProvider } from '@chakra-ui/react'
+import "react-toastify/dist/ReactToastify.css";
 
 const App = React.lazy(() => import("./App.tsx"));
 const GlobalStyle = React.lazy(() => import('./styles/global.ts'));
