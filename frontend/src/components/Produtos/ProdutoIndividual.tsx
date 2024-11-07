@@ -132,6 +132,33 @@ export function ProdutoIndividual() {
         return <NotFound />;
     }
 
+    function irParaPagamentoBtn() {
+    client.post('/accounts/cart/', { email: emailUser })
+          .then(response => {
+            setProdutos(response.data.itens);
+          })
+          .catch(error => {
+            console.log("Erro ao buscar produtos", error);
+          });
+ 
+    var compra = 0;
+    client.post('/compra/compra-create/', 
+    {
+      email: emailUser,
+      products: [produtos?.product_id],
+      quantity: [1],
+      valor_total: produtos?.price
+    })
+    .then(response => {
+            compra = response.data.compra_id;
+            navigate(`/resumo-compra/${compra}`);
+              
+    })
+    .catch(error => {
+            console.log("Erro ao buscar produtos", error);
+    }); 
+  }
+
     return (
         <>
             <ToastContainer
@@ -197,7 +224,7 @@ export function ProdutoIndividual() {
                                     <button onClick={() => handleAdd(produtos.product_id)} className="btn" id="add-cart-pdt">
                                         Adicionar ao carrinho
                                     </button>
-                                    <button className="btn" id="add-cart-pdt">
+                                    <button className="btn" onClick={() => irParaPagamentoBtn ()} id="add-cart-pdt">
                                         Comprar Agora
                                     </button>
                                 </div>
