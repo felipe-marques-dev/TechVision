@@ -125,7 +125,7 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                         onClick={handleSave}
                         className="Button"
                         variant="outline-primary"
-                        disabled={password.length < 8 || password === "" || password === null || !valid}
+                        disabled={isLoading || password.length < 8 || password === "" || password === null || !valid}
                     >{isLoading ? <Spinner animation="border" /> : "Continuar"}</Button>
 
                 </Modal.Footer>
@@ -194,7 +194,7 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                         onClick={handleUpdate}
                         className="Button"
                         variant="outline-primary"
-                        disabled={newPassword.length < 8 || newPassword !== newPasswordConfirm || newPassword === "" || newPasswordConfirm === "" || newPassword === null}
+                        disabled={isLoading || newPassword.length < 8 || newPassword !== newPasswordConfirm || newPassword === "" || newPasswordConfirm === "" || newPassword === null}
                     >{isLoading ? <Spinner animation="border" /> : "Salvar alterações"}</Button>
 
                 </Modal.Footer>

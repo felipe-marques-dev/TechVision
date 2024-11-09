@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { client } from "../services/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ export function Profile() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(false);
     const [user, setUser] = useState<Usuario | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         document.title = 'Meu perfil';
@@ -35,11 +36,13 @@ export function Profile() {
 
     async function submitLogout(e: { preventDefault: () => void; }) {
         e.preventDefault();
+        setIsLoading(true);
         await client.post("accounts/logout", { withCredentials: true })
             .then(function (res) {
                 setCurrentUser(false);
                 navigate('/');
             });
+        setIsLoading(false);
     }
 
     if (!currentUser) {
@@ -83,7 +86,7 @@ export function Profile() {
 
                             </div>
                             <form onSubmit={e => submitLogout(e)}>
-                                <Button type="submit" variant="danger">Log out</Button>
+                                <Button type="submit" variant="danger" disabled={isLoading}>{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Log out</p>)}</Button>
                             </form>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { client } from "../../services/client";
 import { useState } from "react";
 import '../../styles/Edit.css';
@@ -18,6 +18,7 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleCloseSuccessful = () => {
         setShowSuccessful(false);
@@ -31,7 +32,9 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
         setShowError(false);
     }
 
-    const handleSave = () => {
+    const handleSave = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        setIsLoading(true);
         client.patch("/accounts/update/", {
             email: userEmail,
             first_name: firstNameModified.trim(),
@@ -44,6 +47,7 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
                     setShowError(true);
                     handleClose();
                 });
+        setIsLoading(false);
     };
 
     return (
@@ -85,8 +89,8 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
                             onClick={handleSave}
                             className="Button"
                             variant="outline-primary"
-                            disabled={firstNameModified === firstName || firstNameModified === "" || firstNameModified === null}
-                        >Salvar alterações</Button>   
+                            disabled={isLoading || firstNameModified === firstName || firstNameModified === "" || firstNameModified === null}
+                        >{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Salvar alterações</p>)}</Button>   
                         
                     </Modal.Footer>
                 </Modal>
@@ -123,6 +127,7 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleCloseSuccessful = () => {
         setShowSuccessful(false);
@@ -136,7 +141,9 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
         setShowError(false);
     }
 
-    const handleSave = () => {
+    const handleSave = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        setIsLoading(true);
         client.patch("/accounts/update/", {
             email: userEmail,
             last_name: lastNameModified.trim(),
@@ -149,6 +156,7 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
                     setShowError(true);
                     handleClose();
                 });
+        setIsLoading(false);
     };
 
     return (
@@ -190,8 +198,8 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
                             onClick={handleSave}
                             className="Button"
                             variant="outline-primary"
-                            disabled={lastNameModified === lastName || lastNameModified === "" || lastNameModified === null}
-                        >Salvar alterações</Button>   
+                            disabled={isLoading ||lastNameModified === lastName || lastNameModified === "" || lastNameModified === null}
+                        >{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Salvar alterações</p>)}</Button>   
                         
                     </Modal.Footer>
                 </Modal>

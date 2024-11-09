@@ -150,7 +150,7 @@ export function Carrinho() {
   return (
     <div>
       <Nav_bar />
-      <ToastContainer />
+      <ToastContainer draggable/>
       {currentUser && (
         <div className="container-fluid row d-flex justify-content-center m-0 p-0">
           <div className="col d-flex justify-content-center">
