@@ -5,51 +5,44 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { Footer } from "../components/Footer/Footer";
 import { Box, Checkbox, VStack, Text, Image, Heading, Button } from '@chakra-ui/react';
+import { Produto } from "../types/Produto";
+import { Spinner } from "react-bootstrap";
+import { Loading } from "../components/Loading";
 
 export function Assinatura() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [emailUser, setEmail] = useState<string>('');
   const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [produtos, setProdutos] = useState<Produto>();
   const planos = [
     {
       assinatura_id: 24,
-      id: 'monthly',
       nome: 'Plano Mensal',
-      valor: 'R$ 40,00',
+      valor: 40,
       descricao: 'Acesso mensal a todos os conteúdos.',
     },
     {
       assinatura_id: 25,
-      id: 'sixMonths',
       nome: 'Plano Semestral',
-      valor: 'R$ 200,00',
+      valor: 200,
       descricao: 'Acesso por 6 meses com desconto.',
     },
     {
       assinatura_id: 26,
-      id: 'annual',
       nome: 'Plano Anual',
-      valor: 'R$ 400,00',
+      valor: 400,
       descricao: 'Acesso por 1 ano com o maior desconto.',
     },
   ];
-
   const handleCheckboxChange = (planId: number) => {
     setSelectedPlan(planId === selectedPlan ? null : planId);
   };
-
   const selectedPlanData = planos.find(plan => plan.assinatura_id === selectedPlan);
-
-  const handleSubmit = async () => {
-    client.post('/accounts/cart', { emailUser: emailUser })
-    .then(response => {
-      
-    });
-  }
-
+  var compra = 0;
   useEffect(() => {
+    setIsLoading(true);
     document.title = 'Assinatura';
     client.get("/accounts/usuario")
       .then(response => {
@@ -60,13 +53,33 @@ export function Assinatura() {
         setCurrentUser(false);
         navigate('/login');
       });
-  }, [navigate]);
+      setIsLoading(false);
+  }, []);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    client.post('/compra/compra-create/',
+      {
+        email: emailUser,
+        products: [selectedPlanData?.assinatura_id],
+        quantity: [1],
+        valor_total: selectedPlanData?.valor
+      })
+      .then(response => {
+        compra = response.data.compra_id;
+        navigate(`/resumo-compra/${compra}`);
+        window.location.reload();
+      }, error => {
+        toast.error("Erro ao realizar a compra");
+      });
+    setIsLoading(false);
+  }
 
   return (
     <div>
       <Nav_bar />
       <ToastContainer />
-      {currentUser && (
+      {currentUser && !isLoading ? (
         <div className="container text-center">
           <Box p={4}>
             <Heading as="h2" size="lg" mb={4}>
@@ -79,23 +92,23 @@ export function Assinatura() {
                   isChecked={selectedPlan === plan.assinatura_id}
                   onChange={() => handleCheckboxChange(plan.assinatura_id)}
                 >
-                  {plan.nome} - {plan.valor}
+                  {plan.nome} - R${(plan.valor).toFixed(2).replace('.', ',')}
                 </Checkbox>
               ))}
             </VStack>
-  
-            <Box p={4}>
-              <Box display={{ base: "block", md: "flex" }} alignItems="start">
+
+            <Box p={4} >
+              <Box className="d-flex flex-wrap" alignItems="start" >
                 <Image
                   src="/images/streamings.jpg"
                   alt="Streamings"
-                  boxSize={{ base: "100%", md: "400px" }} 
+                  boxSize={{ md: "400px" }}
                   objectFit="cover"
                   borderRadius="md"
-                  mb={{ base: 4, md: 0 }} 
-                  mr={4}
+                  mb={5}
+                  mr={5}
                 />
-                <Text flex="1"> 
+                <Text flex="1" minW="30vw">
                   <VStack align="start" spacing={4}>
                     <Heading as="h3" size="lg">
                       Todos os Canais Liberados
@@ -117,23 +130,27 @@ export function Assinatura() {
                 </Text>
               </Box>
             </Box>
-  
+
             {selectedPlanData && (
               <Box mt={6} p={4} borderWidth={1} borderRadius="md">
                 <Heading as="h3" size="md">{selectedPlanData.nome}</Heading>
                 <Text>{selectedPlanData.descricao}</Text>
-                <Text fontWeight="bold">{selectedPlanData.valor}</Text>
+                <Text fontWeight="bold">R${(selectedPlanData.valor).toFixed(2).replace('.', ',')}</Text>
               </Box>
             )}
-  
-            <Button mt={4} colorScheme="purple" isDisabled={!selectedPlan} onClick={handleSubmit}>
-              Confirmar Assinatura
+
+            <Button 
+            mt={4} 
+            colorScheme="purple" 
+            isDisabled={!selectedPlan || isLoading} 
+            onClick={handleSubmit}>
+              {isLoading ? (<Spinner animation="border"/>) : ("Confirmar Assinatura")}
             </Button>
           </Box>
         </div>
-      )}
+      ): <Loading height="70vh" withPhrase={true}/>}
       <Footer />
     </div>
   );
-  
+
 }  
