@@ -13,12 +13,12 @@ type userLastNameProps = {
     lastName: string,
 }
 
-export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
+export function EditFirstName({ userEmail, firstName }: userFirstNameProps) {
     const [firstNameModified, setFirstNameModified] = useState(firstName);
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [btnMessage, setBtnMessage] = useState<string>("Salvar Alterações");
 
     const handleCloseSuccessful = () => {
         setShowSuccessful(false);
@@ -26,15 +26,16 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
 
     const handleClose = () => {
         setShow(false);
+        setBtnMessage("Salvar Alterações");
     }
 
     const handleCloseError = () => {
         setShowError(false);
     }
 
-    const handleSave = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        setIsLoading(true);
+    const handleUpdateFirstName = async () => {
+        setBtnMessage("Salvando Alterações...");
+        document.getElementById("btnUpdateFirstName").disabled = true;
         client.patch("/accounts/update/", {
             email: userEmail,
             first_name: firstNameModified.trim(),
@@ -47,53 +48,54 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
                     setShowError(true);
                     handleClose();
                 });
-        setIsLoading(false);
-    };
+    }
 
     return (
         <>
-        <div className="m-0 p-0 d-flex align-items-center">
-            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{firstName.length > 15 ? `${firstName.slice(0, 15)}...` : firstName}</Button>
-        </div>
-            
-                <Modal centered show={show} onHide={() => handleClose()} animation={true}>
-                    <Modal.Header closeButton>
-                        <Modal.Title className="outline-primary d-flex justify-content-center">
-                            <h2 className="d-flex justify-content-center">Editar Nome</h2>
-                            </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form.Group controlId="firstName" className="mb-3" id="controlGroup" >
-                            <Form.Label className="d-flex justify-content-start">Nome Atual</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={firstName}
-                                disabled={true}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
-                            <Form.Label className="d-flex justify-content-start">Novo Nome</Form.Label>
-                            <Form.Control
-                                type="text"
-                                id="input"
-                                value={firstNameModified}
-                                onChange={(e) => setFirstNameModified(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Modal.Body>
-                    <Modal.Footer className="d-flex justify-content-between">
-                         <Button variant="secondary" onClick={() => handleClose()}>
-                            Close
-                        </Button>
-                        <Button
-                            onClick={handleSave}
-                            className="Button"
-                            variant="outline-primary"
-                            disabled={isLoading || firstNameModified === firstName || firstNameModified === "" || firstNameModified === null}
-                        >{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Salvar alterações</p>)}</Button>   
-                        
-                    </Modal.Footer>
-                </Modal>
+            <div className="m-0 p-0 d-flex align-items-center">
+                <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{ height: "50px" }}>{firstName.length > 15 ? `${firstName.slice(0, 15)}...` : firstName}</Button>
+            </div>
+
+            <Modal centered show={show} onHide={() => handleClose()} animation={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="outline-primary d-flex justify-content-center">
+                        <h2 className="d-flex justify-content-center">Editar Nome</h2>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group controlId="firstName" className="mb-3" id="controlGroup" >
+                        <Form.Label className="d-flex justify-content-start">Nome Atual</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={firstName}
+                            disabled={true}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
+                        <Form.Label className="d-flex justify-content-start">Novo Nome</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="input"
+                            value={firstNameModified}
+                            onChange={(e) => setFirstNameModified(e.target.value)}
+                        />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer className="d-flex justify-content-between">
+                    <Button variant="secondary" onClick={() => handleClose()}>
+                        Close
+                    </Button>
+                    <Button
+                        onClick={() => handleUpdateFirstName()}
+                        className="Button"
+                        variant="outline-primary"
+                        id="btnUpdateFirstName"
+                        disabled={firstNameModified === firstName || firstNameModified === "" || firstNameModified === null}>
+                        {btnMessage}
+                    </Button>
+
+                </Modal.Footer>
+            </Modal>
 
             <Modal centered show={showSuccessful} onHide={handleCloseSuccessful} animation={true}>
                 <Modal.Header closeButton>
@@ -122,12 +124,12 @@ export function EditFirstName({userEmail, firstName} : userFirstNameProps) {
     );
 }
 
-export function EditLastName({userEmail, lastName} : userLastNameProps) {
+export function EditLastName({ userEmail, lastName }: userLastNameProps) {
     const [lastNameModified, setLastNameModified] = useState(lastName);
     const [showSuccessful, setShowSuccessful] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [btnMessage, setBtnMessage] = useState<string>("Salvar Alterações");
 
     const handleCloseSuccessful = () => {
         setShowSuccessful(false);
@@ -135,15 +137,16 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
 
     const handleClose = () => {
         setShow(false);
+        setBtnMessage("Salvar Alterações");
     }
 
     const handleCloseError = () => {
         setShowError(false);
     }
 
-    const handleSave = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        setIsLoading(true);
+    const handleSave = async () => {
+        setBtnMessage("Salvando Alterações...");
+        document.getElementById("btnUpdateLastName").disabled = true;
         client.patch("/accounts/update/", {
             email: userEmail,
             last_name: lastNameModified.trim(),
@@ -156,53 +159,53 @@ export function EditLastName({userEmail, lastName} : userLastNameProps) {
                     setShowError(true);
                     handleClose();
                 });
-        setIsLoading(false);
-    };
+    }
 
     return (
         <>
-        <div className="m-0 p-0 d-flex align-items-center">
-            <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{height: "50px"}}>{lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}</Button>
-        </div>
-            
-                <Modal centered show={show} onHide={() => handleClose()} animation={true}>
-                    <Modal.Header closeButton>
-                        <Modal.Title className="outline-primary d-flex justify-content-center">
-                            <h2 className="d-flex justify-content-center">Editar Sobrenome</h2>
-                            </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form.Group controlId="firstName" className="mb-3" id="controlGroup">
-                            <Form.Label className="d-flex justify-content-start">Sobrenome Atual</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={lastName}
-                                disabled={true}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
-                            <Form.Label className="d-flex justify-content-start">Novo Sobrenome</Form.Label>
-                            <Form.Control
-                                type="text"
-                                id="input"
-                                value={lastNameModified}
-                                onChange={(e) => setLastNameModified(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Modal.Body>
-                    <Modal.Footer className="d-flex justify-content-between">
-                         <Button variant="secondary" onClick={() => handleClose()}>
-                            Close
-                        </Button>
-                        <Button
-                            onClick={handleSave}
-                            className="Button"
-                            variant="outline-primary"
-                            disabled={isLoading ||lastNameModified === lastName || lastNameModified === "" || lastNameModified === null}
-                        >{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Salvar alterações</p>)}</Button>   
-                        
-                    </Modal.Footer>
-                </Modal>
+            <div className="m-0 p-0 d-flex align-items-center">
+                <Button id="titulo" variant="outline-light" onClick={() => setShow(true)} style={{ height: "50px" }}>{lastName.length > 15 ? `${lastName.slice(0, 15)}...` : lastName}</Button>
+            </div>
+
+            <Modal centered show={show} onHide={() => handleClose()} animation={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="outline-primary d-flex justify-content-center">
+                        <h2 className="d-flex justify-content-center">Editar Sobrenome</h2>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group controlId="firstName" className="mb-3" id="controlGroup">
+                        <Form.Label className="d-flex justify-content-start">Sobrenome Atual</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={lastName}
+                            disabled={true}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
+                        <Form.Label className="d-flex justify-content-start">Novo Sobrenome</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="input"
+                            value={lastNameModified}
+                            onChange={(e) => setLastNameModified(e.target.value)}
+                        />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer className="d-flex justify-content-between">
+                    <Button variant="secondary" onClick={() => handleClose()}>
+                        Close
+                    </Button>
+                    <Button
+                        onClick={handleSave}
+                        className="Button"
+                        id="btnUpdateLastName"
+                        variant="outline-primary"
+                        disabled={lastNameModified === lastName || lastNameModified === "" || lastNameModified === null}>
+                        {btnMessage}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             <Modal centered show={showSuccessful} onHide={handleCloseSuccessful} animation={true}>
                 <Modal.Header closeButton>

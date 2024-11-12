@@ -83,7 +83,6 @@ export function Profile() {
                     <div className="col d-flex justify-content-center my-5" id="col">
                         <div className="row-fluid d-flex p-0 mt-0" id="row2">
                             <div className="me-3">
-
                             </div>
                             <form onSubmit={e => submitLogout(e)}>
                                 <Button type="submit" variant="danger" disabled={isLoading}>{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Log out</p>)}</Button>

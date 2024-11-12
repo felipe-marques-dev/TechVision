@@ -10,28 +10,44 @@ export function Assinatura() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [emailUser, setEmail] = useState<string>('');
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
 
   const planos = [
     {
+      assinatura_id: 24,
       id: 'monthly',
       nome: 'Plano Mensal',
       valor: 'R$ 40,00',
       descricao: 'Acesso mensal a todos os conteúdos.',
     },
     {
+      assinatura_id: 25,
       id: 'sixMonths',
       nome: 'Plano Semestral',
       valor: 'R$ 200,00',
       descricao: 'Acesso por 6 meses com desconto.',
     },
     {
+      assinatura_id: 26,
       id: 'annual',
       nome: 'Plano Anual',
       valor: 'R$ 400,00',
       descricao: 'Acesso por 1 ano com o maior desconto.',
     },
   ];
+
+  const handleCheckboxChange = (planId: number) => {
+    setSelectedPlan(planId === selectedPlan ? null : planId);
+  };
+
+  const selectedPlanData = planos.find(plan => plan.assinatura_id === selectedPlan);
+
+  const handleSubmit = async () => {
+    client.post('/accounts/cart', { emailUser: emailUser })
+    .then(response => {
+      
+    });
+  }
 
   useEffect(() => {
     document.title = 'Assinatura';
@@ -46,12 +62,6 @@ export function Assinatura() {
       });
   }, [navigate]);
 
-  const handleCheckboxChange = (planId: string) => {
-    setSelectedPlan(planId === selectedPlan ? null : planId);
-  };
-
-  const selectedPlanData = planos.find(plan => plan.id === selectedPlan);
-
   return (
     <div>
       <Nav_bar />
@@ -65,9 +75,9 @@ export function Assinatura() {
             <VStack align="start">
               {planos.map(plan => (
                 <Checkbox
-                  key={plan.id}
-                  isChecked={selectedPlan === plan.id}
-                  onChange={() => handleCheckboxChange(plan.id)}
+                  key={plan.assinatura_id}
+                  isChecked={selectedPlan === plan.assinatura_id}
+                  onChange={() => handleCheckboxChange(plan.assinatura_id)}
                 >
                   {plan.nome} - {plan.valor}
                 </Checkbox>
@@ -116,7 +126,7 @@ export function Assinatura() {
               </Box>
             )}
   
-            <Button mt={4} colorScheme="purple" isDisabled={!selectedPlan}>
+            <Button mt={4} colorScheme="purple" isDisabled={!selectedPlan} onClick={handleSubmit}>
               Confirmar Assinatura
             </Button>
           </Box>

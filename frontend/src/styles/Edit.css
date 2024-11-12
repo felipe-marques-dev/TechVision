@@ -10,6 +10,11 @@ input {
   all: unset;
 }
 
+#btnUpdateFirstName, #btnUpdateLastName{
+  width: 150px;
+  margin: 2vh;
+}
+
 #titulo {
   font-size: 30px;
 }

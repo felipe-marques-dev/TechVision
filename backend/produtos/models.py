@@ -11,7 +11,7 @@ class Categoria(models.Model):
 class Produto(models.Model):
     product_id = models.AutoField(primary_key = True)
     name = models.CharField(max_length=40)
-    categoria = models.ForeignKey(Categoria, related_name="categories", on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, related_name="categories", on_delete=models.CASCADE, null=True, blank=True)
     sub_category = models.CharField(max_length=40)
     description = models.CharField(max_length=150)
     url_name = models.SlugField(unique=True, null=True, blank=True)
