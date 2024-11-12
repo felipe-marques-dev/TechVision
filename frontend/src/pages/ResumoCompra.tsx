@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { client } from "../services/client";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosResponse } from "axios";
-import { Produto } from "../types/Produto";
+import { tokenToCSSVar } from "@chakra-ui/react";
 
 export function ResumoCompra() {
   const navigate = useNavigate();
@@ -13,24 +13,25 @@ export function ResumoCompra() {
   const [compraPrice, setCompraPrice] = useState(0)
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [emailUser, setEmail] = useState<string>('');
+  const [userName, setUserName] = useState('');
   const { compra_id } = useParams<{ compra_id: string }>();
-  const [ produtosComprados, setProdutosComprados ] = useState<[Produto[]]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadCompra = async () => {
     if (emailUser) {
       const response: AxiosResponse = await client.post('/compra/compra-itens', { email: emailUser, pedido_id: compra_id })
       setCompraInfo(response.data.pedidos)
       setCompraPrice(response.data.valor_total)
-      console.log(compraInfo)
-      console.log(response.data.pedidos)
     }
   }
 
   useEffect(() => {
+    setIsLoading(true);
     client.get("/accounts/usuario")
       .then(response => {
         setCurrentUser(true);
         setEmail(response.data.user.email);
+        setUserName(response.data.user.first_name);
         loadCompra()
       })
       .catch(error => {
@@ -39,12 +40,6 @@ export function ResumoCompra() {
       });
   }, [currentUser]);
 
-  const createProductList = () => {
-    compraInfo.forEach((produto) => {
-      setProdutosComprados(produto)
-    });
-  }
-
   return (
     <>
 
@@ -52,7 +47,7 @@ export function ResumoCompra() {
       <div className="d-flex flex-column justify-content-center align-items-center p-4" style={{ minHeight: "100vh", textAlign: 'justify' }}>
         <BsCheckCircle size={70} color="green" className="mx-auto" />
         <h1>Parabéns!</h1>
-        <p className="w-75  fs-5 text-wrap">Olá, {emailUser}!<br></br>
+        <p className="w-75  fs-5 text-wrap">Olá, {userName}!<br></br>
           <br></br>
           Gostaríamos de começar dizendo um muito obrigado por escolher a nossa loja para a sua compra! Estamos muito felizes por você ter confiado em nós, e queremos que saiba que ficamos emocionados em tê-lo como cliente.
           <br></br>

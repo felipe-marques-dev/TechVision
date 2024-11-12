@@ -30,7 +30,20 @@ export function ProdutoIndividual() {
     const [currentUser, setCurrentUser] = useState<boolean>(false);
     const { url_name } = useParams<{ url_name: string }>();
     const url_product = url_name?.toString();
-    const [produtos, setProdutos] = useState<Produto | null>(null);
+    const [produtos, setProdutos] = useState<Produto>({ name: "" ,
+  product_id: 1,
+  category: "",
+  sub_category: "",
+  description: "",
+  url_name: "",
+  estoque: 1,
+  price: 1,
+  promotion: false,
+  foto_1: "",
+  foto_2: "", // Se a foto 2 for opcional
+  foto_3: "", // Se a foto 3 for opcional
+  foto_4: ""
+});
     const [imgPrincipal, setImgPrincipal] = useState<string>("");
     const imgSrc2 = produtos?.foto_2 || '';
     const imgSrc3 = produtos?.foto_3 || '';
@@ -133,31 +146,34 @@ export function ProdutoIndividual() {
     }
 
     function irParaPagamentoBtn() {
-    client.post('/accounts/cart/', { email: emailUser })
-          .then(response => {
-            setProdutos(response.data.itens);
-          })
-          .catch(error => {
-            console.log("Erro ao buscar produtos", error);
-          });
- 
-    var compra = 0;
-    client.post('/compra/compra-create/', 
-    {
-      email: emailUser,
-      products: [produtos?.product_id],
-      quantity: [1],
-      valor_total: produtos?.price
-    })
-    .then(response => {
-            compra = response.data.compra_id;
-            navigate(`/resumo-compra/${compra}`);
-              
-    })
-    .catch(error => {
-            console.log("Erro ao buscar produtos", error);
-    }); 
-  }
+        if (!currentUser) {
+            return navigate("/login");
+        }
+        client.post('/accounts/cart/', { email: emailUser })
+            .then(response => {
+                setProdutos(response.data.itens);
+            })
+            .catch(error => {
+                console.log("Erro ao buscar produtos", error);
+            });
+
+        var compra = 0;
+        client.post('/compra/compra-create/',
+            {
+                email: emailUser,
+                products: [produtos?.product_id],
+                quantity: [1],
+                valor_total: produtos?.price
+            })
+            .then(response => {
+                compra = response.data.compra_id;
+                navigate(`/resumo-compra/${compra}`);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.log("Erro ao buscar produtos", error);
+            });
+    }
 
     return (
         <>
@@ -224,7 +240,7 @@ export function ProdutoIndividual() {
                                     <button onClick={() => handleAdd(produtos.product_id)} className="btn" id="add-cart-pdt">
                                         Adicionar ao carrinho
                                     </button>
-                                    <button className="btn" onClick={() => irParaPagamentoBtn ()} id="add-cart-pdt">
+                                    <button className="btn" onClick={() => irParaPagamentoBtn()} id="add-cart-pdt">
                                         Comprar Agora
                                     </button>
                                 </div>
