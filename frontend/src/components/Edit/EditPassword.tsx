@@ -10,7 +10,6 @@ type userPasswordProps = {
 
 export function PasswordValidation({ userEmail }: userPasswordProps) {
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
     const [show, setShow] = useState(false);
     const [showError, setShowError] = useState(false);
     const [newPassword, setNewPassword] = useState("");
@@ -19,11 +18,13 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
     const [showUpdate, setShowUpdate] = useState(false);
     const [showUpdateError, setShowUpdateError] = useState(false);
     const [valid, setValid] = useState(true);
+    const [btnMessage, setBtnMessage] = useState<string>("Verificar");
+    const [btnMessageUpdatePassword, setBtnMessageUpdatePassword] = useState<string>("Salvar Alterações");
     const navigate = useNavigate();
 
-    function handleSave(e: { currentTarget: any; preventDefault: () => void; }) {
-        e.preventDefault();
-        setIsLoading(true);
+    function handleSave() {
+        setBtnMessage("Verificando...");
+        document.getElementById("btnCheckPassword").disabled = true;
 
         client.post("accounts/check/", {
             email: userEmail,
@@ -37,12 +38,11 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                 setShowError(true);
                 setValid(false);
             });
-        setIsLoading(false);
     }
 
-    const handleUpdate = (e: { currentTarget: any; preventDefault: () => void; }) => {
-        e.preventDefault();
-        setIsLoading(true);
+    const handleUpdate = () => {
+        setBtnMessageUpdatePassword("Salvando Alterações...");
+        document.getElementById("btnUpdatePassword").disabled = true;
 
         client.patch("/accounts/update/", {
             password: newPassword,
@@ -56,29 +56,35 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                     setShowUpdateError(true);
                     handleClose();
                 });
-        setIsLoading(false);
     }
 
     const handleClose = () => {
         setShow(false);
         setPassword("");
+        setBtnMessage("Verificar");
     }
 
     const handleCloseError = () => {
         setShowError(false);
+        setBtnMessage("Verificar");
     }
 
     const handleCloseUpdateSuccessful = () => {
         setShowUpdateSuccessful(false);
+        setBtnMessageUpdatePassword("Salvar Alterações");
         navigate("/");
     }
 
     const handleUpdateClose = () => {
         setShowUpdate(false);
+        setNewPassword("");
+        setNewPasswordConfirm("");
+        setBtnMessageUpdatePassword("Salvar Alterações");
     }
 
     const handleCloseUpdateError = () => {
         setShowUpdateError(false);
+        setBtnMessageUpdatePassword("Salvar Alterações");
     }
 
     const clearErrors = () => {
@@ -110,7 +116,7 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                     <Form.Group controlId="newFirstName" className="object-fit-fill" id="controlGroup">
                         <Form.Label className="d-flex justify-content-start">Insira a senha atual</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="password"
                             id="input"
                             value={password}
                             onChange={handleChangePassword}
@@ -125,8 +131,10 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                         onClick={handleSave}
                         className="Button"
                         variant="outline-primary"
-                        disabled={isLoading || password.length < 8 || password === "" || password === null || !valid}
-                    >{isLoading ? <Spinner animation="border" /> : "Continuar"}</Button>
+                        id="btnCheckPassword"
+                        disabled={password.length < 8 || password === "" || password === null || !valid}>
+{btnMessage}
+                        </Button>
 
                 </Modal.Footer>
             </Modal>
@@ -155,7 +163,7 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                     <Form.Group className="my-2" id="controlGroupUpdate">
                         <Form.Label>Informe sua nova senha</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             isValid={newPassword.length > 8 || newPassword === newPasswordConfirm || /^[a-z0-9.]/.test(newPassword)}
@@ -175,7 +183,7 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                     <Form.Group className="my-2" id="controlGroupUpdate">
                         <Form.Label>Confirme sua nova senha</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="password"
                             value={newPasswordConfirm}
                             onChange={(e) => setNewPasswordConfirm(e.target.value)}
                             isValid={newPassword.length > 8 || newPassword === newPasswordConfirm || /^[a-z0-9.]/.test(newPassword)}
@@ -194,9 +202,10 @@ export function PasswordValidation({ userEmail }: userPasswordProps) {
                         onClick={handleUpdate}
                         className="Button"
                         variant="outline-primary"
-                        disabled={isLoading || newPassword.length < 8 || newPassword !== newPasswordConfirm || newPassword === "" || newPasswordConfirm === "" || newPassword === null}
-                    >{isLoading ? <Spinner animation="border" /> : "Salvar alterações"}</Button>
-
+                        id="btnUpdatePassword"
+                        disabled={newPassword.length < 8 || newPassword !== newPasswordConfirm || newPassword === "" || newPasswordConfirm === "" || newPassword === null}>
+                            {btnMessageUpdatePassword}
+                            </Button>
                 </Modal.Footer>
             </Modal>
             <Modal centered show={showUpdateSuccessful} onHide={handleCloseUpdateSuccessful} animation={true}>
