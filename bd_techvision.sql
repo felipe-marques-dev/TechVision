@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/11/2024 às 19:05
--- Versão do servidor: 11.5.2-MariaDB
+-- Tempo de geração: 12/11/2024 às 21:53
+-- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -303,7 +303,14 @@ INSERT INTO `compra_pedido` (`delivery_id`, `status`, `user_id`, `valor_total`) 
 (125, 'Aprovado', 1, 39.9),
 (126, 'Aprovado', 1, 199.99),
 (127, 'Aprovado', 1, 1999.9),
-(128, 'Aprovado', 1, 499.9);
+(128, 'Aprovado', 1, 499.9),
+(129, 'Aprovado', 31, 2599.8),
+(130, 'Aprovado', 31, 149.99),
+(131, 'Aprovado', 32, 199.99),
+(132, 'Aprovado', 32, 799.95),
+(133, 'Aprovado', 32, 1699.88),
+(134, 'Aprovado', 32, 1699.88),
+(135, 'Aprovado', 32, 1699.88);
 
 -- --------------------------------------------------------
 
@@ -332,7 +339,18 @@ INSERT INTO `compra_pedidoitem` (`pedidoItem_id`, `pedido_id`, `produto_id`, `qu
 (7, 125, 23, 1),
 (8, 126, 9, 1),
 (9, 127, 16, 1),
-(10, 128, 17, 1);
+(10, 128, 17, 1),
+(11, 129, 10, 2),
+(12, 130, 12, 1),
+(13, 131, 9, 1),
+(14, 132, 9, 1),
+(15, 132, 12, 4),
+(16, 133, 9, 2),
+(17, 133, 10, 1),
+(18, 134, 9, 2),
+(19, 134, 10, 1),
+(20, 135, 9, 2),
+(21, 135, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -440,7 +458,15 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `user_id`, `content_type_id
 (71, '2024-10-03 11:20:57', 1, 14, '7', 'Carrinho object (7)', 1, '[{\"added\": {}}]'),
 (72, '2024-10-08 18:16:20', 2, 21, '1', 'https://www.mercadolivre.com.br/dia-das-criancas#D', 2, '[{\"changed\": {\"fields\": [\"Foto\"]}}]'),
 (73, '2024-10-08 18:49:58', 2, 21, '4', 'https://lista.mercadolivre.com.br/_Container_ddc-games#deal_print_id=0c9bb0d0-85a6-11ef-b4c7-db911e0386b6&c_id=mainslideritem-normal&c_element_order=4&c_campaign=23.09_MS_GAMER&c_uid=0c9bb0d0-85a6-11e', 1, '[{\"added\": {}}]'),
-(74, '2024-11-05 13:20:10', 1, 11, '15', 'Aspirador de Pó Robô', 3, '');
+(74, '2024-11-05 13:20:10', 1, 11, '15', 'Aspirador de Pó Robô', 3, ''),
+(75, '2024-11-12 20:28:35', 2, 11, '24', 'Assinatura Mensal', 1, '[{\"added\": {}}]'),
+(76, '2024-11-12 20:31:10', 2, 11, '25', 'Assinatura Semestral', 1, '[{\"added\": {}}]'),
+(77, '2024-11-12 20:31:27', 2, 11, '24', 'Assinatura Mensal', 2, '[{\"changed\": {\"fields\": [\"Description\"]}}]'),
+(78, '2024-11-12 20:32:21', 2, 11, '26', 'Plano Anual', 1, '[{\"added\": {}}]'),
+(79, '2024-11-12 20:32:31', 2, 11, '25', 'Plano Semestral', 2, '[{\"changed\": {\"fields\": [\"Name\"]}}]'),
+(80, '2024-11-12 20:32:45', 2, 11, '24', 'Plano Mensal', 2, '[{\"changed\": {\"fields\": [\"Name\"]}}]'),
+(81, '2024-11-12 20:53:18', 2, 11, '25', 'Plano Semestral', 2, '[{\"changed\": {\"fields\": [\"Url name\"]}}]'),
+(82, '2024-11-12 20:53:26', 2, 11, '24', 'Plano Mensal', 2, '[{\"changed\": {\"fields\": [\"Url name\"]}}]');
 
 -- --------------------------------------------------------
 
@@ -557,6 +583,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('cprfscjtrmuq5kg75rra1fpn1h4w7wa2', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1syADl:GdynYGcvQSD73TvlWFGYP3Z9q6zKRYOhymcwBxxvq-w', '2024-10-22 13:25:49.411385'),
 ('edeowszhehzl5dsv3scfkfcgcoo5xt8e', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1siwXr:nQdUi7POBfGyExmmBiKYphSQ7aQPdDQV-nS2qpqTmUQ', '2024-09-10 13:47:39.772701'),
 ('f1zznuf0v3htkwasutmlsxn1f7a1j6c6', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1spsuw:kksh13WFv7OXnFCO8JRfVcFYtEIF7bIoD_Iy9mFK7t0', '2024-09-29 17:20:10.932756'),
+('g4z9ngf3yzbcxaszoik44xom77jsyxvf', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1tAxSM:wBw3K6HW0g_qj641lFAbuSJXEOmiZAaGBkjBz-03zyY', '2024-11-26 20:25:46.651091'),
 ('gdg5p9j0r14d2b6e58i21fjfw94wgody', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1swJhA:gjpvo7Z3lXak-doXei2_1rmFqRuIQL2lTZePcenpnWE', '2024-10-17 11:08:32.214277'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
@@ -597,7 +624,7 @@ INSERT INTO `produtos_categoria` (`category_id`, `name`) VALUES
 CREATE TABLE `produtos_produto` (
   `product_id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `categoria_id` int(11) NOT NULL,
+  `categoria_id` int(11) DEFAULT NULL,
   `sub_category` varchar(40) NOT NULL,
   `description` varchar(150) NOT NULL,
   `url_name` varchar(40) DEFAULT NULL,
@@ -628,7 +655,10 @@ INSERT INTO `produtos_produto` (`product_id`, `name`, `categoria_id`, `sub_categ
 (20, 'Desinfetante Multiuso', 3, 'Produtos de Limpeza', 'Desinfetante para superfícies com ação bactericida.', 'desinfetante-multiuso', 300, 19.9, 0, 'produtos/41JMkvdEsNL._AC_SX425_.jpg', 'produtos/51zAkd4QDWL._AC_SX425_.jpg', 'produtos/51lLrVkfqAL._AC_SX425_.jpg', ''),
 (21, 'Esfregão Giratório', 3, 'Acessórios', 'Esfregão com balde giratório para facilitar a limpeza do chão.', 'esfregao-giratorio', 120, 99.9, 1, 'produtos/6162CgGP0L._AC_SY300_SX300_.jpg', 'produtos/71HNLLouJML._AC_SY450_.jpg', 'produtos/71hFjaDD9rL._AC_SY450_.jpg', ''),
 (22, 'Limpa Vidros Spray', 3, 'Produtos de Limpeza', 'Produto especial para limpeza e brilho em vidros.', 'limpa-vidros-spray', 200, 24.9, 0, 'produtos/61GWEj0j16L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/71UcJK2a40L._AC_SY355_.jpg', 'produtos/71ZzlrutfnL._AC_SY355_.jpg', ''),
-(23, 'Sabão em Pó 2kg', 3, 'Lavanderia', 'Sabão em pó eficaz para remoção de manchas e sujeiras.', 'sabao-em-po-2kg', 400, 39.9, 1, 'produtos/71Gb18PPs5L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/61AMsdP9XtL._AC_SX425_.jpg', 'produtos/71-ygFAW97L._AC_SX425_.jpg', '');
+(23, 'Sabão em Pó 2kg', 3, 'Lavanderia', 'Sabão em pó eficaz para remoção de manchas e sujeiras.', 'sabao-em-po-2kg', 400, 39.9, 1, 'produtos/71Gb18PPs5L.__AC_SX300_SY300_QL70_ML2_.jpg', 'produtos/61AMsdP9XtL._AC_SX425_.jpg', 'produtos/71-ygFAW97L._AC_SX425_.jpg', ''),
+(24, 'Plano Mensal', NULL, 'Assinatura', 'Acesso mensal a todos os conteúdos.', 'plano-mensal', 999999999, 40, 0, '', '', '', ''),
+(25, 'Plano Semestral', NULL, 'Assinatura', 'Acesso por 6 meses com desconto.', 'plano-semestral', 999999999, 200, 0, '', '', '', ''),
+(26, 'Plano Anual', NULL, 'Assinatura', 'Acesso por 1 ano com o maior desconto.', 'plano-anual', 999999999, 400, 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -655,10 +685,13 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
 (1, 'Felipe', 'Marques', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-11-07 15:52:20', 1),
-(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-10-08 13:54:29', 1),
+(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-11-12 20:25:46', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0),
-(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-11-05 16:04:23', 0);
+(30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-11-05 16:04:23', 0),
+(31, 'Lucas', 'Miguel', 'l@gmail.com', 'pbkdf2_sha256$720000$anVuOFTBmYYqFGUzOZ0RHt$WMJK9JCqQnVztqh4Zmde9cckvuIk7ymKvbcT/2c9NWQ=', 0, 1, 0, '2024-11-08 21:55:43', 0),
+(32, 'Lucas', 'Miguel', 'lucas@gmail.com', 'pbkdf2_sha256$720000$5Rw5uX1ZiNzXYIXGkGo9jL$Rc3XDp6NObRH8J05OYx+o64vi1fY1W2HOSo5JXKbIJo=', 0, 1, 0, '2024-11-08 22:27:12', 0),
+(33, 'teste', 'jr', 'teste@gmail.com', 'pbkdf2_sha256$720000$lXjP9DU5Tr88CNyauF0RvW$FJTJOO25Sfy9XEXTa3vVYpzf/X7Ue2k0qWHuCr7QX/Q=', 0, 1, 0, '2024-11-12 20:23:18', 0);
 
 -- --------------------------------------------------------
 
@@ -682,7 +715,10 @@ INSERT INTO `usuario_carrinho` (`cart_id`, `produto_id`, `user_id`, `created_at`
 (2, 1, 2, '2024-09-10 10:24:51', '2024-09-10 10:26:09'),
 (5, 0, 11, '2024-09-10 14:19:01', '2024-09-10 14:19:01'),
 (6, 0, 1, '2024-09-10 14:41:52', '2024-09-10 14:44:40'),
-(7, 0, 30, '2024-10-03 14:20:57', '2024-10-03 14:20:57');
+(7, 0, 30, '2024-10-03 14:20:57', '2024-10-03 14:20:57'),
+(8, 0, 31, '2024-11-09 00:55:43', '2024-11-09 00:55:43'),
+(9, 0, 32, '2024-11-09 01:07:12', '2024-11-09 01:07:12'),
+(10, 0, 33, '2024-11-12 23:23:18', '2024-11-12 23:23:18');
 
 -- --------------------------------------------------------
 
@@ -704,7 +740,8 @@ CREATE TABLE `usuario_carrinhoitem` (
 
 INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price_ind`) VALUES
 (28, 6, 13, 4, 80),
-(29, 6, 17, 3, 500);
+(29, 6, 17, 3, 500),
+(50, 9, 9, 3, 200);
 
 -- --------------------------------------------------------
 
@@ -908,13 +945,13 @@ ALTER TABLE `carroussel_carroussel`
 -- AUTO_INCREMENT de tabela `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT de tabela `compra_pedidoitem`
 --
 ALTER TABLE `compra_pedidoitem`
-  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `corsheaders_corsmodel`
@@ -926,7 +963,7 @@ ALTER TABLE `corsheaders_corsmodel`
 -- AUTO_INCREMENT de tabela `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT de tabela `django_content_type`
@@ -950,25 +987,25 @@ ALTER TABLE `produtos_categoria`
 -- AUTO_INCREMENT de tabela `produtos_produto`
 --
 ALTER TABLE `produtos_produto`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_carrinho`
 --
 ALTER TABLE `usuario_carrinho`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
-  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_groups`
