@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { client } from "../../services/client";
 import { Nav_bar } from "../../components/NavBar/Navbar";
-import '../../styles/Produto Individual/ProdutoIndividual.css';
+import '../../styles/ProdutoIndividual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";
 import { Produto } from "../../types/Produto";
@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useMediaQuery } from "@chakra-ui/react";
 import { Loading } from "../Loading";
 import { NotFound } from "../404";
+import { Button, Spinner } from "react-bootstrap";
 
 const ico_entregas = 'entregas.png';
 const ico_cartao = 'ico-cartao.jpg';
@@ -19,7 +20,6 @@ const ico_cadeado = 'ico-cadeado.png';
 interface CartItem {
     produto: {
         product_id: number;
-
     };
     quantity: number;
 }
@@ -30,20 +30,7 @@ export function ProdutoIndividual() {
     const [currentUser, setCurrentUser] = useState<boolean>(false);
     const { url_name } = useParams<{ url_name: string }>();
     const url_product = url_name?.toString();
-    const [produtos, setProdutos] = useState<Produto>({ name: "" ,
-  product_id: 1,
-  category: "",
-  sub_category: "",
-  description: "",
-  url_name: "",
-  estoque: 1,
-  price: 1,
-  promotion: false,
-  foto_1: "",
-  foto_2: "", // Se a foto 2 for opcional
-  foto_3: "", // Se a foto 3 for opcional
-  foto_4: ""
-});
+    const [produtos, setProdutos] = useState<Produto>();
     const [imgPrincipal, setImgPrincipal] = useState<string>("");
     const imgSrc2 = produtos?.foto_2 || '';
     const imgSrc3 = produtos?.foto_3 || '';
@@ -52,6 +39,9 @@ export function ProdutoIndividual() {
     const [carrinho, setCarrinho] = useState<{ [key: number]: number }>({});
     const [isLargerThanMD] = useMediaQuery("(min-width: 800px)");
     const [error, setError] = useState<boolean>(false);
+    const [isLoadingAddCart, setIsLoadingAddCart] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    var compra = 0;
 
     const loadProdutos = async () => {
         const data = await pegarProdutoIndividual(`/produtos/itens/${url_product}/`);
@@ -85,6 +75,7 @@ export function ProdutoIndividual() {
     }, [currentUser]);
 
     const handleAdd = async (product_id: number) => {
+        setIsLoadingAddCart(true);
         if (!currentUser) {
             navigate("/login");
             return;
@@ -114,9 +105,9 @@ export function ProdutoIndividual() {
                 });
             }
         } catch (error) {
-            console.error("Erro ao atualizar item no carrinho", error);
             toast.error("Erro ao atualizar item no carrinho");
         }
+        setIsLoadingAddCart(false);
     };
 
 
@@ -133,7 +124,7 @@ export function ProdutoIndividual() {
                     });
                     setCarrinho(newCarrinho);
                 } catch (error) {
-                    console.log("Erro ao buscar produtos do carrinho", error);
+                    toast.error("Erro ao buscar produtos do carrinho");
                 }
             };
 
@@ -146,18 +137,11 @@ export function ProdutoIndividual() {
     }
 
     function irParaPagamentoBtn() {
+        setIsLoading(true);
         if (!currentUser) {
             return navigate("/login");
         }
-        client.post('/accounts/cart/', { email: emailUser })
-            .then(response => {
-                setProdutos(response.data.itens);
-            })
-            .catch(error => {
-                console.log("Erro ao buscar produtos", error);
-            });
 
-        var compra = 0;
         client.post('/compra/compra-create/',
             {
                 email: emailUser,
@@ -169,10 +153,10 @@ export function ProdutoIndividual() {
                 compra = response.data.compra_id;
                 navigate(`/resumo-compra/${compra}`);
                 window.location.reload();
-            })
-            .catch(error => {
-                console.log("Erro ao buscar produtos", error);
+            }, error => {
+                toast.error("Erro ao realizar a compra");
             });
+        setIsLoading(false);
     }
 
     return (
@@ -237,12 +221,20 @@ export function ProdutoIndividual() {
                                 </p>
                                 <p className="descricao" id="descricao-pdts">{produtos.description}</p>
                                 <div className="row m-0 p-0">
-                                    <button onClick={() => handleAdd(produtos.product_id)} className="btn" id="add-cart-pdt">
-                                        Adicionar ao carrinho
-                                    </button>
-                                    <button className="btn" onClick={() => irParaPagamentoBtn()} id="add-cart-pdt">
-                                        Comprar Agora
-                                    </button>
+                                    <Button
+                                        onClick={() => handleAdd(produtos.product_id)}
+                                        className="btn border-0"
+                                        id="add-cart-pdt"
+                                        disabled={isLoadingAddCart}>
+                                        {isLoadingAddCart ? <Spinner animation="border"/> : ("Adicionar ao carrinho")}
+                                    </Button>
+                                    <Button
+                                        className="btn border-0"
+                                        onClick={() => irParaPagamentoBtn()}
+                                        id="add-cart-pdt"
+                                        disabled={isLoading}>
+                                        {isLoading ? (<Spinner animation="border" />) : ("Comprar Agora")}
+                                    </Button>
                                 </div>
                             </div>
                             <div className="mt-5 d-flex justify-content-center">
