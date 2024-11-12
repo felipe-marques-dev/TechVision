@@ -7,6 +7,7 @@ import { useNavigateProducts } from "../../hooks/useNavigateProducts";
 import { H3 } from "../../styles/Carrossel/lista";
 import { Produto } from "../../types/Produto";
 import ProdutoCard from "./ProdutoCard";
+import { toast } from "react-toastify";
 
 type promotionProps = {
     promotion: boolean;
@@ -21,7 +22,7 @@ function PrincipaisProdutos(props: promotionProps) {
                 setProdutos(response.data)
             })
             .catch(error => {
-                console.log("Ops! Ocorreu um erro ao buscar os produtos.")
+                toast.error("Ops! Ocorreu um erro ao buscar os produtos.")
             })
     }, []);
 

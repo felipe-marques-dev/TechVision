@@ -15,7 +15,6 @@ export function Assinatura() {
   const [emailUser, setEmail] = useState<string>('');
   const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [produtos, setProdutos] = useState<Produto>();
   const planos = [
     {
       assinatura_id: 24,
@@ -80,7 +79,7 @@ export function Assinatura() {
       <Nav_bar />
       <ToastContainer />
       {currentUser && !isLoading ? (
-        <div className="container text-center">
+        <div className="container text-center mt-5">
           <Box p={4}>
             <Heading as="h2" size="lg" mb={4}>
               Escolha seu Plano de Assinatura
@@ -97,7 +96,7 @@ export function Assinatura() {
               ))}
             </VStack>
 
-            <Box p={4} >
+            <Box p={4} mt="3">
               <Box className="d-flex flex-wrap" alignItems="start" >
                 <Image
                   src="/images/streamings.jpg"
@@ -144,7 +143,7 @@ export function Assinatura() {
             colorScheme="purple" 
             isDisabled={!selectedPlan || isLoading} 
             onClick={handleSubmit}>
-              {isLoading ? (<Spinner animation="border"/>) : ("Confirmar Assinatura")}
+              {isLoading ? ("Confirmando Assinatura...") : ("Confirmar Assinatura")}
             </Button>
           </Box>
         </div>

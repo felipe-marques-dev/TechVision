@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Nav_bar } from "../../components/NavBar/Navbar";
+import { Nav_bar } from "../components/NavBar/Navbar";
 import '../../styles/Produto Individual/ProdutoIndividual.css';
 import { useParams } from "react-router-dom";
 import { pegarProdutoIndividual } from "./pegarProdutos";

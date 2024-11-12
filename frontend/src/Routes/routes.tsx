@@ -10,7 +10,6 @@ import { Home } from "../pages/Home.tsx";
 import { Profile } from "../pages/Profile.tsx";
 import { ProdutoIndividual } from "../components/Produtos/ProdutoIndividual.tsx";
 import { Carrinho } from "../pages/Carrinho.tsx";
-import ProdutosCategoria from "../components/Produtos/ProdutosCategoria.tsx";
 import Categoria from "../pages/Categoria.tsx";
 import { EsqueciMinhaSenhaVerificacao, EsqueciMinhaSenha } from "../pages/EsqueciMinhaSenha.tsx";
 import { TermosDeUsos } from "../pages/TermosDeUsos.tsx";

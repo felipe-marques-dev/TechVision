@@ -19,7 +19,6 @@ export function NavbarDesktop() {
         setLoggedIn(true)
       })
       .catch(response => {
-        console.log("Erro ao capturar usuario")
         setLoggedIn(false)
       })
   }, [])

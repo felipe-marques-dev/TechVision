@@ -175,8 +175,6 @@ export function EsqueciMinhaSenha() {
         password: password,
       }
     ).then(function (res) {
-      const message = res.data.message;
-      console.log(message);
       setIsLoading(false);
       setShowSuccessful(true);
     }).catch(function (error) {
