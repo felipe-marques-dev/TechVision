@@ -17,13 +17,15 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { Footer } from "../components/Footer/Footer";
+import { Loading } from "../components/Loading";
+import { Spinner } from "react-bootstrap";
 
 export function Carrinho() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<boolean>(false);
   const [produtos, setProdutos] = useState<Item[]>([]);
   const [emailUser, setEmail] = useState<string>('');
-  const [compra_id, setCompra_id] = useState(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     document.title = 'Carrinho';
@@ -39,16 +41,17 @@ export function Carrinho() {
   }, [currentUser]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (emailUser) {
       client.post('/accounts/cart/', { email: emailUser })
         .then(response => {
           setProdutos(response.data.itens);
-          console.log(produtos)
         })
         .catch(error => {
-          console.log("Erro ao buscar produtos", error);
+          toast.error("Erro ao buscar produtos");
         });
     }
+    setIsLoading(false);
   }, [emailUser]);
 
   const handleDelete = async (product_id: number) => {
@@ -66,9 +69,7 @@ export function Carrinho() {
         });
         toast.success("Você retirou o item do seu carrinho!");
         setProdutos(produtos.filter(item => item.produto.product_id !== product_id));
-        console.log(produtos)
       } catch (error) {
-        console.error("Erro ao remover produto", error);
         toast.error("Erro ao retirar item do carrinho");
       }
     }
@@ -88,12 +89,11 @@ export function Carrinho() {
         setProdutos(prevProdutos =>
           prevProdutos.map(item =>
             item.produto.product_id === product_id
-              ? { ...item, quantity } 
+              ? { ...item, quantity }
               : item
           )
         );
       } catch (error) {
-        console.error("Erro ao mudar quantidade do produto", error);
         toast.error("Erro ao mudar quantidade");
       }
     }
@@ -102,7 +102,7 @@ export function Carrinho() {
   const calcularTotal = () => {
     return produtos.reduce((total, item) => {
       return total + (item.produto.price * item.quantity);
-    }, 0).toFixed(2); 
+    }, 0).toFixed(2);
   };
 
   function continuarComprandoBtn() {
@@ -111,46 +111,43 @@ export function Carrinho() {
 
   function irParaPagamentoBtn() {
     client.post('/accounts/cart/', { email: emailUser })
-          .then(response => {
-            setProdutos(response.data.itens);
-          })
-          .catch(error => {
-            console.log("Erro ao buscar produtos", error);
-          });
-    
+      .then(response => {
+        setProdutos(response.data.itens);
+      })
+      .catch(error => {
+        toast.error("Erro ao buscar produtos");
+      });
+
     const productArray: number[] = [];
     const quantityArray: number[] = [];
     produtos.forEach((item) => {
       productArray.push(item.produto.product_id)
       quantityArray.push(item.quantity)
     });
-    console.log(productArray)
-    
-    
+
+
     var compra = 0;
-    client.post('/compra/compra-create/', 
-    {
-      email: emailUser,
-      products: productArray,
-      quantity: quantityArray,
-      valor_total: calcularTotal()
-    })
-    .then(response => {
-            compra = response.data.compra_id;
-            console.log(compra)
-              navigate(`/resumo-compra/${compra}`);
-    })
-    .catch(error => {
-            console.log("Erro ao buscar produtos", error);
-    }); 
-    console.log('teste')
+    client.post('/compra/compra-create/',
+      {
+        email: emailUser,
+        products: productArray,
+        quantity: quantityArray,
+        valor_total: calcularTotal()
+      })
+      .then(response => {
+        compra = response.data.compra_id;
+        navigate(`/resumo-compra/${compra}`);
+      })
+      .catch(error => {
+        toast.error("Erro ao buscar produtos");
+      });
   }
 
 
   return (
     <div>
       <Nav_bar />
-      <ToastContainer draggable/>
+      <ToastContainer draggable />
       {currentUser && (
         <div className="container-fluid row d-flex justify-content-center m-0 p-0">
           <div className="col d-flex justify-content-center">
@@ -158,11 +155,12 @@ export function Carrinho() {
           </div>
 
           <div className="row d-flex justify-content-center m-0">
-            <div className="col-md-12 col-lg-8">
+            {!isLoading || produtos.length > 0 ? 
+           (<div className="col-md-12 col-lg-8">
               {produtos.length > 0 ? (
                 produtos.map(item => (
                   <div className="cart-item row align-items-center" id="box" key={item.produto.product_id}>
-                    <div className="col-md-1 col-lg-3 d-flex justify-content-center">
+                    <div className="col-md-4 col-lg-3 d-flex justify-content-center">
                       <ImageLoader src={`http://localhost:8000${item.produto.foto_1}`} onClick={item.produto.url_name} erro={false} className="imgLoader" />
                     </div>
                     <div className="col-sm-10 col-md-6">
@@ -171,9 +169,9 @@ export function Carrinho() {
                       <p>Quantidade:
                         <div>
                           <Stack shouldWrapChildren direction='row'>
-                            <NumberInput 
-                              size='xs' 
-                              maxW={90} 
+                            <NumberInput
+                              size='xs'
+                              maxW={90}
                               value={item.quantity}
                               min={1}
                               onChange={(valueString) => {
@@ -185,11 +183,11 @@ export function Carrinho() {
                             >
                               <NumberInputField />
                               <NumberInputStepper>
-                                <NumberIncrementStepper 
-                                  onClick={() => handleQuantityChange(item.produto.product_id, item.quantity )} 
+                                <NumberIncrementStepper
+                                  onClick={() => handleQuantityChange(item.produto.product_id, item.quantity)}
                                 />
-                                <NumberDecrementStepper 
-                                  onClick={() => handleQuantityChange(item.produto.product_id, item.quantity)} 
+                                <NumberDecrementStepper
+                                  onClick={() => handleQuantityChange(item.produto.product_id, item.quantity)}
                                 />
                               </NumberInputStepper>
                             </NumberInput>
@@ -201,23 +199,23 @@ export function Carrinho() {
                     <div className="col text-center d-flex justify-content-center">
                       <div className="row d-flex" style={{ width: 200 }}>
                         <p className="fs-4 fw-semibold">R$ {item.produto.price.toFixed(2)}</p>
-                        <p className="btn btn-danger btn-sm" style={{width: 200}} onClick={() => handleDelete(item.produto.product_id)}>Remover</p>
-                      </div>
+                        <p className="btn btn-danger btn-sm" style={{ width: 200 }} onClick={() => handleDelete(item.produto.product_id)}>Remover</p>
+                      </  div>
                     </div>
                   </div>
                 ))
               ) : (
                 <p>Não há produtos no carrinho.</p>
               )}
-            </div>
-
+            </div>):(<div className="col-md-12 col-lg-8 mt-5 d-flex justify-content-center align-items-center"><Spinner animation="border"/></div>)
+}
             <div className="col-md-8 col-lg-4 d-flex justify-content-md-center pt-4">
-              <div className="row w-md-75 col-md-8" style={{ height: '200px'}}>
+              <div className="row w-md-75 col-md-8" style={{ height: '200px' }}>
                 <h5>RESUMO</h5>
                 <p><strong>Valor dos Produtos:</strong> R$ {calcularTotal()}</p>
                 <div className="justify-content-center">
-                <p className="botao" onClick={irParaPagamentoBtn}>Ir para o pagamento</p>
-                <p className="botao-carrinho" onClick={continuarComprandoBtn}>Continuar comprando</p>
+                  <p className="botao" onClick={irParaPagamentoBtn}>Ir para o pagamento</p>
+                  <p className="botao-carrinho" onClick={continuarComprandoBtn}>Continuar comprando</p>
                 </div>
               </div>
             </div>
