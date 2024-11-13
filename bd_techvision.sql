@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/11/2024 às 21:53
+-- Tempo de geração: 13/11/2024 às 00:31
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -310,7 +310,30 @@ INSERT INTO `compra_pedido` (`delivery_id`, `status`, `user_id`, `valor_total`) 
 (132, 'Aprovado', 32, 799.95),
 (133, 'Aprovado', 32, 1699.88),
 (134, 'Aprovado', 32, 1699.88),
-(135, 'Aprovado', 32, 1699.88);
+(135, 'Aprovado', 32, 1699.88),
+(136, 'Aprovado', 2, 400),
+(137, 'Aprovado', 2, 400),
+(138, 'Aprovado', 2, 200),
+(139, 'Aprovado', 2, 400),
+(140, 'Aprovado', 2, 200),
+(141, 'Aprovado', 2, 400),
+(142, 'Aprovado', 2, 40),
+(143, 'Aprovado', 2, 1299.9),
+(144, 'Aprovado', 2, 199.99),
+(145, 'Aprovado', 2, 4999.9),
+(146, 'Aprovado', 2, 400),
+(147, 'Aprovado', 2, 4999.9),
+(148, 'Aprovado', 2, 400),
+(149, 'Aprovado', 2, 400),
+(150, 'Aprovado', 2, 400),
+(151, 'Aprovado', 2, 4999.9),
+(152, 'Aprovado', 2, 40),
+(153, 'Aprovado', 2, 1299.9),
+(154, 'Aprovado', 2, 200),
+(155, 'Aprovado', 2, 40),
+(156, 'Aprovado', 2, 400),
+(157, 'Aprovado', 2, 4999.9),
+(158, 'Aprovado', 2, 400);
 
 -- --------------------------------------------------------
 
@@ -350,7 +373,30 @@ INSERT INTO `compra_pedidoitem` (`pedidoItem_id`, `pedido_id`, `produto_id`, `qu
 (18, 134, 9, 2),
 (19, 134, 10, 1),
 (20, 135, 9, 2),
-(21, 135, 10, 1);
+(21, 135, 10, 1),
+(22, 136, 26, 1),
+(23, 137, 26, 1),
+(24, 138, 25, 1),
+(25, 139, 26, 1),
+(26, 140, 25, 1),
+(27, 141, 26, 1),
+(28, 142, 24, 1),
+(29, 143, 10, 1),
+(30, 144, 9, 1),
+(31, 145, 11, 1),
+(32, 146, 26, 1),
+(33, 147, 11, 1),
+(34, 148, 26, 1),
+(35, 149, 26, 1),
+(36, 150, 26, 1),
+(37, 151, 11, 1),
+(38, 152, 24, 1),
+(39, 153, 10, 1),
+(40, 154, 25, 1),
+(41, 155, 24, 1),
+(42, 156, 26, 1),
+(43, 157, 11, 1),
+(44, 158, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -576,6 +622,7 @@ CREATE TABLE `django_session` (
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('0oti68b8iacpm7os58a5ckc66emc5vjh', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1swJsh:WfKnA6yS_iU6HEKjobKzt4O_YHdKmlVbY_JIwkghZ-8', '2024-10-17 11:20:27.972767'),
 ('21512wjrhdedbrsalilq50dboqx0ltni', '.eJxVjDsOgzAQRO_iOrLwH6dMzxmsXe86JolAwlBFuXtAokjKmfdm3iLBtta0NV7SSOIqlLj8dgj5ydMB6AHTfZZ5ntZlRHko8qRNDjPx63a6fwcVWt3XgKELSIGKcVr1aNnmoHvnyUL0gZxx6BWabIourJXritsTQ7RWcwzi8wXlXzfW:1sny1N:paKFe5XD62wkAAj4GNHexeAPylbnplIdqEpXgcP176A', '2024-09-24 10:22:53.560445'),
+('8ajl262uzxyrg435vdijlxuymga9z2ye', '.eJxVjEEOwiAQRe_C2pCWKTC4dO8ZmhkYbNVAUtqV8e7apAvd_vfef6mRtnUatybLOCd1VgDq9DsyxYeUnaQ7lVvVsZZ1mVnvij5o09ea5Hk53L-Didr0rcWgYM7oO-fBMKc-RfSQMQB5FjTspA9DtC5A6Iy14hktZSGILqZBvT8O0zhZ:1tB0KQ:-X-48R258YhWmorpPfC-xiqebStUU7OBJB7-9xkfMZU', '2024-11-26 23:29:46.670752'),
 ('b0ydl5x4k2zlyeeoyldn81rgfs68ujgf', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1syAfV:ufFuBIz0HfUAKjUfjNaHErE91vows7J_aaR7sTyeAbo', '2024-10-22 13:54:29.436172'),
 ('b80ehir8jysfrtyk8ghu9y5gva0ilyas', '.eJxVjEEOwiAQRe_C2hCgDAwu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWQZx-t0T5wW0H5U7tNss8t3WZktwVedAur3Ph5-Vw_w4q9fqtgZnBMAafMIN3puSEgRw6O9iB2EAoCrUDHUY_omeXkIlUyUEBWi3eH-XEN6M:1sj0wE:w3l-tstaDpgO3oUO7dTBdpLPpaj-Mth7miZK-rgjqFI', '2024-09-10 18:29:06.843108'),
 ('c1xgy9bcp228p6pqcf4ainmb8ry5jc1s', '.eJxVjMEOwiAQRP-FsyEsWAoevfsNZNndStXQpLQn47_bJj3oZQ7z3sxbJVyXktYmcxpZXZRVp98uIz2l7oAfWO-Tpqku85j1ruiDNn2bWF7Xw_07KNjKtgYRGwYZJADGaL0XQw6jD0R99hByDADBkLdbROjY-T4ax2zP7KRj9fkC5Gk3iQ:1shBNh:lnL_kNUtPaJscKjiNm7b5nBOX0cgrFGRI4Ts3V5M8MA', '2024-09-05 17:13:53.038053'),
@@ -583,7 +630,6 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('cprfscjtrmuq5kg75rra1fpn1h4w7wa2', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1syADl:GdynYGcvQSD73TvlWFGYP3Z9q6zKRYOhymcwBxxvq-w', '2024-10-22 13:25:49.411385'),
 ('edeowszhehzl5dsv3scfkfcgcoo5xt8e', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1siwXr:nQdUi7POBfGyExmmBiKYphSQ7aQPdDQV-nS2qpqTmUQ', '2024-09-10 13:47:39.772701'),
 ('f1zznuf0v3htkwasutmlsxn1f7a1j6c6', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1spsuw:kksh13WFv7OXnFCO8JRfVcFYtEIF7bIoD_Iy9mFK7t0', '2024-09-29 17:20:10.932756'),
-('g4z9ngf3yzbcxaszoik44xom77jsyxvf', '.eJxVjDsOwjAQBe_iGln2shtjSnrOEO36gwPIluKkQtwdIqWA9s3Me6mR16WMa0_zOEV1VqAOv5tweKS6gXjnems6tLrMk-hN0Tvt-tpiel529--gcC_feohoJIA4F62QMQzgCdFKZLYhA3sSIM4n7wiZ_TFT8IORjIBAjtT7A-H-N48:1tAxSM:wBw3K6HW0g_qj641lFAbuSJXEOmiZAaGBkjBz-03zyY', '2024-11-26 20:25:46.651091'),
 ('gdg5p9j0r14d2b6e58i21fjfw94wgody', '.eJxVjEsOAiEQBe_C2pBGaD4u3XsG0g0oowaSYWZlvLtOMgvdvqp6LxFpXWpcR5njlMVJaBCH35EpPUrbSL5Tu3WZelvmieWmyJ0Oeem5PM-7-3dQadRvrVAjOUsFDSBmUsUcQ1J8Zc3GY0DrNdhgDWVWDryDXAgZMYEzwCzeH-nMN2U:1swJhA:gjpvo7Z3lXak-doXei2_1rmFqRuIQL2lTZePcenpnWE', '2024-10-17 11:08:32.214277'),
 ('hucy6nguukccyx3twvqub3kkk2vmwumv', '.eJxVjMEOwiAQRP-FsyFAQViP3v0GsruAVE2blPZk_HdL0oMeZ96beYuI21rj1vISxyQuwojTb0fIzzx1kB443WfJ87QuI8muyIM2eZtTfl0P9--gYqv72tlcnIZM3pLTgwY1cCBWATKQDYa8Z0A4l6QAvUHDrueB92iwWPH5AtndN-E:1shBCm:uz4Na60KD0HeRENpVAVrif_NdAPh9Om-jN_QK0zHZcA', '2024-09-05 17:02:36.627676'),
 ('iipg2tr9p3jixaqtu2335zovkn4jaldi', '.eJxVjDsOgzAQRO_iOrLwZ21ImZ4zWLvedSCJQMJQRbl7QKJIypn3Zt4q4bYOaauypJHVVVl1-e0I81OmA_ADp_us8zyty0j6UPRJq-5nltftdP8OBqzDvkaKTSSOXBxY05IXn6NtIbDHLkQGBxQMueyKLWINNAX2JNh5b6WL6vMF5fg31w:1sjdHD:EoE7DhfUVl4gX1tNmb3taB17QktKWrLe48e6BL4o80g', '2024-09-12 11:25:19.993473'),
@@ -685,13 +731,13 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `first_name`, `last_name`, `email`, `password`, `is_verified`, `is_active`, `is_staff`, `last_login`, `is_superuser`) VALUES
 (1, 'Felipe', 'Marques', 'usuariosuper@exemplo.com', 'pbkdf2_sha256$720000$6LFXfD6nztx3Wh9CHTtP0R$wT7n0xeVAAM/YuomqIz6wvrQmgitHJWVfKzbA8TLJRY=', 0, 1, 1, '2024-11-07 15:52:20', 1),
-(2, 'Lucas', 'Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-11-12 20:25:46', 1),
+(2, 'Lucas', 'Miguel Leite', 'lucasleite.miguel10@gmail.com', 'pbkdf2_sha256$720000$dmseukqxuGzFwxInFzgtu6$JOKTQtZ+KLPoca9+wdc1W7W/nwjg4i5OtcNCoSFWsVI=', 0, 1, 1, '2024-11-12 20:25:46', 1),
 (11, 'teste', 'ssss', 'teste222@gmail.com', 'pbkdf2_sha256$720000$ksLoofM4g4xuK8R5aqMMJZ$nSbQjwjDtjyLtJxI3Y2QNN7RXOn3qeYtXNwJgOhoJMM=', 0, 1, 0, NULL, 0),
 (29, 'afd', 'adsf', 'lucas1@gmail.com', 'pbkdf2_sha256$720000$PkeIrbMFiFTkHJyvFEy8ux$MHumSXU+X2wcO5O0VokLjwT+fL2G6MXjVWHLI+60338=', 0, 1, 0, '2024-09-15 17:19:01', 0),
 (30, 'lucas', 'leite', 'felipe12345@gmail.com', 'pbkdf2_sha256$720000$7RdcvoTqStaHcs9EaQ1sFs$E2s8wIm/oO47P4zicyi8Dy2LhifFSLBCFtJlg4WVZHo=', 0, 1, 1, '2024-11-05 16:04:23', 0),
 (31, 'Lucas', 'Miguel', 'l@gmail.com', 'pbkdf2_sha256$720000$anVuOFTBmYYqFGUzOZ0RHt$WMJK9JCqQnVztqh4Zmde9cckvuIk7ymKvbcT/2c9NWQ=', 0, 1, 0, '2024-11-08 21:55:43', 0),
 (32, 'Lucas', 'Miguel', 'lucas@gmail.com', 'pbkdf2_sha256$720000$5Rw5uX1ZiNzXYIXGkGo9jL$Rc3XDp6NObRH8J05OYx+o64vi1fY1W2HOSo5JXKbIJo=', 0, 1, 0, '2024-11-08 22:27:12', 0),
-(33, 'teste', 'jr', 'teste@gmail.com', 'pbkdf2_sha256$720000$lXjP9DU5Tr88CNyauF0RvW$FJTJOO25Sfy9XEXTa3vVYpzf/X7Ue2k0qWHuCr7QX/Q=', 0, 1, 0, '2024-11-12 20:23:18', 0);
+(33, 'teste', 'jr', 'teste@gmail.com', 'pbkdf2_sha256$720000$lXjP9DU5Tr88CNyauF0RvW$FJTJOO25Sfy9XEXTa3vVYpzf/X7Ue2k0qWHuCr7QX/Q=', 0, 1, 0, '2024-11-12 23:29:46', 0);
 
 -- --------------------------------------------------------
 
@@ -733,15 +779,6 @@ CREATE TABLE `usuario_carrinhoitem` (
   `quantity` int(11) NOT NULL,
   `price_ind` double(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `usuario_carrinhoitem`
---
-
-INSERT INTO `usuario_carrinhoitem` (`cartitem_id`, `cart_id`, `produto_id`, `quantity`, `price_ind`) VALUES
-(28, 6, 13, 4, 80),
-(29, 6, 17, 3, 500),
-(50, 9, 9, 3, 200);
 
 -- --------------------------------------------------------
 
@@ -945,13 +982,13 @@ ALTER TABLE `carroussel_carroussel`
 -- AUTO_INCREMENT de tabela `compra_pedido`
 --
 ALTER TABLE `compra_pedido`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT de tabela `compra_pedidoitem`
 --
 ALTER TABLE `compra_pedidoitem`
-  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `pedidoItem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de tabela `corsheaders_corsmodel`
@@ -1005,7 +1042,7 @@ ALTER TABLE `usuario_carrinho`
 -- AUTO_INCREMENT de tabela `usuario_carrinhoitem`
 --
 ALTER TABLE `usuario_carrinhoitem`
-  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `cartitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de tabela `usuario_groups`
