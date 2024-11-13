@@ -8,7 +8,7 @@ import { Produto } from "../../types/Produto";
 import { Footer } from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import { useMediaQuery } from "@chakra-ui/react";
+import { useMediaQuery, useTimeout } from "@chakra-ui/react";
 import { Loading } from "../Loading";
 import { NotFound } from "../404";
 import { Button, Spinner } from "react-bootstrap";
@@ -82,32 +82,34 @@ export function ProdutoIndividual() {
         }
 
         // Verifica a quantidade atual no carrinho
-        const currentQuantity = carrinho[product_id] || 0;
-        const newQuantity = currentQuantity + 1;
-        setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
+        setTimeout(() => {
+            const currentQuantity = carrinho[product_id] || 0;
+            const newQuantity = currentQuantity + 1;
+            setCarrinho(prev => ({ ...prev, [product_id]: newQuantity }));
 
-        try {
-            if (currentQuantity > 0) {
-                // Se o item já existe, faz um PATCH para atualizar a quantidade
-                await client.patch('accounts/cart/', {
-                    email: emailUser,
-                    product_id: product_id,
-                    quantity: newQuantity,
-                });
-                toast(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
-                    autoClose: 2000,
-                });
-            } else {
-                // Se o item não existe, faz um POST para adicioná-lo
-                await client.post('accounts/add-item/', { email: emailUser, product_id: product_id });
-                toast("Você adicionou o item ao seu carrinho!", {
-                    autoClose: 2000,
-                });
+            try {
+                if (currentQuantity > 0) {
+                    // Se o item já existe, faz um PATCH para atualizar a quantidade
+                    client.patch('accounts/cart/', {
+                        email: emailUser,
+                        product_id: product_id,
+                        quantity: newQuantity,
+                    });
+                    toast(`Quantidade do item aumentada! Agora você tem ${newQuantity}.`, {
+                        autoClose: 2000,
+                    });
+                } else {
+                    // Se o item não existe, faz um POST para adicioná-lo
+                    client.post('accounts/add-item/', { email: emailUser, product_id: product_id });
+                    toast("Você adicionou o item ao seu carrinho!", {
+                        autoClose: 2000,
+                    });
+                }
+            } catch (error) {
+                toast.error("Erro ao atualizar item no carrinho");
             }
-        } catch (error) {
-            toast.error("Erro ao atualizar item no carrinho");
-        }
-        setIsLoadingAddCart(false);
+        setIsLoadingAddCart(false)
+        }, 1000);
     };
 
 
@@ -124,7 +126,7 @@ export function ProdutoIndividual() {
                     });
                     setCarrinho(newCarrinho);
                 } catch (error) {
-                    toast.error("Erro ao buscar produtos do carrinho");
+                    window.location.reload();
                 }
             };
 
@@ -224,14 +226,14 @@ export function ProdutoIndividual() {
                                     <Button
                                         onClick={() => handleAdd(produtos.product_id)}
                                         className="btn border-0"
-                                        id="add-cart-pdt"
-                                        disabled={isLoadingAddCart}>
-                                        {isLoadingAddCart ? <Spinner animation="border"/> : ("Adicionar ao carrinho")}
+                                        disabled={isLoadingAddCart}
+                                        id="add-cart-pdt">
+                                        {isLoadingAddCart ? (<Spinner animation="border" />) : ("Adicionar ao carrinho")}
                                     </Button>
                                     <Button
                                         className="btn border-0"
                                         onClick={() => irParaPagamentoBtn()}
-                                        id="add-cart-pdt"
+                                        id="compra-pdt"
                                         disabled={isLoading}>
                                         {isLoading ? (<Spinner animation="border" />) : ("Comprar Agora")}
                                     </Button>

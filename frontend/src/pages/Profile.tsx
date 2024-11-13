@@ -85,7 +85,7 @@ export function Profile() {
                             <div className="me-3">
                             </div>
                             <form onSubmit={e => submitLogout(e)}>
-                                <Button type="submit" variant="danger" disabled={isLoading}>{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Log out</p>)}</Button>
+                                <Button type="submit" variant="danger" style={{width: "60px", height: "40px"}} disabled={isLoading}>{isLoading ? (<Spinner animation="border" />) : (<p className="m-0">Log out</p>)}</Button>
                             </form>
                         </div>
                     </div>
