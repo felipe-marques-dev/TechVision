@@ -149,14 +149,14 @@ export function Carrinho() {
       <Nav_bar />
       <ToastContainer draggable />
       {currentUser && (
-        <div className="container-fluid row d-flex justify-content-center m-0 p-0" style={{minHeight: "60vh"}}>
+        <div className="container-fluid row d-flex justify-content-center m-0 p-0" >
           <div className="col d-flex justify-content-center">
             <H3 id="text-titulo" style={{ padding: 0 }}>Carrinho</H3>
           </div>
 
           <div className="row d-flex justify-content-center m-0">
             {!isLoading || produtos.length > 0 ? 
-           (<div className="col-md-12 col-lg-8">
+           (<div className="col-md-12 col-lg-8" style={{minHeight: "40vh"}}>
               {produtos.length > 0 ? (
                 produtos.map(item => (
                   <div className="cart-item row align-items-center" id="box" key={item.produto.product_id}>

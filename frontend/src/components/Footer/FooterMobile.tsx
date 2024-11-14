@@ -24,15 +24,15 @@ export function FooterMobile() {
                         <b className='me-3'>Redes Sociais</b>
                     </div>
                     <div className='d-flex justify-content-center'>
-                    <a className='me-3' target="self" href="#">
+                    <a className='me-3' target="self" href="https://www.instagram.com/atenacyber/">
                         <FaInstagram size={25}/>
                     </a>
 
-                    <a target="self" className="me-3" href="#">
+                    <a target="self" className="me-3" href="https://www.facebook.com/Atenacyber/?locale=pt_BR">
                         <FaFacebook size={25}/>
                     </a>
 
-                    <a target="self" className="me-3" href="#">
+                    <a target="self" className="me-3" href="https://wa.me/+5515991787889">
                         <FaWhatsapp size={27}/>
                     </a>
                     </div>
