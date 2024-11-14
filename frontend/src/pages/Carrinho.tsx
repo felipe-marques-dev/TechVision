@@ -149,7 +149,7 @@ export function Carrinho() {
       <Nav_bar />
       <ToastContainer draggable />
       {currentUser && (
-        <div className="container-fluid row d-flex justify-content-center m-0 p-0">
+        <div className="container-fluid row d-flex justify-content-center m-0 p-0" style={{minHeight: "60vh"}}>
           <div className="col d-flex justify-content-center">
             <H3 id="text-titulo" style={{ padding: 0 }}>Carrinho</H3>
           </div>
