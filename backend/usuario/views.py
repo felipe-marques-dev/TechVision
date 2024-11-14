@@ -12,6 +12,7 @@ from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.conf import settings
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -174,11 +175,10 @@ class ResetPasswordVerify(APIView):
             context = { "reset_url": reset_url }
             html_content = render_to_string('mail/mail.html', context)
             plain_content = render_to_string('mail/mail.txt', context)
-            print(html_content)
             send_mail(
                 subject = "Redefinição de senha",
                 message = plain_content,
-                from_email = 'lucasleite.miguel10@gmail.com',
+                from_email = f'{settings.EMAIL_HOST_USER}',
                 recipient_list = [f'{email}',],
                 html_message = html_content,
                 fail_silently = False,
