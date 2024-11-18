@@ -73,38 +73,39 @@ export function Cadastro() {
         setIsLoading(true);
 
         // Define um intervalo de tempo para a função responder
-        //    setTimeout(() => {
-        client.post(
-            "accounts/cadastro",
-            {
-                email: email,
-                first_name: firstName,
-                last_name: lastName,
-                password: password,
-            }
-        )
-            // faz o login automaticamente 
-            // se o cadastro não retornar nenhum erro
-            .then((res) => {
-                setValid(true);
-                client.post(
-                    "accounts/login",
-                    {
-                        email: email,
-                        password: password,
-                    }
-                ).then(function (res) {
-                    setCurrentUser(true);
-                });
-            },
-                // se o email já está sendo utilizado retorna um erro
-                // no campo de email
-                (error) => {
-                    setCurrentUser(false);
-                    setValid(false);
-                });
-        return setIsLoading(false);
-        //   }, 1500);
+        setTimeout(() => {
+            client.post(
+                "accounts/cadastro",
+                {
+                    email: email,
+                    first_name: firstName,
+                    last_name: lastName,
+                    password: password,
+                }
+            )
+                // faz o login automaticamente 
+                // se o cadastro não retornar nenhum erro
+                .then((res) => {
+                    setValid(true);
+                    client.post(
+                        "accounts/login",
+                        {
+                            email: email,
+                            password: password,
+                        }
+                    ).then(function (res) {
+                        setCurrentUser(true);
+                        setIsLoading(false);
+                    });
+                },
+                    // se o email já está sendo utilizado retorna um erro
+                    // no campo de email
+                    (error) => {
+                        setValid(false);
+                        setCurrentUser(false);
+                        setIsLoading(false);
+                    });
+        }, 1000);
     }
 
     if (currentUser) {

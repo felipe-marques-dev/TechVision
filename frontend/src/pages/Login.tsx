@@ -62,24 +62,24 @@ export function Login() {
     }
 
     // Define um intervalo de tempo para a função responder
-    //  setTimeout(() => {
-    // Envia requisição para o servidor 
-    client.post(
-      "accounts/login",
-      {
-        email: email,
-        password: password,
-      }
-    ).then(function (res) {
-      setCurrentUser(true);
-      setValid(true);
-      setIsLoading(false);
-    }).catch(function (error) {
-      setCurrentUser(false);
-      setValid(false);
-      setIsLoading(false);
-    });
-    //   }, 1500);
+    setTimeout(() => {
+      // Envia requisição para o servidor 
+      client.post(
+        "accounts/login",
+        {
+          email: email,
+          password: password,
+        }
+      ).then(function (res) {
+        setCurrentUser(true);
+        setValid(true);
+        setIsLoading(false);
+      }).catch(function (error) {
+        setCurrentUser(false);
+        setValid(false);
+        setIsLoading(false);
+      });
+    }, 1000);
 
   }
 
