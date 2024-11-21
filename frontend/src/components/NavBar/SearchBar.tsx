@@ -66,7 +66,7 @@ export const SearchBar = (props: SearchBarProps) => {
         {/* Resultados da pesquisa */}
         {sugestoes.length > 0 && using && (
           <div
-            className={`search-results position-fixed p-2 rounded border border-secondary me-5`}
+            className={`search-results position-absolute p-2 rounded border border-secondary me-5`}
             id="suggestions"
           >
             <ul className="list-unstyled mb-0">
