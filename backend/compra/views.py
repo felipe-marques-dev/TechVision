@@ -19,9 +19,9 @@ class CompraCreate(APIView):
         user = User.objects.get(email=emailBody)
         PedidoAtual = Pedido.objects.create(user= user, status='Aprovado', valor_total=valorBody)
         if products:
-            for idx, id in enumerate(products): 
+            for index, id in enumerate(products): 
                 produtoDesejado = Produto.objects.get(product_id = id)
-                PedidoItem.objects.create(pedido = PedidoAtual, produto = produtoDesejado, quantity = quantityBody[idx])
+                PedidoItem.objects.create(pedido = PedidoAtual, produto = produtoDesejado, quantity = quantityBody[index])
             return Response({"compra_id": PedidoAtual.delivery_id}, status=status.HTTP_200_OK)
 
 
