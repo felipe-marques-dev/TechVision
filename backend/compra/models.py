@@ -1,11 +1,6 @@
 from django.db import models
 from usuario.models import User
 from produtos.models import Produto
-class Transportadora(models.Model):
-    carrier_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=40)
-    cnpj = models.CharField(max_length=14)
-    description = models.CharField(max_length=150)
 
 class Pedido(models.Model):
     STATUS_CHOICES = [
