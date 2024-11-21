@@ -80,8 +80,9 @@ class UserCart(APIView):
         cartItem.save()
 
         return Response({"data": "alterado!"}, status=status.HTTP_200_OK)
-        
 
+
+# Adiciona os items do carrinho
 class ItemCartUser(APIView):
     authentication_classes = (SessionAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
@@ -116,6 +117,7 @@ class UserCheckPassword(APIView):
         return Response(status=status.HTTP_400_UNAUTHORIZED)
 
 
+# Retorna os dados do usuario
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)

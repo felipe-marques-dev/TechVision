@@ -7,7 +7,8 @@ from rest_framework.authentication import SessionAuthentication
 from .models import Pedido, PedidoItem
 from produtos.models import Produto
 from .serializers import CompraItemSerializer
-# Create your views here.
+
+# Cria compra
 class CompraCreate(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication,)
@@ -25,14 +26,13 @@ class CompraCreate(APIView):
             return Response({"compra_id": PedidoAtual.delivery_id}, status=status.HTTP_200_OK)
 
 
+# Retorna os items da compra desejada
 class CompraItens(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication,)   
     def post(self, request):
         emailBody= request.data.get('email')
-        print(emailBody)
         pedidoBody= request.data.get('pedido_id')
-        print(pedidoBody)
         user = User.objects.get(email=emailBody)
         pedidos = Pedido.objects.filter(user_id = user, delivery_id = pedidoBody ) 
         pedido = Pedido.objects.get(delivery_id = pedidoBody)

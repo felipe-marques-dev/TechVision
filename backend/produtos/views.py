@@ -56,6 +56,8 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
             return [IsAdminUser()]
         return [AllowAny()]
 
+
+# Função que retorna os produtos que possuem correspondencia com o termo pesquisado
 def sugestoes_produtos(request):
     termo_busca = request.GET.get('q', '')
     if termo_busca:
