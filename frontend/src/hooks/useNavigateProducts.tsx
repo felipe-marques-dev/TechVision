@@ -5,6 +5,7 @@ export const useNavigateProducts = () => {
 
     const goToProduct = (url_name: string) => {
         navigate(`/produto/${url_name}`);
+        window.location.reload();
     };
 
     return { goToProduct }

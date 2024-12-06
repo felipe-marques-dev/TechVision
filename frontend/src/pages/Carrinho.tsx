@@ -126,7 +126,7 @@ export function Carrinho() {
     });
 
 
-    var compra = 0;
+    let compra = 0;
     client.post('/compra/compra-create/',
       {
         email: emailUser,
@@ -137,9 +137,10 @@ export function Carrinho() {
       .then(response => {
         compra = response.data.compra_id;
         navigate(`/resumo-compra/${compra}`);
+        window.location.reload();
       })
       .catch(error => {
-        toast.error("Erro ao buscar produtos");
+        toast.error("Erro ao efetuar compra");
       });
   }
 

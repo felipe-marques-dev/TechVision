@@ -5,6 +5,7 @@ export const useNavigateCategory = () => {
 
     const goToCategory = (name: string) => {
         navigate(`/categoria/${name}`);
+        window.location.reload();
     };
 
     return { goToCategory }
