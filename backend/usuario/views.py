@@ -93,8 +93,12 @@ class ItemCartUser(APIView):
 
         user = User.objects.get(email=emailBody)
         cartUser = Carrinho.objects.get(user_id=user.id)
-        produtouser = Produto.objects.get(product_id=productBody)
-        CarrinhoItem.objects.create(cart_id=cartUser.cart_id, produto_id=productBody, quantity=1, price_ind=produtouser.price )
+
+        produtoUser = Produto.objects.filter(product_id=productBody).first()
+        if not produtoUser:
+            return Response({ 'message': 'produto nao encontrado'}, status= status.HTTP_404_NOT_FOUND)
+
+        CarrinhoItem.objects.create(cart_id=cartUser.cart_id, produto_id=productBody, quantity=1, price_ind=produtoUser.price )
        
         return Response("sucesso!", status=status.HTTP_201_CREATED)
 
@@ -134,7 +138,7 @@ class UserUpdate(APIView):
         senhaBody = request.data.get('password')
         requestBody = request.data
 
-        # trata possiveis excessoes
+        # trata possiveis exceçoes
         try:
             user = User.objects.get(email=emailBody)
         except User.DoesNotExist:
@@ -142,14 +146,14 @@ class UserUpdate(APIView):
         except User.MultipleObjectsReturned:
             return Response(status= status.HTTP_400_BAD_REQUEST)
             
-        if senhaBody:
+        if senhaBody: # atualiza senha caso exista na requisicao
             clean_data = {'password':senhaBody, 'email': emailBody}
             serializer = UserInfoSerializer(user, data=clean_data, partial=True)
             if serializer.is_valid():
                 serializer.updatePassword(user, clean_data)
                 return Response({"message":"senha alterada"}, status=status.HTTP_200_OK)
             
-        else:
+        else: # atualiza outros dados recebidos
             serializer = UserInfoSerializer(user, data=requestBody, partial=True)
         
             if serializer.is_valid():
