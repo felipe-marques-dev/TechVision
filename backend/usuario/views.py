@@ -130,17 +130,24 @@ class UserUpdate(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
     def patch(self, request):
-        emailBody = request.data.get('email')
+        emailBody = request.data.get('email') 
         senhaBody = request.data.get('password')
         requestBody = request.data
-        user = User.objects.get(email=emailBody)
 
-        if senhaBody != None:
+        # trata possiveis excessoes
+        try:
+            user = User.objects.get(email=emailBody)
+        except User.DoesNotExist:
+            return Response(status= status.HTTP_404_NOT_FOUND)
+        except User.MultipleObjectsReturned:
+            return Response(status= status.HTTP_400_BAD_REQUEST)
+            
+        if senhaBody:
             clean_data = {'password':senhaBody, 'email': emailBody}
             serializer = UserInfoSerializer(user, data=clean_data, partial=True)
             if serializer.is_valid():
                 serializer.updatePassword(user, clean_data)
-                return Response({"senha alterada"}, status=status.HTTP_200_OK)
+                return Response({"message":"senha alterada"}, status=status.HTTP_200_OK)
             
         else:
             serializer = UserInfoSerializer(user, data=requestBody, partial=True)
