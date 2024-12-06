@@ -3,7 +3,7 @@ from django.urls import reverse
 from .models import *
 from rest_framework import status
 from rest_framework.test import APIClient
-
+from usuario.models import User
 # ====================================
 # Forma de usar:
 # pytest --no-migrations 
@@ -34,6 +34,14 @@ def category():
         name='Eletrônico'
     )
 
+@pytest.fixture
+def user():
+    return User.objects.create_user(
+        first_name = 'nome',
+        last_name = 'sobrenome',
+        email = 'emailteste@gmail.com', 
+    )
+
 @pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
 def test_products_view(client):
     url = reverse('product-list-create')
@@ -61,3 +69,20 @@ def test_individual_categories(category):
     client = APIClient()
     response = client.get(f'/produtos/categories/{category.name}/')
     assert response.status_code == status.HTTP_200_OK
+
+
+@pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
+def test_products_view_post_unlogged():
+    client = APIClient()
+    response = client.post('/produtos/itens/',
+    data= {
+        'name': 'geladeira',
+        'sub_category': 'testing',
+        'description': 'geladeira',
+        'estoque': 100,
+        'price': 100,
+        'promotion': False,
+    }                       
+    )
+    
+    assert response.status_code == status.HTTP_403_FORBIDDEN
