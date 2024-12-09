@@ -15,8 +15,8 @@ from usuario.models import User
 # ====================================
 
 
-
-@pytest.fixture # cria um produto que será usado para multiplos testes
+# produto mock para ser usado em testes
+@pytest.fixture
 def product(db):
 
     return Produto.objects.create(
@@ -28,12 +28,15 @@ def product(db):
     promotion = True, 
     )
 
-@pytest.fixture # cria uma uma categoria que será usada para multiplos testes
+# categoria mock para ser usada em testes
+@pytest.fixture
 def category():
     return Categoria.objects.create(
         name='Eletrônico'
     )
 
+
+# usuario mock para ser usado em testes
 @pytest.fixture
 def user():
     return User.objects.create_user(
@@ -42,6 +45,7 @@ def user():
         email = 'emailteste@gmail.com', 
     )
 
+# testa a funcao de retornar os produtos
 @pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
 def test_products_view(client):
     url = reverse('product-list-create')
@@ -49,6 +53,7 @@ def test_products_view(client):
     assert response.status_code == 200
 
 
+# testa a funcao de retornar um produto individual
 @pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
 def test_individual_product_view(product):
     client = APIClient()
@@ -57,6 +62,7 @@ def test_individual_product_view(product):
 
 
 
+# testa a funcao de retornar categorias
 @pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
 def test_categorias_view(category):
     client = APIClient()
@@ -64,6 +70,7 @@ def test_categorias_view(category):
     assert response.status_code == status.HTTP_200_OK
 
 
+# testa a funcao de retornar uma categoria individual 
 @pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
 def test_individual_categories(category):
     client = APIClient()
@@ -71,6 +78,7 @@ def test_individual_categories(category):
     assert response.status_code == status.HTTP_200_OK
 
 
+# testa a tentativa de post por usuarios nao autenticados na view de produtos
 @pytest.mark.django_db # marca que o teste ira interagir com o banco de dados
 def test_products_view_post_unlogged():
     client = APIClient()
